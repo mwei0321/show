@@ -504,6 +504,8 @@
 	border:solid 1px #5191d1;
 }
 .dynamic-text{
-	margin-top:40px;
-	border-top:solid 1px #ddd;
+	margin-top: 40px;
+    border-top: solid 1px #ddd;
+    padding: 35px 65px;
+    min-height: 480px;
 }
