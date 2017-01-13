@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="css/plugin.css">
   <link rel="stylesheet" href="css/landing.css">
   <link rel="stylesheet" href="css/custom.css">
+  <script src="js/daterangepicker/moment.min.js"></script>
+  <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
   <script src="js/ie/respond.min.js"></script>
   <script src="js/ie/html5.js"></script>
 </head>
@@ -109,9 +111,14 @@
 				<div class="row">
 					<form class="cast-data">
 						<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name"></input></div>
-						<div class="row col-lg-12"><label>性别</label> </div>
+						<div class="row col-lg-12"><label>性别</label>
+							<select class="gender">
+								<option>男</option>
+								<option>女</option>
+							<select>
+						</div>
 						<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"></input></div>
-						<div class="row col-lg-12"><label>出生日期</label><span class="cast-data-birth" id="data-cast-birth">1995-11-11</span><a class="change-birth">更改</a></div>
+						<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"></input></div>
 						<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"></input></div>
 						<div class="row col-lg-12">
 							<label>个人简介</label><textarea id="data-intro"></textarea>
@@ -203,6 +210,7 @@
 
   <script src="js/app.data.js"></script>
 
+  <script src="js/daterangepicker/daterangepicker.js"></script>
 
 
   <!-- Sparkline Chart -->
@@ -215,6 +223,16 @@
 
   <script src="js/ie/excanvas.js"></script>
 
+	<script>
+	
+		$('#data-cast-birth').daterangepicker({
+			showDropdowns: true,
+		locale: {
+		  format: 'YYYY-MM-DD'
+		},
+		   singleDatePicker: true,
+		});
+	</script>
 </body>
 
 </html>
