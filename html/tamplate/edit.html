@@ -16,7 +16,6 @@
   <script src="js/ie/respond.min.js"></script>
   <script src="js/ie/html5.js"></script>
 	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
-	
 	<script charset="utf-8" src="/kindeditor-4.1.10/lang/zh-CN.js"></script>
 </head>
 <body>
@@ -273,45 +272,7 @@
 		$(".btn-info").click(function(){
 			$(".add-cast-list").append(onelist);
 		})
-		KindEditor.ready(function(K) {
-
-var editor1 = K.create('textarea[name="content"]', {
-
-cssPath : 'kindeditor/plugins/code/prettify.css',
-
-uploadJson : 'kindeditor/jsp/upload_json.jsp',
-
-fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
-
-allowFileManager : true,
-
-afterCreate : function() {
-
-var self = this;
-
-K.ctrl(document, 13, function() {
-
-self.sync();
-
-document.forms['example'].submit();
-
-});
-
-K.ctrl(self.edit.doc, 13, function() {
-
-self.sync();
-
-document.forms['example'].submit();
-
-});
-
-}
-
-});
-
-prettyPrint();
-
-});
+		
   </script>
 
 </body>
