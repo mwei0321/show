@@ -127,10 +127,10 @@
 										<option>开开</option>
 										<option>心心</option>
 									</select>
-									<select class="position-one cast-position">
-										<option value="0">演员</option>
-										<option value="1">编剧</option>
-										<option value="2">导演</option>
+									<select class="position-one cast-position" style="margin-left: 8px;">
+										<option value="0">导演</option>
+										<option value="1">演员</option>
+										<option value="2">编剧</option>
 										<option value="3">灯光</option>
 										<option value="4">音响</option>
 										<option value="5">舞美</option>
@@ -138,9 +138,10 @@
 										<option value="7">剧务</option>
 										<option value="8">后勤</option>
 									</select>
+									<input type="text" class="play" style="margin-left: 8px;">
 								</div>
 							</div>
-							<a class="btn btn-small btn-info" style="margin-left:11px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a>
+							<div><a class="btn btn-small btn-info" style="margin-left:102px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a></div>
 						</div>
 					</form>
 					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it">发布</a></div>
@@ -251,6 +252,14 @@
 		   timePicker: true, 
 		   timePickerIncrement: 30, 
 		});
+		$(".cast-position").click(function(){
+			if($(this).val()==1){
+				$(this).parent().find(".play").css("visibility","visible");
+			}
+			else{
+				$(this).parent().find(".play").css("visibility","hidden");
+			}
+		})
 		var onelist = 
 					'<div class="pull-group">'+
 						'<select class="position-one cast-select">'+
@@ -258,20 +267,29 @@
 							'<option>导演</option>'+
 						'</select>'+
 						'<select class="position-one cast-position">'+
-							'<option value="0">演员</option>'+
-							'<option value="1">导演</option>'+
+							'<option value="0">导演</option>'+
+							'<option value="1">演员</option>'+
 							'<option value="2">编剧</option>'+
-							'<option value="3">导演</option>'+
-							'<option value="4">灯光</option>'+
-							'<option value="5">音响</option>'+
-							'<option value="6">舞美</option>'+
-							'<option value="7">道具</option>'+
-							'<option value="8">剧务</option>'+
+							'<option value="3">灯光</option>'+
+							'<option value="4">音响</option>'+
+							'<option value="5">舞美</option>'+
+							'<option value="6">道具</option>'+
+							'<option value="7">剧务</option>'+
+							'<option value="8">后勤</option>'+
 							'<option>后勤</option>'+
 						'</select>'+
+						'<input type="text" class="play">'+
 					'</div>'
 		$(".btn-info").click(function(){
 			$(".add-cast-list").append(onelist);
+			$(".cast-position").click(function(){
+				if($(this).val()==1){
+					$(this).parent().find(".play").css("visibility","visible");
+				}
+				else{
+					$(this).parent().find(".play").css("visibility","hidden");
+				}
+			})
 		})
 		KindEditor.ready(function(K) {
 

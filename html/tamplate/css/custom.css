@@ -292,7 +292,7 @@
 	margin-bottom:10px;
 }
 .add-cast-list{
-	width: 220px;
+	width: 330px;
     margin-left: 0px;
     position: relative;
     display: inline-block;
@@ -304,6 +304,11 @@
 	width:100px;
 	height:33px;
 	border-radius:4px;
+	margin-left:10px;
+}
+.play{
+	visibility:hidden;
+	width:100px;
 	margin-left:10px;
 }
 .position-select{
