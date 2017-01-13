@@ -10,9 +10,14 @@
 	<link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/plugin.css">
   <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="css/custom.css">
+  <script src="js/daterangepicker/moment.min.js"></script>
   <script src="js/ie/respond.min.js"></script>
   <script src="js/ie/html5.js"></script>
+	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
+	
+	<script charset="utf-8" src="/kindeditor-4.1.10/lang/zh-CN.js"></script>
 </head>
 <body>
 
@@ -106,60 +111,39 @@
 				<div class="row">
 					<form class="theatre-data">
 						<div class="row col-lg-12"><label>演出名称</label><input type="text" id="data-name"></input></div>
-						<div class="row col-lg-12"><label>演出时间</label>
-							<div class="input-group">
-								<input type="text" id="data-start-time"></input>
-								<input type="text" id="data-end-time"></input>
-							</div>
+						<div class="row col-lg-12"><label>演出时间</label><input type="text" id="data-start-time"></input>
 						</div>
 						<div class="row col-lg-12">
 							<label>演出时长</label><input type="text" id="data-during"></input>
 						</div>
 						<div class="row col-lg-12">
-							<label>演出简介</label><textarea id="data-intro"></textarea>
+							<label>演出简介</label><textarea id="data-intro" name="content"></textarea>
 						</div>
 						<div class="row col-lg-12">
 							<label>演职人员</label>
 							<div class="add-cast-list">
 								<div class="pull-group">
-									<input type="text" class="cast-one">
-									<select class="position-one">
-										<option>演员</option>
-										<option>导演</option>
+									<select class="position-one cast-select">
+										<option>开开</option>
+										<option>心心</option>
 									</select>
-								</div>
-								<div class="pull-group">
-									<input type="text" class="cast-one">
-									<select class="position-one">
-										<option>演员</option>
-										<option>导演</option>
-									</select>
-								</div>
-								<div class="pull-group">
-									<input type="text" class="cast-one">
-									<select class="position-one">
-										<option>演员</option>
-										<option>导演</option>
-									</select>
-								</div>
-								<div class="pull-group">
-									<input type="text" class="cast-one">
-									<select class="position-one">
-										<option>演员</option>
-										<option>导演</option>
-									</select>
-								</div>
-								<div class="pull-group">
-									<input type="text" class="cast-one">
-									<select class="position-one">
-										<option>演员</option>
-										<option>导演</option>
+									<select class="position-one cast-position">
+										<option value="0">演员</option>
+										<option value="1">编剧</option>
+										<option value="2">导演</option>
+										<option value="3">灯光</option>
+										<option value="4">音响</option>
+										<option value="5">舞美</option>
+										<option value="6">道具</option>
+										<option value="7">剧务</option>
+										<option value="8">后勤</option>
 									</select>
 								</div>
 							</div>
 							<a class="btn btn-small btn-info" style="margin-left:11px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a>
 						</div>
 					</form>
+					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it">发布</a></div>
 				</div>
 			</section>
 		</div>
@@ -244,6 +228,8 @@
   <script src="js/app.plugin.js"></script>
 
   <script src="js/app.data.js"></script>
+  
+  <script src="js/daterangepicker/daterangepicker.js"></script>
 
 
 
@@ -252,10 +238,81 @@
   <script src="js/charts/sparkline/jquery.sparkline.min.js"></script>  
 
   <!-- Easy Pie Chart -->
-
+	
   <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
 
   <script src="js/ie/excanvas.js"></script>
+  <script>
+	
+		$('#data-start-time').daterangepicker({
+		locale: {
+		  format: 'YYYY-MM-DD HH:mm'
+		},
+		   timePicker: true, 
+		   timePickerIncrement: 30, 
+		});
+		var onelist = 
+					'<div class="pull-group">'+
+						'<select class="position-one cast-select">'+
+							'<option>演员</option>'+
+							'<option>导演</option>'+
+						'</select>'+
+						'<select class="position-one cast-position">'+
+							'<option value="0">演员</option>'+
+							'<option value="1">导演</option>'+
+							'<option value="2">编剧</option>'+
+							'<option value="3">导演</option>'+
+							'<option value="4">灯光</option>'+
+							'<option value="5">音响</option>'+
+							'<option value="6">舞美</option>'+
+							'<option value="7">道具</option>'+
+							'<option value="8">剧务</option>'+
+							'<option>后勤</option>'+
+						'</select>'+
+					'</div>'
+		$(".btn-info").click(function(){
+			$(".add-cast-list").append(onelist);
+		})
+		KindEditor.ready(function(K) {
+
+var editor1 = K.create('textarea[name="content"]', {
+
+cssPath : 'kindeditor/plugins/code/prettify.css',
+
+uploadJson : 'kindeditor/jsp/upload_json.jsp',
+
+fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
+
+allowFileManager : true,
+
+afterCreate : function() {
+
+var self = this;
+
+K.ctrl(document, 13, function() {
+
+self.sync();
+
+document.forms['example'].submit();
+
+});
+
+K.ctrl(self.edit.doc, 13, function() {
+
+self.sync();
+
+document.forms['example'].submit();
+
+});
+
+}
+
+});
+
+prettyPrint();
+
+});
+  </script>
 
 </body>
 

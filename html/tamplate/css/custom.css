@@ -264,7 +264,7 @@
 	margin-bottom:20px;
 }
 #data-start-time{
-	margin-bottom:20px;
+	width: 233px;
 }
 .theatre-data input{
 	height: 33px;
@@ -292,7 +292,7 @@
 	margin-bottom:10px;
 }
 .add-cast-list{
-	width: 210px;
+	width: 220px;
     margin-left: 0px;
     position: relative;
     display: inline-block;
