@@ -13,7 +13,6 @@
 
     namespace common\models;
     use Yii;
-use function Faker\unique;
 
     class Uploade{
         //文件名前缀

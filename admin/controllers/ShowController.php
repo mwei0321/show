@@ -56,9 +56,9 @@ use yii\base\Widget;
          * @author MaWei (http://www.phpython.com)
          * @date 2017年1月12日 下午3:30:46
         **/
-        function actionEdit($id){
+        function actionEdit(){
             //获取ID
-//             $id = Yii::$app->request->get('id');
+            $id = Yii::$app->request->get('id');
 
             $showInfo = [];
             if($id > 0){
