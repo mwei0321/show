@@ -13,6 +13,7 @@
 
     use yii\helpers\Html;
     use admin\assets\AdminAssets;
+    use yii\helpers\Url;
 
     AdminAssets::register($this);
 
@@ -31,6 +32,7 @@
     <?php $this->head() ?>
 
     <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/mwForm.js"></script>
 </head>
 <body>
 
@@ -98,9 +100,9 @@
 
     <ul class="nav" data-spy="affix" data-offset-top="50">
         <?php ?>
-        <li class="active"><a href=""><i class="icon-dashboard icon-xlarge"></i>演出管理</a></li>
-        <li class=""><a href="index.html"><i class="icon-dashboard icon-xlarge"></i>演员管理</a></li>
-        <li class=""><a href="index.html"><i class="icon-dashboard icon-xlarge"></i>剧场动态管理</a></li>
+        <li class="active"><a href="<?= Url::toRoute(['show/index']) ?>"><i class="icon-dashboard icon-xlarge"></i>演出管理</a></li>
+        <li class=""><a href="<?= Url::toRoute(['actor/index']) ?>"><i class="icon-dashboard icon-xlarge"></i>演员管理</a></li>
+        <li class=""><a href="<?= Url::toRoute(['show/index']) ?>"><i class="icon-dashboard icon-xlarge"></i>剧场动态管理</a></li>
 
     </ul>
 

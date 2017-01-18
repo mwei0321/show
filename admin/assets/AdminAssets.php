@@ -43,5 +43,9 @@
             //Easy Pie Chart
             'js/charts/easypiechart/jquery.easy-pie-chart.js',
             'js/ie/excanvas.js',
+            //check form value not null
+//             'js/mwForm.js'
+            'js/mwlayer.js',
+            'js/adminPublic.js',
         ];
     }

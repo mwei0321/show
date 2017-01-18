@@ -28,47 +28,84 @@
 				</header>
 				<div class="row main-info">
 					<div class="poster intro-post uploader-list" id="fileList">
-						<img src="<?= $showInfo['cover']??null ?>" id="thumbImgCover">
-						<input type="hidden" name="avatar" value="<?= $showInfo['cover']??null ?>" id="cover"/>
+						<img src="<?= ImageUrl ?><?= $showInfo['cover']??null ?>" id="thumbImgCover">
 					</div>
 					<a class="post-change" id="filePicker" style="">更改图片</a>
 				</div>
 				<div class="row">
-					<form class="theatre-data">
+					<form class="theatre-data" id="addshow" action="<?= Url::toRoute(['show/updata']) ?>" method="post">
+						<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>">
+						<input type="hidden" name="id" value="<?= $showInfo['id']??null ?>" />
+						<input type="hidden" name="cover" value="<?= $showInfo['cover']??null ?>" id="cover"  class="check" emsg="请选择节目封面"/>
 						<div class="row col-lg-12">
-							<label>演出名称</label><input type="text" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
+							<label>演出名称</label><input type="text" class="check" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
 							<div class="input-group">
-								<input type="text" id="data-start-time" name="stime" value="<?= $showInfo['stime']??null ?>" id="data-start-time"></input>
+								<input type="text"  class="check" emsg="请选择演出时间" id="data-start-time" name="time" value="<?= $showInfo['stime']??null ?>" id="data-start-time"></input>
 							</div>
 						</div>
 						<div class="row col-lg-12">
-							<label>演出时长</label><input type="text" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
+							<label>演出时长</label><input type="text"  class="check" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
+							<span>（分钟）</span>
 						</div>
 						<div class="row col-lg-12">
 							<label>演出简介</label><textarea id="data-intro" name="intro"><?= $showInfo['intro']??null ?></textarea>
 						</div>
 						<div class="row col-lg-12">
 							<label>演职人员</label>
-							<div class="pull-group" id="showActor">
-								<select class="position-one cast-select" name="actor[]">
-									<?php foreach ($actors as $k => $v) {
-									   echo '<option value="'.$k.'">'.$v['name'].'</option>';
-									}?>
-								</select>
-								<select class="position-one cast-position" name="duty[]">
-									<?php foreach ($dutys as $k => $v){
-									   echo '<option value="'.$k.'">'.$v.'</option>';
-									}?>
-								</select>
+							<div class="add-cast-list">
+								<?php if ($showActors??null) {?>
+    								<?php foreach ($showActors as $key => $val){?>
+            							<div class="pull-group addActor">
+            								<select class="position-one cast-select" name="actor[]">
+            									<?php foreach ($actors as $k => $v) {
+            									    if($k == $val['actor_id'])
+            									        echo '<option value="'.$k.'" selected="true" >'.$v['name'].'</option>';
+            									    else
+            									        echo '<option value="'.$k.'">'.$v['name'].'</option>';
+            									}?>
+            								</select>
+            								<select class="position-one cast-position" name="duty[]">
+            									<?php foreach ($dutys as $k => $v){
+            									    if($k == $val['duty'])
+            									        echo '<option value="'.$k.'" selected="true">'.$v.'</option>';
+            									    else
+            									        echo '<option value="'.$k.'">'.$v.'</option>';
+            									}?>
+            								</select>
+            							</div>
+    							<?php }}else{?>
+    								<div class="pull-group addActor">
+        								<select class="position-one cast-select" name="actor[]">
+        									<?php foreach ($actors as $k => $v) {
+        									   echo '<option value="'.$k.'">'.$v['name'].'</option>';
+        									}?>
+        								</select>
+        								<select class="position-one cast-position" name="duty[]">
+        									<?php foreach ($dutys as $k => $v){
+        									   echo '<option value="'.$k.'">'.$v.'</option>';
+        									}?>
+        								</select>
+        							</div>
+    							<?php }?>
 							</div>
-							<a class="btn btn-small btn-info" style="margin-left:11px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a>
+							<a class="btn btn-small btn-info" onclick="addActor();" style="margin-left:11px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a>
 						</div>
 					</form>
+					<div class="row col-lg-12" style="text-align:center;"><span class="confirm-it" onclick="submit();" href="javascript:;">发布</span></div>
 				</div>
 			</section>
 		</div>
+		<script>
+			var addActor = function () {
+				$('.add-cast-list').append($('.add-cast-list div:first-child').clone());
+			}
+			var submit = function () {
+				$("#addshow").submit();
+				//mwForm.check('#addShow');
+			}
+		</script>
 		<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 		// 图片上传demo

@@ -11,6 +11,8 @@
 	*  +----------------------------------------------------------------------------------------------+
 	**/
 
+    use yii\helpers\Url;
+    use yii\widgets\LinkPager;
 
 ?>
 
@@ -34,91 +36,33 @@
                             <a href="#" class="panel-toggle text-muted"><i class="icon-caret-down icon-large text-active"></i><i class="icon-caret-up icon-large text"></i></a>
                         </li>
                     </ul>
-                    共<span class="label label-large bg-default">15</span>场演出
+                    共<span class="label label-large bg-default"><?= $pages->totalCount ?></span>场演出
                 </header>
                 <section class="panel-content scrollbar scroll-y">
                     <ul class="theatre">
-                        <li	class="theatre-session">
-                            <div class="poster"><img src=""></div>
+                    <?php foreach ($lists as $k => $v) {?>
+                        <li	class="theatre-session" id="show_<?= $v['id'] ?>">
+                            <div class="poster"><img src="<?= $v['cover'] ?>"></div>
                             <div class="session-info">
-                                <a class="theatre-name">开心麻花经典舞台剧《牢友记》</a>
-                                <p class="theatre-time">时间：2016.12.19至 2016-12-29</p>
+                                <a class="theatre-name"><?= $v['title'] ?></a>
+                                <p class="theatre-time">时间：<?php echo date('Y-m-d',$v['stime']) ?>至 2016-12-29</p>
                                 <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
                                 <div class="theatre-button-group">
-                                    <a class="theatre-button" href="theatre.html">售票情况</a>
-                                    <a class="theatre-button" href="edit.html">编辑详情</a>
-                                    <a class="theatre-button-red">删除</a>
+                                    <a class="theatre-button" href="<?= Url::toRoute(['show/ticket']) ?>">售票情况</a>
+                                    <a class="theatre-button" href="<?= Url::toRoute(['show/edit','id'=>$v['id']]) ?>">编辑详情</a>
+                                    <a class="theatre-button-red" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['del-show','id'=>$v['id']]) ?>" delId="#show_<?= $v['id'] ?>">删除</a>
                                 </div>
                             </div>
                         </li>
-                        <li	class="theatre-session">
-                            <div class="poster"><img src=""></div>
-                            <div class="session-info">
-                                <a class="theatre-name">开心麻花经典舞台剧《牢友记》</a>
-                                <p class="theatre-time">时间：2016.12.19至 2016-12-29</p>
-                                <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
-                                <div class="theatre-button-group">
-                                    <a class="theatre-button" href="theatre.html">售票情况</a>
-                                    <a class="theatre-button" href="edit.html">编辑详情</a>
-                                    <a class="theatre-button-red">删除</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li	class="theatre-session">
-                            <div class="poster"><img src=""></div>
-                            <div class="session-info">
-                                <a class="theatre-name">开心麻花经典舞台剧《牢友记》</a>
-                                <p class="theatre-time">时间：2016.12.19至 2016-12-29</p>
-                                <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
-                                <div class="theatre-button-group">
-                                    <a class="theatre-button" href="theatre.html">售票情况</a>
-                                    <a class="theatre-button" href="edit.html">编辑详情</a>
-                                    <a class="theatre-button-red">删除</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li	class="theatre-session">
-                            <div class="poster"><img src=""></div>
-                            <div class="session-info">
-                                <a class="theatre-name">开心麻花经典舞台剧《牢友记》</a>
-                                <p class="theatre-time">时间：2016.12.19至 2016-12-29</p>
-                                <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
-                                <div class="theatre-button-group">
-                                    <a class="theatre-button" href="theatre.html">售票情况</a>
-                                    <a class="theatre-button" href="edit.html">编辑详情</a>
-                                    <a class="theatre-button-red">删除</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li	class="theatre-session">
-                            <div class="poster"><img src=""></div>
-                            <div class="session-info">
-                                <a class="theatre-name">开心麻花经典舞台剧《牢友记》</a>
-                                <p class="theatre-time">时间：2016.12.19至 2016-12-29</p>
-                                <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
-                                <div class="theatre-button-group">
-                                    <a class="theatre-button" href="theatre.html">售票情况</a>
-                                    <a class="theatre-button" href="edit.html">编辑详情</a>
-                                    <a class="theatre-button-red">删除</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li	class="theatre-session">
-                            <div class="poster"><img src=""></div>
-                            <div class="session-info">
-                                <a class="theatre-name">开心麻花经典舞台剧《牢友记》</a>
-                                <p class="theatre-time">时间：2016.12.19至 2016-12-29</p>
-                                <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
-                                <div class="theatre-button-group">
-                                    <a class="theatre-button" href="theatre.html">售票情况</a>
-                                    <a class="theatre-button" href="edit.html">编辑详情</a>
-                                    <a class="theatre-button-red">删除</a>
-                                </div>
-                            </div>
-                        </li>
+                     <?php }?>
                     </ul>
                 </section>
             </section>
+            <div class="page">
+				<?= LinkPager::widget([
+				    'pagination'=>$pages
+				]) ?>
+            </div>
         </div>
     </div>
 </section>

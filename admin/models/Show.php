@@ -29,6 +29,7 @@
     use yii\db\ActiveRecord;
 
     class Show extends ActiveRecord{
+        public $_pageSize = 20;
 
         /**
          * 定义表对象
@@ -41,6 +42,24 @@
         }
 
         /**
+         * 节目列表
+         * @param  array $_where
+         * @param  string $_offset
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年1月18日 上午10:04:03
+        **/
+        function getShowList($_where = 1,$_offset = 'count'){
+            $showM = self::find()->where($_where);
+            if($_offset == 'count'){
+                return $showM->count();
+            }
+
+            $data = $showM->offset($_offset)->limit($this->_pageSize)->orderBy('id DESC')->asArray()->all();
+            return $data;
+        }
+
+        /**
          * 获取节目详情
          * @param  int $_id
          * @return array
@@ -48,8 +67,18 @@
          * @date 2017年1月12日 下午3:35:59
         **/
         function getShowInfoById($_id){
-            return self::findOne($_id);
-            return self::find()->where($_id)->asArray()->one();
+            return self::find()->where(['id'=>$_id])->asArray()->one();
+        }
+
+        /**
+         * 删除节目
+         * @param  int $_id
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年1月18日 上午11:12:30
+        **/
+        function deleteShowById($_id){
+            return self::findOne($_id)->delete();
         }
 
 
