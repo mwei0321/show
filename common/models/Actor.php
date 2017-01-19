@@ -51,6 +51,31 @@
         }
 
         /**
+         * 节目演员详情
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年1月19日 下午3:17:30
+        **/
+        function getShowActorInfo($_showId){
+            $datas = self::find()
+                    ->select('a.*,sa.duty,sa.act')
+                    ->from('actor a')
+                    ->rightJoin('show_actor sa','a.id = sa.actor_id')
+                    ->where(['sa.show_id'=>$_showId])
+                    ->asArray()
+                    ->all();
+            //处理数据
+            $dutyNameList = $this->getActorDutyLists();
+            foreach ($datas as $k => $v){
+                unset($datas[$k]['ctime']);
+                $datas[$k]['dutyName'] = $dutyNameList[$v['duty']];
+            }
+
+            return $datas;
+        }
+
+        /**
          * 返回职务列表
          * @return array
          * @author MaWei (http://www.phpython.com)
