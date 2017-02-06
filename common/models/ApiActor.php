@@ -1,0 +1,69 @@
+<?php
+   /**
+	*  +----------------------------------------------------------------------------------------------+
+	*   | Explain:  演员API接口处理模型
+	*  +----------------------------------------------------------------------------------------------+
+	*   | Author: MaWei <1123265518@qq.com>
+	*  +----------------------------------------------------------------------------------------------+
+	*   | Creater Time : 2017年2月6日
+	*  +----------------------------------------------------------------------------------------------+
+	*   | Link :		http://www.phpython.com
+	*  +----------------------------------------------------------------------------------------------+
+	**/
+
+    namespace common\models;
+    use yii\db\ActiveRecord;
+    use common\models\Actor;
+
+    class ApiActor extends ActiveRecord{
+
+        /**
+         * 节目演员详情
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月6日 上午11:00:57
+        **/
+        function getShowActorList($_showId){
+            $info = (new Actor())->getShowActorInfo($_showId);
+
+            return $info;
+        }
+
+        /**
+         * 获取演员详情
+         * @param  int $_actorId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月6日 下午3:29:00
+        **/
+        function getActorInfoById($_actorId){
+            $info = (new Actor())->getActorInfoById($_actorId);
+
+            $info['avatar'] = ImageUrl.$info['avatar'];
+            $info['gender'] = $info['gender'] ? '男' : '女' ;
+            unset($info['ctime']);
+
+            return $info;
+        }
+
+        /**
+         * 获取演员演的节目
+         * @param  int $_actorId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月6日 上午11:40:52
+        **/
+        function getActorShowList($_actorId){
+            $showlist = (new Actor())->getActorShowList($_actorId);
+
+            foreach ($showlist as $k => $v){
+                $showlist[$k]['cover'] = ImageUrl.$v['cover'];
+                unset($showlist[$k]['ctime']);
+                unset($showlist[$k]['intro']);
+                unset($showlist[$k]['duration']);
+            }
+
+            return $showlist;
+        }
+    }

@@ -12,10 +12,13 @@
 	**/
 
     namespace common\models;
-
     use yii\db\ActiveRecord;
 
     class Actor extends ActiveRecord{
+
+        static function tableName(){
+            return 'actor';
+        }
 
         /**
          * 获取演员详情
@@ -73,6 +76,36 @@
             }
 
             return $datas;
+        }
+
+        /**
+         * 获取演员演的节目
+         * @param  int $_actorId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月6日 上午11:09:08
+        **/
+        function getActorShowList($_actorId){
+            //获取演员演过的节目ID
+            $showIds = self::find()
+                        ->select('show_id')
+                        ->from('show_actor')
+                        ->where([
+                            'actor_id'=>$_actorId,
+                        ])
+                        ->orderBy('ctime DESC')
+                        ->asArray()
+                        ->all();
+            //获取节目详情
+            $showlist = self::find()
+                        ->from('show')
+                        ->where([
+                            'id' => arr2to1($showIds,'show_id'),
+                        ])
+//                         ->createCommand()->getRawSql();
+                        ->asArray()
+                        ->all();
+           return $showlist;
         }
 
         /**

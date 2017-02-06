@@ -20,10 +20,6 @@
         public $_reMsg  = '';
         public $_count  = 0;
 
-        function __construct(){
-
-        }
-
         /**
          * 检查用户登录
          * @return array
@@ -44,15 +40,15 @@
         **/
         function _returnJson($_data = [],$_addData = []){
             $data = [
-                'data'  =>  $_data,
                 'code'  =>  $this->_reCode,
                 'msg'   =>  $this->_reCodeMsg(),
                 'count' =>  $this->_count,
+                'data'  =>  $_data,
             ];
             //合并数据
             $data = array_merge($data,$_addData);
             //格式化为json输入
-            Yii::$app->response->format = \yii\base\Response::FORMAT_JSON;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return $data;
         }
 

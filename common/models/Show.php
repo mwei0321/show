@@ -50,7 +50,7 @@
         **/
         function getShowList($_where = 1,$_offset = 'count'){
             $showM = self::find()->where($_where);
-            if($_offset == 'count'){
+            if((string)$_offset == 'count'){
                 return $showM->count();
             }
 

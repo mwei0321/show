@@ -101,6 +101,7 @@ class Command extends Component
      */
     private $_refreshTableName;
 
+    public $_getlastsql;
 
     /**
      * Enables query cache for this command.
@@ -188,7 +189,7 @@ class Command extends Component
         foreach (explode('?', $this->_sql) as $i => $part) {
             $sql .= (isset($params[$i]) ? $params[$i] : '') . $part;
         }
-
+        $this->_getlastsql = $sql;
         return $sql;
     }
 
@@ -881,6 +882,7 @@ class Command extends Component
                     $fetchMode,
                     $this->db->dsn,
                     $this->db->username,
+
                     $rawSql,
                 ];
                 $result = $cache->get($cacheKey);
