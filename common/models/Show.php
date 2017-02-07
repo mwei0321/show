@@ -70,6 +70,28 @@
         }
 
         /**
+         * 获取演出场次
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月7日 上午11:11:24
+        **/
+        function getShowTimesById($_showId){
+            return self::find()->from('show_times')->where(['show_id'=>$_showId])->asArray()->all();
+        }
+
+        /**
+         * 返回演出详细信息
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月7日 上午11:14:49
+        **/
+        function getShowDetailById($_showId){
+
+        }
+
+        /**
          * 删除节目
          * @param  int $_id
          * @return array

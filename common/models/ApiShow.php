@@ -32,8 +32,6 @@
             if((string)$_offset != 'count'){
                 foreach ($lists as $k => $v){
                     $lists[$k]['cover'] = ImageUrl.$v['cover'];
-                    $lists[$k]['stime'] = date('Y-m-d H:i',$v['stime']);
-                    $lists[$k]['etime'] = date('Y-m-d H:i',$v['etime']);
                     unset($lists[$k]['ctime']);
                 }
             }

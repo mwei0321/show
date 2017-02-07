@@ -103,8 +103,8 @@
             $showModel->cover   =   $request->post('cover','');
             $showModel->intro   =   $request->post('intro','');
             $showModel->duration=   $request->post('duration','');
-            $showModel->stime   =   strtotime($time[0]);
-            $showModel->etime   =   strtotime($time[1]);
+//             $showModel->stime   =   strtotime($time[0]);
+//             $showModel->etime   =   strtotime($time[1]);
             $showModel->ctime   =   time();
 //             var_dump($_POST);
 //             var_dump($showModel);exit;
