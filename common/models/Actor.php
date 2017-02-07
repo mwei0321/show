@@ -12,10 +12,13 @@
 	**/
 
     namespace common\models;
-
     use yii\db\ActiveRecord;
 
     class Actor extends ActiveRecord{
+
+        static function tableName(){
+            return 'actor';
+        }
 
         /**
          * 获取演员详情
@@ -48,6 +51,61 @@
         function getActorInfoAll(){
             $actorLists = self::find()->asArray()->all();
             return fieldtokey($actorLists);
+        }
+
+        /**
+         * 节目演员详情
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年1月19日 下午3:17:30
+        **/
+        function getShowActorInfo($_showId){
+            $datas = self::find()
+                    ->select('a.*,sa.duty,sa.act')
+                    ->from('actor a')
+                    ->rightJoin('show_actor sa','a.id = sa.actor_id')
+                    ->where(['sa.show_id'=>$_showId])
+                    ->asArray()
+                    ->all();
+            //处理数据
+            $dutyNameList = $this->getActorDutyLists();
+            foreach ($datas as $k => $v){
+                unset($datas[$k]['ctime']);
+                $datas[$k]['dutyName'] = $dutyNameList[$v['duty']];
+            }
+
+            return $datas;
+        }
+
+        /**
+         * 获取演员演的节目
+         * @param  int $_actorId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月6日 上午11:09:08
+        **/
+        function getActorShowList($_actorId){
+            //获取演员演过的节目ID
+            $showIds = self::find()
+                        ->select('show_id')
+                        ->from('show_actor')
+                        ->where([
+                            'actor_id'=>$_actorId,
+                        ])
+                        ->orderBy('ctime DESC')
+                        ->asArray()
+                        ->all();
+            //获取节目详情
+            $showlist = self::find()
+                        ->from('show')
+                        ->where([
+                            'id' => arr2to1($showIds,'show_id'),
+                        ])
+//                         ->createCommand()->getRawSql();
+                        ->asArray()
+                        ->all();
+           return $showlist;
         }
 
         /**
