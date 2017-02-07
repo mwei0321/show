@@ -427,6 +427,11 @@
 #data-cast-sigh{
 	width:100px;
 }
+.gender{
+	border-radius: 4px;
+    height: 26px;
+    margin-left: -3px;
+}
 .cast-data-birth{
 	color:#999;
 	font-size:14px;
