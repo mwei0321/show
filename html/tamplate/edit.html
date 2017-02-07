@@ -110,7 +110,11 @@
 				<div class="row">
 					<form class="theatre-data">
 						<div class="row col-lg-12"><label>演出名称</label><input type="text" id="data-name"></input></div>
-						<div class="row col-lg-12"><label>演出时间</label><input type="text" id="data-start-time"></input>
+							<div class="row col-lg-12"><label>演出时间</label>
+							<div class="time-group">
+								<input type="text" id="data-start-time" class="time-input-length"></input>
+							</div>
+							<div class="add-time-btn">+</div>
 						</div>
 						<div class="row col-lg-12">
 							<label>演出时长</label><input type="text" id="data-during"></input>
@@ -246,10 +250,10 @@
 	
 		$('#data-start-time').daterangepicker({
 		locale: {
-		  format: 'YYYY-MM-DD HH:mm'
+		  format: 'YYYY-MM-DD'
 		},
-		   timePicker: true, 
-		   timePickerIncrement: 30, 
+		   singleDatePicker: true,
+		   //timePickerIncrement: 30, 
 		});
 		$(".cast-position").click(function(){
 			if($(this).val()==1){
@@ -290,7 +294,19 @@
 				}
 			})
 		})
-		
+		var inputset = '<input type="text" class="time-input-length" style="margin-top:10px;">'
+		$(".add-time-btn").click(function(){
+			var len = "time" + $(".time-group input").length;
+			$(".time-group").append(inputset);
+			$(".time-group input:last").attr("id",len);
+			$('.time-group input:last').daterangepicker({
+				locale: {
+				  format: 'YYYY-MM-DD'
+				},
+				   singleDatePicker: true,
+				   //timePickerIncrement: 30, 
+				});
+			})
   </script>
 
 </body>
