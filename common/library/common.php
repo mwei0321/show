@@ -61,9 +61,9 @@
      */
     function page($_count,$_pnum = 10,$_sort = 0){
         $page = [];
-        $p = intval($_REQUEST['p']);
+        $p = intval($_REQUEST['p'] ?? 0);
         $nowPage = $p > 1 ? $p : 1;
-        $pageNum = intval($_REQUEST['pn']) ? : $_pnum;
+        $pageNum = intval($_REQUEST['pn'] ?? $_pnum);
         $totalPage = intval(ceil($_count/$pageNum));
         if($nowPage > $totalPage) return 0;
         if($_sort)
@@ -74,7 +74,26 @@
         $page['pageNum'] = $pageNum;
         $page['totalPage'] = $totalPage;
         $page['page'] = "$row,$pageNum";
+        $page['offset'] = (string)$row;
         return $page;
+    }
+
+    /**
+     * 二维数组格式化时间
+     * @param  array $_data 数组
+     * @param  arrary $_filedList 格式
+     * @param  string $_format 格式
+     * @return array
+     * @author MaWei (http://www.phpython.com)
+     * @date 2017年2月6日 上午9:29:27
+    **/
+    function formatTime($_data,$_filedList = ['stime','etime','ctime'],$_format = 'Y-m-d H:i'){
+        foreach ($_data as $k => $v){
+            foreach ($_filedList as $val){
+                isset($_data[$k][$val]) && $_data[$k][$val] = date($_format,$_data[$k][$val]);
+            }
+        }
+        return $_data;
     }
 
     /**

@@ -14,11 +14,9 @@
     namespace admin\controllers;
     use Yii;
     use yii\web\Controller;
-    use admin\models\Show;
+    use common\models\Show;
     use common\models\Actor;
     use common\models\CommonModel;
-use yii\widgets\LinkPager;
-use yii\base\Widget;
 
     class ShowController extends Controller{
 //         public $layout = 'template';
