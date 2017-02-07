@@ -264,7 +264,6 @@
 	margin-bottom:20px;
 }
 #data-start-time{
-	width: 233px;
 }
 .theatre-data input{
 	height: 33px;
@@ -518,4 +517,26 @@
     border-top: solid 1px #ddd;
     padding: 35px 65px;
     min-height: 480px;
+}
+.add-time-btn{
+	display: inline-block;
+    width: 33px;
+    height: 33px;
+    border: solid 2px #ddd;
+    border-radius: 4px;
+    vertical-align: bottom;
+    color: #ddd;
+    text-align: center;
+    font-size: 30px;
+    line-height: 27px;
+    margin-left: 10px;
+	cursor:pointer;
+}
+.time-group{
+	display:inline-block;
+	margin-left: -4px;
+	width:92px;
+}
+.time-input-length{
+	width:90px;
 }
