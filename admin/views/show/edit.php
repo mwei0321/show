@@ -41,9 +41,12 @@
 							<label>演出名称</label><input type="text" class="check" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
-							<div class="input-group">
-								<input type="text"  class="check" emsg="请选择演出时间" id="data-start-time" name="time" value="<?= $showInfo['stime']??null ?>" id="data-start-time"></input>
+							<div class="input-group" id="showtimes">
+								<input type="text"  class="check data-start-time" emsg="请选择演出时间" name="time[]" value="<?= $showInfo['stime']??null ?>"></input>
+								<input type="text"  class="check data-start-time" emsg="请选择演出时间" name="time[]" value="<?= $showInfo['stime']??null ?>"></input>
+								<input type="text"  class="check data-start-time" emsg="请选择演出时间" name="time[]" value="<?= $showInfo['stime']??null ?>"></input>
 							</div>
+							<span onclick="addTimes($(this));" style="display: block; width:25px; height:25px;">+=======</span>
 						</div>
 						<div class="row col-lg-12">
 							<label>演出时长</label><input type="text"  class="check" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
@@ -200,7 +203,7 @@
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
 	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
 	<script>
-		$('#data-start-time').daterangepicker({
+		$('.data-start-time').daterangepicker({
     		locale: {
     		  format: 'YYYY-MM-DD HH:mm'
     		},

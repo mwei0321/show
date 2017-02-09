@@ -26,15 +26,18 @@
          * @date 2017年1月18日 上午10:04:03
          **/
         function getShowList($_where = 1,$_offset = 'count'){
-            $lists = (new Show())->getShowList($_where,$_offset);
-
+            $showM = new Show();
+            $lists = $showM->getShowList($_where,$_offset);
+            if(!$lists) return [];
             //处理列表
             if((string)$_offset != 'count'){
                 foreach ($lists as $k => $v){
                     $lists[$k]['cover'] = ImageUrl.$v['cover'];
-                    $lists[$k]['stime'] = date('Y-m-d H:i',$v['stime']);
-                    $lists[$k]['etime'] = date('Y-m-d H:i',$v['etime']);
                     unset($lists[$k]['ctime']);
+                    //写入演出时间范围
+                    $times = $showM->getShowExpire($v['id']);
+                    $lists[$k]['stime'] = date('Y-m-d H:i',$times['stime']);
+                    $lists[$k]['etime'] = date('Y-m-d H:i',$times['etime']);
                 }
             }
 
@@ -57,4 +60,5 @@
 
             return $info;
         }
+
     }
