@@ -49,4 +49,16 @@
         function getDynamicInfoById($_dynamicId){
             return self::find()->where(['id'=>$_dynamicId])->asArray()->one();
         }
+
+        /**
+         * 获取前几动态列表
+         * @param  string $_orderBy
+         * @param  string $_limit
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月10日 下午5:12:26
+        **/
+        function getDynamicListByTop($_orderBy = 'ctime DESC',$_limit = 3){
+            return self::find()->where(['status'=>1])->orderBy($_orderBy)->limit($_limit)->asArray()->all();
+        }
     }

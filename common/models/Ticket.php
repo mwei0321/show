@@ -50,11 +50,15 @@
          * @date 2017年2月7日 上午11:11:24
          **/
         function getShowTimesById($_showId){
-            return self::find()->from('show_times')->where([
-                'and',
-                ['show_id'   => $_showId],
-                ['>','stime',(time()+10)]
-            ])->orderBy('stime DESC')->asArray()->all();
+            $times = self::find()->from('show_times')->where([
+                        'and',
+                        ['show_id'   => $_showId],
+                        ['>','stime',(time()+10)]
+                    ])->orderBy('stime DESC')
+//                     ->createCommand()->getRawSql();
+                    ->asArray()
+                    ->all();
+            return $times;
         }
 
         /**

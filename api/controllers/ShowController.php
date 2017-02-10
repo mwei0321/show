@@ -16,6 +16,7 @@
     use Yii;
     use common\models\ApiShow;
     use common\models\ApiActor;
+    use common\models\ApiDynamic;
 
     class ShowController extends CommonController{
 
@@ -56,7 +57,7 @@
          * @date 2017年1月19日 上午10:52:08
         **/
         function actionGetshowinfo(){
-            $id = Yii::$app->request->get('id',0);
+            $id = Yii::$app->request->get('show_id',0);
 
             $info = [];
             if($id > 0){
@@ -65,6 +66,9 @@
                 //节目演员详情
                 $actorLists = (new ApiActor())->getShowActorList($id);
                 $info['actors'] = $actorLists;
+                //动态
+                $dynamic = (new ApiDynamic())->getDynamicByTop();
+                $info['dynamic'] = $dynamic;
             }else{
                 $this->_reCode = 440;
                 $this->_reMsg = 'id errors->'.$id;

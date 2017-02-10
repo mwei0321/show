@@ -15,7 +15,6 @@
     use Yii;
     use api\controllers\CommonController;
     use common\models\ApiTicket;
-use common\models\Ticket;
 
     class TicketController extends CommonController{
 
@@ -31,8 +30,6 @@ use common\models\Ticket;
             $ticketM = new ApiTicket();
             $seatList = $ticketM->getShowTimesList($showId) ? : [];
 
-//             var_dump(time());exit;
-
             return $this->_returnJson($seatList);
         }
 
@@ -44,10 +41,10 @@ use common\models\Ticket;
         **/
         function actionGettimesticket(){
             $showId = Yii::$app->request->get('show_id',1);
-            $times = Yii::$app->request->get('times_id',1);
+            $timesId = Yii::$app->request->get('times_id',1);
 
             $ticketM = new ApiTicket();
-            $ticketList = $ticketM->getTimesSeatInfo($times);
+            $ticketList = $ticketM->getTimesSeatInfo($showId,$timesId);
 
 
             return $this->_returnJson($ticketList);

@@ -42,7 +42,9 @@
 
             $info['avatar'] = ImageUrl.$info['avatar'];
             $info['gender'] = $info['gender'] ? '男' : '女' ;
+            $info['actor_id'] = $info['id'];
             unset($info['ctime']);
+            unset($info['id']);
 
             return $info;
         }
@@ -59,9 +61,12 @@
 
             foreach ($showlist as $k => $v){
                 $showlist[$k]['cover'] = ImageUrl.$v['cover'];
+                $showlist[$k]['show_id'] = $v['id'];
                 unset($showlist[$k]['ctime']);
                 unset($showlist[$k]['intro']);
                 unset($showlist[$k]['duration']);
+                unset($showlist[$k]['id']);
+                unset($showlist[$k]['status']);
             }
 
             return $showlist;

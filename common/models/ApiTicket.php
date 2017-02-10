@@ -17,6 +17,7 @@
 
     class ApiTicket extends ActiveRecord{
 
+        private $_week = ['周日','周一','周二','周三','周四','周五','周六'];
 
         /**
          * 获取演出节目场次
@@ -26,17 +27,33 @@
          * @date 2017年2月10日 上午10:18:57
         **/
         function getShowTimesList($_showId){
-            return (new Ticket())->getShowTimesById($_showId);
+            $times = (new Ticket())->getShowTimesById($_showId);
+
+            foreach ($times as $k => $v){
+                $times[$k]['times_id'] = $v['id'];
+                $times[$k]['stime_date'] = date('Y-m-d',$v['stime']);
+                $times[$k]['stime_week'] = $this->_week[date('w',$v['stime'])];
+                $times[$k]['stime_time'] = date('H:i',$v['stime']);
+
+                unset($times[$k]['id']);
+                unset($times[$k]['etime']);
+                unset($times[$k]['stime']);
+                unset($times[$k]['ctime']);
+            }
+
+            return $times;
         }
 
         /**
          * 获取场次座位情况
+         * @param  int $_show_id
          * @param  int $_timesId
+         * @param  int $_roomId
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月10日 上午10:19:39
         **/
-        function getTimesSeatInfo($_timesId,$_roomId = 1){
+        function getTimesSeatInfo($_show_id,$_timesId,$_roomId = 1){
             $ticketM = new Ticket();
 
             //获取房间座位
@@ -56,6 +73,8 @@
                 }elseif(in_array($v['seat_id'], $buySeatIds))
                     $status = 1;
                 $roomSeat[$k]['status'] = $status;
+                $roomSeat[$k]['times_id'] = $_timesId;
+                $roomSeat[$k]['show_id'] = $_show_id;
                 unset($roomSeat[$k]['id']);
             }
 
