@@ -45,7 +45,7 @@
                             <div class="poster"><img src="<?= $v['cover'] ?>"></div>
                             <div class="session-info">
                                 <a class="theatre-name"><?= $v['title'] ?></a>
-                                <p class="theatre-time">时间：<?php echo date('Y-m-d',$v['stime']) ?>至 2016-12-29</p>
+                                <p class="theatre-time">时间： <?php echo date('Y-m-d',$v['ctime']) ?>至 2016-12-29</p>
                                 <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
                                 <div class="theatre-button-group">
                                     <a class="theatre-button" href="<?= Url::toRoute(['show/ticket']) ?>">售票情况</a>

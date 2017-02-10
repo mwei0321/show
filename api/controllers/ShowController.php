@@ -19,6 +19,12 @@
 
     class ShowController extends CommonController{
 
+        function actionIndex(){
+            $m = new \common\models\Show();
+
+            var_dump($m->getShowTimesById(1));
+        }
+
         /**
          * 获取节目列表
          * @return array
@@ -30,6 +36,7 @@
 
             //返回节目列表
             $showM = new ApiShow();
+
             $this->_count = $showM->getShowList($where);
             if($this->_count < 1){
                 $this->_reCode = 204;

@@ -86,6 +86,7 @@
             ]);
         }
 
+
         /**
          * 数据更新
          * @return array
@@ -93,7 +94,8 @@
          * @date 2017年1月13日 上午10:25:16
         **/
         function actionUpdata(){
-
+            $this->_showTimes(1);
+var_dump($_REQUEST);exit;
             $request = Yii::$app->request;
             //时间
             $time = explode(' - ', $request->post('time'));
@@ -133,6 +135,31 @@
             }else{
 
             }
+        }
+
+        /**
+         * 演出场次处理
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月7日 下午3:56:14
+        **/
+        function _showTimes($_showId){
+            $times = Yii::$app->request->post('time',[]);
+
+            //删除之前的场次
+            (new Show())->deleteShowTimesByIds($_showId);
+
+            //写入新的场次
+            if($times && is_array($times)){
+                foreach ($times as $k => $v){
+                    $showTimesM = new CommonModel('show_times');
+                    $showTimesM->show_id    = $_showId;
+                    $showTimesM->stime      = strtotime($v);
+                    $showTimesM->ctime      = time();
+                    $showTimesM->save();
+                }
+            }
+            var_dump($times);exit;
         }
 
         /**
