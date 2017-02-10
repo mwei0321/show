@@ -70,21 +70,6 @@
         }
 
         /**
-         * 获取演出场次
-         * @param  int $_showId
-         * @return array
-         * @author MaWei (http://www.phpython.com)
-         * @date 2017年2月7日 上午11:11:24
-        **/
-        function getShowTimesById($_showId){
-            return self::find()->from('show_times')->where([
-                        'and',
-                        ['show_id'   => $_showId],
-                        ['>','stime',(time()+10)]
-            ])->groupBy('stime DESC')->asArray()->all();
-        }
-
-        /**
          * 查出演出时间段
          * @param  int $_showId
          * @return array

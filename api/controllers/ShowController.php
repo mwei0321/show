@@ -20,9 +20,9 @@
     class ShowController extends CommonController{
 
         function actionIndex(){
-            $m = new \common\models\Show();
+            $m = new \common\models\Ticket();
 
-            var_dump($m->getShowTimesById(1));
+            var_dump($m->createRoomSeat(1));
         }
 
         /**
