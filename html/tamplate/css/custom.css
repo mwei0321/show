@@ -540,3 +540,27 @@
 .time-input-length{
 	width:90px;
 }
+
+.left-list{
+	display:inline-block;
+	width:12%;
+	background:#fff;
+	height:726px;
+	overflow-y:auto;
+	border-right:solid #ddd 1px;
+	border-bottom:solid #ddd 1px;
+}
+.theatre-arrange li{
+	height: 77px;
+	border-bottom:dashed #aaa 1px;
+}
+.theatre-arrange a{
+	height:100%;
+	padding: 30px 10px !important;
+}
+.right-form{
+	display: inline-block;
+    height: 726px;
+    width: 87%;
+    vertical-align: top;
+}
