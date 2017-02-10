@@ -42,10 +42,14 @@
             ]);
             $lists = $showModel->getShowList($where,(string)$pageM->offset);
 
+			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $lists;
+			/**
             return $this->render('index',[
                 'lists' => $lists,
                 'pages' => $pageM,
             ]);
+			**/
         }
 
         /**
