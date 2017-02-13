@@ -17,6 +17,7 @@
     use common\models\Show;
     use common\models\Actor;
     use common\models\CommonModel;
+    use common\models\Ticket;
 
     class ShowController extends Controller{
 //         public $layout = 'template';
@@ -42,14 +43,12 @@
             ]);
             $lists = $showModel->getShowList($where,(string)$pageM->offset);
 
-			/**Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return $lists;**/
-			
+//             var_dump($pageM);
+//             var_dump($lists);exit;
             return $this->render('index',[
                 'lists' => $lists,
                 'pages' => $pageM,
             ]);
-			
         }
 
         /**
@@ -63,10 +62,14 @@
             $id = Yii::$app->request->get('id');
 
             $showInfo = [];
+            $timesList = [];
             if($id > 0){
                 //获取节目详情
                 $showModel = new Show();
                 $showInfo = $showModel->getShowInfoById($id);
+                //获取场次
+                $timesList = (new Ticket())->getShowTimesById($id);
+//                 var_dump($timesList);exit;
             }
             //获取演员列表
             $actorObj = new Actor();
@@ -83,6 +86,7 @@
                 'actors'    => $actors,
                 'dutys'     => $dutys,
                 'showActors'=> $showActors,
+                'showTimes' => $timesList,
             ]);
         }
 
@@ -97,7 +101,7 @@
 //             $this->_showTimes(1);
             $request = Yii::$app->request;
             //时间
-            $time = explode(' - ', $request->post('time'));
+            $time = $request->post('time',[]);
             //节目信息
             if($request->post('id','') > 0)
                 $showModel = Show::findOne($request->post('id',''));
@@ -114,6 +118,20 @@
 //             var_dump($_POST);
 //             var_dump($showModel);exit;
             if($showModel->save(false) && $showModel->id > 0){
+                $showId = $showModel->id;
+                //写入场次
+                $showModel->deleteShowTimesByShowIds($showId);
+                if($time && is_array($time)){
+                    foreach ($time as $k => $v){
+                        $showTimes = new CommonModel('show_times');
+                        $showTimes->show_id = $showId;
+                        $showTimes->room_id = 1;
+                        $showTimes->stime   = strtotime($v);
+                        $showTimes->ctime   = time();
+                        $showTimes->save(false);
+                    }
+                }
+
                 //删除演员
                 (new CommonModel('show_actor'))->deleteAll(['show_id'=>$showModel->id]);
                 //写入演员信息
@@ -129,7 +147,7 @@
                     $actorModel->save(false);
 //                     echo $actorModel->id;
                 }
-//                 return $this->redirect('http://q.com/index.php?r=show');
+
                 return $this->redirect(['show/index']);
             }else{
 
@@ -158,7 +176,8 @@
                     $showTimesM->save();
                 }
             }
-            var_dump($times);exit;
+
+            return null;
         }
 
         /**
