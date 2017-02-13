@@ -27,8 +27,19 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月9日 下午2:43:29
         **/
-        function getShowTicketInfo($_timesId){
+        function getShowTicketSellInfo($_timesId){
             return self::find()->where(['times_id'=>$_timesId])->asArray()->all();
+        }
+
+        /**
+         * 返回票的详情
+         * @param  int|array $_ids
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月13日 下午2:36:07
+         **/
+        function getTicketInfoByIds($_ids){
+            return self::find()->where(['id' => $_ids])->asArray()->all();
         }
 
         /**

@@ -58,13 +58,14 @@
         **/
         function actionBuyticket(){
             $memberId = Yii::$app->request->get('mid',1);
-            $seatId = Yii::$app->request->get('seat_id','');
             $timesId = Yii::$app->request->get('times_id',0);
+            $seatId = Yii::$app->request->get('seat_id','');
+            $seatIds = explode(',', $seatId);
 //             $showId = Yii::$app->request->get('show_id',0);
 
-            if($memberId && $seatId && $timesId){
+            if($memberId && $timesId && $seatIds && is_array($seatIds)){
                 $ApiTicketM = new ApiTicket();
-                $reid = $ApiTicketM->BuyTicket($memberId, $timesId, $seatId);
+                $reid = $ApiTicketM->BuyTicket($memberId, $timesId, $seatIds);
             }else{
                 $this->_reCode = 440;
                 $this->_reMsg = 'memeber -> '.$memberId.' &seatId -> '.$seatId.' &timesId -> '.$timesId;
@@ -76,8 +77,8 @@
                 '恭喜您，出票成功，感谢您的支持！',
                 '场次选择错误，请刷新重试！',
                 '非常抱歉，该场次已开始！',
-                '非常抱歉，该座位已售，请重新选择！',
-                '非常抱歉，该座位已售，请重新选择！',
+                '非常抱歉，选择座位已售，请重新选择！',
+                '非常抱歉，选择座位有预留的，请重新选择！',
             ];
 
             //判断出票是否成功
@@ -85,10 +86,11 @@
             if($reid != 1){
                 $this->_reCode = 400;
             }
-
+            //返回数据
             $data['code'] = $reid;
+            $data['msg'] = $reMsg[$reid];
 
-            $this->_returnJson($data);
+            return $this->_returnJson($data);
         }
     }
 

@@ -66,7 +66,7 @@
             $resseredSeat = $ticketM->getShowTimesReserved($_timesId);
             $resseredSeatIds = $resseredSeat ? arr2to1($resseredSeat,'seat_id') : [];
             //获取已售座位
-            $buySeat = $ticketM->getShowTicketInfo($_timesId);
+            $buySeat = $ticketM->getShowTicketSellInfo($_timesId);
             $buySeatIds = $buySeat ? arr2to1($buySeat,'seat_id') : [];
             //处理
             foreach ($roomSeat as $k => $v){
@@ -89,7 +89,7 @@
          * 购票
          * @param  int $_memberId 会员ID
          * @param  int $_timesId 场次ID
-         * @param  int $_seatId 座位ID
+         * @param  array $_seatId 座位ID
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月13日 上午9:46:45
@@ -128,28 +128,45 @@
                         //判断座位是否是预留
                         if($seatIsReserved == 0){
                             //写入购票数据
-                            $this->member_id    = $_memberId;
-                            $this->room_id      = $timesInfo['room_id'];
-                            $this->show_id      = $timesInfo['show_id'];
-                            $this->times_id     = $_timesId;
-                            $this->row          = $seatInfo['row'];
-                            $this->column       = $seatInfo['column'];
-                            $this->seat_id      = $_seatId;
-                            $reid = $this->save();
-                            exit;
+                            $ticketIds = [];
+                            foreach ($_seatId as $k => $v){
+                                $ticketM = new self();
+                                $ticketM->member_id    = $_memberId;
+                                $ticketM->room_id      = $timesInfo['room_id'];
+                                $ticketM->show_id      = $timesInfo['show_id'];
+                                $ticketM->times_id     = $_timesId;
+                                $ticketM->row          = $seatInfo['row'];
+                                $ticketM->column       = $seatInfo['column'];
+                                $ticketM->seat_id      = $v;
+                                $reid = $ticketM->save();
+                                $ticketIds[] = $ticketM->attributes['id'];
+                            }
+                            return $reid ? 1 : 0;
                         }else {
-                            $reCode = 5;
+                            $reCode = 5; //选择座位有预留的
                         }
                     }else {
-                        $reCode = 4;
+                        $reCode = 4; //选择座位已售
                     }
                 }else{
-                    $reCode = 3;
+                    $reCode = 3; //场次已开始
                 }
             }else{
-                $reCode = 2;
+                $reCode = 2; //场次已开始
             }
 
             return $reCode;
+        }
+
+        /**
+         * 获取票务信息
+         * @param  array $_ticketIds
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月13日 下午2:43:16
+        **/
+        function getTicketInfoByIds($_ticketIds){
+
+
         }
     }
