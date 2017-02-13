@@ -26,7 +26,7 @@
         **/
         function actionGetdynamiclist(){
             $where = [];
-            $where['static'] = 1;
+            $where['status'] = 1;
 
             //返回节目列表
             $dynamicM = new ApiDynamic();
