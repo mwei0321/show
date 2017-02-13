@@ -29,6 +29,9 @@
             $actorId = Yii::$app->request->get('actorid',0);
             //演员详情
             $info = (new ApiActor())->getActorInfoById($actorId);
+            //演员演出过的节目
+            $showlist = (new ApiActor())->getActorShowList($actorId);
+            $info['actor_show'] = $showlist;
 
             return $this->_returnJson($info);
         }
