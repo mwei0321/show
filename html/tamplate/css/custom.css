@@ -554,13 +554,24 @@
 	height: 77px;
 	border-bottom:dashed #aaa 1px;
 }
+.theatre-arrange li:focus{
+	background:#afb5be !important;
+}
 .theatre-arrange a{
 	height:100%;
 	padding: 30px 10px !important;
+	color:#333;
+}
+.theatre-arrange a:focus,
+.theatre-arrange a:hover{
+	background:#afb5be !important;
 }
 .right-form{
 	display: inline-block;
     height: 726px;
     width: 87%;
     vertical-align: top;
+}
+.theatre-arrange .active{
+	background:#afb5be;
 }
