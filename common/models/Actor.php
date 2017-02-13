@@ -71,8 +71,11 @@
             //处理数据
             $dutyNameList = $this->getActorDutyLists();
             foreach ($datas as $k => $v){
-                unset($datas[$k]['ctime']);
                 $datas[$k]['dutyName'] = $dutyNameList[$v['duty']];
+                $datas[$k]['actor_id'] = $v['id'];
+
+                unset($datas[$k]['ctime']);
+                unset($datas[$k]['id']);
             }
 
             return $datas;

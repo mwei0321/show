@@ -36,8 +36,11 @@
                     unset($lists[$k]['ctime']);
                     //写入演出时间范围
                     $times = $showM->getShowExpire($v['id']);
-                    $lists[$k]['stime'] = date('Y-m-d H:i',$times['stime']);
-                    $lists[$k]['etime'] = date('Y-m-d H:i',$times['etime']);
+                    $lists[$k]['stime'] = date('Y-m-d',$times['stime']);
+                    $lists[$k]['etime'] = date('Y-m-d',$times['etime']);
+                    //
+                    $lists[$k]['show_id'] = $v['id'];
+                    unset($lists[$k]['id']);
                 }
             }
 
@@ -53,10 +56,15 @@
          * @date 2017年2月6日 上午10:36:58
          **/
         function getShowInfoById($_showId){
-            $info = (new Show())->getShowInfoById($_showId);
-            $info['stime'] = date('Y-m-d H:i',$info['stime']);
-            $info['etime'] = date('Y-m-d H:i',$info['etime']);
-            $info['ctime'] = date('Y-m-d H:i',$info['ctime']);
+            $showM = new Show();
+            $info = $showM->getShowInfoById($_showId);
+            //写入演出时间范围
+            $times = $showM->getShowExpire($_showId);
+            $info['stime'] = date('Y-m-d',$times['stime']);
+            $info['etime'] = date('Y-m-d',$times['etime']);
+            $info['show_id'] = $_showId;
+            $info['cover'] = ImageUrl.$info['cover'];
+            unset($info['id']);
 
             return $info;
         }
