@@ -50,7 +50,7 @@
          * @date 2017年2月9日 下午3:09:51
         **/
         function getShowTimesReserved($_timesId){
-            return self::find()->from('reserved_seat')->where(['show_times'=>$_timesId])->asArray()->one();
+            return self::find()->from('reserved_seat')->where(['times_id'=>$_timesId])->asArray()->one();
         }
 
         /**
