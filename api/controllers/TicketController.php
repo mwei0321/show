@@ -18,8 +18,12 @@
 
     class TicketController extends CommonController{
 
+//         function actionIndex(){
+//             (new \common\models\Ticket())->createRoomSeat(1);
+//         }
+
         /**
-         * 获取演出丧心场次
+         * 获取演出场次
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月10日 上午10:13:10

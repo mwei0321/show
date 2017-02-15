@@ -38,18 +38,18 @@
 						<input type="hidden" name="id" value="<?= $showInfo['id']??null ?>" />
 						<input type="hidden" name="cover" value="<?= $showInfo['cover']??null ?>" id="cover"  class="check" emsg="请选择节目封面"/>
 						<div class="row col-lg-12">
-							<label>演出名称</label><input type="text" class="check" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
+							<label>演出名称</label><input type="text" class="check theatre-data-input" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
-							<div class="input-group" id="showtimes">
-								<input type="text"  class="check data-start-time" emsg="请选择演出时间" name="time[]" value="<?= $showInfo['stime']??null ?>"></input>
-								<input type="text"  class="check data-start-time" emsg="请选择演出时间" name="time[]" value="<?= $showInfo['stime']??null ?>"></input>
-								<input type="text"  class="check data-start-time" emsg="请选择演出时间" name="time[]" value="<?= $showInfo['stime']??null ?>"></input>
+							<div class="time-group">
+								<?php foreach ($showTimes as $k => $v) {?>
+									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" value="<?= date('Y-m-d H:i',$v['stime']) ?>"></input>
+								<?php }?>
 							</div>
-							<span onclick="addTimes($(this));" style="display: block; width:25px; height:25px;">+=======</span>
+							<div class="add-time-btn">+</div>
 						</div>
 						<div class="row col-lg-12">
-							<label>演出时长</label><input type="text"  class="check" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
+							<label>演出时长</label><input type="text"  class="check theatre-data-input" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
 							<span>（分钟）</span>
 						</div>
 						<div class="row col-lg-12">
@@ -207,8 +207,23 @@
     		locale: {
     		  format: 'YYYY-MM-DD HH:mm'
     		},
-		   timePicker: true,
-		   timePickerIncrement: 30,
+    		singleDatePicker: true,
+		    timePicker: true,
+// 		    timePickerIncrement: 30,
+		});
+		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-top:10px;">'
+		$(".add-time-btn").click(function(){
+    		var len = "time" + $(".time-group input").length;
+    		$(".time-group").append(inputset);
+    		$(".time-group input:last").attr("id",len);
+    		$('.time-group input:last').daterangepicker({
+    			locale: {
+    			  format: 'YYYY-MM-DD HH:mm'
+    			},
+    			   singleDatePicker: true,
+    			   timePicker: true,
+    			   //timePickerIncrement: 30,
+    			});
 		});
 	</script>
 	<script>

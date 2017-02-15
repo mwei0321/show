@@ -50,7 +50,7 @@
          * @date 2017年2月9日 下午3:09:51
         **/
         function getShowTimesReserved($_timesId){
-            return self::find()->from('reserved_seat')->where(['show_times'=>$_timesId])->asArray()->one();
+            return self::find()->from('reserved_seat')->where(['times_id'=>$_timesId])->asArray()->one();
         }
 
         /**
@@ -112,7 +112,7 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月10日 上午11:00:53
         **/
-        function createRoomSeat($_roomId = 1,$_coord = [29,28,28,23,23,23,23,23,23,28,28,28,28,27,27]){
+        function createRoomSeat($_roomId = 1,$_coord = [27,27,28,28,28,28,23,23,23,23,23,23,28,28,29]){
             //删除座位
             (new \common\models\CommonModel('room_seat'))->deleteAll(['room_id'=>$_roomId]);
             //写入座位sql

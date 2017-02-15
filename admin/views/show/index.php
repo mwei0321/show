@@ -42,7 +42,7 @@
                     <ul class="theatre">
                     <?php foreach ($lists as $k => $v) {?>
                         <li	class="theatre-session" id="show_<?= $v['id'] ?>">
-                            <div class="poster"><img src="<?= $v['cover'] ?>"></div>
+                            <div class="poster"><img src="<?= ImageUrl.$v['cover'] ?>"></div>
                             <div class="session-info">
                                 <a class="theatre-name"><?= $v['title'] ?></a>
                                 <p class="theatre-time">时间： <?php echo date('Y-m-d',$v['ctime']) ?>至 2016-12-29</p>
@@ -61,7 +61,7 @@
             <div class="page">
 				<?= LinkPager::widget([
 				    'pagination'=>$pages
-				]) ?>
+				]); ?>
             </div>
         </div>
     </div>

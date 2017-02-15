@@ -264,10 +264,9 @@
 	margin-bottom:20px;
 }
 #data-start-time{
-	width: 233px;
 }
-.theatre-data input{
-	height: 33px;
+.theatre-data-input{
+	height: 33px !important;
     border-radius: 4px;
     box-shadow: none;
     outline: none;
@@ -292,7 +291,7 @@
 	margin-bottom:10px;
 }
 .add-cast-list{
-	width: 220px;
+	width: 330px;
     margin-left: 0px;
     position: relative;
     display: inline-block;
@@ -304,6 +303,11 @@
 	width:100px;
 	height:33px;
 	border-radius:4px;
+	margin-left:10px;
+}
+.play{
+	visibility:hidden;
+	width:100px;
 	margin-left:10px;
 }
 .position-select{
@@ -422,6 +426,11 @@
 #data-cast-sigh{
 	width:100px;
 }
+.gender{
+	border-radius: 4px;
+    height: 26px;
+    margin-left: -3px;
+}
 .cast-data-birth{
 	color:#999;
 	font-size:14px;
@@ -508,4 +517,61 @@
     border-top: solid 1px #ddd;
     padding: 35px 65px;
     min-height: 480px;
+}
+.add-time-btn{
+	display: inline-block;
+    width: 33px;
+    height: 33px;
+    border: solid 2px #ddd;
+    border-radius: 4px;
+    vertical-align: bottom;
+    color: #ddd;
+    text-align: center;
+    font-size: 30px;
+    line-height: 27px;
+    margin-left: 10px;
+	cursor:pointer;
+}
+.time-group{
+	display:inline-block;
+	margin-left: -4px;
+	width:120px;
+}
+.time-input-length{
+	width:116px;
+}
+
+.left-list{
+	display:inline-block;
+	width:12%;
+	background:#fff;
+	height:726px;
+	overflow-y:auto;
+	border-right:solid #ddd 1px;
+	border-bottom:solid #ddd 1px;
+}
+.theatre-arrange li{
+	height: 77px;
+	border-bottom:dashed #aaa 1px;
+}
+.theatre-arrange li:focus{
+	background:#afb5be !important;
+}
+.theatre-arrange a{
+	height:100%;
+	padding: 30px 10px !important;
+	color:#333;
+}
+.theatre-arrange a:focus,
+.theatre-arrange a:hover{
+	background:#afb5be !important;
+}
+.right-form{
+	display: inline-block;
+    height: 726px;
+    width: 87%;
+    vertical-align: top;
+}
+.theatre-arrange .active{
+	background:#afb5be;
 }

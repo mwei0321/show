@@ -122,9 +122,12 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月7日 下午5:03:44
         **/
-        function deleteShowTimesByIds($_showId){
-            $where = ['and',['>','stime',time()],['show_id'=>$_showId]];
-//             $where = ['show_id'=>$_showId];
+        function deleteShowTimesByShowIds($_showId){
+            $where = [
+                'and',
+                ['>','stime',time()],
+                ['show_id'=>$_showId]
+            ];
             return (new \common\models\CommonModel('show_times'))->deleteAll($where);
         }
 
