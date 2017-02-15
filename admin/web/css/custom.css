@@ -265,8 +265,8 @@
 }
 #data-start-time{
 }
-.theatre-data input{
-	height: 33px;
+.theatre-data-input{
+	height: 33px !important;
     border-radius: 4px;
     box-shadow: none;
     outline: none;
@@ -535,10 +535,10 @@
 .time-group{
 	display:inline-block;
 	margin-left: -4px;
-	width:92px;
+	width:120px;
 }
 .time-input-length{
-	width:90px;
+	width:116px;
 }
 
 .left-list{
