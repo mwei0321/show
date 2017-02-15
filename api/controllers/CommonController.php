@@ -19,6 +19,12 @@
         public $_reCode = 200;
         public $_reMsg  = '';
         public $_count  = 0;
+        //会员ID
+        public $mid = 0;
+
+        function init(){
+            $this->mid = Yii::$app->request->get('mid',0);
+        }
 
         /**
          * 检查用户登录
@@ -27,7 +33,10 @@
          * @date 2017年1月19日 上午11:18:47
         **/
         function _checkUser(){
-
+            if($this->mid < 1){
+                $this->_reCode = 401;
+                return $this->_returnJson();
+            }
         }
 
         /**
@@ -49,7 +58,11 @@
             $data = array_merge($data,$_addData);
             //格式化为json输入
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return $data;
+            Yii::$app->response->data = $data;
+            Yii::$app->response->send();
+            exit;
+//             return $data;
+//             echo \yii\helpers\Json::encode($data);exit;
         }
 
         /**

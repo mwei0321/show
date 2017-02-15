@@ -20,12 +20,6 @@
 
     class ShowController extends CommonController{
 
-        function actionIndex(){
-            $m = new \common\models\Ticket();
-
-            var_dump($m->createRoomSeat(1));
-        }
-
         /**
          * 获取节目列表
          * @return array
