@@ -52,7 +52,7 @@ class MemberController extends CommonController{
                 $this->_reCode = 440;
                 $this->_reMsg = '该手机号码已被注册';
             } else {
-                $re = $Member->addOne($cellphone,$pwd);
+                $re = $Member->addOne($cellphone,$username,$pwd);
                 if ( empty($re) ) {
                     $this->_reCode = 440;
                     $this->_reMsg = '注册失败，请重试!';

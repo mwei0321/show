@@ -30,9 +30,10 @@ class Member extends ActiveRecord{
         else return false;
     }
 
-    function addOne($username,$pwd){
-        if ( $this->ifCellphoneExist($username) || $this->ifUsernameExist($username) ) return false;
-        $this->username = $this->cellphone = $username;
+    function addOne($cellphone,$username,$pwd){
+        if ( $this->ifCellphoneExist($cellphone) || $this->ifUsernameExist($username) ) return false;
+        $this->username = $username;
+        $this->cellphone = $cellphone;
         $this->passwd = $this->encodePwd($pwd);
         $this->ctime = time();
         return $this->insert();
