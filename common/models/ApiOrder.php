@@ -38,6 +38,7 @@
                 //节目场次信息
                 $times = (new \common\models\Ticket())->getTimesByIds(arr2to1($lists,'times_id'));
                 foreach ($lists as $k => $v){
+                    $lists[$k]['order_id'] = $v['id'];
                     $lists[$k]['ctime'] = date('Y-m-d H:i',$v['ctime']);
                     $lists[$k]['title'] = $showInfos[$v['show_id']]['title'];
                     $lists[$k]['cover'] = ImageUrl.$showInfos[$v['show_id']]['cover'];
@@ -45,13 +46,23 @@
                     //判断节目开始
                     $time = time();
                     if($time < $times[$v['times_id']]['stime']){
-                        $lists[$k]['status'] = ($time < ($times[$v['times_id']]['stime'] - 3600)) ? 0 : 1; //即将开始
+//                         $lists[$k]['status'] = ($time < ($times[$v['times_id']]['stime'] - 3600)) ? 0 : 1; //即将开始
+                        $lists[$k]['status'] = 1; //即将开始
                     }elseif ($time > $times[$v['times_id']]['stime']){
                         $lists[$k]['status'] = 2; //已开始
                     }elseif($time > ($times[$v['times_id']]['stime'] + $showInfos[$v['show_id']]['duration'] * 60)){
                         $lists[$k]['status'] = 3; //已结束
                     }
+                    //处理座位
+                    $seat = '';
+                    foreach ($v['ticket'] as $val){
+                        $seat .= $val['row']."排".$val['column']."座 ";
+                    }
+                    $lists[$k]['seat'] = $seat;
 
+                    unset($lists[$k]['id']);
+                    unset($lists[$k]['member_id']);
+                    unset($lists[$k]['ticket']);
                 }
             }
 

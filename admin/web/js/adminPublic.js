@@ -21,7 +21,22 @@ var delshow = function (obj){
 	});
 }
 
-var ajaxUpdate = function (url,data,callback){
+//删除动态
+var deldynamic = function (e){
+	mwlayer.msg(e.msg,e.status);
+	setTimeout(function () {
+		window.location.href=e.url;
+	},2000);
+}
+
+//删除
+var delById = function (Obj,callback,data){
+	var url = Obj.attr('url');
+	ajaxRequest(url,data,callback);
+}
+
+//ajax
+var ajaxRequest = function (url,data,callback){
 	$.ajax({
 		type : 'post',
 		url  : url,
@@ -32,17 +47,20 @@ var ajaxUpdate = function (url,data,callback){
 	});
 }
 
-
+//from提交
 var fromData = function(Obj,from,callback){
 	var data = $(from).serialize();
 	var url = Obj.attr('url');
-	ajaxUpdate(url,data,callback);
+	ajaxResquest(url,data,callback);
 }
 
+//动态添加、修改回调函数
 var dynamic = function (e){
 	mwlayer.msg(e.msg,e.status);
 	if(e.status == 200){
-		window.location.href="";
+		setTimeout(function () {
+			window.location.href=e.url;
+		},2000);
 	}
 }
 

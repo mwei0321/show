@@ -67,6 +67,8 @@ var mwlayer = {};
 				mwlayer.error(msg,time,close,rload);
 			}
 		},
+		//消息提示延时
+		msgDelay : function (){},
 		//可以url加载
 		load : function (title,url,parem,_top){
 			mwlayer.Options.top = _top;

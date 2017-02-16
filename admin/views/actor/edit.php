@@ -17,41 +17,46 @@
     $this->title = '动态编辑修改';
 ?>
 <section class="main padder">
-		<div class="col-lg-12" style="margin-top:30px;">
-			<section class="panel">
-				<header class="panel-heading">
-					<div class="row step-bar">
-						<a class="top-step" href="cast.html">剧场动态管理</a><a class="top-step" > - </a><a class="top-step" >编辑动态</a>
-					</div>
-				</header>
-				<div class="row main-info">
-					<div class="poster intro-post"><img src="<?= ImageUrl.($dynamicInfo['cover']??null) ?>" id="thumbImgCover"></div>
-					<div class="avatar-btn-group">
-						<p class="avatar-tips">图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
-						<a class="post-change" id="filePicker" style="">上传封面</a>
-					</div>
+	<div class="col-lg-12" style="margin-top:30px;">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="row step-bar">
+					<a class="top-step" href="cast.html">演职员管理</a><a class="top-step" > - </a><a class="top-step" >编辑资料</a>
 				</div>
-				<div class="row">
-					<form class="dynamic-data">
-						<input type="hidden" value="<?= $dynamicInfo['cover']??null ?>" id="cover" name="cover" class="check"/>
-						<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>" class="check">
-						<input type="hidden" name="dyid" value="<?= $dynamicInfo['id'] ?? null ?>" class="check"/>
-						<div class="row col-lg-12"><label>标题</label><input  value="<?= $dynamicInfo['title'] ?? null ?>" type="text" id="dynamic-title" name="title" class="check"></input></div>
-						<div class="row col-lg-12">
-							<label>详情</label><textarea id="data-intro" name="content" class="check"><?= $dynamicInfo['content']??null ?></textarea>
-						</div>
-						<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'.check',dynamic);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
-					</form>
+			</header>
+			<div class="row main-info">
+				<div class="poster intro-post"><img src="<?= ImageUrl.($actorInfo['avatar']??null) ?>" id="thumbImgCover"></div>
+				<div class="avatar-btn-group">
+					<p class="avatar-tips">图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
+					<a class="post-change" id="filePicker" style="">上传封面</a>
 				</div>
-			</section>
-		</div>
+			</div>
+			<div class="row">
+				<form class="cast-data">
+					<input type="hidden" value="<?= $actorInfo['avatar']??null ?>" id="cover" name="cover" class="check"/>
+					<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>" class="check">
+					<input type="hidden" name="dyid" value="<?= $actorInfo['id'] ?? null ?>" class="check"/>
+					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name"></input></div>
+					<div class="row col-lg-12"><label>性别</label>
+						<select class="gender">
+							<option>男</option>
+							<option>女</option>
+						<select>
+					</div>
+					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"></input></div>
+					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"></input></div>
+					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"></input></div>
+					<div class="row col-lg-12">
+						<label>个人简介</label><textarea id="data-intro"></textarea>
+					</div>
+					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it">提交修改</a></div>
+				</form>
+			</div>
+		</section>
+	</div>
 
-    </section>
-	<script type="text/javascript">
-
-	</script>
-    <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
+</section>
+	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
     	// 图片上传demo
     	jQuery(function() {
@@ -77,7 +82,7 @@
     	        swf: '/js/Uploader.swf',
 
     	        // 文件接收服务端。
-    	        server: '<?= Url::to(['dynamic/uploadeimg']) ?>',
+    	        server: '<?= Url::toRoute(['actor/uploadeimg']) ?>',
 
     	        // 选择文件的按钮。可选。
     	        // 内部根据当前运行是创建，可能是input元素，也可能是flash.

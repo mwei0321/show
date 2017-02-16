@@ -64,7 +64,8 @@
                         ])->asArray()->all();
             $data = [];
             foreach ($ticketList as $k => $v){
-                $data[$v['order_id']] = $v;
+                unset($v['id']);
+                $data[$v['order_id']][] = $v;
             }
 
             return $data;

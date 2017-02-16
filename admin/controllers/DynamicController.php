@@ -15,7 +15,6 @@
     use Yii;
     use yii\web\Controller;
     use common\models\Dynamic;
-use yii\helpers\Url;
 
     class DynamicController extends Controller{
 
@@ -66,6 +65,21 @@ use yii\helpers\Url;
         }
 
         /**
+         * 动态详情
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月16日 下午2:52:21
+        **/
+        function actionInfo(){
+            $dyid = Yii::$app->request->get('dyid',0);
+            $dynamicInfo = (new Dynamic())->getDynamicInfoById($dyid);
+
+            return $this->render('info',[
+                'info'  =>  $dynamicInfo,
+            ]);
+        }
+
+        /**
          * 添加、修改数据到数据库
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -96,8 +110,31 @@ use yii\helpers\Url;
             if($dynamicM->save(false) && $dynamicM->id >0){
                 $data['status'] = 200;
                 $data['msg'] = '添加修改成功！';
-                $data['url'] = Url::toRoute(['dynamic/index']);
+                $data['url'] = \yii\helpers\Url::toRoute(['dynamic/index']);
             }
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            return $data;
+        }
+
+        /**
+         * 删除动态
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月16日 下午3:22:28
+        **/
+        function actionDeldynamic(){
+            $dyid = Yii::$app->request->get('dyid',0);
+
+            $data = [];
+            $data['status'] = 0;
+            $data['msg'] = '删除失败！请刷新后重试！';
+            $data['url'] = \yii\helpers\Url::toRoute(['dynamic/index']);
+            if((new Dynamic())->findOne(['id'=>$dyid])->delete()){
+                $data['status'] = 200;
+                $data['msg'] = '删除成功！';
+            }
+
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
             return $data;
@@ -128,7 +165,7 @@ use yii\helpers\Url;
          * @date 2017年1月17日 下午2:32:27
          **/
         function beforeAction($action){
-            if(in_array($action->id,['uploadeimg'])){
+            if(in_array($action->id,['uploadeimg','deldynamic'])){
                 $action->controller->enableCsrfValidation = false;
             }
             parent::beforeAction($action);
