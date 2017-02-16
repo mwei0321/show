@@ -20,7 +20,7 @@ class MemberController extends CommonController{
             $re = $Member->getByNamePwd($cellphone,$pwd);
             if ( empty($re) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '登录失败，请检查账号或密码!';
+                $this->_reMsg = $this->_showMsg = '登录失败，请检查账号或密码!';
             } else {
                 $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone'],'avatar'=>$re['avatar']];
             }
@@ -44,18 +44,18 @@ class MemberController extends CommonController{
         if ( $cellphone && $code && $pwd && $username ) {
             if ( ! $Randcode->validateCode($cellphone,$code,11) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '验证码错误';
+                $this->_showMsg =$this->_reMsg = '验证码错误';
             } elseif ( $Member->ifUsernameExist($username) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '该用户名已被注册';
+                $this->_showMsg =$this->_reMsg = '该用户名已被注册';
             } elseif ( $Member->ifCellphoneExist($cellphone) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '该手机号码已被注册';
+                $this->_showMsg =$this->_reMsg = '该手机号码已被注册';
             } else {
                 $re = $Member->addOne($cellphone,$username,$pwd);
                 if ( empty($re) ) {
                     $this->_reCode = 440;
-                    $this->_reMsg = '注册失败，请重试!';
+                    $this->_showMsg =$this->_reMsg = '注册失败，请重试!';
                 } else {
                     $re = $Member->getByNamePwd($cellphone,$pwd);
                     $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone'],'avatar'=>$re['avatar']];
@@ -103,7 +103,7 @@ class MemberController extends CommonController{
         if ( $cellphone && $code ) {
             if ( ! $Randcode->validateCodeOnly($cellphone,$code,11) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '验证码错误';
+                $this->_showMsg =$this->_reMsg = '验证码错误';
             }
         } else {
             $this->_reCode = 440;
@@ -124,10 +124,10 @@ class MemberController extends CommonController{
         if ( $cellphone && $code && $pwd && $pwdre && ($pwd==$pwdre) ) {
             if ( ! $Randcode->validateCode($cellphone,$code,11) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '验证码错误';
-            } elseif ( ! $Member->ifExist($cellphone) ) {
+                $this->_showMsg =$this->_reMsg = '验证码错误';
+            } elseif ( ! $Member->ifCellphoneExist($cellphone) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '该账号不存在';
+                $this->_showMsg =$this->_reMsg = '该账号不存在';
             } else {
                 $re = $Member->resetPwd($cellphone,$pwd);
                 if ( empty($re) ) {

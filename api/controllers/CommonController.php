@@ -18,6 +18,7 @@
     class CommonController extends Controller{
         public $_reCode = 200;
         public $_reMsg  = '';
+        public $_showMsg  = '';
         public $_count  = 0;
         //会员ID
         public $mid = 0;
@@ -51,6 +52,7 @@
             $data = [
                 'code'  =>  $this->_reCode,
                 'msg'   =>  $this->_reCodeMsg(),
+                'show_msg'   =>  $this->_showMsg,
                 'count' =>  $this->_count,
                 'data'  =>  $_data,
             ];
