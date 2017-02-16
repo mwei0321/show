@@ -3,6 +3,8 @@ namespace api\controllers;
 use api\controllers\CommonController;
 use common\models\Member;
 use common\models\RandCode;
+use yii\base\Behavior;
+use yii\base\Event;
 
 class MemberController extends CommonController{
 
@@ -20,7 +22,7 @@ class MemberController extends CommonController{
                 $this->_reCode = 440;
                 $this->_reMsg = '登录失败，请检查账号或密码!';
             } else {
-                $data = ['token'=>$re['member_id'],'username'=>$re['username']];
+                $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone']];
             }
         } else {
             $this->_reCode = 440;
@@ -35,26 +37,34 @@ class MemberController extends CommonController{
         $Member = new Member();
         $Randcode = new RandCode();
         $cellphone = \yii::$app->request->get('cellphone');
+        $username  = \yii::$app->request->get('username');
         $code      = \yii::$app->request->get('code');
         $pwd       = \yii::$app->request->get('pwd');
-        if ( $cellphone && $code && $pwd ) {
+        $data = [];
+        if ( $cellphone && $code && $pwd && $username ) {
             if ( ! $Randcode->validateCode($cellphone,$code,11) ) {
                 $this->_reCode = 440;
                 $this->_reMsg = '验证码错误';
-            } elseif ( $Member->ifExist($cellphone) ) {
+            } elseif ( $Member->ifUsernameExist($username) ) {
                 $this->_reCode = 440;
-                $this->_reMsg = '该账号已被注册';
+                $this->_reMsg = '该用户名已被注册';
+            } elseif ( $Member->ifCellphoneExist($cellphone) ) {
+                $this->_reCode = 440;
+                $this->_reMsg = '该手机号码已被注册';
             } else {
                 $re = $Member->addOne($cellphone,$pwd);
                 if ( empty($re) ) {
                     $this->_reCode = 440;
                     $this->_reMsg = '注册失败，请重试!';
+                } else {
+                    $re = $Member->getByNamePwd($cellphone,$pwd);
+                    $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone']];
                 }
             }
         } else {
             $this->_reCode = 440;
         }
-        return $this->_returnJson();
+        return $this->_returnJson($data);
 
     }
 

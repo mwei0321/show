@@ -14,14 +14,18 @@ class Member extends ActiveRecord{
         return 'member';
     }
 
-    function ifExist($useranme){
+    function ifCellphoneExist($useranme){
+        return $this->M->where(['cellphone'=>$useranme])->count();
+    }
+    function ifUsernameExist($useranme){
         return $this->M->where(['username'=>$useranme])->count();
     }
 
     function getByNamePwd($useranme,$pwd){
         $haveS = $this->M->where(['cellphone'=>$useranme,'status'=>1])->asArray()->one();
+        if ( empty($haveS) ) $haveS = $this->M->where(['username'=>$useranme,'status'=>1])->asArray()->one();
         if ( $haveS && $this->encodePwd($pwd)==$haveS['passwd'] ) {
-            return ['member_id'=>$haveS['id'],'username'=>$haveS['username']];
+            return ['member_id'=>$haveS['id'],'username'=>$haveS['username'],'cellphone'=>$haveS['cellphone']];
         }
         else return false;
     }
