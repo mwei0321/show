@@ -58,6 +58,9 @@
                 $this->_reMsg = 'id errors->'.$dynamicId;
             }
 
+            //增加阅读数
+            (new ApiDynamic())->IncDynamicReadNum($dynamicId);
+
             return $this->_returnJson($info);
         }
     }

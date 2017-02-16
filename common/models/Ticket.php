@@ -73,6 +73,18 @@
         }
 
         /**
+         * 根据场次ID返回场次信息
+         * @param  array $_timesIds
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 下午3:13:53
+        **/
+        function getTimesByIds($_timesIds){
+            $times = self::find()->from('show_times')->where(['id'=>$_timesIds])->asArray()->all();
+            return fieldtokey($times);
+        }
+
+        /**
          * 返回座位信息
          * @param  int $_seatId
          * @return array

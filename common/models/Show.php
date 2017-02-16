@@ -70,6 +70,18 @@
         }
 
         /**
+         * 返回多个节目基础信息
+         * @param  array $_ids
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 下午2:59:30
+        **/
+        function getShowInfoByIds($_ids){
+            $showInfos = self::find()->select('id,title,cover,duration')->where(['id'=>$_ids])->asArray()->all();
+            return fieldtokey($showInfos);
+        }
+
+        /**
          * 查出演出时间段
          * @param  int $_showId
          * @return array
