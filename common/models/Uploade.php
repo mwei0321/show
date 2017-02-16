@@ -118,6 +118,7 @@
                 'showimg'   =>  '/showimg/',
                 'actorimg'  =>  '/actorimg/',
                 'dynamic'   =>  '/dynamic/',
+                'avatar'   =>  '/avatar/',
             ];
 
             $this->path = $path[$_path].date('Y').'/';

@@ -22,7 +22,7 @@ class MemberController extends CommonController{
                 $this->_reCode = 440;
                 $this->_reMsg = '登录失败，请检查账号或密码!';
             } else {
-                $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone']];
+                $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone'],'avatar'=>$re['avatar']];
             }
         } else {
             $this->_reCode = 440;
@@ -58,7 +58,7 @@ class MemberController extends CommonController{
                     $this->_reMsg = '注册失败，请重试!';
                 } else {
                     $re = $Member->getByNamePwd($cellphone,$pwd);
-                    $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone']];
+                    $data = ['token'=>$re['member_id'],'username'=>$re['username'],'cellphone'=>$re['cellphone'],'avatar'=>$re['avatar']];
                 }
             }
         } else {
@@ -137,6 +137,33 @@ class MemberController extends CommonController{
             }
         } else {
             $this->_reCode = 440;
+        }
+        return $this->_returnJson();
+    }
+
+    // 上传图片
+    function actionUploadeimg(){
+        $fileInfo = (new \common\models\Uploade('avatar'))->uploadeImg();
+        $reArray = [
+            'path'      =>  ImageUrl.$fileInfo['path'],
+            'imgPath'   =>  $fileInfo['path'],
+            'status'    =>  200,
+        ];
+
+        return $this->_returnJson($reArray);
+    }
+
+    function actionUpdate(){
+        $token = \yii::$app->request->get('token');
+        $avatar = \yii::$app->request->get('avatar');
+        if ( empty($token) || empty($avatar) ) $this->_reCode = 440;
+        else {
+            $Member    = new Member();
+            $re = $Member->updateOne( ['avatar'=>$avatar],$token );
+            if ( empty($re) ) {
+                $this->_reCode = 440;
+                $this->_reMsg = '操作失败，请重试!';
+            }
         }
         return $this->_returnJson();
     }
