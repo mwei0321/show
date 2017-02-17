@@ -63,6 +63,10 @@
             ]);
         }
 
+        function actionUpdate(){
+
+        }
+
         /**
          * 节目图片上传
          * @return array

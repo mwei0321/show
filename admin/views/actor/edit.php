@@ -36,18 +36,18 @@
 					<input type="hidden" value="<?= $actorInfo['avatar']??null ?>" id="cover" name="cover" class="check"/>
 					<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>" class="check">
 					<input type="hidden" name="dyid" value="<?= $actorInfo['id'] ?? null ?>" class="check"/>
-					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name"></input></div>
+					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name" name="name" value="<?= $actorInfo['name'] ??null?>" class="check"></input></div>
 					<div class="row col-lg-12"><label>性别</label>
-						<select class="gender">
+						<select class="gender"  name="gender" class="check">
 							<option>男</option>
 							<option>女</option>
 						<select>
 					</div>
-					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"></input></div>
-					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"></input></div>
-					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"></input></div>
+					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"  name="constellation" value="<?= $actorInfo['constellation'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $actorInfo['birthday'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $actorInfo['address'] ??null?>" class="check"></input></div>
 					<div class="row col-lg-12">
-						<label>个人简介</label><textarea id="data-intro"></textarea>
+						<label>个人简介</label><textarea id="data-intro"  name="content" class="check">value="<?= $actorInfo['content'] ??null?>"</textarea>
 					</div>
 					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it">提交修改</a></div>
 				</form>
