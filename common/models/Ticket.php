@@ -73,6 +73,18 @@
         }
 
         /**
+         * 根据场次ID返回场次信息
+         * @param  array $_timesIds
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 下午3:13:53
+        **/
+        function getTimesByIds($_timesIds){
+            $times = self::find()->from('show_times')->where(['id'=>$_timesIds])->asArray()->all();
+            return fieldtokey($times);
+        }
+
+        /**
          * 返回座位信息
          * @param  int $_seatId
          * @return array
@@ -112,7 +124,7 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月10日 上午11:00:53
         **/
-        function createRoomSeat($_roomId = 1,$_coord = [29,28,28,23,23,23,23,23,23,28,28,28,28,27,27]){
+        function createRoomSeat($_roomId = 1,$_coord = [27,27,28,28,28,28,23,23,23,23,23,23,28,28,29]){
             //删除座位
             (new \common\models\CommonModel('room_seat'))->deleteAll(['room_id'=>$_roomId]);
             //写入座位sql

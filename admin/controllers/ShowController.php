@@ -43,8 +43,6 @@
             ]);
             $lists = $showModel->getShowList($where,(string)$pageM->offset);
 
-//             var_dump($pageM);
-//             var_dump($lists);exit;
             return $this->render('index',[
                 'lists' => $lists,
                 'pages' => $pageM,
@@ -105,17 +103,15 @@
             //节目信息
             if($request->post('id','') > 0)
                 $showModel = Show::findOne($request->post('id',''));
-            else
+            else{
                 $showModel = new Show();
+                $showModel->ctime   =   time();
+            }
 
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
             $showModel->intro   =   $request->post('intro','');
             $showModel->duration=   $request->post('duration','');
-//             $showModel->stime   =   strtotime($time[0]);
-//             $showModel->etime   =   strtotime($time[1]);
-            $showModel->ctime   =   time();
-//             var_dump($_POST);
 //             var_dump($showModel);exit;
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;

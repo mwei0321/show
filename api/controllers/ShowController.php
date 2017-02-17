@@ -20,12 +20,6 @@
 
     class ShowController extends CommonController{
 
-        function actionIndex(){
-            $m = new \common\models\Ticket();
-
-            var_dump($m->createRoomSeat(1));
-        }
-
         /**
          * 获取节目列表
          * @return array
@@ -75,5 +69,31 @@
             }
 
             return $this->_returnJson($info);
+        }
+
+        /**
+         * 搜索
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月17日 上午9:35:50
+        **/
+        function actionSearch(){
+            $keyword = Yii::$app->request->get('keyword','');
+
+            $data = [];
+            if($keyword){
+                $searchM = new \common\models\Search();
+                //节目演出
+                $data['show'] = $searchM->searchShow($keyword);
+                //演员
+                $data['actor'] = $searchM->searchActor($keyword);
+                //动态
+                $data['dynamic'] = $searchM->searchDynamic($keyword);
+            }else{
+                $this->_reCode = 440;
+                $this->_reMsg = 'param errors-> keyword null';
+            }
+
+            return $this->_returnJson($data);
         }
     }

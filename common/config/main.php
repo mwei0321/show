@@ -12,5 +12,11 @@ return [
             'password' => 'gt_dev_2016_db',
             'charset' => 'utf8',
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => false,
+            'showScriptName' => true,
+            'rules' => [
+            ],
+        ],
     ],
 ];

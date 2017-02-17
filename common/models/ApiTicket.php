@@ -106,13 +106,12 @@
 
             //判断场次节目是否开始，开始
             if($timesInfo){
-                $seatInfo = self::find()->from('room_seat')->where([
+                $seatLists = self::find()->from('room_seat')->where([
                                 'room_id'=>$timesInfo['room_id'],
                                 'seat_id'=>$_seatId
-                            ])->asArray()->one();
-
+                            ])->asArray()->all();
                 //判断座位
-                if($seatInfo){
+                if($seatLists){
                     $seatIsBuy = self::find()->from('ticket')->where([
                                     'seat_id'   => $_seatId,
                                     'times_id'  => $_timesId,
@@ -127,21 +126,32 @@
 //                                 var_dump($seatIsReserved);exit;
                         //判断座位是否是预留
                         if($seatIsReserved == 0){
+                            //写入订单
+                            $orderM = new \common\models\CommonModel('ticket_order');
+                            $orderM->member_id    = $_memberId;
+                            $orderM->room_id      = $timesInfo['room_id'];
+                            $orderM->show_id      = $timesInfo['show_id'];
+                            $orderM->times_id     = $_timesId;
+                            $orderM->code         = rand(100000,999999);
+                            $orderM->ticket_num   = count($_seatId);
+                            $orderM->save(false);
                             //写入购票数据
-                            $ticketIds = [];
-                            foreach ($_seatId as $k => $v){
-                                $ticketM = new self();
-                                $ticketM->member_id    = $_memberId;
-                                $ticketM->room_id      = $timesInfo['room_id'];
-                                $ticketM->show_id      = $timesInfo['show_id'];
-                                $ticketM->times_id     = $_timesId;
-                                $ticketM->row          = $seatInfo['row'];
-                                $ticketM->column       = $seatInfo['column'];
-                                $ticketM->seat_id      = $v;
-                                $reid = $ticketM->save();
-                                $ticketIds[] = $ticketM->attributes['id'];
+                            if($orderM->save(false) && $orderM->attributes['id'] > 0){
+                                $seatLists = fieldtokey($seatLists,'seat_id');
+                                $ticketIds = [];
+                                foreach ($_seatId as $k => $v){
+                                    $ticketM = new self();
+                                    $ticketM->order_id     = $orderM->attributes['id'];
+                                    $ticketM->times_id     = $_timesId;
+                                    $ticketM->row          = $seatLists[$v]['row'];
+                                    $ticketM->column       = $seatLists[$v]['column'];
+                                    $ticketM->seat_id      = $v;
+                                    $reid = $ticketM->save();
+                                    $ticketIds[] = $ticketM->attributes['id'];
+                                }
+                                return $reid ? 1 : 0;
                             }
-                            return $reid ? 1 : 0;
+                            return 0;
                         }else {
                             $reCode = 5; //选择座位有预留的
                         }

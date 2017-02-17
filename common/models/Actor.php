@@ -15,9 +15,28 @@
     use yii\db\ActiveRecord;
 
     class Actor extends ActiveRecord{
+        public $_pageSize = 20;
 
         static function tableName(){
             return 'actor';
+        }
+
+        /**
+         * 演员列表
+         * @param  array $_where
+         * @param  string $_offset
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月16日 下午3:54:15
+        **/
+        function getActorList($_where = 1,$_offset = 'count'){
+            $ActorM = self::find()->where($_where);
+            if((string)$_offset == 'count'){
+                return $ActorM->count();
+            }
+
+            $data = $ActorM->offset($_offset)->limit($this->_pageSize)->orderBy('id DESC')->asArray()->all();
+            return $data;
         }
 
         /**

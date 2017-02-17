@@ -18,8 +18,22 @@
 
     class TicketController extends CommonController{
 
+//         function actionIndex(){
+//             (new \common\models\Ticket())->createRoomSeat(1);
+//         }
+
         /**
-         * 获取演出丧心场次
+         * 构造函数
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 上午11:13:24
+        **/
+        function init(){
+            parent::init();
+        }
+
+        /**
+         * 获取演出场次
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月10日 上午10:13:10
@@ -57,18 +71,20 @@
          * @date 2017年2月10日 下午2:46:19
         **/
         function actionBuyticket(){
-            $memberId = Yii::$app->request->get('mid',1);
+            //检查用户登录
+            $this->_checkUser();
+
             $timesId = Yii::$app->request->get('times_id',0);
             $seatId = Yii::$app->request->get('seat_id','');
             $seatIds = explode(',', $seatId);
 //             $showId = Yii::$app->request->get('show_id',0);
 
-            if($memberId && $timesId && $seatIds && is_array($seatIds)){
+            if($this->mid && $timesId && $seatIds && is_array($seatIds)){
                 $ApiTicketM = new ApiTicket();
-                $reid = $ApiTicketM->BuyTicket($memberId, $timesId, $seatIds);
+                $reid = $ApiTicketM->BuyTicket($this->mid, $timesId, $seatIds);
             }else{
                 $this->_reCode = 440;
-                $this->_reMsg = 'memeber -> '.$memberId.' &seatId -> '.$seatId.' &timesId -> '.$timesId;
+                $this->_reMsg = 'memeber -> '.$this->mid.' &seatId -> '.$seatId.' &timesId -> '.$timesId;
             }
 
             //提示消息

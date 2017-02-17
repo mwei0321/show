@@ -17,6 +17,9 @@
 
     class ApiDynamic extends ActiveRecord{
 
+        static function tableName(){
+            return 'dynamic';
+        }
 
         /**
          * 获取动态列表
@@ -87,5 +90,19 @@
             }
 
             return $dynamic;
+        }
+
+
+        /**
+         * 增加阅读动态数
+         * @param  int $_dyId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 下午3:41:55
+        **/
+        function IncDynamicReadNum($_dyId,$_incNum = 1){
+            $dynamicM = self::findOne(['id'=>$_dyId]);
+            $dynamicM->read_num += 1;
+            return $dynamicM->save();
         }
     }
