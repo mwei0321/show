@@ -31,10 +31,11 @@
          * @date 2017年1月11日 下午6:21:43
         **/
         function actionIndex(){
-            $showModel = new Show();
-            $showModel->_pageSize = 5;
             $where = [];
+            $keyword = Yii::$app->request->get('keyword','');
+            $keyword && $where = ['like','title',$keyword];
 
+            $showModel = new Show();
             $count = $showModel->getShowList($where);
             $pageM = new \yii\data\Pagination([
                 'totalCount'=>$count,
@@ -44,8 +45,8 @@
             $lists = $showModel->getShowList($where,(string)$pageM->offset);
 
             return $this->render('index',[
-                'lists' => $lists,
-                'pages' => $pageM,
+                'lists'     => $lists,
+                'pages'     => $pageM,
             ]);
         }
 

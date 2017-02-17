@@ -74,3 +74,17 @@ var addTimes = function (){
 	var timesHtml = '<input type="text" class="check" id="data-start-time" name="time" />'
 	$('#showtimes').append(timesHtml);
 }
+
+//jquery
+$(function (e) {
+	//搜索
+	$('#search').focus(function (e){
+		$(this).keydown(function (e){
+			if(e.keyCode == 13){
+				var val = $(this).val();
+				var url = $(this).attr('url');
+				window.location.href=url+"&keyword="+val;
+			}
+		});
+	});
+})

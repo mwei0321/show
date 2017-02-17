@@ -20,10 +20,8 @@
 			<div class="row">
 				<div class="top-operation">
 					<a class="btn btn-small btn-info" style="margin-left:11px;margin-bottom:2px;" href="<?= Url::toRoute(['actor/edit'])?>"><i class="icon-plus"></i> 添加演职员</a>
-					<form class="navbar-form search-cast shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">
 						<i class="icon-search text-muted"></i>
-						<input type="text" class="input-small form-control" placeholder="Search">
-					</form>
+						<input type="text" class="input-small form-control" placeholder="Search" id="search" url="<?= Url::toRoute(['actor/index'])?>">
 				</div>
 			</div>
 			<div class="row">
@@ -39,6 +37,11 @@
 						<?php }?>
 					</ul>
 				</section>
+				<div class="page">
+				<?= LinkPager::widget([
+				    'pagination'=>$pages
+				]); ?>
+            </div>
 			</div>
 		</div>
 

@@ -25,11 +25,11 @@
          * @date 2017年2月16日 下午3:51:31
         **/
         function actionIndex(){
+            $where = [];
+            $keyword = Yii::$app->request->get('keyword','');
+            $keyword && $where = ['like','name',$keyword];
 
             $ActorM = new Actor();
-            $ActorM->_pageSize = 5;
-            $where = [];
-
             $count = $ActorM->getActorList($where);
             $pageM = new \yii\data\Pagination([
                 'totalCount'=>$count,

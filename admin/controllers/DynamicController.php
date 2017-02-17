@@ -25,10 +25,12 @@
          * @date 2017年2月13日 下午6:34:18
         **/
         function actionIndex(){
-            $dynamicM = new Dynamic();
-            $dynamicM->_pageSize = 5;
             $where = [];
+            //搜索条件
+            $keyword = Yii::$app->request->get('keyword','');
+            $keyword && $where = ['like','title',$keyword];
 
+            $dynamicM = new Dynamic();
             $count = $dynamicM->getDynamicList($where);
             $pageM = new \yii\data\Pagination([
                 'totalCount'=>$count,
@@ -38,8 +40,8 @@
             $lists = $dynamicM->getDynamicList($where,(string)$pageM->offset);
 
             return $this->render('index',[
-                'lists' => $lists,
-                'pages' => $pageM,
+                'lists'     => $lists,
+                'pages'     => $pageM,
             ]);
         }
 

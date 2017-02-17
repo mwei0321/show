@@ -20,10 +20,8 @@
 	<div class="row">
 		<div class="m-t-small">
 			<a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute(['dynamic/edit']) ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 创建新动态</a>
-			<form class="navbar-form pull-right shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">
 				<i class="icon-search text-muted"></i>
-				<input type="text" class="input-small form-control" placeholder="搜索演出">
-			</form>
+				<input type="text" class="input-small form-control" placeholder="搜索演出" id="search" url="<?= Url::toRoute(['dynamic/index'])?>">
 		</div>
 	</div>
 	<div class="row">
@@ -43,6 +41,11 @@
 					</ul>
 				</section>
 			</section>
+			<div class="page">
+				<?= LinkPager::widget([
+				    'pagination'=>$pages
+				]); ?>
+            </div>
 		</div>
 	</div>
 </section>
