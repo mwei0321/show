@@ -132,14 +132,15 @@
                 //删除演员
                 (new CommonModel('show_actor'))->deleteAll(['show_id'=>$showModel->id]);
                 //写入演员信息
-                $actor = $request->post('actor');
-                $duty  = $request->post('duty');
+                $actor = $request->post('actor',[]);
+                $duty  = $request->post('duty',[]);
+                $act  = $request->post('act',[]);
                 foreach ($actor as $k => $v){
                     $actorModel = new CommonModel('show_actor');
                     $actorModel->show_id     = $showModel->id;
                     $actorModel->actor_id    = $v;
                     $actorModel->duty        = $duty[$k];
-                    $actorModel->act         = '';
+                    $actorModel->act         = $act[$k];
                     $actorModel->ctime       = time();
                     $actorModel->save(false);
 //                     echo $actorModel->id;

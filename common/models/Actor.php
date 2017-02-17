@@ -138,9 +138,9 @@
         **/
         function getActorDutyLists(){
             return [
+                '导演',
                 '演员',
                 '编剧',
-                '导演',
                 '灯光',
                 '音响',
                 '舞美',
