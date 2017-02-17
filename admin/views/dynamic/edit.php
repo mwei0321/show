@@ -41,7 +41,7 @@
 							<label>详情</label><textarea id="data-intro" name="content" class="check"><?= $dynamicInfo['content']??null ?></textarea>
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'.check',dynamic);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
+						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
 					</form>
 				</div>
 			</section>

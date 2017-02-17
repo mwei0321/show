@@ -32,7 +32,7 @@
 					</div>
 					<div class="info-button-group">
 						<a class="info-btn info-edit-btn" href="<?= Url::toRoute(['dynamic/edit','dyid'=>$info['id']]) ?>">编辑</a>
-						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delById($(this),deldynamic);" url="<?= Url::toRoute(['dynamic/deldynamic','dyid'=>$info['id']]) ?>">删除</a>
+						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delById($(this),delmsgJump);" url="<?= Url::toRoute(['dynamic/deldynamic','dyid'=>$info['id']]) ?>">删除</a>
 					</div>
 				</div>
 				<div class="row">

@@ -21,18 +21,12 @@ var delshow = function (obj){
 	});
 }
 
-//删除动态
-var deldynamic = function (e){
-	mwlayer.msg(e.msg,e.status);
-	setTimeout(function () {
-		window.location.href=e.url;
-	},2000);
-}
-
 //删除
 var delById = function (Obj,callback,data){
-	var url = Obj.attr('url');
-	ajaxRequest(url,data,callback);
+	if(confirm('你确定要删除吗？')){
+		var url = Obj.attr('url');
+		ajaxRequest(url,data,callback);
+	}
 }
 
 //ajax
@@ -51,11 +45,20 @@ var ajaxRequest = function (url,data,callback){
 var fromData = function(Obj,from,callback){
 	var data = $(from).serialize();
 	var url = Obj.attr('url');
-	ajaxResquest(url,data,callback);
+	console.log(data);
+	ajaxRequest(url,data,callback);
+}
+
+//获胜信息跳转
+var delmsgJump = function (e){
+	mwlayer.msg(e.msg,e.status);
+	setTimeout(function () {
+		window.location.href=e.url;
+	},2000);
 }
 
 //动态添加、修改回调函数
-var dynamic = function (e){
+var modifyMsgJump = function (e){
 	mwlayer.msg(e.msg,e.status);
 	if(e.status == 200){
 		setTimeout(function () {

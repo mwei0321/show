@@ -34,7 +34,7 @@
     							<div class="actor-display">
     								<img src="<?= ImageUrl.$v['avatar'] ?>">
     							</div>
-    							<a class="cast-list-name" href="cast-detail.html"><?= $v['name'] ?></a>
+    							<a class="cast-list-name" href="<?= Url::toRoute(['actor/info','actor_id'=>$v['id']]) ?>"><?= $v['name'] ?></a>
     						</li>
 						<?php }?>
 					</ul>

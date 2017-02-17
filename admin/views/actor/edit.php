@@ -25,31 +25,39 @@
 				</div>
 			</header>
 			<div class="row main-info">
-				<div class="poster intro-post"><img src="<?= ImageUrl.($actorInfo['avatar']??null) ?>" id="thumbImgCover"></div>
+				<div class="poster intro-post"><img src="<?= ImageUrl.($ActorInfo['avatar']??null) ?>" id="thumbImgCover"></div>
 				<div class="avatar-btn-group">
 					<p class="avatar-tips">图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
 					<a class="post-change" id="filePicker" style="">上传封面</a>
 				</div>
 			</div>
 			<div class="row">
-				<form class="cast-data">
-					<input type="hidden" value="<?= $actorInfo['avatar']??null ?>" id="cover" name="cover" class="check"/>
+				<form class="cast-data" id="artorSubmit">
+					<input type="hidden" value="<?= $ActorInfo['avatar']??null ?>" id="avatar" name="avatar" class="check"/>
 					<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>" class="check">
-					<input type="hidden" name="dyid" value="<?= $actorInfo['id'] ?? null ?>" class="check"/>
-					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name" name="name" value="<?= $actorInfo['name'] ??null?>" class="check"></input></div>
+					<input type="hidden" name="actor_id" value="<?= $ActorInfo['id'] ?? null ?>" class="check"/>
+					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name" name="name" value="<?= $ActorInfo['name'] ??null?>" class="check"></input></div>
 					<div class="row col-lg-12"><label>性别</label>
 						<select class="gender"  name="gender" class="check">
-							<option>男</option>
-							<option>女</option>
+							<?php if(isset($ActorInfo['gender'])){
+							    echo '<option value="1" '.($ActorInfo['gender'] ? 'select="selected"':'').'>男</option>';
+							    echo '<option value="0" '.($ActorInfo['gender'] == 0 ? 'select="selected"':'').'>女</option>';
+							}else{?>
+
+							<option value="1">男</option>
+							<option value="0">女</option>
+							<?php }?>
 						<select>
 					</div>
-					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"  name="constellation" value="<?= $actorInfo['constellation'] ??null?>" class="check"></input></div>
-					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $actorInfo['birthday'] ??null?>" class="check"></input></div>
-					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $actorInfo['address'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"  name="constellation" value="<?= $ActorInfo['constellation'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $ActorInfo['birthday'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check"></input></div>
 					<div class="row col-lg-12">
-						<label>个人简介</label><textarea id="data-intro"  name="content" class="check">value="<?= $actorInfo['content'] ??null?>"</textarea>
+						<label>个人简介</label><textarea id="data-intro"  name="intro" class="check"><?= $ActorInfo['content'] ??null?></textarea>
 					</div>
-					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it">提交修改</a></div>
+					<div class="row col-lg-12" style="text-align:center;">
+						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'#artorSubmit',modifyMsgJump);" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
+					</div>
 				</form>
 			</div>
 		</section>
@@ -108,7 +116,7 @@
     	    uploader.on( 'uploadSuccess', function( file,respones ) {
     	    	if(respones.status == 200){
         	    	$("#thumbImgCover").attr('src',respones.path);
-        	    	$("#cover").val(respones.imgPath);
+        	    	$("#avatar").val(respones.imgPath);
     	    	}
     	    	console.log(respones);
     	    });
