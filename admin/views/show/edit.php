@@ -77,9 +77,9 @@
             									        echo '<option value="'.$k.'">'.$v.'</option>';
             									}?>
             									<?php if($val['duty'] == 1){?>
-            										<input type="text" class="play" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
+            										<input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
             									<?php }else {?>
-            										<input type="text" class="play" name="act[]" value="<?= $val['act'] ?>">
+            										<input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
             									<?php }?>
             								</select>
             								<script type="text/javascript">
@@ -104,7 +104,7 @@
         									<?php foreach ($dutys as $k => $v){
         									   echo '<option value="'.$k.'">'.$v.'</option>';
         									}?>
-        									<input type="text" class="play" name="act[]">
+        									<input type="text" class="play theatre-data-input" name="act[]">
         								</select>
         								<script type="text/javascript">
             								$(".cast-position").click(function(){

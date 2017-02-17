@@ -575,3 +575,21 @@
 .theatre-arrange .active{
 	background:#afb5be;
 }
+.search-box{
+	width: 136px;
+    height: 30px;
+    display: inline-block;
+	position:relative;
+}
+.search-box .icon-search{
+	position: absolute;
+    z-index: 1;
+    left: .6em;
+    top: 50%;
+    margin-top: -8px;
+    color: #bbb;
+}
+.search-box  .input-small{
+	padding-left:26px;
+    border-radius: 14px;
+}
