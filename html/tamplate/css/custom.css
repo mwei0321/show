@@ -22,8 +22,8 @@
 .poster img{
 	display:inline-blocl;
 	position:relative;
-	width:100%;
-	height:100%;
+	width: 120px;
+    height: 160px;
 }
 .session-info{
 	height:160px;
@@ -571,7 +571,26 @@
     height: 726px;
     width: 87%;
     vertical-align: top;
+	overflow: auto;
 }
 .theatre-arrange .active{
 	background:#afb5be;
+}
+
+.seat{
+	width:20px;
+	height:17px;
+	display:inline-block;
+	background:#fff;
+	background-image:url(../images/seat.png);
+	background-size:cover;
+	margin-left: 6px;
+}
+.selected{
+	background-image:url(../images/seat-selected.png);
+	background-size:cover;
+}
+.oneset{
+	width: 766px;
+    margin: 0px auto 10px auto;
 }

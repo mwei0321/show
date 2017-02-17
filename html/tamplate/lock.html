@@ -115,10 +115,26 @@
 						</div>
 						<div class="right-form">
 							<div class="tab-content">
-							  <div role="tabpanel" class="tab-pane active" id="1-set" data="1">...</div>
-							  <div role="tabpanel" class="tab-pane" id="2-set" data="2">...</div>
-							  <div role="tabpanel" class="tab-pane" id="3-set" data="3">...</div>
-							  <div role="tabpanel" class="tab-pane" id="4-set" data="4">...</div>
+							  <div role="tabpanel" class="tab-pane active" id="1-set" data="1">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="2-set" data="2">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="3-set" data="3">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="4-set" data="4">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
 							</div>
 						</div>
 					</div>
@@ -280,8 +296,45 @@
 				},
 				   singleDatePicker: true,
 				   //timePickerIncrement: 30, 
-				});
+			});
+		})
+		
+		var line = 15;
+		//var seatset = new array();
+		//var perline = new array();
+		var farray = new Array();
+		for(var k=0;k<line;k++){
+			farray[k] = new Array();
+		}
+		$(".document").ready(function(){
+			var perline ="27,27,28,28,28,28,23,23,23,23,23,23,28,28,29";
+			perline = perline.split(",");
+			if(perline.length != 15){
+				
+			}
+			var pset = '<p class="oneset"></p>'
+			for(var i=0;i<perline.length;i++){
+				$(".field").append(pset);
+				for(var j=0;j<perline[i];j++){
+					var sset = '<a class="seat" data=""></a>';
+					$(".oneset:eq("+i+")").append(sset);
+				}
+			}
+			$("p a").click(function(){
+				if($(this).hasClass("selected")){
+					$(this).removeClass("selected");
+				}
+				else
+				$(this).addClass("selected");
 			})
+			$(".show").click(function(){
+				for(k=0;k<$(".seat").length;k++){
+					if ($(".seat:eq("+k+")").hasClass("selected")){
+						console.log(k);
+					}
+				}
+			})
+		})
   </script>
 
 </body>
