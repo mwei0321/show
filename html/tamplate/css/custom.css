@@ -594,3 +594,9 @@
 	width: 766px;
     margin: 0px auto 10px auto;
 }
+.search-box{
+	width: 136px;
+    height: 30px;
+    border-radius: 14px;
+    display: inline-block;
+}
