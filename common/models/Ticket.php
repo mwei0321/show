@@ -54,7 +54,7 @@
         }
 
         /**
-         * 获取演出场次
+         * 获取未开演出演出场次
          * @param  int $_showId
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -62,10 +62,8 @@
          **/
         function getShowTimesById($_showId){
             $times = self::find()->from('show_times')->where([
-                        'and',
-                        ['show_id'   => $_showId],
-                        ['>','stime',(time()+10)]
-                    ])->orderBy('stime DESC')
+                        'show_id'   => $_showId
+                    ])->orderBy('stime ASC')
 //                     ->createCommand()->getRawSql();
                     ->asArray()
                     ->all();
@@ -82,6 +80,37 @@
         function getTimesByIds($_timesIds){
             $times = self::find()->from('show_times')->where(['id'=>$_timesIds])->asArray()->all();
             return fieldtokey($times);
+        }
+
+        /**
+         * 返回场次座位信息
+         * @param  int $_timesId
+         * @param  int $_roomId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月20日 上午10:38:56
+        **/
+        function getSeatInfoByTimesId($_timesId,$_roomId){
+            //获取房间座位
+            $roomSeat = $this->getRoomInfo($_roomId);
+            //获取场次预留座位
+            $resseredSeat = $this->getShowTimesReserved($_timesId);
+            $resseredSeatIds = $resseredSeat ? arr2to1($resseredSeat,'seat_id') : [];
+            //获取已售座位
+            $buySeat = $this->getShowTicketSellInfo($_timesId);
+            $buySeatIds = $buySeat ? arr2to1($buySeat,'seat_id') : [];
+            //处理
+            foreach ($roomSeat as $k => $v){
+                $status = 0;
+                //判断座位状态
+                if(in_array($v['seat_id'],$resseredSeatIds)){
+                    $status = 2;
+                }elseif(in_array($v['seat_id'], $buySeatIds))
+                    $status = 1;
+                $roomSeat[$k]['status'] = $status;
+            }
+
+            return $roomSeat;
         }
 
         /**
