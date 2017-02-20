@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mobile first web app theme | first</title>
+  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/plugin.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="js/daterangepicker/moment.min.js"></script>
+  <script src="js/ie/respond.min.js"></script>
+  <script src="js/ie/html5.js"></script>
+	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
+	<script charset="utf-8" src="/kindeditor-4.1.10/lang/zh-CN.js"></script>
+</head>
+<body>
+
+  <!-- header -->
+
+	<header id="header" class="navbar">
+
+    <ul class="nav navbar-nav navbar-avatar pull-right">
+
+      <li class="dropdown">
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">            
+
+          <span class="hidden-sm-only">Mika Sokeil</span>
+
+          <span class="thumb-small avatar inline"><img src="images/avatar.jpg" alt="Mika Sokeil" class="img-circle"></span>
+
+          <b class="caret hidden-sm-only"></b>
+
+        </a>
+
+        <ul class="dropdown-menu">
+
+          <li><a href="#">Settings</a></li>
+
+          <li><a href="#">Profile</a></li>
+
+          <li><a href="#"><span class="badge bg-danger pull-right">3</span>Notifications</a></li>
+
+          <li class="divider"></li>
+
+          <li><a href="docs.html">Help</a></li>
+
+          <li><a href="signin.html">Logout</a></li>
+
+        </ul>
+
+      </li>
+
+    </ul>
+
+    <a class="navbar-brand" href="#">first</a>
+
+    <button type="button" class="btn btn-link pull-left nav-toggle hidden-lg" data-toggle="class:slide-nav slide-nav-left" data-target="body">
+
+      <i class="icon-reorder icon-xlarge text-default"></i>
+
+    </button>
+
+    
+
+      </li>
+
+    </ul>
+
+
+	</header>
+
+  <!-- / header -->
+
+  <!-- nav -->
+
+  <nav id="nav" class="nav-primary visible-lg nav-vertical">
+
+    <ul class="nav" data-spy="affix" data-offset-top="50">
+
+      <li class="active"><a href="index.html"><i class="icon-dashboard icon-xlarge"></i>演出管理</a></li>
+      <li class=""><a href="index.html"><i class="icon-dashboard icon-xlarge"></i>演员管理</a></li>
+      <li class=""><a href="index.html"><i class="icon-dashboard icon-xlarge"></i>剧场动态管理</a></li>
+	  
+    </ul>
+
+  </nav>
+
+  <!-- / nav -->
+
+  <section id="content">
+
+    <section class="main padder">
+		<div class="col-lg-12" style="margin-top:30px;">
+			<section class="panel">
+				<header class="panel-heading">
+					<div class="row step-bar">
+						<a class="top-step" href="index.html">演出管理</a><a class="top-step" > - </a><a class="top-step" >编辑演出</a>
+					</div>
+				</header>
+				<div class="row">
+					<div class="row col-lg-12">
+						<div class="left-list">
+							<ul class="nav theatre-arrange" role="tablist">
+								<li role="presentation" class="active"><a href="#1-set" aria-controls="home" role="tab" data-toggle="tab">2017-2-10 周一 16:30</a></li>
+								<li role="presentation"><a href="#2-set" aria-controls="profile" role="tab" data-toggle="tab">2017-2-10 周一 16:30</a></li>
+								<li role="presentation"><a href="#3-set" aria-controls="messages" role="tab" data-toggle="tab">2017-2-10 周一 16:30</a></li>
+								<li role="presentation"><a href="#4-set" aria-controls="settings" role="tab" data-toggle="tab">2017-2-10 周一 16:30</a></li>
+							</ul>
+						</div>
+						<div class="right-form">
+							<div class="tab-content">
+							  <div role="tabpanel" class="tab-pane active" id="1-set" data="1">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="2-set" data="2">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="3-set" data="3">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							  <div role="tabpanel" class="tab-pane" id="4-set" data="4">
+								<div class="field" style="text-align:center;">
+		
+								</div>
+							  </div>
+							</div>
+						</div>
+					</div>
+					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it">发布</a></div>
+				</div>
+			</section>
+		</div>
+		
+    </section>
+  </section>
+
+  <!-- .modal -->
+
+  <div id="modal" class="modal fade">
+
+    <form class="m-b-none">
+
+      <div class="modal-dialog pos-abt" style="margin-top:-235px; top:50%">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+
+            <h4 class="modal-title" id="myModalLabel">Post your first idea</h4>
+
+          </div>
+
+          <div class="modal-body">          
+
+            <div class="block">
+
+              <label class="control-label">Title</label>
+
+              <input type="text" class="form-control" placeholder="Post title">
+
+            </div>
+
+            <div class="block">
+
+              <label class="control-label">Content</label>
+
+              <textarea class="form-control" placeholder="Content" rows="5"></textarea>
+
+            </div>
+
+            <div class="checkbox">
+
+              <label>
+
+                <input type="checkbox"> Share with all memebers of first
+
+              </label>
+
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-small btn-default" data-dismiss="modal">Save</button>
+
+            <button type="button" class="btn btn-small btn-primary" data-loading-text="Publishing...">Publish</button>
+
+          </div>
+
+        </div><!-- /.modal-content -->
+
+      </div>
+
+    </form>
+
+  </div>
+
+	<script src="js/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+
+  <script src="js/bootstrap.js"></script>
+
+  <!-- app -->
+
+  <script src="js/app.js"></script>
+
+  <script src="js/app.plugin.js"></script>
+
+  <script src="js/app.data.js"></script>
+  
+  <script src="js/daterangepicker/daterangepicker.js"></script>
+
+
+
+  <!-- Sparkline Chart -->
+
+  <script src="js/charts/sparkline/jquery.sparkline.min.js"></script>  
+
+  <!-- Easy Pie Chart -->
+	
+  <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
+
+  <script src="js/ie/excanvas.js"></script>
+  <script>
+	
+		$('#data-start-time').daterangepicker({
+		locale: {
+		  format: 'YYYY-MM-DD'
+		},
+		   singleDatePicker: true,
+		   //timePickerIncrement: 30, 
+		});
+		$(".cast-position").click(function(){
+			if($(this).val()==1){
+				$(this).parent().find(".play").css("visibility","visible");
+			}
+			else{
+				$(this).parent().find(".play").css("visibility","hidden");
+			}
+		})
+		var onelist = 
+					'<div class="pull-group">'+
+						'<select class="position-one cast-select">'+
+							'<option>演员</option>'+
+							'<option>导演</option>'+
+						'</select>'+
+						'<select class="position-one cast-position">'+
+							'<option value="0">导演</option>'+
+							'<option value="1">演员</option>'+
+							'<option value="2">编剧</option>'+
+							'<option value="3">灯光</option>'+
+							'<option value="4">音响</option>'+
+							'<option value="5">舞美</option>'+
+							'<option value="6">道具</option>'+
+							'<option value="7">剧务</option>'+
+							'<option value="8">后勤</option>'+
+							'<option>后勤</option>'+
+						'</select>'+
+						'<input type="text" class="play">'+
+					'</div>'
+		$(".btn-info").click(function(){
+			$(".add-cast-list").append(onelist);
+			$(".cast-position").click(function(){
+				if($(this).val()==1){
+					$(this).parent().find(".play").css("visibility","visible");
+				}
+				else{
+					$(this).parent().find(".play").css("visibility","hidden");
+				}
+			})
+		})
+		var inputset = '<input type="text" class="time-input-length" style="margin-top:10px;">'
+		$(".add-time-btn").click(function(){
+			var len = "time" + $(".time-group input").length;
+			$(".time-group").append(inputset);
+			$(".time-group input:last").attr("id",len);
+			$('.time-group input:last').daterangepicker({
+				locale: {
+				  format: 'YYYY-MM-DD'
+				},
+				   singleDatePicker: true,
+				   //timePickerIncrement: 30, 
+			});
+		})
+		
+		var line = 15;
+		//var seatset = new array();
+		//var perline = new array();
+		var farray = new Array();
+		for(var k=0;k<line;k++){
+			farray[k] = new Array();
+		}
+		$(".document").ready(function(){
+			var perline ="27,27,28,28,28,28,23,23,23,23,23,23,28,28,29";
+			perline = perline.split(",");
+			if(perline.length != 15){
+				
+			}
+			var pset = '<p class="oneset"></p>'
+			for(var i=0;i<perline.length;i++){
+				$(".field").append(pset);
+				for(var j=0;j<perline[i];j++){
+					var sset = '<a class="seat" data=""></a>';
+					$(".oneset:eq("+i+")").append(sset);
+				}
+			}
+			$("p a").click(function(){
+				if($(this).hasClass("selected")){
+					$(this).removeClass("selected");
+				}
+				else
+				$(this).addClass("selected");
+			})
+			$(".show").click(function(){
+				for(k=0;k<$(".seat").length;k++){
+					if ($(".seat:eq("+k+")").hasClass("selected")){
+						console.log(k);
+					}
+				}
+			})
+		})
+  </script>
+
+</body>
+
+</html>

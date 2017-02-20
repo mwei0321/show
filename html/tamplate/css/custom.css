@@ -22,8 +22,8 @@
 .poster img{
 	display:inline-blocl;
 	position:relative;
-	width:100%;
-	height:100%;
+	width: 120px;
+    height: 160px;
 }
 .session-info{
 	height:160px;
@@ -539,4 +539,64 @@
 }
 .time-input-length{
 	width:90px;
+}
+
+.left-list{
+	display:inline-block;
+	width:12%;
+	background:#fff;
+	height:726px;
+	overflow-y:auto;
+	border-right:solid #ddd 1px;
+	border-bottom:solid #ddd 1px;
+}
+.theatre-arrange li{
+	height: 77px;
+	border-bottom:dashed #aaa 1px;
+}
+.theatre-arrange li:focus{
+	background:#afb5be !important;
+}
+.theatre-arrange a{
+	height:100%;
+	padding: 30px 10px !important;
+	color:#333;
+}
+.theatre-arrange a:focus,
+.theatre-arrange a:hover{
+	background:#afb5be !important;
+}
+.right-form{
+	display: inline-block;
+    height: 726px;
+    width: 87%;
+    vertical-align: top;
+	overflow: auto;
+}
+.theatre-arrange .active{
+	background:#afb5be;
+}
+
+.seat{
+	width:20px;
+	height:17px;
+	display:inline-block;
+	background:#fff;
+	background-image:url(../images/seat.png);
+	background-size:cover;
+	margin-left: 6px;
+}
+.selected{
+	background-image:url(../images/seat-selected.png);
+	background-size:cover;
+}
+.oneset{
+	width: 766px;
+    margin: 0px auto 10px auto;
+}
+.search-box{
+	width: 136px;
+    height: 30px;
+    border-radius: 14px;
+    display: inline-block;
 }

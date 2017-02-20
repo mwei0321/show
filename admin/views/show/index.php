@@ -21,10 +21,8 @@
     <div class="row">
         <div class="m-t-small">
             <a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute('edit') ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 创建新演出</a>
-            <form class="navbar-form pull-right shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">
                 <i class="icon-search text-muted"></i>
-                <input type="text" class="input-small form-control" placeholder="搜索演出">
-            </form>
+                <input type="text" class="input-small form-control" placeholder="搜索演出" id="search" url="<?= Url::toRoute(['show/index'])?>">
         </div>
     </div>
     <div class="row">
@@ -42,10 +40,10 @@
                     <ul class="theatre">
                     <?php foreach ($lists as $k => $v) {?>
                         <li	class="theatre-session" id="show_<?= $v['id'] ?>">
-                            <div class="poster"><img src="<?= $v['cover'] ?>"></div>
+                            <div class="poster"><img src="<?= ImageUrl.$v['cover'] ?>"></div>
                             <div class="session-info">
                                 <a class="theatre-name"><?= $v['title'] ?></a>
-                                <p class="theatre-time">时间：<?php echo date('Y-m-d',$v['stime']) ?>至 2016-12-29</p>
+                                <p class="theatre-time">时间： <?php echo date('Y-m-d',$v['ctime']) ?>至 2016-12-29</p>
                                 <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
                                 <div class="theatre-button-group">
                                     <a class="theatre-button" href="<?= Url::toRoute(['show/ticket']) ?>">售票情况</a>
@@ -61,7 +59,7 @@
             <div class="page">
 				<?= LinkPager::widget([
 				    'pagination'=>$pages
-				]) ?>
+				]); ?>
             </div>
         </div>
     </div>

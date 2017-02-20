@@ -17,6 +17,9 @@
 
     class ApiDynamic extends ActiveRecord{
 
+        static function tableName(){
+            return 'dynamic';
+        }
 
         /**
          * 获取动态列表
@@ -32,10 +35,12 @@
             if($_offset != 'count'){
                 foreach ($list as $k => $v){
                     $list[$k]['cover'] = ImageUrl.$v['cover'];
-                    $list[$k]['ctime'] = date('Y-m-d H:i',$v['ctime']);
+                    $list[$k]['ctime'] = date('Y-m-d',$v['ctime']);
+                    $list[$k]['dynamic_id'] = $v['id'];
                     unset($list[$k]['static']);
                     unset($list[$k]['utime']);
                     unset($list[$k]['content']);
+                    unset($list[$k]['id']);
                 }
             }
 
@@ -53,10 +58,51 @@
             $info = (new Dynamic())->getDynamicInfoById($_dynamicId);
 
             $info['cover'] = ImageUrl.$info['cover'];
-            $info['ctime'] = date('Y-m-d H:i',$info['ctime']);
+            $info['ctime'] = date('Y-m-d',$info['ctime']);
+            $info['dynamic_id'] = $info['id'];
             unset($info['static']);
             unset($info['utime']);
+            unset($info['id']);
 
             return $info;
+        }
+
+        /**
+         * 获取动态最几
+         * @param  string $_orderBy
+         * @param  string $_limit
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月10日 下午5:27:21
+        **/
+        function getDynamicByTop($_orderBy = 'ctime DESC',$_limit = 3){
+            $dynamic = (new Dynamic())->getDynamicListByTop($_orderBy,$_limit);
+
+            foreach ($dynamic as $k => $v){
+                $dynamic[$k]['dynamic_id'] = $v['id'];
+                $dynamic[$k]['ctime'] = date('Y-m-d',$v['ctime']);
+                $dynamic[$k]['cover'] = ImageUrl.$v['cover'];
+                unset($dynamic[$k]['status']);
+                unset($dynamic[$k]['utime']);
+                unset($dynamic[$k]['ctime']);
+                unset($dynamic[$k]['id']);
+                unset($dynamic[$k]['content']);
+            }
+
+            return $dynamic;
+        }
+
+
+        /**
+         * 增加阅读动态数
+         * @param  int $_dyId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 下午3:41:55
+        **/
+        function IncDynamicReadNum($_dyId,$_incNum = 1){
+            $dynamicM = self::findOne(['id'=>$_dyId]);
+            $dynamicM->read_num += 1;
+            return $dynamicM->save();
         }
     }

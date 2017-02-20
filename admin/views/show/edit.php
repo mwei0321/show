@@ -38,15 +38,18 @@
 						<input type="hidden" name="id" value="<?= $showInfo['id']??null ?>" />
 						<input type="hidden" name="cover" value="<?= $showInfo['cover']??null ?>" id="cover"  class="check" emsg="请选择节目封面"/>
 						<div class="row col-lg-12">
-							<label>演出名称</label><input type="text" class="check" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
+							<label>演出名称</label><input type="text" class="check theatre-data-input" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
-							<div class="input-group">
-								<input type="text"  class="check" emsg="请选择演出时间" id="data-start-time" name="time" value="<?= $showInfo['stime']??null ?>" id="data-start-time"></input>
+							<div class="time-group">
+								<?php foreach ($showTimes as $k => $v) {?>
+									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" value="<?= date('Y-m-d H:i',$v['stime']) ?>"></input>
+								<?php }?>
 							</div>
+							<div class="add-time-btn">+</div>
 						</div>
 						<div class="row col-lg-12">
-							<label>演出时长</label><input type="text"  class="check" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
+							<label>演出时长</label><input type="text"  class="check theatre-data-input" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
 							<span>（分钟）</span>
 						</div>
 						<div class="row col-lg-12">
@@ -73,7 +76,22 @@
             									    else
             									        echo '<option value="'.$k.'">'.$v.'</option>';
             									}?>
+            									<?php if($val['duty'] == 1){?>
+            										<input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
+            									<?php }else {?>
+            										<input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
+            									<?php }?>
             								</select>
+            								<script type="text/javascript">
+                								$(".cast-position").click(function(){
+                									if($(this).val()==1){
+                										$(this).parent().find(".play").css("visibility","visible");
+                									}
+                									else{
+                										$(this).parent().find(".play").css("visibility","hidden");
+                									}
+                								});
+            								</script>
             							</div>
     							<?php }}else{?>
     								<div class="pull-group addActor">
@@ -86,7 +104,18 @@
         									<?php foreach ($dutys as $k => $v){
         									   echo '<option value="'.$k.'">'.$v.'</option>';
         									}?>
+        									<input type="text" class="play theatre-data-input" name="act[]">
         								</select>
+        								<script type="text/javascript">
+            								$(".cast-position").click(function(){
+            									if($(this).val()==1){
+            										$(this).parent().find(".play").css("visibility","visible");
+            									}
+            									else{
+            										$(this).parent().find(".play").css("visibility","hidden");
+            									}
+            								});
+            							</script>
         							</div>
     							<?php }?>
 							</div>
@@ -105,6 +134,15 @@
 				$("#addshow").submit();
 				//mwForm.check('#addShow');
 			}
+
+// 			$(".cast-position").click(function(){
+// 				if($(this).val()==0){
+// 					$(this).parent().find(".play").css("visibility","visible");
+// 				}
+// 				else{
+// 					$(this).parent().find(".play").css("visibility","hidden");
+// 				}
+// 			});
 		</script>
 		<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 		<script>
@@ -200,12 +238,27 @@
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
 	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
 	<script>
-		$('#data-start-time').daterangepicker({
+		$('.data-start-time').daterangepicker({
     		locale: {
     		  format: 'YYYY-MM-DD HH:mm'
     		},
-		   timePicker: true,
-		   timePickerIncrement: 30,
+    		singleDatePicker: true,
+		    timePicker: true,
+// 		    timePickerIncrement: 30,
+		});
+		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-top:10px;">'
+		$(".add-time-btn").click(function(){
+    		var len = "time" + $(".time-group input").length;
+    		$(".time-group").append(inputset);
+    		$(".time-group input:last").attr("id",len);
+    		$('.time-group input:last').daterangepicker({
+    			locale: {
+    			  format: 'YYYY-MM-DD HH:mm'
+    			},
+    			   singleDatePicker: true,
+    			   timePicker: true,
+    			   //timePickerIncrement: 30,
+    			});
 		});
 	</script>
 	<script>

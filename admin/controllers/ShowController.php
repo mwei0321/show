@@ -17,6 +17,7 @@
     use common\models\Show;
     use common\models\Actor;
     use common\models\CommonModel;
+    use common\models\Ticket;
 
     class ShowController extends Controller{
 //         public $layout = 'template';
@@ -30,10 +31,11 @@
          * @date 2017年1月11日 下午6:21:43
         **/
         function actionIndex(){
-            $showModel = new Show();
-            $showModel->_pageSize = 5;
             $where = [];
+            $keyword = Yii::$app->request->get('keyword','');
+            $keyword && $where = ['like','title',$keyword];
 
+            $showModel = new Show();
             $count = $showModel->getShowList($where);
             $pageM = new \yii\data\Pagination([
                 'totalCount'=>$count,
@@ -43,8 +45,8 @@
             $lists = $showModel->getShowList($where,(string)$pageM->offset);
 
             return $this->render('index',[
-                'lists' => $lists,
-                'pages' => $pageM,
+                'lists'     => $lists,
+                'pages'     => $pageM,
             ]);
         }
 
@@ -59,10 +61,14 @@
             $id = Yii::$app->request->get('id');
 
             $showInfo = [];
+            $timesList = [];
             if($id > 0){
                 //获取节目详情
                 $showModel = new Show();
                 $showInfo = $showModel->getShowInfoById($id);
+                //获取场次
+                $timesList = (new Ticket())->getShowTimesById($id);
+//                 var_dump($timesList);exit;
             }
             //获取演员列表
             $actorObj = new Actor();
@@ -79,8 +85,10 @@
                 'actors'    => $actors,
                 'dutys'     => $dutys,
                 'showActors'=> $showActors,
+                'showTimes' => $timesList,
             ]);
         }
+
 
         /**
          * 数据更新
@@ -89,46 +97,85 @@
          * @date 2017年1月13日 上午10:25:16
         **/
         function actionUpdata(){
-
+//             $this->_showTimes(1);
             $request = Yii::$app->request;
             //时间
-            $time = explode(' - ', $request->post('time'));
+            $time = $request->post('time',[]);
             //节目信息
             if($request->post('id','') > 0)
                 $showModel = Show::findOne($request->post('id',''));
-            else
+            else{
                 $showModel = new Show();
+                $showModel->ctime   =   time();
+            }
 
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
             $showModel->intro   =   $request->post('intro','');
             $showModel->duration=   $request->post('duration','');
-//             $showModel->stime   =   strtotime($time[0]);
-//             $showModel->etime   =   strtotime($time[1]);
-            $showModel->ctime   =   time();
-//             var_dump($_POST);
 //             var_dump($showModel);exit;
             if($showModel->save(false) && $showModel->id > 0){
+                $showId = $showModel->id;
+                //写入场次
+                $showModel->deleteShowTimesByShowIds($showId);
+                if($time && is_array($time)){
+                    foreach ($time as $k => $v){
+                        $showTimes = new CommonModel('show_times');
+                        $showTimes->show_id = $showId;
+                        $showTimes->room_id = 1;
+                        $showTimes->stime   = strtotime($v);
+                        $showTimes->ctime   = time();
+                        $showTimes->save(false);
+                    }
+                }
+
                 //删除演员
                 (new CommonModel('show_actor'))->deleteAll(['show_id'=>$showModel->id]);
                 //写入演员信息
-                $actor = $request->post('actor');
-                $duty  = $request->post('duty');
+                $actor = $request->post('actor',[]);
+                $duty  = $request->post('duty',[]);
+                $act  = $request->post('act',[]);
                 foreach ($actor as $k => $v){
                     $actorModel = new CommonModel('show_actor');
                     $actorModel->show_id     = $showModel->id;
                     $actorModel->actor_id    = $v;
                     $actorModel->duty        = $duty[$k];
-                    $actorModel->act         = '';
+                    $actorModel->act         = $act[$k];
                     $actorModel->ctime       = time();
                     $actorModel->save(false);
 //                     echo $actorModel->id;
                 }
-//                 return $this->redirect('http://q.com/index.php?r=show');
+
                 return $this->redirect(['show/index']);
             }else{
 
             }
+        }
+
+        /**
+         * 演出场次处理
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月7日 下午3:56:14
+        **/
+        function _showTimes($_showId){
+            $times = Yii::$app->request->post('time',[]);
+
+            //删除之前的场次
+            (new Show())->deleteShowTimesByIds($_showId);
+
+            //写入新的场次
+            if($times && is_array($times)){
+                foreach ($times as $k => $v){
+                    $showTimesM = new CommonModel('show_times');
+                    $showTimesM->show_id    = $_showId;
+                    $showTimesM->stime      = strtotime($v);
+                    $showTimesM->ctime      = time();
+                    $showTimesM->save();
+                }
+            }
+
+            return null;
         }
 
         /**

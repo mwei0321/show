@@ -26,7 +26,7 @@
         **/
         function actionGetdynamiclist(){
             $where = [];
-            $where['static'] = 1;
+            $where['status'] = 1;
 
             //返回节目列表
             $dynamicM = new ApiDynamic();
@@ -57,6 +57,9 @@
                 $this->_reCode = 440;
                 $this->_reMsg = 'id errors->'.$dynamicId;
             }
+
+            //增加阅读数
+            (new ApiDynamic())->IncDynamicReadNum($dynamicId);
 
             return $this->_returnJson($info);
         }

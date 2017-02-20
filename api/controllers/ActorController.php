@@ -18,10 +18,6 @@
 
     class ActorController extends CommonController{
 
-        function actionIndex(){
-            echo 111;
-        }
-
         /**
          * 获取演员详情
          * @return array
@@ -30,9 +26,12 @@
         **/
         function actionGetactorinfo(){
             //获取ID
-            $actorId = Yii::$app->request->get('actorid',0);
+            $actorId = Yii::$app->request->get('actor_id',0);
             //演员详情
             $info = (new ApiActor())->getActorInfoById($actorId);
+            //演员演出过的节目
+            $showlist = (new ApiActor())->getActorShowList($actorId);
+            $info['actor_show'] = $showlist;
 
             return $this->_returnJson($info);
         }
@@ -45,9 +44,14 @@
         **/
         function actionGetactorshow(){
             //获取ID
-            $actorId = Yii::$app->request->get('actorid',0);
-
-            $showlist = (new ApiActor())->getActorShowList($actorId);
+            $actorId = Yii::$app->request->get('actor_id',0);
+            $showlist = [];
+            if($actorId > 0){
+                $showlist = (new ApiActor())->getActorShowList($actorId);
+            }else{
+                $this->_reCode = 440;
+                $this->_reMsg = 'actorId errors -> '.$actorId;
+            }
 
             return $this->_returnJson($showlist);
         }

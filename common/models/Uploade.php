@@ -116,7 +116,9 @@
             //文件路径
             $path = [
                 'showimg'   =>  '/showimg/',
-                'actorimg'  =>  '/actorimg/',
+                'actor'  =>  '/actor/',
+                'dynamic'   =>  '/dynamic/',
+                'avatar'   =>  '/avatar/',
             ];
 
             $this->path = $path[$_path].date('Y').'/';

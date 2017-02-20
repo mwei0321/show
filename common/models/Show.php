@@ -70,14 +70,39 @@
         }
 
         /**
-         * 获取演出场次
+         * 返回多个节目基础信息
+         * @param  array $_ids
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月15日 下午2:59:30
+        **/
+        function getShowInfoByIds($_ids){
+            $showInfos = self::find()->select('id,title,cover,duration')->where(['id'=>$_ids])->asArray()->all();
+            return fieldtokey($showInfos);
+        }
+
+        /**
+         * 查出演出时间段
          * @param  int $_showId
          * @return array
          * @author MaWei (http://www.phpython.com)
-         * @date 2017年2月7日 上午11:11:24
+         * @date 2017年2月9日 上午11:22:16
         **/
-        function getShowTimesById($_showId){
-            return self::find()->from('show_times')->where(['show_id'=>$_showId])->asArray()->all();
+        function getShowExpire($_showId){
+            $showTimesM = self::find()
+                    ->from('show_times')
+                    ->where([
+                        'and',
+                        ['show_id'   => $_showId],
+                        ['>','stime',(time()+10)]
+                    ]);
+            $stime = $showTimesM->min('stime');
+            $etime = $showTimesM->max('stime');
+//             echo $showTimesM->createCommand()->getRawSql();
+            return [
+                'stime' => $stime,
+                'etime' => $etime,
+            ];
         }
 
         /**
@@ -102,6 +127,21 @@
             return self::findOne($_id)->delete();
         }
 
+        /**
+         * 删除多条记录
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月7日 下午5:03:44
+        **/
+        function deleteShowTimesByShowIds($_showId){
+            $where = [
+                'and',
+                ['>','stime',time()],
+                ['show_id'=>$_showId]
+            ];
+            return (new \common\models\CommonModel('show_times'))->deleteAll($where);
+        }
 
         /**
          * 表单验证规则定义
