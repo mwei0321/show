@@ -77,6 +77,7 @@
         **/
         function searchDynamic($_keyword){
             $dynamiclist = self::find()->select('id dynamic_id,title,cover')
+                        ->from('dynamic')
                         ->where(['like','title',$_keyword])
                         ->orderBy('id DESC')
                         ->asArray()->all();
