@@ -20,8 +20,11 @@
 	<div class="row">
 		<div class="m-t-small">
 			<a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute(['dynamic/edit']) ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 创建新动态</a>
-				<i class="icon-search text-muted"></i>
+		
+		<div class="search-box">
+		<i class="icon-search text-muted"></i>
 				<input type="text" class="input-small form-control" placeholder="搜索演出" id="search" url="<?= Url::toRoute(['dynamic/index'])?>">
+		</div>
 		</div>
 	</div>
 	<div class="row">
