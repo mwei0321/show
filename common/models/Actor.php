@@ -85,6 +85,7 @@
                     ->from('actor a')
                     ->rightJoin('show_actor sa','a.id = sa.actor_id')
                     ->where(['sa.show_id'=>$_showId])
+                    ->orderBy('duty ASC')
                     ->asArray()
                     ->all();
             //处理数据
@@ -139,8 +140,8 @@
         function getActorDutyLists(){
             return [
                 '导演',
-                '演员',
                 '编剧',
+                '演员',
                 '灯光',
                 '音响',
                 '舞美',

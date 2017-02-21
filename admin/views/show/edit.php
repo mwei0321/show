@@ -31,6 +31,9 @@
 						<img src="<?= ImageUrl ?><?= $showInfo['cover']??null ?>" id="thumbImgCover">
 					</div>
 					<a class="post-change" id="filePicker" style="">更改图片</a>
+					<style>
+					   #filePicker .webuploader-element-invisible{display:none;}
+					</style>
 				</div>
 				<div class="row">
 					<form class="theatre-data" id="addshow" action="<?= Url::toRoute(['show/updata']) ?>" method="post">
@@ -79,7 +82,7 @@
             									    else
             									        echo '<option value="'.$k.'">'.$v.'</option>';
             									}?>
-            									<?php if($val['duty'] == 1){?>
+            									<?php if($val['duty'] == 2){?>
             										<input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
             									<?php }else {?>
             										<input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
