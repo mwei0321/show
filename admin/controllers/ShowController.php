@@ -51,6 +51,31 @@
         }
 
         /**
+         * 座位查看设置
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月20日 上午10:01:28
+        **/
+        function actionSeat(){
+            $showId = Yii::$app->request->get('show_id',0);
+
+            $times = $ticket = [];
+            if($showId > 0){
+                $ticketM = new Ticket();
+                $times = $ticketM->getShowTimesById($showId);
+
+                $ticket = $ticketM->getSeatInfoByTimesId($times['0']['id'],$times['0']['room_id']);
+//                 var_dump($ticket);
+            }
+
+            return $this->render('seat',[
+                'times'     => $times,
+                'ticket'    => $ticket,
+                'show_id'   => $showId,
+            ]);
+        }
+
+        /**
          * 节目编辑，修改
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -150,6 +175,28 @@
             }else{
 
             }
+        }
+
+        /**
+         * 设置场次座位
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月17日 下午4:31:40
+        **/
+        function actionSeattimes(){
+            $showId = Yii::$app->request->get('show_id',0);
+
+            if($showId > 0){
+                $showM = new Show();
+                $times = $showM->getShowTimes($showId);
+
+                //获取锁票
+
+            }
+
+            $this->render([
+
+            ]);
         }
 
         /**

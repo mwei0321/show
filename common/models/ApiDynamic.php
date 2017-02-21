@@ -84,7 +84,6 @@
                 $dynamic[$k]['cover'] = ImageUrl.$v['cover'];
                 unset($dynamic[$k]['status']);
                 unset($dynamic[$k]['utime']);
-                unset($dynamic[$k]['ctime']);
                 unset($dynamic[$k]['id']);
                 unset($dynamic[$k]['content']);
             }
