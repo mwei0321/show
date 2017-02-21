@@ -17,7 +17,8 @@
 	width:120px;
 	height:160px;
 	display:inline-block;
-	background:black;
+	background:url(../images/raw_event_dft.jpg);
+	background-size:cover;
 }
 .poster img{
 	display:inline-blocl;
@@ -331,7 +332,8 @@
 .actor-display{
 	width: 120px;
     height: 160px;
-	background:#fff;
+	background:url(../images/raw_event_dft.jpg);
+	background-size:cover;
 	position:relative;
 	display:inline-block;
 	vertical-align: top;
@@ -631,4 +633,61 @@
 }
 .search-box .form-control{
 	padding-left:22px;
+}
+.user-list{
+	width:1200px;
+	list-style:none;
+}
+.user-line{
+	width: 100%;
+    border-bottom: #aaa dashed 1px;
+    font-size: 18px;
+    height: 40px;
+    padding: 8px 0px;
+}
+.first-item{
+	display:inline-block;
+	width:23%;
+	padding-left:30px;
+}
+.second-item{
+	display:inline-block;
+	width:23%;
+	padding-left:30px;
+}
+.third-item{
+	display:inline-block;
+	width:23%;
+	padding-left:30px;
+}
+.forth-item{
+	display:inline-block;
+	width:25%;
+	padding-left:30px;
+}
+.user-header{
+	display: inline-block;
+    width: 1160px;
+    height: 40px;
+    background: #f7f8f9;
+    margin-left: 40px;
+    font-size: 18px;
+    height: 40px;
+    padding: 8px 0px;
+	font-weight:bolder;
+	margin-top:30px;
+}
+.header-title{
+	display:inline-block;
+	padding-left:24px;
+}
+.change-password{
+	cursor:pointer;
+	margin-right:30px;
+}
+.delete-user:hover,
+.delete-user:visited,
+.delete-user{
+	cursor:pointer;
+	color:#d61742;
 }
