@@ -39,7 +39,11 @@
          * @date 2017年2月10日 上午10:13:10
         **/
         function actionGetshowtimes(){
-            $showId = Yii::$app->request->get('show_id',1);
+            $showId = Yii::$app->request->get('show_id',0);
+            if($showId < 1){
+                $this->_reCode = 400;
+                $this->_returnJson();
+            }
 
             $ticketM = new ApiTicket();
             $seatList = $ticketM->getShowTimesList($showId) ? : [];
