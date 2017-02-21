@@ -33,10 +33,10 @@
         function getShowTimesList($_showId){
             $times = $times = self::find()->from('show_times')->where([
                         'and',
-                        'show_id'   => $_showId,
+                        ['show_id'   => $_showId],
                         ['>','stime',(time() - 10)],
-            ])->orderBy('stime ASC')
-//                     ->createCommand()->getRawSql();
+                    ])->orderBy('stime ASC')
+//                     ->createCommand()->getRawSql();var_dump($times);exit;
                     ->asArray()
                     ->all();
 
