@@ -3,8 +3,6 @@ namespace api\controllers;
 use api\controllers\CommonController;
 use common\models\Member;
 use common\models\RandCode;
-use yii\base\Behavior;
-use yii\base\Event;
 
 class MemberController extends CommonController{
 
@@ -45,6 +43,9 @@ class MemberController extends CommonController{
             if ( ! $Randcode->validateCode($cellphone,$code,11) ) {
                 $this->_reCode = 440;
                 $this->_showMsg =$this->_reMsg = '验证码错误';
+            } elseif ( strlen($pwd)<6 || strlen($pwd)>12 ) {
+                $this->_reCode = 440;
+                $this->_showMsg =$this->_reMsg = '密码格式不对';
             } elseif ( $Member->ifUsernameExist($username) ) {
                 $this->_reCode = 440;
                 $this->_showMsg =$this->_reMsg = '该用户名已被注册';
