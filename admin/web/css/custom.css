@@ -55,7 +55,7 @@
     line-height: 16px;
 }
 .theatre-button-group{
-	margin-top: 40px;
+	margin-top: 68px;
 }
 .theatre-button,
 .theatre-button:hover{
@@ -605,6 +605,7 @@
     height: 30px;
     border-radius: 14px;
     display: inline-block;
+	position:relative;
 }
 .stage-block{
 	display: inline-block;
@@ -621,4 +622,13 @@
 	font-size: 25px;
     font-weight: bolder;
     padding: 22px 0px;
+}
+
+.search-box .icon-search{
+	position:absolute;
+	top: 8px;
+	left:3px;
+}
+.search-box .form-control{
+	padding-left:22px;
 }
