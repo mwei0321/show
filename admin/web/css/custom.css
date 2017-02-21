@@ -22,8 +22,8 @@
 .poster img{
 	display:inline-blocl;
 	position:relative;
-	width:100%;
-	height:100%;
+	width: 100%;
+    height: 100%;
 }
 .session-info{
 	height:160px;
@@ -266,7 +266,7 @@
 #data-start-time{
 }
 .theatre-data input{
-	height: 33px;
+	height: 33px !important;
     border-radius: 4px;
     box-shadow: none;
     outline: none;
@@ -535,8 +535,90 @@
 .time-group{
 	display:inline-block;
 	margin-left: -4px;
-	width:92px;
+	width:125px;
 }
 .time-input-length{
-	width:90px;
+	width:125px;
+}
+
+.left-list{
+	display:inline-block;
+	width:12%;
+	background:#fff;
+	height:726px;
+	overflow-y:auto;
+	border-right:solid #ddd 1px;
+	border-bottom:solid #ddd 1px;
+}
+.theatre-arrange li{
+	height: 77px;
+	border-bottom:dashed #aaa 1px;
+}
+.theatre-arrange li:focus{
+	background:#afb5be !important;
+}
+.theatre-arrange a{
+	height:100%;
+	padding: 30px 10px !important;
+	color:#333;
+}
+.theatre-arrange a:focus,
+.theatre-arrange a:hover{
+	background:#afb5be !important;
+}
+.right-form{
+	display: inline-block;
+    height: 726px;
+    width: 87%;
+    vertical-align: top;
+	overflow: auto;
+	text-align:center;
+}
+.theatre-arrange .active{
+	background:#afb5be;
+}
+
+.seat{
+	width:20px;
+	height:17px;
+	display:inline-block;
+	background:#fff;
+	background-image:url(../images/seat.png);
+	background-size:cover;
+	margin-left: 6px;
+}
+.selected{
+	background-image:url(../images/seat-selected.png);
+	background-size:cover;
+}
+.sold{
+	background-image:url(../images/sold.png);
+	background-size: 27px;
+    background-position: center;
+}
+.oneset{
+	width: 780px;
+    margin: 0px auto 10px auto;
+}
+.search-box{
+	width: 136px;
+    height: 30px;
+    border-radius: 14px;
+    display: inline-block;
+}
+.stage-block{
+	display: inline-block;
+    width: 500px;
+    height: 90px;
+    box-shadow: 0px 1px 4px #000;
+    background: #272636;
+    border-bottom-right-radius: 32px;
+    margin-bottom: 45px;
+    margin-top: 50px;
+    text-align: center;
+    color: #fff;
+    border-bottom-left-radius: 32px;
+	font-size: 25px;
+    font-weight: bolder;
+    padding: 22px 0px;
 }

@@ -42,8 +42,11 @@
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
 							<div class="time-group">
-								<?php foreach ($showTimes as $k => $v) {?>
-									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" value="<?= date('Y-m-d H:i',$v['stime']) ?>"></input>
+								<?php if(isset($showTimes) && $showTimes){?>
+    								<?php foreach ($showTimes as $k => $v) {?>
+    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" value="<?= date('Y-m-d H:i',$v['stime']) ?>"></input>
+    								<?php }}else {?>
+    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" />
 								<?php }?>
 							</div>
 							<div class="add-time-btn">+</div>
@@ -244,6 +247,7 @@
     		},
     		singleDatePicker: true,
 		    timePicker: true,
+			minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});
 		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-top:10px;">'
@@ -257,7 +261,8 @@
     			},
     			   singleDatePicker: true,
     			   timePicker: true,
-    			   //timePickerIncrement: 30,
+				minDate: moment(),
+//     			   timePickerIncrement: 30,
     			});
 		});
 	</script>

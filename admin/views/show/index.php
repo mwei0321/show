@@ -20,7 +20,7 @@
 
     <div class="row">
         <div class="m-t-small">
-			
+
             <a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute('edit') ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 创建新演出</a>
                 <i class="icon-search text-muted"></i>
                 <input type="text" class="input-small form-control" placeholder="搜索演出" id="search" url="<?= Url::toRoute(['show/index'])?>">
@@ -32,7 +32,7 @@
                 <header class="panel-heading">
                     <ul class="nav nav-pills pull-right">
                         <li>
-                            <a href="#" class="panel-toggle text-muted"><i class="icon-caret-down icon-large text-active"></i><i class="icon-caret-up icon-large text"></i></a>
+                            <a href="javascript:;" class="panel-toggle text-muted"><i class="icon-caret-down icon-large text-active"></i><i class="icon-caret-up icon-large text"></i></a>
                         </li>
                     </ul>
                     共<span class="label label-large bg-default"><?= $pages->totalCount ?></span>场演出
@@ -47,7 +47,7 @@
                                 <p class="theatre-time">时间： <?php echo date('Y-m-d',$v['ctime']) ?>至 2016-12-29</p>
                                 <p class="theatre-sold"><a class="sold-box">已售 99</a></p>
                                 <div class="theatre-button-group">
-                                    <a class="theatre-button" href="<?= Url::toRoute(['show/seat','show_id'=>$v['id']]) ?>">售票情况</a>
+                                    <a class="theatre-button" href="<?= Url::toRoute(['ticket/seat','show_id'=>$v['id']]) ?>">售票情况</a>
                                     <a class="theatre-button" href="<?= Url::toRoute(['show/edit','id'=>$v['id']]) ?>">编辑详情</a>
                                     <a class="theatre-button-red" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['del-show','id'=>$v['id']]) ?>" delId="#show_<?= $v['id'] ?>">删除</a>
                                 </div>
