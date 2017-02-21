@@ -31,7 +31,14 @@
          * @date 2017年2月10日 上午10:18:57
         **/
         function getShowTimesList($_showId){
-            $times = (new Ticket())->getShowTimesById($_showId);
+            $times = $times = self::find()->from('show_times')->where([
+                        'and',
+                        'show_id'   => $_showId,
+                        ['>','stime',(time() - 10)],
+            ])->orderBy('stime ASC')
+//                     ->createCommand()->getRawSql();
+                    ->asArray()
+                    ->all();
 
             foreach ($times as $k => $v){
                 $times[$k]['times_id'] = $v['id'];
