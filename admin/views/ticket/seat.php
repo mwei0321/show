@@ -15,6 +15,8 @@
     use yii\helpers\Url;
 
     $this->title = '节目编辑修改';
+    //星期
+    $_week = ['周日','周一','周二','周三','周四','周五','周六']
 
 ?>
 <section class="main padder">
@@ -33,7 +35,7 @@
 							<ul class="nav theatre-arrange" role="tablist">
 								<?php foreach ($times as $k => $v){?>
         							<li role="presentation" class="<?= $times_id == $v['id'] ? 'active' : '' ?>">
-        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="javascript:;" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d H:i',$v['stime']) ?></a>
+        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="javascript:;" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d',$v['stime']).' '.$_week[date('w',$v['stime'])].' '.date('H:i',$v['stime']) ?></a>
         							</li>
     							<?php }?>
 							</ul>
@@ -54,13 +56,12 @@
                                                 echo '<a class="seat ';
                                                 if(in_array($seatId, $buyseat)){
                                                     echo 'sold "';
-
                                                 }elseif(in_array($seatId, $reserved)){
-                                                    echo ' selected " onclick="lockseat($(this));" ';
+                                                    echo ' selected " onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
                                                 }else{
-                                                    echo '" onclick="lockseat($(this));" ';
+                                                    echo '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
                                                 }
-	                                            echo 'url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'" href="javascript:;"></a>';
+	                                            echo ' href="javascript:;"></a>';
 									       }
 									       echo '</p>';
 									   }

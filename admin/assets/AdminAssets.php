@@ -37,7 +37,7 @@
             //app
             'js/app.js',
             'js/app.plugin.js',
-            'js/app.data.js',
+//             'js/app.data.js',
             //Sparkline Chart
             'js/charts/sparkline/jquery.sparkline.min.js',
             //Easy Pie Chart

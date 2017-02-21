@@ -97,13 +97,13 @@
          * @date 2017年1月13日 上午10:25:16
         **/
         function actionUpdata(){
-//             $this->_showTimes(1);
             $request = Yii::$app->request;
             //时间
             $time = $request->post('time',[]);
+            $show_id = $request->post('id','');
             //节目信息
             if($request->post('id','') > 0)
-                $showModel = Show::findOne($request->post('id',''));
+                $showModel = Show::findOne($show_id);
             else{
                 $showModel = new Show();
                 $showModel->ctime   =   time();
@@ -145,11 +145,13 @@
                     $actorModel->save(false);
 //                     echo $actorModel->id;
                 }
-
-                return $this->redirect(['show/index']);
-            }else{
-
+                if($show_id > 0)
+                    return $this->redirect(['show/index']);
+                else
+                    return $this->redirect(['ticket/lockseat','show_id'=>$showId]);
             }
+
+            return $this->renderPartial('jump');
         }
 
         /**
