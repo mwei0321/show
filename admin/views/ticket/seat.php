@@ -51,7 +51,16 @@
 									       echo '<p class="oneset">';
 									       for ($i = 0;$i <= $val;$i++){
 									            $seatId++;
-                                                echo '<a class="seat '.(in_array($seatId,$reserved) ? 'selected' : null).'" onclick="lockSeat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'" href="javascript:;"></a>';
+                                                echo '<a class="seat ';
+                                                if(in_array($seatId, $buyseat)){
+                                                    echo 'sold "';
+
+                                                }elseif(in_array($seatId, $reserved)){
+                                                    echo ' selected " onclick="lockseat($(this));" ';
+                                                }else{
+                                                    echo '" onclick="lockseat($(this));" ';
+                                                }
+	                                            echo 'url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'" href="javascript:;"></a>';
 									       }
 									       echo '</p>';
 									   }
@@ -80,7 +89,7 @@
 			});
 		};
 
-		var lockSeat = function (Obj) {
+		var lockseat = function (Obj) {
 			var url = Obj.attr('url');
 				$.ajax({
 					url:url,

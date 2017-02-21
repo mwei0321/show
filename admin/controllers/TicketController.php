@@ -46,6 +46,7 @@
                 'show_id'   => $showId,
                 'times_id'  => $timesId,
                 'reserved'  => $ReservedSeat,
+                'buyseat'   => $buySeat,
                 'seatNum'   => $ticketM->_RoomSeatNum($roomId),
             ]);
         }
@@ -114,7 +115,15 @@
                 $html .= '<p class="oneset">';
                 for ($i = 0;$i <= $val;$i++){
                     $seatId++;
-                    $html .= '<a class="seat '.(in_array($seatId,$ReservedSeat) ? 'selected' : null).'" onclick="lockSeat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" href="javascript:;"></a>';
+                    $html .= '<a class="seat ';
+                    if(in_array($seatId, $buySeat)){
+                        $html .= 'sold "';
+                    }elseif(in_array($seatId, $ReservedSeat)){
+                        $html .= ' selected " onclick="lockseat($(this));" ';
+                    }else{
+                        $html .= '" onclick="lockseat($(this));" ';
+                    }
+                    $html .= 'url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" href="javascript:;"></a>';
                 }
                 $html .= '</p>';
             }
