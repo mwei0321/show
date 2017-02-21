@@ -535,10 +535,10 @@
 .time-group{
 	display:inline-block;
 	margin-left: -4px;
-	width:92px;
+	width:125px;
 }
 .time-input-length{
-	width:90px;
+	width:125px;
 }
 
 .left-list{
@@ -621,47 +621,12 @@
     font-weight: bolder;
     padding: 22px 0px;
 }
-.user-block{
-	
-}
-.user{
-	display:inline-block;
-	height:88px;
-	vertical-align:top;
-}
-.admin-user:hover,
-.admin-user:visited,
-.admin-user{
-	display: inline-block;
-    width: 120px;
-    height: 40px;
-    font-size: 18px;
-    font-weight: bolder;
-    text-align: center;
-    padding: 6px 0px;
-    color: #3a5a7a;
-	cursor:pointer;
-	border:solid 2px #3a5a7a;
-	border-radius:6px;
-	margin-right:50px;
-}
-.user-choice{
-	list-style:none;
-	font-size:14px;
-	color:#333;
-	font-weight:bolder;
-	padding-left:0px;
-	width:120px;
-}
-.user-choice .divider{
-	height: 1px;
-    margin: 9px 0;
-    overflow: hidden;
-    background-color: #e5e5e5;
-}
 .change-password{
 	cursor:pointer;
 }
 .delete-user{
 	cursor:pointer;
+}
+.admin-header{
+	
 }

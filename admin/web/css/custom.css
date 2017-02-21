@@ -22,8 +22,8 @@
 .poster img{
 	display:inline-blocl;
 	position:relative;
-	width: 120px;
-    height: 160px;
+	width: 100%;
+    height: 100%;
 }
 .session-info{
 	height:160px;
@@ -535,10 +535,10 @@
 .time-group{
 	display:inline-block;
 	margin-left: -4px;
-	width:92px;
+	width:125px;
 }
 .time-input-length{
-	width:90px;
+	width:125px;
 }
 
 .left-list{

@@ -247,6 +247,7 @@
     		},
     		singleDatePicker: true,
 		    timePicker: true,
+			minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});
 		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-top:10px;">'
@@ -260,6 +261,7 @@
     			},
     			   singleDatePicker: true,
     			   timePicker: true,
+				minDate: moment(),
 //     			   timePickerIncrement: 30,
     			});
 		});
