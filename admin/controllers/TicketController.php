@@ -119,11 +119,11 @@
                     if(in_array($seatId, $buySeat)){
                         $html .= 'sold "';
                     }elseif(in_array($seatId, $ReservedSeat)){
-                        $html .= ' selected " onclick="lockseat($(this));" ';
+                        $html .= ' selected " onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
                     }else{
-                        $html .= '" onclick="lockseat($(this));" ';
+                        $html .= '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
                     }
-                    $html .= 'url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" href="javascript:;"></a>';
+                    $html .= ' href="javascript:;"></a>';
                 }
                 $html .= '</p>';
             }
