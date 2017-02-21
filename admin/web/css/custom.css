@@ -593,7 +593,8 @@
 }
 .sold{
 	background-image:url(../images/sold.png);
-	background-size:cover;
+	background-size: 27px;
+    background-position: center;
 }
 .oneset{
 	width: 780px;
