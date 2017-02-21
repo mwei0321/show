@@ -621,3 +621,6 @@
     font-weight: bolder;
     padding: 22px 0px;
 }
+.admin-user{
+	display:inline-block;
+}
