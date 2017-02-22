@@ -65,7 +65,7 @@
         $nowPage = $p > 1 ? $p : 1;
         $pageNum = intval($_REQUEST['pn'] ?? $_pnum);
         $totalPage = intval(ceil($_count/$pageNum));
-        if($nowPage > $totalPage) return 0;
+//         if($nowPage > $totalPage) return 0;
         if($_sort)
             $row = ($_count - $pageNum * $nowPage) > 0 ? ($_count - $pageNum * $nowPage) : 0;
         else
