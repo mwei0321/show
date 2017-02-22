@@ -63,7 +63,7 @@
         function getShowTimesById($_showId){
             $times = self::find()->from('show_times')->where([
                         'show_id'   => $_showId
-                    ])->orderBy('stime ASC')
+                    ])->orderBy('id ASC')
 //                     ->createCommand()->getRawSql();
                     ->asArray()
                     ->all();

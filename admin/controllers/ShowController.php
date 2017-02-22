@@ -43,7 +43,14 @@
                 'pageParam'=>'p',
             ]);
             $lists = $showModel->getShowList($where,(string)$pageM->offset);
-
+            //获取开始结束时间
+            foreach ($lists as $k => $v){
+                //写入演出时间范围
+                $times = $showModel->getShowExpire($v['id']);
+                $lists[$k]['stime'] = date('Y-m-d',$times['stime']);
+                $lists[$k]['etime'] = date('Y-m-d',$times['etime']);
+            }
+// var_dump($lists);exit;
             return $this->render('index',[
                 'lists'     => $lists,
                 'pages'     => $pageM,
@@ -117,17 +124,18 @@
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
                 //写入场次
-                $showModel->deleteShowTimesByShowIds($showId);
-                if($time && is_array($time)){
-                    foreach ($time as $k => $v){
-                        $showTimes = new CommonModel('show_times');
-                        $showTimes->show_id = $showId;
-                        $showTimes->room_id = 1;
-                        $showTimes->stime   = strtotime($v);
-                        $showTimes->ctime   = time();
-                        $showTimes->save(false);
-                    }
-                }
+                $this->_updataTimes($showId);
+//                 $showModel->deleteShowTimesByShowIds($showId);
+//                 if($time && is_array($time)){
+//                     foreach ($time as $k => $v){
+//                         $showTimes = new CommonModel('show_times');
+//                         $showTimes->show_id = $showId;
+//                         $showTimes->room_id = 1;
+//                         $showTimes->stime   = strtotime($v);
+//                         $showTimes->ctime   = time();
+//                         $showTimes->save(false);
+//                     }
+//                 }
 
                 //删除演员
                 (new CommonModel('show_actor'))->deleteAll(['show_id'=>$showModel->id]);
@@ -155,28 +163,6 @@
         }
 
         /**
-         * 设置场次座位
-         * @return array
-         * @author MaWei (http://www.phpython.com)
-         * @date 2017年2月17日 下午4:31:40
-        **/
-        function actionSeattimes(){
-            $showId = Yii::$app->request->get('show_id',0);
-
-            if($showId > 0){
-                $showM = new Show();
-                $times = $showM->getShowTimes($showId);
-
-                //获取锁票
-
-            }
-
-            $this->render([
-
-            ]);
-        }
-
-        /**
          * 演出场次处理
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -200,6 +186,41 @@
             }
 
             return null;
+        }
+
+        /**
+         * 更新、添加演出场次
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月22日 上午10:26:54
+        **/
+        function _updataTimes($_showId){
+            $request = Yii::$app->request;
+
+            //更新场次
+            $timesIds = $request->post('timesids','');
+            if($timesIds){
+                $timesIds = explode(',', substr($timesIds,0,-1));
+                foreach ($timesIds as $k => $v){
+                    $stime = $request->post('times_'.$v,'');
+                    $stime = strtotime($stime);
+                    $TimesM = \admin\models\ShowTimes::findOne(['id'=>$v]);
+                    $TimesM->stime = $stime;
+                    $TimesM->save();
+                }
+            }
+            //插入新场次
+            $times = Yii::$app->request->post('time',[]);
+            if($times && is_array($times)){
+                foreach ($times as $k => $v){
+                    $showTimesM = new CommonModel('show_times');
+                    $showTimesM->show_id    = $_showId;
+                    $showTimesM->stime      = strtotime($v);
+                    $showTimesM->ctime      = time();
+                    $showTimesM->save();
+                }
+            }
+            return 1;
         }
 
         /**

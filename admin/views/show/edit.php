@@ -45,12 +45,13 @@
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
 							<div class="time-group">
-								<?php if(isset($showTimes) && $showTimes){?>
-    								<?php foreach ($showTimes as $k => $v) {?>
-    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" value="<?= date('Y-m-d H:i',$v['stime']) ?>"></input>
+								<?php $timesids = ''; if(isset($showTimes) && $showTimes){?>
+    								<?php foreach ($showTimes as $k => $v) { $timesids .= $v['id'].',';?>
+    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input>
     								<?php }}else {?>
-    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]" />
+    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]"  style="margin-bottom:10px;"/>
 								<?php }?>
+								<input type="hidden" name="timesids" value="<?= $timesids ?>"/>
 							</div>
 							<div class="add-time-btn">+</div>
 						</div>
@@ -253,7 +254,7 @@
 			minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});
-		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-top:10px;">'
+		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-bottom:10px;">'
 		$(".add-time-btn").click(function(){
     		var len = "time" + $(".time-group input").length;
     		$(".time-group").append(inputset);
