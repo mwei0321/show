@@ -44,15 +44,7 @@
 
         <li class="dropdown">
 
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-                <span class="hidden-sm-only">Mika Sokeil</span>
-
-                <span class="thumb-small avatar inline"><img src="images/avatar.jpg" alt="Mika Sokeil" class="img-circle"></span>
-
-                <b class="caret hidden-sm-only"></b>
-
-            </a>
+            <a class="logout">注销</a>
 
             <ul class="dropdown-menu">
 
@@ -73,8 +65,6 @@
         </li>
 
     </ul>
-
-    <a class="navbar-brand" href="#">first</a>
 
     <button type="button" class="btn btn-link pull-left nav-toggle hidden-lg" data-toggle="class:slide-nav slide-nav-left" data-target="body">
 

@@ -1,3 +1,21 @@
+.logout:hover,
+.logout:visited,
+.logout:active,
+.logout{
+	margin-top: 11px;
+    margin-right: 10px;
+    font-size: 12px;
+    width: 62px;
+    height: 25px;
+    text-align: center;
+    background: #13c4a5 !important;
+    padding: 2px !important;
+    color: #fff !important;
+    box-shadow: 0px 1px 3px #333;
+    border-radius: 8px !important;
+    display: inline-block !important;
+	cursor:pointer;
+}
 .theatre{
 	list-style:none;
 	position:relative;
