@@ -33,6 +33,8 @@
         public $upKey = 'file';
         //过滤接收文件类型
         public $filterExe = ['gif','jpg','jpeg','bmp','png','swf','txt','xls','doc','xlsx','docx','zip','rar','7z'];
+        //文件类型
+        public $fileType = '';
         //文件对象
         public $fileObj;
 
@@ -60,8 +62,8 @@
         **/
         function uploadeImg($_fileName = null){
             //文件绝对路径
-//             $this->filePrefix.date('YmdHis').rand(2000,99999).$this->fileObj['extension'];
-            $this->fileName = autoCharset(($_fileName ? $_fileName : $this->fileObj['name']),'utf-8','gbk');
+            $this->fileName = $this->filePrefix.date('YmdHis').rand(2000,99999).'.'.$this->fileType;
+//             $this->fileName = autoCharset(($_fileName ? $_fileName : $this->fileObj['name']),'utf-8','gbk');
             $this->fileAbsPath = $this->absRootPath.$this->path.$this->fileName;
             if(!move_uploaded_file($this->fileObj['tmp_name'], $this->fileAbsPath)) {
                 return false;
@@ -99,9 +101,9 @@
             if($this->size > $this->maxSize || $this->size == -1){
                 return -2;//文件太大
             }
-            $fileExeName = $this->_getFileExeName($this->fileObj['name']);
+            $this->fileType = $this->_getFileExeName($this->fileObj['name']);
             //过滤文件类型
-            if(!in_array($fileExeName,$this->filterExe)){
+            if(!in_array($this->fileType,$this->filterExe)){
                 return -1;//文件类型错误
             }
         }
