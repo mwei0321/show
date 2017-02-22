@@ -92,9 +92,7 @@
             $showTimesM = self::find()
                     ->from('show_times')
                     ->where([
-                        'and',
-                        ['show_id'   => $_showId],
-                        ['>','stime',(time()+10)]
+                        'show_id'   => $_showId
                     ]);
             $stime = $showTimesM->min('stime');
             $etime = $showTimesM->max('stime');

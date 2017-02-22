@@ -18,10 +18,6 @@
 
     class TicketController extends CommonController{
 
-//         function actionIndex(){
-//             (new \common\models\Ticket())->createRoomSeat(1);
-//         }
-
         /**
          * 构造函数
          * @return array
@@ -111,6 +107,12 @@
             $data['msg'] = $reMsg[$reid];
 
             return $this->_returnJson($data);
+        }
+
+        function actionCreateseat(){
+            if(Yii::$app->request->get('seat','') == 'yes'){
+                (new \common\models\Ticket())->createRoomSeat(1);
+            }
         }
     }
 
