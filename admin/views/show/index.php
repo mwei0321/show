@@ -46,7 +46,7 @@
                             <div class="poster"><img src="<?= ImageUrl.$v['cover'] ?>"></div>
                             <div class="session-info">
                                 <a class="theatre-name"><?= $v['title'] ?></a>
-                                <p class="theatre-time">时间： <?php echo date('Y-m-d',$v['ctime']) ?>至 2016-12-29</p>
+                                <p class="theatre-time">时间： <?= $v['stime'] ?>至 <?= $v['etime'] ?></p>
                                 <div class="theatre-button-group">
                                     <a class="theatre-button" href="<?= Url::toRoute(['ticket/seat','show_id'=>$v['id']]) ?>">售票情况</a>
                                     <a class="theatre-button" href="<?= Url::toRoute(['show/edit','id'=>$v['id']]) ?>">编辑详情</a>
