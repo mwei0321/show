@@ -56,6 +56,7 @@
                 'count' =>  $this->_count,
                 'data'  =>  $_data,
             ];
+            if(!$_data) unset($data['data']);
             //合并数据
             $data = array_merge($data,$_addData);
             //格式化为json输入
