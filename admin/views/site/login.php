@@ -10,26 +10,20 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="login-form">
+    <img src="images/logo.png">
+</div>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+    <div class="form-box">
+        <div class="login-control">
+            <p class="login-hint">用户名</p>
+            <input class="password-input" type="text" placeholder="输入账户名">
         </div>
+        <div class="login-control">
+            <p class="login-hint">密码</p>
+            <input class="password-input" type="password" placeholder="输入密码">
+            <p class="login-tips" id="password-tips">*输入密码错误*</p>
+        </div>
+        <a class="login">登录</a>
     </div>
 </div>
