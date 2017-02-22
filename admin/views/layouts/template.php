@@ -44,7 +44,7 @@
 
         <li class="dropdown">
 
-            <a class="logout">注销</a>
+            <a class="logout" href="<?= Url::toRoute(['site/logout']) ?>">注销</a>
 
             <ul class="dropdown-menu">
 
