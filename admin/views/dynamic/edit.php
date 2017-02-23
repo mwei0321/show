@@ -25,7 +25,7 @@
 					</div>
 				</header>
 				<div class="row main-info">
-					<div class="poster intro-post"><img src="<?= ImageUrl.($dynamicInfo['cover']??null) ?>" id="thumbImgCover"></div>
+					<div class="dt-poster"><img src="<?= ImageUrl.($dynamicInfo['cover']??null) ?>" id="thumbImgCover"></div>
 					<div class="avatar-btn-group">
 						<p class="avatar-tips">图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
 						<a class="post-change" id="filePicker" style="">上传封面</a>
