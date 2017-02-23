@@ -52,7 +52,6 @@
                                 }else{
                                     echo $v['stime'].' 至 '.$v['etime'];
                                 }?>
-                                <?= $v['stime'] ?>至 <?= $v['etime'] ?></p>
                                 <div class="theatre-button-group">
                                     <a class="theatre-button" href="<?= Url::toRoute(['ticket/seat','show_id'=>$v['id']]) ?>">售票情况</a>
                                     <a class="theatre-button" href="<?= Url::toRoute(['show/edit','id'=>$v['id']]) ?>">编辑详情</a>
