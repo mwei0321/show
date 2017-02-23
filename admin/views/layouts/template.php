@@ -40,6 +40,7 @@
 
 <header id="header" class="navbar">
 
+	<img class="logo-top" src="/images/logo-top.png">
     <ul class="nav navbar-nav navbar-avatar pull-right">
 
         <li class="dropdown">
