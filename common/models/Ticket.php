@@ -71,6 +71,25 @@
         }
 
         /**
+         * 获取未开演出演出场次
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月7日 上午11:11:24
+         **/
+        function getShowTimesById2($_showId){
+            $times = self::find()->from('show_times')->where([
+                'and',
+                ['show_id'   => $_showId],
+                ['>','stime',(time()+60)],
+            ])->orderBy('id ASC')
+//                     ->createCommand()->getRawSql();
+            ->asArray()
+            ->all();
+            return $times;
+        }
+
+        /**
          * 根据场次ID返回场次信息
          * @param  array $_timesIds
          * @return array

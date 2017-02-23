@@ -74,7 +74,7 @@
                 $showModel = new Show();
                 $showInfo = $showModel->getShowInfoById($id);
                 //获取场次
-                $timesList = (new Ticket())->getShowTimesById($id);
+                $timesList = (new Ticket())->getShowTimesById2($id);
 //                 var_dump($timesList);exit;
             }
             //获取演员列表
