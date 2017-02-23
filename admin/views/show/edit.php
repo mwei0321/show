@@ -22,8 +22,8 @@
 			<section class="panel">
 				<header class="panel-heading">
 					<div class="row step-bar">
-						<?= Html::a('演出管理', ['index','id'=>1], ['class' => 'top-step']) ?> -
-						<?= Html::a('编辑演出', ['edit', 'id' =>1], ['class' => 'top-step']) ?>
+						<?= Html::a('演出管理', ['index'], ['class' => 'top-step']) ?> -
+						<a class="top-step" href="javascript::">编辑演出</a>
 					</div>
 				</header>
 				<div class="row main-info">
@@ -47,7 +47,7 @@
 							<div class="time-group">
 								<?php $timesids = ''; if(isset($showTimes) && $showTimes){?>
     								<?php foreach ($showTimes as $k => $v) { $timesids .= $v['id'].',';?>
-    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input>
+    									<input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input>
     								<?php }}else {?>
     									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]"  style="margin-bottom:10px;"/>
 								<?php }?>

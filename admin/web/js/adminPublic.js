@@ -5,6 +5,7 @@
  */
 
 var delshow = function (obj){
+	if(!confirm('你确定要删除吗？')) return false;
 	var url = obj.attr('url');
 	var delid = obj.attr('delid');
 	$.ajax({

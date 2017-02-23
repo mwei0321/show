@@ -21,7 +21,8 @@
 			<section class="panel" style="min-height:820px;">
 				<header class="panel-heading">
 					<div class="row step-bar">
-						<a class="top-step" href="cast.html">演职员管理</a><a class="top-step" > - </a><a class="top-step" >演职员详情</a>
+						<a class="top-step" href="<?= Url::toRoute(['actor/index'])?>">演职员管理</a><a class="top-step" > - </a>
+						<a class="top-step" href="javascript:;">演职员详情</a>
 					</div>
 				</header>
 				<h1 class="cast-name"><?= $ActorInfo['name'] ?></h1>

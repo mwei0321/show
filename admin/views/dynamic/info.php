@@ -21,7 +21,8 @@
 			<section class="panel">
 				<header class="panel-heading">
 					<div class="row step-bar">
-						<a class="top-step" href="dynamic.html">剧团动态管理</a><a class="top-step" > - </a><a class="top-step" >动态详情</a>
+						<a class="top-step" href="<?= Url::toRoute('dynamic/index')?>">剧团动态管理</a><a class="top-step" > - </a>
+						<a class="top-step" href="javascript:;">动态详情</a>
 					</div>
 				</header>
 				<div class="row main-info">
