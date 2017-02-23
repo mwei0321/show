@@ -22,8 +22,11 @@
 	margin-top:5px;
 	margin-left: 25px;
 }
-.form-group input{
-	
+#loginform-username{
+	width:280px;
+}
+.login-btn{
+	width:280px;
 }
 .theatre{
 	list-style:none;
