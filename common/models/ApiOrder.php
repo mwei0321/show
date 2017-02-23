@@ -45,12 +45,13 @@
                     $lists[$k]['stime'] = date('Y-m-d H:i',$times[$v['times_id']]['stime']);
                     //判断节目开始
                     $time = time();
+                    $showt = $times[$v['times_id']]['stime'] + $showInfos[$v['show_id']]['duration'] * 60;
                     if($time < $times[$v['times_id']]['stime']){
 //                         $lists[$k]['status'] = ($time < ($times[$v['times_id']]['stime'] - 3600)) ? 0 : 1; //即将开始
                         $lists[$k]['status'] = 1; //即将开始
-                    }elseif ($time > $times[$v['times_id']]['stime']){
+                    }elseif (($time > $times[$v['times_id']]['stime']) && $time < $showt){
                         $lists[$k]['status'] = 2; //已开始
-                    }elseif($time > ($times[$v['times_id']]['stime'] + $showInfos[$v['show_id']]['duration'] * 60)){
+                    }elseif($time > $showt){
                         $lists[$k]['status'] = 3; //已结束
                     }
                     //处理座位
