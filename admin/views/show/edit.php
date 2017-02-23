@@ -83,7 +83,7 @@
             									    else
             									        echo '<option value="'.$k.'">'.$v.'</option>';
             									}?>
-            									<?php if($val['duty'] == 3){?>
+            									<?php if($val['duty'] == 2){?>
             										<input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
             									<?php }else {?>
             										<input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
@@ -91,7 +91,7 @@
             								</select>
             								<script type="text/javascript">
                 								$(".cast-position").click(function(){
-                									if($(this).val()==1){
+                									if($(this).val()==2){
                 										$(this).parent().find(".play").css("visibility","visible");
                 									}
                 									else{
@@ -115,7 +115,7 @@
         								</select>
         								<script type="text/javascript">
             								$(".cast-position").click(function(){
-            									if($(this).val()==1){
+            									if($(this).val()==2){
             										$(this).parent().find(".play").css("visibility","visible");
             									}
             									else{
