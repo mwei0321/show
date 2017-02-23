@@ -21,7 +21,8 @@
 		<section class="panel">
 			<header class="panel-heading">
 				<div class="row step-bar">
-					<a class="top-step" href="cast.html">演职员管理</a><a class="top-step" > - </a><a class="top-step" >编辑资料</a>
+					<a class="top-step" href="<?= Url::toRoute(['actor/index'])?>">演职员管理</a><a class="top-step" > - </a>
+					<a class="top-step" href="javascript:;">编辑资料</a>
 				</div>
 			</header>
 			<div class="row main-info">
