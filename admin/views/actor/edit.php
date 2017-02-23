@@ -49,9 +49,9 @@
 							<?php }?>
 						<select>
 					</div>
-					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"  name="constellation" value="<?= $ActorInfo['constellation'] ??null?>" class="check"></input></div>
-					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $ActorInfo['birthday'] ??null?>" class="check"></input></div>
-					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"  name="constellation" value="<?= $ActorInfo['constellation'] ??null?>" class="check theatre-data-input"></input></div>
+					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $ActorInfo['birthday'] ??null?>" class="check theatre-data-input"></input></div>
+					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12">
 						<label>个人简介</label><textarea id="data-intro"  name="intro" class="check"><?= $ActorInfo['content'] ??null?></textarea>
 					</div>

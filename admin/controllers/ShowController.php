@@ -19,7 +19,7 @@
     use common\models\CommonModel;
     use common\models\Ticket;
 
-    class ShowController extends Controller{
+    class ShowController extends SiteController{
 //         public $layout = 'template';
 //         public $enableCsrfValidation = false;
 

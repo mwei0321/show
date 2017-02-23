@@ -16,12 +16,24 @@
     display: inline-block !important;
 	cursor:pointer;
 }
+.logo-top{
+	display:inline-block;
+	height:40px;
+	margin-top:5px;
+	margin-left: 25px;
+}
+.form-group input{
+	
+}
 .theatre{
 	list-style:none;
 	position:relative;
 	width:100%;
 	padding:0px;
 	margin:5px 0px 5px 5px;
+}
+.form-group{
+	text-align:left;
 }
 .panel-heading{
 	margin-bottom:0px;

@@ -18,7 +18,7 @@
     use yii\helpers\Url;
     use common\models\CommonModel;
 
-    class TicketController extends Controller{
+    class TicketController extends SiteController{
 
         function actionSeat(){
             $showId = Yii::$app->request->get('show_id',0);

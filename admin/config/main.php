@@ -9,6 +9,7 @@ $params = array_merge(
 return [
     'id' => 'app-admin',
     'basePath' => dirname(__DIR__),
+    'language' => 'zh-CN',
     'controllerNamespace' => 'admin\controllers',
     'bootstrap' => ['log'],
     'modules' => [],

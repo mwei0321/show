@@ -16,7 +16,7 @@
     use yii\web\Controller;
     use common\models\Actor;
 
-    class ActorController extends Controller{
+    class ActorController extends SiteController{
 
         /**
          * 演员列表
