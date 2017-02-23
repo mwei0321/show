@@ -16,7 +16,7 @@
     use yii\web\Controller;
     use common\models\Dynamic;
 
-    class DynamicController extends Controller{
+    class DynamicController extends SiteController{
 
         /**
          * 动态列表显示
