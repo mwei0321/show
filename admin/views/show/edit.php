@@ -83,7 +83,7 @@
             									    else
             									        echo '<option value="'.$k.'">'.$v.'</option>';
             									}?>
-            									<?php if($val['duty'] == 2){?>
+            									<?php if($val['duty'] == 3){?>
             										<input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
             									<?php }else {?>
             										<input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">

@@ -48,7 +48,7 @@
                                 <a class="theatre-name"><?= $v['title'] ?></a>
                                 <p class="theatre-time">时间：
                                 <?php if($v['stime'] == $v['etime']) {
-                                    echo $v['stime'].' (只演一天)';
+                                    echo $v['stime'];
                                 }else{
                                     echo $v['stime'].' 至 '.$v['etime'];
                                 }?>
