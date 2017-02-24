@@ -3182,6 +3182,9 @@ _extend(KCmd, {
 		return this;
 	},
 	insertimage : function(url, title, width, height, border, align) {
+		var domain = 'http://'+document.domain;
+		url = domain + url;
+		
 		title = _undef(title, '');
 		border = _undef(border, 0);
 		var html = '<img src="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" ';

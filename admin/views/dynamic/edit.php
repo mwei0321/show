@@ -125,7 +125,7 @@
     	});
     </script>
 
-    	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
+    	<script src="kindeditor-4.1.10/kindeditor.js"></script>
   	<script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
 	<script>
     	KindEditor.ready(function(K) {
