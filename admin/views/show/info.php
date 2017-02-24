@@ -26,7 +26,7 @@
 					</div>
 				</header>
 				<div class="row main-info">
-					<div class="poster intro-post"><img src=""></div>
+					<div class="poster intro-post"><img src="<?= ImageUrl.$showInfo['cover']?>"></div>
 					<div class="session-info">
 						<a class="info-name"><?= $showInfo['title']?></a>
 						<p class="info-time">时间：

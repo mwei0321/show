@@ -17,6 +17,7 @@
     $this->title = '节目编辑修改';
 ?>
 <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="kindeditor-4.1.10/themes/default/default.css">
 <section class="main padder">
 		<div class="col-lg-12" style="margin-top:30px;">
 			<section class="panel">
@@ -269,8 +270,19 @@
 //     			   timePickerIncrement: 30,
     			});
 		});
-	</script>
-	<script>
 
+	</script>
+
+	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
+  	<script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
+
+	<script>
+    	KindEditor.ready(function(K) {
+    		window.editor = K.create('#data-intro',{
+    			//height : '700px',
+    			resizeType: 0,
+    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image'] ,
+    		});
+    	});
 	</script>
 </section>

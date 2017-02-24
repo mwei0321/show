@@ -136,3 +136,16 @@
     	    });
     	});
     </script>
+
+    	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
+  	<script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
+  	<script src="js/editor.js"></script>
+	<script>
+    	KindEditor.ready(function(K) {
+    		window.editor = K.create('#data-intro',{
+    			//height : '700px',
+    			resizeType: 0,
+    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image'] ,
+    		});
+    	});
+	</script>
