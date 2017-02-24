@@ -39,10 +39,11 @@
 						<input type="hidden" name="dyid" value="<?= $dynamicInfo['id'] ?? null ?>" class="check"/>
 						<div class="row col-lg-12"><label>标题</label><input  value="<?= $dynamicInfo['title'] ?? null ?>" type="text" id="dynamic-title" name="title" class="check"></input></div>
 						<div class="row col-lg-12">
-							<label>详情</label><textarea id="data-intro" name="content" class="check"><?= $dynamicInfo['content']??null ?></textarea>
+							<label>详情</label><textarea id="data-intro" name="" class="check"><?= $dynamicInfo['content']??null ?></textarea>
+							<input type="hidden" name="content" value="<?= $dynamicInfo['content'] ??null?>" id="contedit" />
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
+						<a class="confirm-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
 					</form>
 				</div>
 			</section>

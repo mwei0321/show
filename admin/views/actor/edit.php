@@ -54,10 +54,11 @@
 					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $ActorInfo['birthday'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12">
-						<label>个人简介</label><textarea id="data-intro"  name="intro" class="check"><?= $ActorInfo['content'] ??null?></textarea>
+						<label>个人简介</label><textarea id="data-intro"  name="" class="check"><?= $ActorInfo['content'] ??null?></textarea>
+						<input type="hidden" name="intro" value="<?= $ActorInfo['content'] ??null?>" id="contedit" />
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'#artorSubmit',modifyMsgJump);" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
+						<a class="confirm-it" href="javascript:;" onclick="fromData2($(this),'#artorSubmit',modifyMsgJump);" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
 					</div>
 				</form>
 			</div>
@@ -139,7 +140,6 @@
 
     	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
   	<script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
-  	<script src="js/editor.js"></script>
 	<script>
     	KindEditor.ready(function(K) {
     		window.editor = K.create('#data-intro',{

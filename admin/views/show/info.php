@@ -40,7 +40,7 @@
 					</div>
 					<div class="info-button-group">
 						<a class="info-btn info-edit-btn" href="<?= Url::toRoute(['show/edit','id'=>$showInfo['id']]) ?>">编辑</a>
-						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['del-show','id'=>$showInfo['id']]) ?>" delId="#show_<?= $showInfo['id'] ?>">删除</a>
+						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delshow3($(this));" url="<?= Url::toRoute(['del-show','id'=>$showInfo['id']]) ?>" delId="#show_<?= $showInfo['id'] ?>">删除</a>
 					</div>
 				</div>
 				<div class="row">
@@ -115,4 +115,24 @@
 			});
 		};
 
+		var delshow3 = function (obj){
+			if(!confirm('你确定要删除吗？')) return false;
+			var url = obj.attr('url');
+			var delid = obj.attr('delid');
+			$.ajax({
+				type:'get',
+				url	: url,
+				success:function (e){
+					if(e.status == 200){
+						mwlayer.success('删除成功！');
+						setTimeout(function () {
+							window.location.href="<?= Url::toRoute(['show/index'])?>";
+						},2000);
+
+						return false;
+					}
+					mwlayer.error('删除失败！');
+				}
+			});
+		}
     </script>

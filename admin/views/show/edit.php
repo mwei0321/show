@@ -61,7 +61,8 @@
 							<span>（分钟）</span>
 						</div>
 						<div class="row col-lg-12">
-							<label>演出简介</label><textarea id="data-intro" name="intro"><?= $showInfo['intro']??null ?></textarea>
+							<label>演出简介</label><textarea id="data-intro" name=""><?= $showInfo['intro']??null ?></textarea>
+							<input type="hidden" name="intro" value="<?= $showInfo['content'] ??null?>" id="contedit" />
 						</div>
 						<div class="row col-lg-12">
 							<label>演职人员</label>
@@ -139,6 +140,7 @@
 				$('.add-cast-list').append($('.add-cast-list div:first-child').clone());
 			}
 			var submit = function () {
+				$('#contedit').val(editor.html());
 				$("#addshow").submit();
 				//mwForm.check('#addShow');
 			}

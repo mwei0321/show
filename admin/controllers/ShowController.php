@@ -74,22 +74,26 @@
             $times = $showModel->getShowExpire($showId);
             $showInfo['stime'] = date('Y-m-d',$times['stime']);
             $showInfo['etime'] = date('Y-m-d',$times['etime']);
-
-            //获取场次
-            $timesList = (new Ticket())->getShowTimesById($showId);
-
             //获取演员列表
             $actorObj = new Actor();
             $showActors = $actorObj->getShowActorInfo(['show_id'=>$showId]);
 
-            //预留座位
+            //获取场次
+            $timesList = (new Ticket())->getShowTimesById($showId);
+            $ReservedSeat = $buySeat = [];
+            $timesId = 0;
+            $roomId = 1;
             $ticketM = new Ticket();
-            $timesId = $timesList[0]['id'];
-            $ReservedSeat = $ticketM->getShowTimesReserved($timesId);
-            $ReservedSeat = $ReservedSeat ? arr2to1($ReservedSeat,'seat_id') : [];
-            //已售座位
-            $buySeat = $ticketM->getShowTicketSellInfo($timesId);
-            $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
+            if($timesList){
+                //预留座位
+                $timesId = $timesList[0]['id'];
+                $roomId = $timesList[0]['room_id'];
+                $ReservedSeat = $ticketM->getShowTimesReserved($timesId);
+                $ReservedSeat = $ReservedSeat ? arr2to1($ReservedSeat,'seat_id') : [];
+                //已售座位
+                $buySeat = $ticketM->getShowTicketSellInfo($timesId);
+                $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
+            }
 
             return $this->render('info',[
                 'showInfo'  => $showInfo,
@@ -97,7 +101,7 @@
                 'showTimes' => $timesList,
                 'reserved' => $ReservedSeat,
                 'times_id' => $timesId,
-                'seatNum'   => $ticketM->_RoomSeatNum($timesList[0]['room_id']),
+                'seatNum'   => $ticketM->_RoomSeatNum($roomId),
             ]);
         }
 
