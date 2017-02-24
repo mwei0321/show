@@ -283,7 +283,7 @@
     		window.editor = K.create('#data-intro',{
     			//height : '700px',
     			resizeType: 0,
-    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image'] ,
+    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull'] ,
     		});
     	});
 	</script>

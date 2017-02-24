@@ -112,6 +112,7 @@ if (empty($_FILES) === false) {
 	$ymd = date("Ymd");
 	$save_path .= $ymd . "/";
 	$save_url .= $ymd . "/";
+	$sp = $dir_name.'/'.$ymd.'/';
 	if (!file_exists($save_path)) {
 		mkdir($save_path);
 	}
@@ -123,11 +124,12 @@ if (empty($_FILES) === false) {
 		alert("上传文件失败。");
 	}
 	@chmod($file_path, 0644);
-	$file_url = $save_url . $new_file_name;
+	$basepth = 'http://'.$_SERVER['HTTP_HOST'].'/kindeditor-4.1.10/attached/'.$sp.$new_file_name;
+	$file_url = 'http://'.$_SERVER['HTTP_HOST'].$save_url . $new_file_name;
 
 	header('Content-type: text/html; charset=UTF-8');
 	$json = new Services_JSON();
-	echo $json->encode(array('error' => 0, 'url' => $file_url));
+	echo $json->encode(array('error' => 0, 'url' => $basepth,'name'=>$new_file_name,'aa'=>$save_url));
 	exit;
 }
 

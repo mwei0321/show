@@ -152,6 +152,7 @@
          * @date 2017年1月13日 上午10:25:16
         **/
         function actionUpdata(){
+            var_dump($_SERVER);exit;
             $request = Yii::$app->request;
             //时间
             $time = $request->post('time',[]);
@@ -167,7 +168,7 @@
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
             $showModel->intro   =   $request->post('intro','');
-            $showModel->duration=   $request->post('duration',0);
+            $showModel->duration=   intval($request->post('duration',0));
 //             var_dump($showModel);exit;
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
