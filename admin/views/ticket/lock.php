@@ -46,12 +46,14 @@
 							  <div role="tabpanel" class="tab-pane active" id="1-set" data="1">
 								<div class="field" style="text-align:center;" id="seatmap">
 									<?php
-									   $seatId = 0;
+									   $seatId = 0;$seatcode = 0;
 									   foreach ($seatNum as $val){
 									       echo '<p class="oneset">';
+									       $seatcode += $val;
+									       $seatId = $seatcode;
 									       for ($i = 0;$i <= $val;$i++){
-									            $seatId++;
                                                 echo '<a class="seat '.(in_array($seatId,$reserved) ? 'selected' : null).'" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"></a>';
+                                                $seatId--;
 									       }
 									       echo '</p>';
 									   }

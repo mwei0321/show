@@ -179,7 +179,7 @@
          * @date 2017年2月9日 下午3:06:55
         **/
         function getRoomInfo($_roomId){
-            return self::find()->from('room_seat')->where(['room_id'=>$_roomId])->orderBy('seat_id ASC')->asArray()->all();
+            return self::find()->from('room_seat')->where(['room_id'=>$_roomId])->orderBy('id ASC')->asArray()->all();
         }
 
         /**
@@ -189,17 +189,19 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月10日 上午11:00:53
         **/
-        function createRoomSeat($_roomId = 1,$_coord = 1){
+        function createRoomSeat($_roomId = 1){
             //删除座位
             (new \common\models\CommonModel('room_seat'))->deleteAll(['room_id'=>$_roomId]);
             //写入座位sql
             $sql = "INSERT INTO `room_seat` (`room_id`,`row`,`column`,`seat_id`) VALUES ";
-
-            $seatId = 1;
-            foreach ($_coord as $k => $v){
-                for($i = 1;$i <= $v;$i++){
+            $seat = $this->_RoomSeatNum($_roomId);
+            $seatId = 1;$seatCode = 0;
+            foreach ($seat as $k => $v){
+                $seatCode += $v;
+                $seatId = $seatCode;
+                for($i = $v;$i > 0;$i--){
                     $sql .= "($_roomId,".($k+1).",$i,$seatId),";
-                    $seatId++;
+                    $seatId--;
                 }
             }
             $sql = substr($sql, 0,-1);

@@ -84,7 +84,7 @@
     									   $seatId = 0;
     									   foreach ($seatNum as $val){
     									       echo '<p class="oneset">';
-    									       for ($i = 0;$i <= $val;$i++){
+    									       for ($i = 0;$i < $val;$i++){
     									            $seatId++;
                                                     echo '<a class="seat '.(in_array($seatId,$reserved) ? 'selected' : null).' href="javascript:;"></a>';
     									       }

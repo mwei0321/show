@@ -107,14 +107,15 @@
 
             $seatNum = $ticketM->_RoomSeatNum($timesInfo['room_id']);
 
-            $seatId = 0;
+            $seatId = $seatcode = 0;
             $html = '';
             $reArray = [];
             $reArray['status'] = 200;
             foreach ($seatNum as $val){
                 $html .= '<p class="oneset">';
-                for ($i = 0;$i <= $val;$i++){
-                    $seatId++;
+                $seatcode += $val;
+                $seatId = $seatcode;
+                for ($i = 0;$i < $val;$i++){
                     $html .= '<a class="seat ';
                     if(in_array($seatId, $buySeat)){
                         $html .= 'sold "';
@@ -124,6 +125,7 @@
                         $html .= '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
                     }
                     $html .= '></a>';
+                    $seatId--;
                 }
                 $html .= '</p>';
             }
