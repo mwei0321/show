@@ -7,16 +7,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
 	<link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
+  <script src="js/editor.js"></script>
 	<link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/plugin.css">
   <link rel="stylesheet" href="css/landing.css">
   <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="kindeditor-4.1.10/themes/default/default.css">
   <script src="js/daterangepicker/moment.min.js"></script>
   <script src="js/ie/respond.min.js"></script>
   <script src="js/ie/html5.js"></script>
-	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
-	<script charset="utf-8" src="/kindeditor-4.1.10/lang/zh-CN.js"></script>
+	
 </head>
 <body>
 
@@ -231,7 +232,6 @@
 
   <script src="js/app.plugin.js"></script>
 
-  <script src="js/app.data.js"></script>
   
   <script src="js/daterangepicker/daterangepicker.js"></script>
 
@@ -246,6 +246,9 @@
   <script src="js/charts/easypiechart/jquery.easy-pie-chart.js"></script>
 
   <script src="js/ie/excanvas.js"></script>
+  <!-- <script src="js/editor.js"></script> -->
+  <script src="kindeditor-4.1.10/kindeditor-all.js"></script>
+  <script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
   <script>
 	
 		$('#data-start-time').daterangepicker({
@@ -307,6 +310,12 @@
 				   //timePickerIncrement: 30, 
 				});
 			})
+		KindEditor.ready(function(K) {
+			window.editor = K.create('#data-intro',{
+				//height : '700px',
+				resizeType: 0,
+			});
+		});
   </script>
 
 </body>

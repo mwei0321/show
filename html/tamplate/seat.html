@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mobile first web app theme | first</title>
+  <meta name="description" content="mobile first, app, web app, responsive, admin dashboard, flat, flat ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/plugin.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="js/daterangepicker/moment.min.js"></script>
+  <script src="js/ie/respond.min.js"></script>
+  <script src="js/ie/html5.js"></script>
+	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
+	<script charset="utf-8" src="/kindeditor-4.1.10/lang/zh-CN.js"></script>
+	<style type="text/css">
+		.seat{width:20px;height:17px;display:inline-block;background:#44332b;}
+		.seat:active{background:green;}
+		.selected{background:#3387aa;}
+	</style>
+</head>
+<body>
+	<div>
+		<input id="se">
+		<button id="build">生成数组</button>
+	</div>
+	<div class="field" style="text-align:center;">
+		
+	</div>
+  <!-- header -->
+	<p>
+	<span class="line"></span>
+		<span class="seat"></span>
+		<a class="seat" data="1排1座"></a>
+		<a class="seat" data="1排2座"></a>
+		<a class="seat" data="1排3座"></a>
+		<a class="seat" data="1排4座"></a>
+		<a class="seat" data="1排5座"></a>
+		<a class="seat" data="1排6座"></a>
+		<a class="seat" data="1排7座"></a>
+		<a class="seat" data="1排8座"></a>
+		<a class="seat" data="1排9座"></a>
+		<a class="seat" data="1排10座"></a>
+		<a class="seat" data="1排11座"></a>
+		<a class="seat" data="1排12座"></a>
+		<a class="seat" data="1排13座"></a>
+		<a class="seat" data="1排14座"></a>
+		<a class="seat" data="1排15座"></a>
+		<a class="seat" data="1排16座"></a>
+	</p>
+	<p>
+	<span class="line"></span>
+		<span class="seat"></span>
+		<a class="seat" data="2排1座"></a>
+		<a class="seat" data="2排2座"></a>
+		<a class="seat" data="2排3座"></a>
+		<a class="seat" data="2排4座"></a>
+		<a class="seat" data="2排5座"></a>
+		<a class="seat" data="2排6座"></a>
+		<a class="seat" data="2排7座"></a>
+		<a class="seat" data="2排8座"></a>
+		<a class="seat" data="2排9座"></a>
+		<a class="seat" data="2排10座"></a>
+		<a class="seat" data="2排11座"></a>
+		<a class="seat" data="2排12座"></a>
+		<a class="seat" data="2排13座"></a>
+		<a class="seat" data="2排14座"></a>
+		<a class="seat" data="2排15座"></a>
+		<a class="seat" data="2排16座"></a>
+	</p>
+	<p>
+	<span class="line"></span>
+		<span class="seat"></span>
+		<a class="seat" data="3排1座"></a>
+		<a class="seat" data="3排2座"></a>
+		<a class="seat" data="3排3座"></a>
+		<a class="seat" data="3排4座"></a>
+		<a class="seat" data="3排5座"></a>
+		<a class="seat" data="3排6座"></a>
+		<a class="seat" data="3排7座"></a>
+		<a class="seat" data="3排8座"></a>
+		<a class="seat" data="3排9座"></a>
+		<a class="seat" data="3排10座"></a>
+		<a class="seat" data="3排11座"></a>
+		<a class="seat" data="3排12座"></a>
+		<a class="seat" data="3排13座"></a>
+		<a class="seat" data="3排14座"></a>
+		<a class="seat" data="3排15座"></a>
+		<a class="seat" data="3排16座"></a>
+	</p>
+	<button class="show">显示座位</button>
+	<script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/ie/excanvas.js"></script>
+
+<script>
+	$("p a").click(function(){
+		if($(this).hasClass("selected")){
+			$(this).removeClass("selected");
+		}
+		else
+		$(this).addClass("selected");
+	})
+	$(".show").click(function(){
+		var selecteddata="";
+		$(".selected").each(function(){
+			var x = $(this).attr("data");
+			selecteddata = selecteddata+x+",";
+		});
+		console.log(selecteddata);
+	})
+	
+	var line = 15;
+	//var seatset = new array();
+	//var perline = new array();
+	var farray = new Array();
+	for(var k=0;k<line;k++){
+		farray[k] = new Array();
+	}
+	$("#build").click(function(){
+		var perline = $("#se").val().split(",");
+		if(perline.length != 15){
+			
+		}
+		var pset = '<p class="oneset"></p>'
+		for(var i=0;i<perline.length;i++){
+			$(".field").append(pset);
+			for(var j=0;j<perline[i];j++){
+			console.log(j);
+				var sset = '<a class="seat" data=""></a>';
+				$(".oneset:eq("+i+")").append(sset);
+			}
+		}
+		$("p a").click(function(){
+			if($(this).hasClass("selected")){
+				$(this).removeClass("selected");
+			}
+			else
+			$(this).addClass("selected");
+		})
+		$(".show").click(function(){
+			for(k=0;k<$(".seat").length;k++){
+				if ($(".seat:eq("+k+")").hasClass("selected")){
+					console.log(k);
+				}
+			}
+		})
+	})
+</script>
+</body>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
