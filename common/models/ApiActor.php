@@ -25,9 +25,13 @@
          * @date 2017年2月6日 上午11:00:57
         **/
         function getShowActorList($_showId){
-            $info = (new Actor())->getShowActorInfo($_showId);
+            $list = (new Actor())->getShowActorInfo($_showId);
 
-            return $info;
+            foreach ($list as $k => $v){
+                $list[$k]['avatar'] = ImageUrl.$v['avatar'];
+            }
+
+            return $list;
         }
 
         /**

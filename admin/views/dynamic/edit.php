@@ -39,10 +39,11 @@
 						<input type="hidden" name="dyid" value="<?= $dynamicInfo['id'] ?? null ?>" class="check"/>
 						<div class="row col-lg-12"><label>标题</label><input  value="<?= $dynamicInfo['title'] ?? null ?>" type="text" id="dynamic-title" name="title" class="check"></input></div>
 						<div class="row col-lg-12">
-							<label>详情</label><textarea id="data-intro" name="content" class="check"><?= $dynamicInfo['content']??null ?></textarea>
+							<label>详情</label><textarea id="data-intro" name="" class="check"><?= $dynamicInfo['content']??null ?></textarea>
+							<input type="hidden" name="content" value="<?= $dynamicInfo['content'] ??null?>" id="contedit" />
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" href="javascript:;" onclick="fromData($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
+						<a class="confirm-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>
 					</form>
 				</div>
 			</section>
@@ -123,3 +124,15 @@
     	    });
     	});
     </script>
+
+    	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
+  	<script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
+	<script>
+    	KindEditor.ready(function(K) {
+    		window.editor = K.create('#data-intro',{
+    			//height : '700px',
+    			resizeType: 0,
+    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image'] ,
+    		});
+    	});
+	</script>

@@ -61,7 +61,7 @@
                                                 }else{
                                                     echo '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
                                                 }
-	                                            echo ' href="javascript:;"></a>';
+	                                            echo ' ></a>';
 									       }
 									       echo '</p>';
 									   }
@@ -85,7 +85,7 @@
 				success:function (e){
 					$('#seatmap').html(e.html);
 					Obj.parent('li').addClass('active').siblings().removeClass('active');
-
+					return false;
 				}
 			});
 		};

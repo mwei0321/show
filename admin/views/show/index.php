@@ -45,7 +45,7 @@
                         <li	class="theatre-session" id="show_<?= $v['id'] ?>">
                             <div class="poster"><img src="<?= ImageUrl.$v['cover'] ?>"></div>
                             <div class="session-info">
-                                <a class="theatre-name"><?= $v['title'] ?></a>
+                                <a class="theatre-name" href="<?= Url::toRoute(['show/info','show_id'=>$v['id']])?>"><?= $v['title'] ?></a>
                                 <p class="theatre-time">时间：
                                 <?php if($v['stime'] == $v['etime']) {
                                     echo $v['stime'];

@@ -50,6 +50,15 @@ var fromData = function(Obj,from,callback){
 	ajaxRequest(url,data,callback);
 }
 
+//from提交
+var fromData2 = function(Obj,from,callback){
+	$('#contedit').val(editor.html());
+	var data = $(from).serialize();
+	var url = Obj.attr('url');
+	console.log(data);
+	ajaxRequest(url,data,callback);
+}
+
 //获胜信息跳转
 var delmsgJump = function (e){
 	mwlayer.msg(e.msg,e.status);

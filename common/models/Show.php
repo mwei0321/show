@@ -123,7 +123,9 @@
          * @date 2017年1月18日 上午11:12:30
         **/
         function deleteShowById($_id){
-            return self::findOne($_id)->delete();
+            $showM = self::findOne(['id'=>$_id]);
+            $showM->status = 0;
+            return $showM->save(false);
         }
 
         /**

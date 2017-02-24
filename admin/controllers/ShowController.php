@@ -58,6 +58,54 @@
         }
 
         /**
+         * 演出详情
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月23日 下午5:54:52
+        **/
+        function actionInfo(){
+            //获取ID
+            $showId = Yii::$app->request->get('show_id');
+
+            //获取节目详情
+            $showModel = new Show();
+            $showInfo = $showModel->getShowInfoById($showId);
+            //写入演出时间范围
+            $times = $showModel->getShowExpire($showId);
+            $showInfo['stime'] = date('Y-m-d',$times['stime']);
+            $showInfo['etime'] = date('Y-m-d',$times['etime']);
+            //获取演员列表
+            $actorObj = new Actor();
+            $showActors = $actorObj->getShowActorInfo(['show_id'=>$showId]);
+
+            //获取场次
+            $timesList = (new Ticket())->getShowTimesById($showId);
+            $ReservedSeat = $buySeat = [];
+            $timesId = 0;
+            $roomId = 1;
+            $ticketM = new Ticket();
+            if($timesList){
+                //预留座位
+                $timesId = $timesList[0]['id'];
+                $roomId = $timesList[0]['room_id'];
+                $ReservedSeat = $ticketM->getShowTimesReserved($timesId);
+                $ReservedSeat = $ReservedSeat ? arr2to1($ReservedSeat,'seat_id') : [];
+                //已售座位
+                $buySeat = $ticketM->getShowTicketSellInfo($timesId);
+                $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
+            }
+
+            return $this->render('info',[
+                'showInfo'  => $showInfo,
+                'showActors'=> $showActors,
+                'showTimes' => $timesList,
+                'reserved' => $ReservedSeat,
+                'times_id' => $timesId,
+                'seatNum'   => $ticketM->_RoomSeatNum($roomId),
+            ]);
+        }
+
+        /**
          * 节目编辑，修改
          * @return array
          * @author MaWei (http://www.phpython.com)
