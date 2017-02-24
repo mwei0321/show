@@ -116,7 +116,6 @@
                         ->where([
                             'actor_id'=>$_actorId,
                         ])
-                        ->orderBy('ctime DESC')
                         ->asArray()
                         ->all();
             //获取节目详情
@@ -126,6 +125,7 @@
                             'id' => arr2to1($showIds,'show_id'),
                         ])
 //                         ->createCommand()->getRawSql();
+                        ->orderBy('ctime DESC')
                         ->asArray()
                         ->all();
            return $showlist;

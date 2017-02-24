@@ -33,7 +33,7 @@
 							<ul class="nav theatre-arrange" role="tablist">
 								<?php foreach ($times as $k => $v){?>
         							<li role="presentation" class="<?= $times_id == $v['id'] ? 'active' : '' ?>">
-        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="javascript:;" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d H:i',$v['stime']) ?></a>
+        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d H:i',$v['stime']) ?></a>
         							</li>
     							<?php }?>
 							</ul>
@@ -51,7 +51,7 @@
 									       echo '<p class="oneset">';
 									       for ($i = 0;$i <= $val;$i++){
 									            $seatId++;
-                                                echo '<a class="seat '.(in_array($seatId,$reserved) ? 'selected' : null).'" onclick="lockSeat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'" href="javascript:;"></a>';
+                                                echo '<a class="seat '.(in_array($seatId,$reserved) ? 'selected' : null).'" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"></a>';
 									       }
 									       echo '</p>';
 									   }
@@ -73,14 +73,13 @@
 			$.ajax({
 				url:url,
 				success:function (e){
-					$('#seatmap').html(e.html);
 					Obj.parent('li').addClass('active').siblings().removeClass('active');
-
+					$('#seatmap').html(e.html);
 				}
 			});
 		};
 
-		var lockSeat = function (Obj) {
+		var lockseat = function (Obj) {
 			var url = Obj.attr('url');
 				$.ajax({
 					url:url,
@@ -88,7 +87,6 @@
 						if(e.status == 1){
 							layer.msg('该票已售！');
 							windown.location.reload();
-
 						}else if(e.status == 2){
 							Obj.removeClass('selected');
 						}else{

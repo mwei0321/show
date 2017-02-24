@@ -123,7 +123,7 @@
                     }else{
                         $html .= '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
                     }
-                    $html .= ' href="javascript:;"></a>';
+                    $html .= '></a>';
                 }
                 $html .= '</p>';
             }
