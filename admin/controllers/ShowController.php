@@ -152,7 +152,6 @@
          * @date 2017年1月13日 上午10:25:16
         **/
         function actionUpdata(){
-            var_dump($_SERVER);exit;
             $request = Yii::$app->request;
             //时间
             $time = $request->post('time',[]);
