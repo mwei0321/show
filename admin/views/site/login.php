@@ -10,7 +10,6 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?=Html::jsFile('js/cookie.js')?>
 <div class="login-form">
     <img src="images/logo.png">
 </div>

@@ -27,7 +27,6 @@ AppAsset::register($this);
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/custom.css">
     <script src="/js/ie/html5.js"></script>
-    <script src="/js/cookie.js"></script>
 
 </head>
 <body>
@@ -37,5 +36,7 @@ AppAsset::register($this);
 </body>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.js"></script>
+	<script src="/js/jquery.cookie.js"></script>
+    <script src="/js/cookie.js"></script>
 </html>
 <?php $this->endPage() ?>
