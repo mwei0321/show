@@ -62,7 +62,7 @@
 						</div>
 						<div class="row col-lg-12">
 							<label>演出简介</label><textarea id="data-intro" name=""><?= $showInfo['intro']??null ?></textarea>
-							<input type="hidden" name="intro" value="<?= $showInfo['content'] ??null?>" id="contedit" />
+							<input type="hidden" name="intro" value="" id="contedit" />
 						</div>
 						<div class="row col-lg-12">
 							<label>演职人员</label>

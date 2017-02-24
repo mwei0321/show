@@ -40,7 +40,7 @@
 						<div class="row col-lg-12"><label>标题</label><input  value="<?= $dynamicInfo['title'] ?? null ?>" type="text" id="dynamic-title" name="title" class="check"></input></div>
 						<div class="row col-lg-12">
 							<label>详情</label><textarea id="data-intro" name="" class="check"><?= $dynamicInfo['content']??null ?></textarea>
-							<input type="hidden" name="content" value="<?= $dynamicInfo['content'] ??null?>" id="contedit" />
+							<input type="hidden" name="content" value="" id="contedit" class="check" />
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
 						<a class="confirm-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a></div>

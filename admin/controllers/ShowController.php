@@ -167,7 +167,7 @@
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
             $showModel->intro   =   $request->post('intro','');
-            $showModel->duration=   $request->post('duration','');
+            $showModel->duration=   $request->post('duration',0);
 //             var_dump($showModel);exit;
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
