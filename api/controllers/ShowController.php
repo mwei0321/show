@@ -28,6 +28,7 @@
         **/
         function actionGetshowlist(){
             $where = [];
+            $where['status'] = 1;
 
             //返回节目列表
             $showM = new ApiShow();
