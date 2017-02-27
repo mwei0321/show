@@ -62,13 +62,13 @@
 	background-size:cover;
 }
 .poster img{
-	display:inline-blocl;
+	display:inline-block;
 	position:relative;
 	width: 100%;
     height: 100%;
 }
 .dt-poster img{
-	display:inline-blocl;
+	display:inline-block;
 	position:relative;
 	width: 100%;
     height: 100%;
