@@ -54,7 +54,7 @@
 					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $ActorInfo['birthday'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12">
-						<label>个人简介</label><textarea id="data-intro"  name="" class="check"><?= $ActorInfo['content'] ??null?></textarea>
+						<label>个人简介</label><textarea id="data-intro"  name="" class="check"><?= $ActorInfo['intro'] ??null?></textarea>
 						<input type="hidden" name="intro" value="" id="contedit" class="check"/>
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
