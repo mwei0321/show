@@ -29,7 +29,7 @@
 
             foreach ($list as $k => $v){
                 $list[$k]['avatar'] = ImageUrl.$v['avatar'];
-                $v['duty'] == 2 && $list[$k]['name'] = $v['act'];
+                $v['duty'] == 2 && $list[$k]['dutyName'] = $v['act'];
             }
 
             return $list;
