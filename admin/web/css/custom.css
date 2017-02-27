@@ -55,9 +55,11 @@
 }
 .dt-poster{
 	width:192px;
-	height:75px;
+	height:111px;
 	display:inline-block;
 	vertical-align:top;
+	background:url(../images/new_page_1.png);
+	background-size:cover;
 }
 .poster img{
 	display:inline-blocl;
@@ -147,8 +149,10 @@
     border-radius: 5px;
 }
 .intro-post{
-	width: 140px;
-    height: 186px;
+	width:192px;
+	height:111px;
+	background:url(../images/new_page_1.png);
+	background-size:cover;
 }
 .top-step,
 .top-step:active,
