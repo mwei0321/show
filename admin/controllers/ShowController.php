@@ -34,6 +34,7 @@
             $where = [];
             $keyword = Yii::$app->request->get('keyword','');
             $keyword && $where = ['like','title',$keyword];
+            $where['status'] = 1;
 
             $showModel = new Show();
             $count = $showModel->getShowList($where);
