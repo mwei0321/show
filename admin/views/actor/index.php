@@ -32,7 +32,7 @@
 						<?php foreach ($actorList as $k => $v){ ?>
     						<li class="cast-display">
     							<div class="actor-display">
-    								<img src="<?= ImageUrl.$v['avatar'] ?>">
+    								<a href="<?= Url::toRoute(['actor/info','actor_id'=>$v['id']]) ?>"><img src="<?= ImageUrl.$v['avatar'] ?>"></a>
     							</div>
     							<a class="cast-list-name" href="<?= Url::toRoute(['actor/info','actor_id'=>$v['id']]) ?>"><?= $v['name'] ?></a>
     						</li>
