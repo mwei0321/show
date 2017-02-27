@@ -41,8 +41,8 @@
 					<div class="row col-lg-12"><label>性别</label>
 						<select class="gender"  name="gender" class="check">
 							<?php if(isset($ActorInfo['gender'])){
-							    echo '<option value="1" '.($ActorInfo['gender'] ? 'select="selected"':'').'>男</option>';
-							    echo '<option value="0" '.($ActorInfo['gender'] == 0 ? 'select="selected"':'').'>女</option>';
+							    echo '<option value="1" '.($ActorInfo['gender'] ? 'selected="selected"':'').'>男</option>';
+							    echo '<option value="0" '.($ActorInfo['gender'] == 0 ? 'selected="selected"':'').'>女</option>';
 							}else{?>
 
 							<option value="1">男</option>
