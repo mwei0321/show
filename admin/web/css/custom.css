@@ -58,6 +58,8 @@
 	height:111px;
 	display:inline-block;
 	vertical-align:top;
+	background:url(../images/new_page_1.png);
+	background-size:cover;
 }
 .poster img{
 	display:inline-blocl;
@@ -149,6 +151,8 @@
 .intro-post{
 	width:192px;
 	height:111px;
+	background:url(../images/new_page_1.png);
+	background-size:cover;
 }
 .top-step,
 .top-step:active,
