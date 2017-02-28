@@ -37,7 +37,7 @@
 					<input type="hidden" value="<?= $ActorInfo['avatar']??null ?>" id="avatar" name="avatar" class="check"/>
 					<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>" class="check">
 					<input type="hidden" name="actor_id" value="<?= $ActorInfo['id'] ?? null ?>" class="check"/>
-					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name" name="name" value="<?= $ActorInfo['name'] ??null?>" class="check"></input></div>
+					<div class="row col-lg-12"><label>姓名</label><input type="text" id="data-cast-name" name="name" value="<?= $ActorInfo['name'] ??null?>" class="check checktitle" emsg="名称不能为空"></input></div>
 					<div class="row col-lg-12"><label>性别</label>
 						<select class="gender"  name="gender" class="check">
 							<?php if(isset($ActorInfo['gender'])){

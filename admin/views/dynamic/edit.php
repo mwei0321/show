@@ -37,7 +37,7 @@
 						<input type="hidden" value="<?= $dynamicInfo['cover']??null ?>" id="cover" name="cover" class="check"/>
 						<input type="hidden" name="_csrf-admin" id='csrf' value="<?= Yii::$app->request->csrfToken ?>" class="check">
 						<input type="hidden" name="dyid" value="<?= $dynamicInfo['id'] ?? null ?>" class="check"/>
-						<div class="row col-lg-12"><label>标题</label><input  value="<?= $dynamicInfo['title'] ?? null ?>" type="text" id="dynamic-title" name="title" class="check"></input></div>
+						<div class="row col-lg-12"><label>标题</label><input  value="<?= $dynamicInfo['title'] ?? null ?>" type="text" id="dynamic-title" name="title" class="check checktitle" emsg="标题不能为空"></input></div>
 						<div class="row col-lg-12">
 							<label>详情</label><textarea id="data-intro" name="" class="check"><?= $dynamicInfo['content']??null ?></textarea>
 							<input type="hidden" name="content" value="" id="contedit" class="check" />

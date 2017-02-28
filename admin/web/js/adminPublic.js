@@ -52,6 +52,11 @@ var fromData = function(Obj,from,callback){
 
 //from提交
 var fromData2 = function(Obj,from,callback){
+	var checkObj = $('.checktitle');
+	if(!checkObj.val()){
+		mwlayer.error(checkObj.attr('emsg'));
+		return false;
+	}
 	$('#contedit').val(editor.html());
 	var data = $(from).serialize();
 	var url = Obj.attr('url');

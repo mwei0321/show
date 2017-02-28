@@ -42,7 +42,7 @@
 						<input type="hidden" name="id" value="<?= $showInfo['id']??null ?>" />
 						<input type="hidden" name="cover" value="<?= $showInfo['cover']??null ?>" id="cover"  class="check" emsg="请选择节目封面"/>
 						<div class="row col-lg-12">
-							<label>演出名称</label><input type="text" class="check theatre-data-input" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
+							<label>演出名称</label><input type="text" class="check theatre-data-input checktitle" emsg="标题不能为空" id="data-name" name="title" value="<?php echo $showInfo['title'] ??null; ?>"></input>
 						</div>
 						<div class="row col-lg-12"><label>演出时间</label>
 							<div class="time-group">
@@ -140,8 +140,14 @@
 				$('.add-cast-list').append($('.add-cast-list div:first-child').clone());
 			}
 			var submit = function () {
-				$('#contedit').val(editor.html());
-				$("#addshow").submit();
+				var title = $('.checktitle').val();
+				if(title){
+    				$('#contedit').val(editor.html());
+    				$("#addshow").submit();
+				}else{
+					mwlayer.error('标题不能为空！');
+					return false;
+				}
 				//mwForm.check('#addShow');
 			}
 
