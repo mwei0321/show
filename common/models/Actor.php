@@ -123,6 +123,7 @@
                         ->from('show')
                         ->where([
                             'id' => arr2to1($showIds,'show_id'),
+                            'status' => 1,
                         ])
 //                         ->createCommand()->getRawSql();
                         ->orderBy('ctime DESC')
