@@ -96,11 +96,12 @@
                 '非常抱歉，选择座位已售，请重新选择！',
                 '非常抱歉，选择座位有预留的，请重新选择！',
             ];
-
+            $this->show_msg = $reMsg[1];
             //判断出票是否成功
             $data = [];
             if($reid != 1){
-                $this->_reCode = 400;
+                $this->_reCode = 110;
+                $this->show_msg = $reMsg[$reid];
             }
             //返回数据
             $data['code'] = $reid;
