@@ -23,7 +23,7 @@
 
 		<div class="search-box" style="margin-top:10px;">
 		<i class="icon-search text-muted"></i>
-				<input type="text" class="input-small form-control" placeholder="搜索演出" id="search" url="<?= Url::toRoute(['dynamic/index'])?>">
+				<input type="text" class="input-small form-control" placeholder="搜索动态" id="search" url="<?= Url::toRoute(['dynamic/index'])?>">
 		</div>
 		</div>
 	</div>
