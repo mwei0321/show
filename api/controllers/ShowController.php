@@ -97,4 +97,81 @@
 
             return $this->_returnJson($data);
         }
+
+        /**
+         * 获取评论列表
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月13日 下午2:35:56
+         **/
+        function actionGetcomment(){
+            $request = Yii::$app->request;
+
+            $showId  = $request->get('show_id',0);
+            $page       = $request->get('p',1);
+            $num        = $request->get('num',20);
+
+            $list = [];
+            //实例化动态评论
+            $showCommentObj = new \common\models\ShowComment();
+            //条件
+            $where = [];
+            $where['show_id']    = $showId;
+            $where['status']        = 1;
+            //获取评论数
+            $this->_count = $showCommentObj->getShowCommentList($where);
+            if($this->_count > 0 && $page = page($this->_count,$this->_num)){
+                $list = $showCommentObj->getShowCommentList($where,$page['offset']);
+            }else{
+                $this->_reCode = 204;
+                return $this->_returnJson();
+            }
+
+            return $this->_returnJson($list);
+        }
+
+        /**
+         * 发布评论
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月5日 上午10:07:59
+         **/
+        function actionUpcomment(){
+            $request = Yii::$app->request;
+
+            $commentObj = new \common\models\CommonModel('show_comment');
+            $commentObj->show_id    = $request->post('show_id',0);
+            $commentObj->member_id  = $this->mid;
+            $commentObj->ctime      = time();
+            $commentObj->content    = text($request->post('content',''));
+            $commentObj->reply_id   = $request->post('reply_id',0);
+
+            if($commentObj->save(false) && $commentObj->id > 0){
+                return $this->_returnJson();
+            }
+            $this->_reCode = 400;
+            $this->_reMsg = '评论失败';
+            $this->_showMsg = '评论失败';
+            return $this->_returnJson();
+        }
+
+        /**
+         * 删除评论
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月5日 上午10:19:41
+         **/
+        function actionDelcomment(){
+            $showId = Yii::$app->request->get('comment_id',0);
+            if($showId > 0){
+                $showObj = \common\models\ShowComment::findOne($showId);
+                $showObj->status = 0;
+                $showObj->save(false);
+                return $this->_returnJson();
+            }
+            $this->_reCode = 400;
+            $this->_reMsg = '评论删除失败';
+            $this->_showMsg = '评论删除失败';
+            return $this->_returnJson();
+        }
     }

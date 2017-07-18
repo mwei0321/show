@@ -173,7 +173,7 @@
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
                 //写入场次
-                $this->_updataTimes($showId);
+                $isTime = $this->_updataTimes($showId);
 //                 $showModel->deleteShowTimesByShowIds($showId);
 //                 if($time && is_array($time)){
 //                     foreach ($time as $k => $v){
@@ -202,7 +202,7 @@
                     $actorModel->save(false);
 //                     echo $actorModel->id;
                 }
-                if($show_id > 0)
+                if($show_id > 0 || $isTime)
                     return $this->redirect(['show/index']);
                 else
                     return $this->redirect(['ticket/lockseat','show_id'=>$showId]);
@@ -246,6 +246,7 @@
         function _updataTimes($_showId){
             $request = Yii::$app->request;
 
+            $isTime = 1;
             //更新场次
             $timesIds = $request->post('timesids','');
             if($timesIds){
@@ -257,6 +258,7 @@
                     $TimesM->stime = $stime;
                     $TimesM->save();
                 }
+                $isTime = 0;
             }
             //插入新场次
             $times = Yii::$app->request->post('time',[]);
@@ -268,8 +270,9 @@
                     $showTimesM->ctime      = time();
                     $showTimesM->save();
                 }
+                $isTime = 0;
             }
-            return 1;
+            return $isTime;
         }
 
         /**

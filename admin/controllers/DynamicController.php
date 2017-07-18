@@ -103,7 +103,7 @@
             $dynamicM->title    =   $request->post('title','');
             $dynamicM->cover    =   $request->post('cover','');
             $dynamicM->content  =   $request->post('content','');
-            $dynamicM->status   =   1;
+            $dynamicM->status   =   $request->get('status',1);
 
             //写入数据操作
             $data = [];

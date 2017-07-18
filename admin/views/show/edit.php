@@ -50,7 +50,6 @@
     								<?php foreach ($showTimes as $k => $v) { $timesids .= $v['id'].',';?>
     									<input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input>
     								<?php }}else {?>
-    									<input type="text" class="time-input-length data-start-time theatre-data-input" name="time[]"  style="margin-bottom:10px;"/>
 								<?php }?>
 								<input type="hidden" name="timesids" value="<?= $timesids ?>"/>
 							</div>

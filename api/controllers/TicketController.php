@@ -110,6 +110,43 @@
             return $this->_returnJson($data);
         }
 
+        /**
+         * 退票
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月5日 下午3:37:54
+        **/
+        function actionRefundticket(){
+            $orderId = Yii::$app->request->get('order_id');
+
+            if($orderId > 0){ //订单ID过滤
+                $orderInfo = \common\models\Order::find()->where([
+                    'id'        => $orderId,
+                    'member_id' => $this->mid,
+                    'status'    => 1,
+                ])->one();
+                if($orderInfo->id > 0){ //该人是否有该订单信息
+                    $timesInfo = (new \common\models\Ticket())->getTimesByIds($orderInfo->times_id);
+                    $timesInfo = array_shift($timesInfo);
+                    if($timesInfo['stime'] > (time()+1800)){ //判断退票时间为开场30分钟以前
+                        $orderInfo->status = 7; //退票
+                        if($orderInfo->save(false)){
+                            $this->_showMsg = '退票成功！';
+                            return $this->_returnJson();
+                        }
+                    }else{
+                        $this->_reCode  = 462; //退票时间过了
+                        $this->_reMsg   = '退票时间已过了';
+                        $this->_showMsg = '退票时间已过了';
+                    }
+                }
+            }
+
+            $this->_reCode  = 400;
+            $this->_showMsg = '退票失败！请刷新后再操作！';
+            $this->_returnJson();
+        }
+
         function actionCreateseat(){
             if(Yii::$app->request->get('seat','') == 'yes'){
                 (new \common\models\Ticket())->createRoomSeat(1);

@@ -20,11 +20,13 @@
         public $_reMsg  = '';
         public $_showMsg  = '';
         public $_count  = 0;
+        public $_num;
         //会员ID
         public $mid = 0;
 
         function init(){
             $this->mid = Yii::$app->request->get('mid',0);
+            $this->_num = Yii::$app->request->get('num',10);
         }
 
         /**

@@ -66,10 +66,12 @@
         $pageNum = intval($_REQUEST['pn'] ?? $_pnum);
         $totalPage = intval(ceil($_count/$pageNum));
 //         if($nowPage > $totalPage) return 0;
-        if($_sort)
+        if($_sort){
             $row = ($_count - $pageNum * $nowPage) > 0 ? ($_count - $pageNum * $nowPage) : 0;
-        else
+        }else{
             $row = (($nowPage - 1) * $pageNum);
+            if($row > $_count) return 0;
+        }
         $page['nowPage'] = $nowPage;
         $page['pageNum'] = $pageNum;
         $page['totalPage'] = $totalPage;

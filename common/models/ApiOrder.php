@@ -46,7 +46,9 @@
                     //判断节目开始
                     $time = time();
                     $showt = $times[$v['times_id']]['stime'] + $showInfos[$v['show_id']]['duration'] * 60;
-                    if($time < $times[$v['times_id']]['stime']){
+                    if($v['status'] == 7){
+                        $lists[$k]['status'] = 7; //退票
+                    }elseif($time < $times[$v['times_id']]['stime']){
 //                         $lists[$k]['status'] = ($time < ($times[$v['times_id']]['stime'] - 3600)) ? 0 : 1; //即将开始
                         $lists[$k]['status'] = 1; //即将开始
                     }elseif (($time > $times[$v['times_id']]['stime']) && $time < $showt){
