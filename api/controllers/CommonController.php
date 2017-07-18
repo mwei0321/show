@@ -53,7 +53,7 @@
         function _returnJson($_data = [],$_addData = []){
             $data = [
                 'code'  =>  $this->_reCode,
-                'msg'   =>  $this->_reCodeMsg(),
+                'msg'   =>  $this->_reMsg ? : $this->_reCodeMsg(),
                 'show_msg'   =>  $this->_showMsg,
                 'count' =>  $this->_count,
                 'data'  =>  $_data,
