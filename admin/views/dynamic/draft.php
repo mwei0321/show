@@ -19,8 +19,6 @@
 <section class="main padder">
 	<div class="row">
 		<div class="m-t-small">
-			<a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute(['dynamic/edit']) ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 创建新动态</a>
-			<a class="btn btn-small pull-left" href="<?= Url::toRoute(['dynamic/edit']) ?>" style="margin:10px; margin-left:16px;">草稿箱</a>
 
 		<div class="search-box" style="margin-top:10px;">
 		<i class="icon-search text-muted"></i>
@@ -33,15 +31,13 @@
 			<section class="panel">
 				<section class="panel-content scrollbar scroll-y">
 					<ul class="dynamic-list">
-						<?php foreach ($lists as $k => $v){?>
     						<li	class="dynamic-block">
-    							<div class="dt-poster"> <a href="<?= Url::toRoute(['dynamic/info','dyid'=>$v['id']]) ?>"><img src="<?= ImageUrl.$v['cover'] ?>"></a></div>
+    							<div class="dt-poster"> <a href=""><img src=""></a></div>
     							<div class="dynamic-info">
-    								<a class="dynamic-title" href="<?= Url::toRoute(['dynamic/info','dyid'=>$v['id']]) ?>"><?= $v['title'] ?></a>
-    								<p class="dynamic-time">发布时间：<?= date('Y-m-d H:i',$v['ctime']) ?></p>
+    								<a class="dynamic-title" href="">大风说的是发顺丰</a>
+    								<p class="dynamic-time">发布时间：3423</p>
     							</div>
     						</li>
-						<?php }?>
 					</ul>
 				</section>
 			</section>

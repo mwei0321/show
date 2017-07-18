@@ -93,6 +93,7 @@
         <li class="<?php if(Yii::$app->controller->id == 'show') echo 'active';?>"><a href="<?= Url::toRoute(['show/index']) ?>"><i class="icon-dashboard icon-xlarge"></i>演出管理</a></li>
         <li class="<?php if(Yii::$app->controller->id == 'actor') echo 'active';?>"><a href="<?= Url::toRoute(['actor/index']) ?>"><i class="icon-dashboard icon-xlarge"></i>演员管理</a></li>
         <li class="<?php if(Yii::$app->controller->id == 'dynamic') echo 'active';?>"><a href="<?= Url::toRoute(['dynamic/index']) ?>"><i class="icon-dashboard icon-xlarge"></i>剧场动态管理</a></li>
+        <li class="<?php if(Yii::$app->controller->id == 'advertisement') echo 'active';?>"><a href="<?= Url::toRoute(['advertisement/manager']) ?>"><i class="icon-dashboard icon-xlarge"></i>广告位管理</a></li>
     </ul>
 
 </nav>
