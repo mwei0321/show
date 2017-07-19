@@ -127,8 +127,32 @@
             return $data;
         }
 
+            /**
+         * 上传启动logo
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月19日 下午3:51:51
+        **/
         function actionUpstartlogo(){
+//             $fileInfo = (new \common\models\Uploade('startlogo',['isDate'=>false]))->uploadeImg('startlogo');
+            \common\models\CommonM::setTabelName('start_logo');
+            $aa = (new \common\models\CommonM());
+var_dump($aa::find()->asArray()->all());
+            $bb = $aa::findOne(3);
+            $bb->logo = 'aaaaaaaa';
+            var_dump($bb->save(false));
 
+//                 $bb = $aa::saveOne(1);
+
+
+//             $reArray = [
+//                 'path'      =>  ImageUrl.$fileInfo['path'],
+//                 'imgPath'   =>  $fileInfo['path'],
+//                 'status'    =>  200,
+//             ];
+
+//             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+//             return $reArray;
         }
 
         /**
@@ -138,7 +162,7 @@
          * @date 2017年7月5日 下午6:29:55
         **/
         function beforeAction($action){
-            if(in_array($action->id,['uploadeimg','delbanner'])){
+            if(in_array($action->id,['uploadeimg','delbanner','upstartlogo'])){
                 $action->controller->enableCsrfValidation = false;
             }
             parent::beforeAction($action);

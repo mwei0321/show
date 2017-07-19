@@ -18,7 +18,7 @@
         protected static $_tableName;
 
         function __construct($_tableName){
-            static::$_tableName = $_tableName;
+            self::$_tableName = $_tableName;
         }
 
         /**
@@ -29,17 +29,6 @@
         **/
         static function tableName(){
             return self::$_tableName;
-        }
-
-        /**
-         * 定义表名
-         * @param  string $_tableName 表名
-         * @return array
-         * @author MaWei (http://www.phpython.com)
-         * @date 2017年7月13日 下午2:25:46
-        **/
-        static function setTableName($_tableName){
-            return static::$_tablename = $_tableName;
         }
 
         /**

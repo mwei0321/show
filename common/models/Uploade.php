@@ -37,6 +37,8 @@
         public $fileType = '';
         //文件对象
         public $fileObj;
+        //路径是否按日期
+        public $isDate = 'Y';
 
         function __construct($_path,$_config = []){
             //主项目根目录
@@ -46,6 +48,8 @@
             $this->fileObj = @$_FILES[$this->upKey];
             //过滤接收文件类型
             isset($_config['filterExe']) && $this->filterExe = $_config['filterExe'];
+            //是否按日期存取
+            isset($_config['isDate']) && $this->isDate = $_config['isDate'];
             //初始化文件上传相对路
             $this->_initPath($_path);
             //文件过滤检查
@@ -62,7 +66,7 @@
         **/
         function uploadeImg($_fileName = null){
             //文件绝对路径
-            $this->fileName = $this->filePrefix.date('YmdHis').rand(2000,99999).'.'.$this->fileType;
+            $this->fileName = $_fileName ? ($_fileName.'.'.$this->fileType) :$this->filePrefix.date('YmdHis').rand(2000,99999).'.'.$this->fileType;
 //             $this->fileName = autoCharset(($_fileName ? $_fileName : $this->fileObj['name']),'utf-8','gbk');
             $this->fileAbsPath = $this->absRootPath.$this->path.$this->fileName;
             if(!move_uploaded_file($this->fileObj['tmp_name'], $this->fileAbsPath)) {
@@ -72,6 +76,7 @@
                 'fileName'  =>  $this->fileName,
                 'size'      =>  $this->size,
                 'path'      =>  $this->path.$this->fileName,
+                'fileType'  =>  $this->fileType
             ];
         }
 
@@ -118,12 +123,14 @@
             //文件路径
             $path = [
                 'showimg'   =>  '/showimg/',
-                'actor'  =>  '/actor/',
+                'actor'     =>  '/actor/',
                 'dynamic'   =>  '/dynamic/',
-                'avatar'   =>  '/avatar/',
+                'avatar'    =>  '/avatar/',
+                'startlogo' =>  '/startlogo/',
+                'banner'    =>  '/banner/',
             ];
 
-            $this->path = $path[$_path].date('Y').'/';
+            $this->path = $path[$_path].($this->isDate ? (date($this->isDate).'/') : '');
             createDir($this->absRootPath.$this->path);
         }
     }
