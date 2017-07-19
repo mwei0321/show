@@ -48,12 +48,13 @@
 							<div class="time-group">
 								<?php $timesids = ''; if(isset($showTimes) && $showTimes){?>
     								<?php foreach ($showTimes as $k => $v) { $timesids .= $v['id'].',';?>
-    									<input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input>
+    									<div><input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input><a class="del-time">删除</a></div>
     								<?php }}else {?>
 								<?php }?>
 								<input type="hidden" name="timesids" value="<?= $timesids ?>"/>
 							</div>
 							<div class="add-time-btn">+</div>
+							<a class="indeterminate">时间待定</a>
 						</div>
 						<div class="row col-lg-12">
 							<label>演出时长</label><input type="text"  class="check theatre-data-input" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
@@ -262,10 +263,13 @@
 			minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});
-		var inputset = '<input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-bottom:10px;">'
+		var inputset = '<div class="one-time-set" ><input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-bottom:10px;"><a class="del-time">删除</a></div>'
 		$(".add-time-btn").click(function(){
     		var len = "time" + $(".time-group input").length;
     		$(".time-group").append(inputset);
+		$(".del-time").click(function(){
+			$(this).parent().remove();
+		})
     		$(".time-group input:last").attr("id",len);
     		$('.time-group input:last').daterangepicker({
     			locale: {
@@ -277,6 +281,21 @@
 //     			   timePickerIncrement: 30,
     			});
 		});
+		$(".indeterminate").toggle(
+		function(){
+			$(this).addClass("indeterminate-sure");
+			$(".time-group").hide();
+			$(".add-time-btn").hide();
+		},
+		function(){
+			$(this).removeClass("indeterminate-sure");
+			$(".time-group").show();
+			$(".add-time-btn").show();
+		}
+		)
+		$(".del-time").click(function(){
+			$(this).parent().remove();
+		})
 
 	</script>
 
