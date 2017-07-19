@@ -37,7 +37,6 @@
                 'show_id'    => $showId,
                 'member_id'     => $this->mid,
             ])->one();
-            var_dump($praiseObj);exit();
             //写入更新点赞
             if($praiseObj){
                 $praiseObj->status = !($praiseObj->status);
