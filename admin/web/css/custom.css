@@ -516,6 +516,34 @@
     background: #16599c;
 	color:#fff;
 }
+.check-seat:hover,
+.check-seat{
+	display: inline-block;
+    width: 175px;
+    height: 38px;
+    color: #fff;
+    border-radius: 6px;
+    text-align: center;
+    padding: 7px;
+    margin-left: 15px;
+    cursor: default;
+    font-size: 16px;
+    background: #5191d1;
+    vertical-align: bottom;
+	margin-top:30px;
+}
+.check-seat:active{
+    background: #16599c;
+	color:#fff;
+}
+.ticket-table-wrap{
+	width:900px;
+	margin-left:-450px;
+	overflow-y:auto;
+}
+.ticket-table-wrap .modal-content{
+	padding:20px;
+}
 .dynamic-block{
 	width: 100%;
     padding: 15px 0px;
@@ -846,7 +874,7 @@
 }
 .adver-table-sort tr,
 .adver-table-sort td{
-	border:#666 3px double;
+	border:#666 2px solid;
 }
 .adver-table-sort tr{
 	height:40px;

@@ -73,11 +73,18 @@
 							</div>
 						</div>
 					</div>
-					<div class="row col-lg-12" style="text-align:center;"><a class="confirm-it" href="<?= Url::toRoute(['show/index'])?>">确定</a></div>
+					<div class="row col-lg-12" style="text-align:center;"><a class="check-seat" href="<?= Url::toRoute(['show/index'])?>" data-toggle="modal" data-target="#check">查看本场订票人信息</a><a class="confirm-it" href="<?= Url::toRoute(['show/index'])?>">确定</a></div>
 				</div>
 			</section>
 		</div>
-
+		<div class="modal fade bs-example-modal-lg" id="check" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		  <div class="modal-dialog modal-lg ticket-table-wrap" role="document">
+			<div class="modal-content">
+				<p class="">订票人信息</p>
+				<p>场次：2016-12-26 周一 19:30 <a class="export-seat">导出列表</a></p>
+			</div>
+		  </div>
+		</div>
     </section>
     <script>
 		var timesseat = function (Obj){
