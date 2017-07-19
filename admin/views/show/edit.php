@@ -294,6 +294,9 @@
 			$(".add-time-btn").show();
 		}
 		)
+		$(".del-time").click(function(){
+			$(this).parent().remove();
+		})
 
 	</script>
 

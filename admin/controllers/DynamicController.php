@@ -65,6 +65,20 @@
                 'dynamicInfo'   => $dynamicInfo,
             ]);
         }
+		
+		
+        /**
+         * 动态草稿箱
+         * @param  array
+         * @param  string
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年2月13日 下午6:38:24
+        **/
+        function actionDraft(){
+           
+             return $this->render('draft');
+        }
 
         /**
          * 动态详情

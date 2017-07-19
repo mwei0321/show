@@ -73,6 +73,33 @@
 	width: 100%;
     height: 100%;
 }
+.draft-it{
+	background:#ddd !important;
+}
+.draft-operation{
+	margin-top:42px;
+}
+.draft-operation a{
+	width:62px;
+	height:25px;
+	display:inline-block;
+	text-align:center;
+	padding:3px;
+	color:#fff;
+	border-radius:5px;
+	cursor:pointer;
+}
+.draft-release{
+	background:#5191d1;
+	margin-right:12px;
+}
+.draft-edit{
+	background:#5191d1;
+	margin-right:12px;
+}
+.draft-del{
+	background:#de2f1c;
+}
 .session-info{
 	height:160px;
 	display:inline-block;

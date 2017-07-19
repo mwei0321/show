@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="m-t-small">
 			<a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute(['dynamic/edit']) ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 创建新动态</a>
-			<a class="btn btn-small pull-left" href="<?= Url::toRoute(['dynamic/edit']) ?>" style="margin:10px; margin-left:16px;">草稿箱</a>
+			<a class="btn btn-small pull-left" href="<?= Url::toRoute(['dynamic/draft']) ?>" style="margin:10px; margin-left:16px;">草稿箱</a>
 
 		<div class="search-box" style="margin-top:10px;">
 		<i class="icon-search text-muted"></i>
