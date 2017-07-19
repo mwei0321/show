@@ -80,8 +80,32 @@
 		<div class="modal fade bs-example-modal-lg" id="check" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 		  <div class="modal-dialog modal-lg ticket-table-wrap" role="document">
 			<div class="modal-content">
-				<p class="">订票人信息</p>
+				<h3 class="">订票人信息</h3>
 				<p>场次：2016-12-26 周一 19:30 <a class="export-seat">导出列表</a></p>
+				<table class="seat-table">
+					<tr><th>订单序列号</th><th>座位号</th><th>联系方式</th></tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+					<tr>
+						<td>1</td><td>9排7座 9排8座</td><td>132xxxxxxxx</td>
+					</tr>
+				</table>
 			</div>
 		  </div>
 		</div>

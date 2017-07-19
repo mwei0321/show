@@ -543,6 +543,39 @@
 }
 .ticket-table-wrap .modal-content{
 	padding:20px;
+	max-height: 430px;
+}
+.ticket-table-wrap h3,
+.ticket-table-wrap p{
+	text-align:center;
+	position:relative;
+}
+.ticket-table-wrap p{
+	padding-top:10px;
+}
+.export-seat,
+.export-seat:hover{
+	display: inline-block;
+    width: 76px;
+    height: 26px;
+    position: absolute;
+    right: 50px;
+    border-radius: 8px;
+    padding: 4px;
+    background: #5191d1;
+    color: #fff;
+	cursor:pointer;
+}
+.seat-table{
+	text-align:center;
+	width:100%;
+	margin-top: 30px;
+}
+.seat-table tr{
+	height:36px;
+}
+.seat-table th{
+	text-align:center;
 }
 .dynamic-block{
 	width: 100%;
@@ -614,10 +647,29 @@
     margin-left: 10px;
 	cursor:pointer;
 }
+.indeterminate{
+	display: inline-block;
+    width: 74px;
+    height: 27px;
+    padding: 4px 10px;
+    margin-left: 10px;
+    border: solid #ddd 1px;
+    border-radius: 4px;
+    color: #333;
+	cursor:pointer;
+}
+.indeterminate-sure{
+	background:#5191d1;
+	color:#fff;
+}
 .time-group{
 	display:inline-block;
 	margin-left: -4px;
-	width:125px;
+	width:166px;
+}
+.del-time{
+	margin-left:10px;
+	cursor:pointer;
 }
 .time-input-length{
 	width:125px;
