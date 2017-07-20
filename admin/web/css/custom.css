@@ -468,11 +468,13 @@
 	position:relative;
 	white-space: nowrap;
 }
-.cast-photo-show img{
-	height:100%;
+.cast-photo-show .photo-wrap{
+	height:160px;
 	width:120px;
-	background:#000;
+	border:solid 1px #333;
 	margin-right:20px;
+	display:inline-block;
+	position:relative;
 }
 .intro-main{
 	color:#333;
@@ -480,6 +482,18 @@
 	margin-top: 20px;
 	line-height: 20px;
 	width:500px;
+}
+.cancel-photo{
+	background: url(../images/x.png) no-repeat;
+    display: none;
+    width: 25px;
+    height: 25px;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    background-size: contain;
+    z-index: 1;
+	cursor:pointer;
 }
 .avatar-btn-group{
 	display:inline-block;

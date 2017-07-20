@@ -39,17 +39,18 @@
 						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delById($(this),delmsgJump);" url="<?= Url::toRoute(['actor/delactor','actor_id' => $ActorInfo['id']]) ?>">删除</a>
 					</div>
 					<div class="cast-photo-show">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
-						<img src="">
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
 					</div>
 				</div>
 				<div class="row">
@@ -62,3 +63,11 @@
 		</div>
 
     </section>
+	<script>
+		$(".photo-wrap").hover(function(){
+			$(this).find(".cancel-photo").show();
+		})
+		$(".photo-wrap").mouseleave(function(){
+			$(this).find(".cancel-photo").hide();
+		})
+	</script>
