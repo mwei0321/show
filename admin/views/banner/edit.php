@@ -30,6 +30,14 @@
 						<label>广告标题</label><input id="adv-title" type="text" name="title" value="<?php echo $bannerInfo->title??'' ?>">
 					</div>
 					<div class="edit-item">
+						<label>类型</label>
+						<select class="banner-type">
+							<option value="1">广告</option>
+							<option value="1">动态</option>
+							<option value="1">演出</option>
+						</select>
+					</div>
+					<div class="edit-item">
 						<label>广告封面</label>
 						<div class="adv-cover-wrap">
 							<div class="adv-cover-show"><img id="thumbImgCover" src="<?php echo ImageUrl,$bannerInfo->imgUrl??'' ?>" style="width:320px;"></div>
