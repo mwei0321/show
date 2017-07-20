@@ -461,6 +461,19 @@
 .cast-info-details{
 	margin-bottom:2px;
 }
+.cast-photo-show{
+	min-height:200px;
+	padding-right: 120px;
+	overflow-x:auto;
+	position:relative;
+	white-space: nowrap;
+}
+.cast-photo-show img{
+	height:100%;
+	width:120px;
+	background:#000;
+	margin-right:20px;
+}
 .intro-main{
 	color:#333;
 	font-size:14px;

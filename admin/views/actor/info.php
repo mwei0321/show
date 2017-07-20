@@ -38,6 +38,19 @@
 						<a class="info-btn info-edit-btn" href="<?= Url::toRoute(['actor/edit','actor_id' => $ActorInfo['id']]) ?>">编辑</a>
 						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delById($(this),delmsgJump);" url="<?= Url::toRoute(['actor/delactor','actor_id' => $ActorInfo['id']]) ?>">删除</a>
 					</div>
+					<div class="cast-photo-show">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+						<img src="">
+					</div>
 				</div>
 				<div class="row">
 					<article class="intro-text">
