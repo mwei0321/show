@@ -36,7 +36,7 @@
                 return $this->_returnJson();
             }
             $pages = page($this->_count,20);
-            $lists = $dynamicM->getDynamicList($where,$pages['offset']);
+            $lists = $dynamicM->getDynamicList($where,$pages['offset'],$this->mid);
 
             return $this->_returnJson($lists);
         }
@@ -52,7 +52,7 @@
 
             $info = [];
             if($dynamicId > 0){
-                $info = (new ApiDynamic())->getDynamicInfoById($dynamicId);
+                $info = (new ApiDynamic())->getDynamicInfoById($dynamicId,$this->mid);
             }else{
                 $this->_reCode = 440;
                 $this->_reMsg = 'id errors->'.$dynamicId;

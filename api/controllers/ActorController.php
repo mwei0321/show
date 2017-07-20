@@ -19,6 +19,18 @@
     class ActorController extends CommonController{
 
         /**
+         * 所有演员列表
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月20日 上午11:23:08
+        **/
+        function actionGetallactor(){
+            $allActorList = (new ApiActor())->getAllActor();
+
+            $this->_returnJson($allActorList);
+        }
+
+        /**
          * 获取演员详情
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -28,7 +40,7 @@
             //获取ID
             $actorId = Yii::$app->request->get('actor_id',0);
             //演员详情
-            $info = (new ApiActor())->getActorInfoById($actorId);
+            $info = (new ApiActor())->getActorInfoById($actorId,$this->mid);
             //演员演出过的节目
             $showlist = (new ApiActor())->getActorShowList($actorId);
             $info['actor_show'] = $showlist;

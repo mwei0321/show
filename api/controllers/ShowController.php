@@ -27,8 +27,10 @@
          * @date 2017年1月19日 上午10:52:22
         **/
         function actionGetshowlist(){
+            $type = Yii::$app->request->get('type',1);
+
             $where = [];
-            $where['status'] = 1;
+            $where['status'] = $type;
 
             //返回节目列表
             $showM = new ApiShow();
@@ -39,7 +41,7 @@
                 return $this->_returnJson();
             }
             $pages = page($this->_count,20);
-            $lists = $showM->getShowList($where,$pages['offset']);
+            $lists = $showM->getShowList($where,$pages['offset'],$this->mid);
 
             return $this->_returnJson($lists);
         }
@@ -57,7 +59,7 @@
             $info = [];
             if($id > 0){
                 //节目详情
-                $info = (new ApiShow())->getShowInfoById($id);
+                $info = (new ApiShow())->getShowInfoById($id,$this->mid);
                 //节目演员详情
                 $actorLists = (new ApiActor())->getShowActorList($id);
                 $info['actors'] = $actorLists;

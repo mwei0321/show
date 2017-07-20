@@ -18,6 +18,21 @@
     class ApiActor extends ActiveRecord{
 
         /**
+         * 获取所有演员
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月20日 上午11:37:03
+        **/
+        function getAllActor(){
+            $artorlist = Actor::find()->select('id actor,name,avatar')->asArray()->all();
+            foreach ($artorlist as $k => $v){
+                $artorlist[$k]['avatar'] = ImageUrl.$v['avatar'];
+            }
+
+            return $artorlist;
+        }
+
+        /**
          * 节目演员详情
          * @param  int $_showId
          * @return array
@@ -42,14 +57,20 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年2月6日 下午3:29:00
         **/
-        function getActorInfoById($_actorId){
+        function getActorInfoById($_actorId,$_memberId = 0){
             $info = (new Actor())->getActorInfoById($_actorId);
 
             $info['avatar'] = ImageUrl.$info['avatar'];
             $info['gender'] = $info['gender'] ? '男' : '女' ;
             $info['actor_id'] = $info['id'];
+            $info['isPraise'] = 0;
             unset($info['ctime']);
             unset($info['id']);
+            //是否点赞过
+            if($_memberId > 0){
+                $actorIds = \common\models\Praise::isPraiseByActorIds($_memberId,$info['actor_id']);
+                $info['isPraise'] = in_array($info['actor_id'], $actorIds) ? 1 : 0;
+            }
 
             return $info;
         }
