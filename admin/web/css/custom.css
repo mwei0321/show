@@ -461,12 +461,39 @@
 .cast-info-details{
 	margin-bottom:2px;
 }
+.cast-photo-show{
+	min-height:200px;
+	padding-right: 120px;
+	overflow-x:auto;
+	position:relative;
+	white-space: nowrap;
+}
+.cast-photo-show .photo-wrap{
+	height:160px;
+	width:120px;
+	border:solid 1px #333;
+	margin-right:20px;
+	display:inline-block;
+	position:relative;
+}
 .intro-main{
 	color:#333;
 	font-size:14px;
 	margin-top: 20px;
 	line-height: 20px;
 	width:500px;
+}
+.cancel-photo{
+	background: url(../images/x.png) no-repeat;
+    display: none;
+    width: 25px;
+    height: 25px;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    background-size: contain;
+    z-index: 1;
+	cursor:pointer;
 }
 .avatar-btn-group{
 	display:inline-block;
