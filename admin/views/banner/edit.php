@@ -21,32 +21,106 @@
 			<section class="panel">
 				<header class="panel-heading">
 					<div class="row step-bar">
-						<a class="top-step" href="<?= Url::toRoute(['advertisement/manager']) ?>">广告位设置</a><a class="top-step"> - </a>
+						<a class="top-step" href="<?= Url::toRoute(['banner/index']) ?>">广告位设置</a><a class="top-step"> - </a>
 						<a class="top-step" href="javascript:;">广告编辑</a>
 					</div>
 				</header>
 				<div class="adv-edit-wrap">
 					<div class="edit-item">
-						<label>广告标题</label><input id="adv-title">
+						<label>广告标题</label><input id="adv-title" type="text" name="title" value="<?php echo $bannerInfo->title??'' ?>">
 					</div>
 					<div class="edit-item">
 						<label>广告封面</label>
 						<div class="adv-cover-wrap">
-							<div class="adv-cover-show"><img src=""></div>
+							<div class="adv-cover-show"><img id="thumbImgCover" src="<?php echo ImageUrl,$bannerInfo->imgUrl??'' ?>" style="width:320px;"></div>
+							<input type="hidden" name="cover" value="<?php echo $bannerInfo->imgUrl??'' ?>"/>
 						</div>
 						<div class="adv-cover-operation">
 							<p>图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
-							<div style="margin-top:26px;"><input type="file" value="上传封面"></div>
+							<a class="pick-start-banner post-change" id="filePicker">上传封面</a>
 						</div>
 					</div>
 					<div class="edit-item">
 						<label>广告详情</label>
-						<textarea id="adv-detail" ></textarea>
+						<textarea id="adv-detail" ><?php echo $bannerInfo->content??'' ?></textarea>
 					</div>
 				</div>
 			</section>
 		</div>
 </section>
+<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	// 图片上传demo
+	jQuery(function() {
+	    var $ = jQuery,
+	        $list = $('#fileList'),
+	        // 优化retina, 在retina下这个值是2
+	        ratio = window.devicePixelRatio || 1,
+
+	        // 缩略图大小
+	        thumbnailWidth = 100 * ratio,
+	        thumbnailHeight = 100 * ratio,
+
+	        // Web Uploader实例
+	        uploader;
+
+	    // 初始化Web Uploader
+	    uploader = WebUploader.create({
+
+	        // 自动上传。
+	        auto: true,
+
+	        // swf文件路径
+	        swf: '/js/Uploader.swf',
+
+	        // 文件接收服务端。
+	        server: '<?= Url::to(['banner/uploadeimg']) ?>',
+
+	        // 选择文件的按钮。可选。
+	        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+	        pick: '#filePicker',
+	        //文件下标名
+	        fileVal:'file',
+
+	        // 只允许选择文件，可选。
+	        accept: {
+	            title: 'Images',
+	            extensions: 'gif,jpg,jpeg,bmp,png',
+	            mimeTypes: 'image/*'
+	        }
+	    });
+
+	    // 当有文件添加进来的时候
+	    uploader.on( 'fileQueued', function( file ) {
+
+	    });
+
+
+	    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+	    uploader.on( 'uploadSuccess', function( file,respones ) {
+	    	if(respones.status == 200){
+    	    	$("#thumbImgCover").attr('src',respones.path);
+    	    	$("#cover").val(respones.imgPath);
+	    	}
+	    	console.log(respones);
+	    });
+
+	    // 文件上传失败，现实上传出错。
+	    uploader.on( 'uploadError', function( file ) {
+	        var $li = $( '#'+file.id ),
+	            $error = $li.find('div.error');
+
+	        // 避免重复创建
+	        if ( !$error.length ) {
+	            $error = $('<div class="error"></div>').appendTo( $li );
+	        }
+
+	        $error.text('上传失败');
+	    });
+	});
+</script>
+
+
 <script>
 	function moveUp(_a){
 	var _row = _a.parentNode.parentNode;

@@ -49,8 +49,8 @@
                 $memberInfos = fieldtokey($memberInfos);
                 //优化处理
                 foreach ($ShowCommentList as $k => $v){
-                    $ShowCommentList[$k]['member_name'] = $memberInfos[$v['member_id']]['username'];
-                    $ShowCommentList[$k]['member_avatar'] = $memberInfos[$v['member_id']]['avatar'];
+                    $ShowCommentList[$k]['member_name'] = isset($memberInfos[$v['member_id']]['username']) ? $memberInfos[$v['member_id']]['username'] : '';
+                    $ShowCommentList[$k]['member_avatar'] = isset($memberInfos[$v['member_id']]['avatar']) ? $memberInfos[$v['member_id']]['avatar'] : '';
                     $ShowCommentList[$k]['ctime'] = date('Y-m-d',$v['ctime']);
                     $ShowCommentList[$k]['comment_id'] = $v['id'];
                     if($v['reply_id'] > 0){

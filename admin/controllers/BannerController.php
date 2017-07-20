@@ -18,16 +18,36 @@
     class BannerController extends SiteController{
 
         /**
-         * banner列表
+         * banner首页
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年7月5日 下午6:35:02
         **/
         function actionIndex(){
-            $list = Banner::find()->where(['status'=>1])->asArray()->all();
+            //启动图片logo
+            \common\models\CommonM::setTabelName('start_logo');
+            $startlogo = \common\models\CommonM::find()->select('path')->where(['id'=>1])->one();
+
+            //banner显示列表
+            $list = Banner::find()->where(['status'=>1])->orderBy('sort DESC')->all();
+
 
             return $this->render('index',[
-                'lists'=>$list
+                'lists'=>$list,
+                'startlogo' => $startlogo,
+            ]);
+        }
+
+        /**
+         * banner列表
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月20日 上午11:01:05
+        **/
+        function actionAdvlist(){
+
+            return $this->render('advlist',[
+
             ]);
         }
 
@@ -127,32 +147,34 @@
             return $data;
         }
 
-            /**
+        /**
          * 上传启动logo
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年7月19日 下午3:51:51
         **/
         function actionUpstartlogo(){
-//             $fileInfo = (new \common\models\Uploade('startlogo',['isDate'=>false]))->uploadeImg('startlogo');
+            $fileInfo = (new \common\models\Uploade('startlogo',['isDate'=>false]))->uploadeImg('startlogo');
+            //修改启动logo
             \common\models\CommonM::setTabelName('start_logo');
-            $aa = (new \common\models\CommonM());
-var_dump($aa::find()->asArray()->all());
-            $bb = $aa::findOne(3);
-            $bb->logo = 'aaaaaaaa';
-            var_dump($bb->save(false));
+            if($fileInfo['size'] > 0){
+                $startlogoObj = \common\models\CommonM::findOne(1);
+                if(!$startlogoObj){
+                    $startlogoObj = new \common\models\CommonM();
+                }
+                $startlogoObj->path    = $fileInfo['path'];
+                $startlogoObj->ctime   = time();
+                $startlogoObj->save(false);
+            }
 
-//                 $bb = $aa::saveOne(1);
+            $reArray = [
+                'path'      =>  ImageUrl.$fileInfo['path'],
+                'imgPath'   =>  $fileInfo['path'],
+                'status'    =>  200,
+            ];
 
-
-//             $reArray = [
-//                 'path'      =>  ImageUrl.$fileInfo['path'],
-//                 'imgPath'   =>  $fileInfo['path'],
-//                 'status'    =>  200,
-//             ];
-
-//             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//             return $reArray;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $reArray;
         }
 
         /**

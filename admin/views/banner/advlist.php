@@ -27,13 +27,13 @@
 					</div>
 				</header>
 				<div class="all-adv-wrap">
-					<div style="width: 100%;height: 60px;padding-left: 25px;padding-top:12px;"><a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute(['advertisement/edit']) ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 新增广告</a></div>
+					<div style="width: 100%;height: 60px;padding-left: 25px;padding-top:12px;"><a class="btn btn-small pull-left btn-info" href="<?= Url::toRoute(['banner/edit']) ?>" style="margin:10px; margin-left:16px;"><i class="icon-plus"></i> 新增广告</a></div>
 					<ul>
 						<li class="adv-block">
 							<div class="adv-poster"><img></div>
 							<div class="adv-info">
 								<p class="adv-word" href="">夺士大夫枯干 枯干</p>
-								<div><a class="adv-edit" href="<?= Url::toRoute(['advertisement/edit']) ?>">编辑</a><a class="adv-del">删除</a></div>
+								<div><a class="adv-edit" href="<?= Url::toRoute(['banner/edit']) ?>">编辑</a><a class="adv-del">删除</a></div>
 							</div>
 						</li>
 						<li class="adv-block">

@@ -18,7 +18,7 @@
 	<div class="adver-start-choose">
 		<h3>启动页设置</h3>
 		<div>
-			<div class="start-img-wrap"><img id="thumbImgCover" src="{{ImageUrl.'startlogo/startlogo.png'}}" style="width:135px"></div>
+			<div class="start-img-wrap"><img id="thumbImgCover" src="<?= ImageUrl.$startlogo->path ?>" style="width:240px"></div>
 			<a class="pick-start-banner post-change" id="filePicker">更改广告页</a>
 			<p class="avatar-tips">图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
 		</div>
@@ -27,36 +27,14 @@
 		<h3>演出页面顶部广告设置</h3>
 		<table width="" border="1">
 		  <tbody>
-			<tr>
-			  <td width="85%">擎动乐享，高圆圆年末巨献</td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
-			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
-			</tr>
-			<tr>
-			  <td width="85%">当偶像剧碰上EMOJI</td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
-			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
-			</tr>
-			<tr>
-			  <td width="85%">《那年夏天你去了哪里》心劫版预告</td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
-			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
-			</tr>
-			<tr>
-			  <td width="85%">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
-			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
-			</tr>
-			<tr>
-			  <td width="85%">FEELUNIQUE助你美美过新年</td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
-			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
-			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
-			</tr>
+		    <?php foreach ($lists as $k => $v){?>
+    			<tr>
+    			  <td width="85%"><?= $v->title ?></td>
+    			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
+    			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
+    			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
+    			</tr>
+			<?php }?>
 		  </tbody>
 		</table>
 		<div class="get-adver">
