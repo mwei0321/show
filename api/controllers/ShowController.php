@@ -141,12 +141,16 @@
         function actionUpcomment(){
             $request = Yii::$app->request;
 
-            $commentObj = new \common\models\CommonModel('show_comment');
+            $commentObj = new \common\models\ShowComment();
             $commentObj->show_id    = $request->post('show_id',0);
             $commentObj->member_id  = $this->mid;
             $commentObj->ctime      = time();
             $commentObj->content    = text($request->post('content',''));
             $commentObj->reply_id   = $request->post('reply_id',0);
+            if($commentObj->reply_id > 0){
+                $replyMid = \common\models\ShowComment::findOne($commentObj->reply_id);
+                $commentObj->reply_mid  = $replyMid->member_id;
+            }
 
             if($commentObj->save(false) && $commentObj->id > 0){
                 return $this->_returnJson();

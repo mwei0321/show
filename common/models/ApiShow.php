@@ -28,7 +28,6 @@
         function getShowList($_where = 1,$_offset = 'count',$_memberId = 0){
             $showM = new Show();
             $lists = $showM->getShowList($_where,$_offset);
-            if(!$lists) return [];
             //处理列表
             if((string)$_offset != 'count'){
                 //点赞列表
@@ -43,9 +42,11 @@
                     unset($lists[$k]['ctime']);
                     //写入演出时间范围
                     $times = $showM->getShowExpire($v['id']);
-                    $lists[$k]['stime'] = date('Y-m-d',$times['stime']);
-                    $lists[$k]['etime'] = date('Y-m-d',$times['etime']);
-                    //
+                    //是否时间未定
+                    if($times['stime'] && $times['etime']){
+                        $lists[$k]['stime'] = date('Y-m-d',$times['stime']);
+                        $lists[$k]['etime'] = date('Y-m-d',$times['etime']);
+                    }
                     $lists[$k]['show_id'] = $v['id'];
                     //是否点赞
                     $lists[$k]['isPraise']  = in_array($v['id'], $showIds) ? 1 : 0;

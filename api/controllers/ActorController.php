@@ -18,6 +18,22 @@
 
     class ActorController extends CommonController{
 
+        function actionIndex(){
+            $ActorObj = new ApiActor();
+            //即将演出
+            $recentlyShow = \common\models\Show::find()->select('id,title')->where(['status'=>2])->orderBy('ctime DESC')->asArray()->one();
+            $recentlyShowActorList = $ActorObj->getShowActorList($recentlyShow['id']);
+            $recentlyShow['artor'] = $recentlyShowActorList ? : [];
+            //最近演出
+            $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
+            $nowShow = Yii::$app->db->createCommand($sql)->queryColumn();
+            //最新加入演员
+            $actorList = ApiActor::find()->orderBy('ctime DESC')->limit(4)->asArray()->all();
+
+
+            $this->_returnJson();
+        }
+
         /**
          * 所有演员列表
          * @return array
@@ -44,6 +60,16 @@
             //演员演出过的节目
             $showlist = (new ApiActor())->getActorShowList($actorId);
             $info['actor_show'] = $showlist;
+            //演员相册
+            \common\models\CommonM::setTabelName('actor_photo');
+            $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->asArray()->all();
+            if($actorPhotos){
+                foreach ($actorPhotos as $k => $v){
+                    $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
+                }
+                $info['actorPhotos'] = $actorPhotos;
+            }else
+                $info['artorPhotos'] = [];
 
             return $this->_returnJson($info);
         }
@@ -109,12 +135,16 @@
         function actionUpcomment(){
             $request = Yii::$app->request;
 
-            $commentObj = new \common\models\CommonModel('actor_comment');
-            $commentObj->artor_id   = $request->post('show_id',0);
+            $commentObj = new \common\models\ActorComment();
+            $commentObj->actor_id   = $request->post('actor_id',0);
             $commentObj->member_id  = $this->mid;
             $commentObj->ctime      = time();
             $commentObj->content    = text($request->post('content',''));
             $commentObj->reply_id   = $request->post('reply_id',0);
+            if($commentObj->reply_id > 0){
+                $replyMid = \common\models\ActorComment::findOne($commentObj->reply_id);
+                $commentObj->reply_mid  = $replyMid->member_id;
+            }
 
             if($commentObj->save(false) && $commentObj->id > 0){
                 return $this->_returnJson();

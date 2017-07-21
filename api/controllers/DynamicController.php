@@ -105,12 +105,16 @@
         function actionUpcomment(){
             $request = Yii::$app->request;
 
-            $commentObj = new \common\models\CommonModel('dynamic_comment');
+            $commentObj = new \common\models\DynamicComment();
             $commentObj->dynamic_id = $request->post('dyid',0);
             $commentObj->member_id  = $this->mid;
             $commentObj->ctime      = time();
             $commentObj->content    = text($request->post('content',''));
             $commentObj->reply_id   = $request->post('reply_id',0);
+            if($commentObj->reply_id > 0){
+                $replyMid = \common\models\DynamicComment::findOne($commentObj->reply_id);
+                $commentObj->reply_mid  = $replyMid->member_id;
+            }
 
             if($commentObj->save(false) && $commentObj->id > 0){
 

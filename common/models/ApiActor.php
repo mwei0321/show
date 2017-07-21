@@ -17,6 +17,10 @@
 
     class ApiActor extends ActiveRecord{
 
+        static function tableName(){
+            return 'actor';
+        }
+
         /**
          * 获取所有演员
          * @return array
