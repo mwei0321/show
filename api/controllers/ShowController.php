@@ -66,6 +66,9 @@
                 //动态
                 $dynamic = (new ApiDynamic())->getDynamicByTop();
                 $info['dynamic'] = $dynamic;
+                //评论
+                $comment = (new \common\models\ShowComment())->getShowCommentList(1,3);
+                $info['comment'] = $comment ? : [];
             }else{
                 $this->_reCode = 440;
                 $this->_reMsg = 'id errors->'.$id;

@@ -70,6 +70,9 @@
                 $info['actorPhotos'] = $actorPhotos;
             }else
                 $info['artorPhotos'] = [];
+            //评论
+            $comment = (new \common\models\ActorComment())->getActorCommentList(1,3);
+            $info['comment'] = $comment ? : [];
 
             return $this->_returnJson($info);
         }
