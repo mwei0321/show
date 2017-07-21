@@ -25,7 +25,7 @@
         public $mid = 0;
 
         function init(){
-            $this->mid = Yii::$app->request->get('mid',0);
+            $this->mid = Yii::$app->request->get('token',0);
             $this->_num = Yii::$app->request->get('num',10);
         }
 
