@@ -48,13 +48,15 @@
 							<div class="time-group">
 								<?php $timesids = ''; if(isset($showTimes) && $showTimes){?>
     								<?php foreach ($showTimes as $k => $v) { $timesids .= $v['id'].',';?>
-    									<div><input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input><a class="del-time">删除</a></div>
+    									<div><input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input></div>
     								<?php }}else {?>
 								<?php }?>
 								<input type="hidden" name="timesids" value="<?= $timesids ?>"/>
 							</div>
 							<div class="add-time-btn">+</div>
+							<?php if(!isset($showTimes) || !$showTimes){?>
 							<a class="indeterminate">时间待定</a>
+							<?php }?>
 						</div>
 						<div class="row col-lg-12">
 							<label>演出时长</label><input type="text"  class="check theatre-data-input" emsg="请填写演出时长" id="data-during" name="duration" value="<?= $showInfo['duration']??null ?>"></input>
@@ -260,6 +262,7 @@
     		},
     		singleDatePicker: true,
 		    timePicker: true,
+		    autoClose:true,
 			minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});

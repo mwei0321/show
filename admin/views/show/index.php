@@ -47,7 +47,10 @@
                             <div class="session-info">
                                 <a class="theatre-name" href="<?= Url::toRoute(['show/info','show_id'=>$v['id']])?>"><?= $v['title'] ?></a>
                                 <p class="theatre-time">时间：
-                                <?php if($v['stime'] == $v['etime']) {
+                                <?php
+                                if(!$v['stime']){
+                                    echo '时间待定';
+                                }elseif($v['stime'] == $v['etime']) {
                                     echo $v['stime'];
                                 }else{
                                     echo $v['stime'].' 至 '.$v['etime'];

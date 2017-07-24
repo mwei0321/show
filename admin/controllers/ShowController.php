@@ -34,7 +34,7 @@
             $where = [];
             $keyword = Yii::$app->request->get('keyword','');
             $keyword && $where = ['like','title',$keyword];
-            $where['status'] = 1;
+            $where['status'] = [1,2];
 
             $showModel = new Show();
             $count = $showModel->getShowList($where);
@@ -48,7 +48,7 @@
             foreach ($lists as $k => $v){
                 //写入演出时间范围
                 $times = $showModel->getShowExpire($v['id']);
-                $lists[$k]['stime'] = date('Y-m-d',$times['stime']);
+                $lists[$k]['stime'] = $times['stime'] ? date('Y-m-d',$times['stime']) : null;
                 $lists[$k]['etime'] = date('Y-m-d',$times['etime']);
             }
 // var_dump($lists);exit;
@@ -164,6 +164,11 @@
                 $showModel = new Show();
                 $showModel->ctime   =   time();
             }
+            //时间判断
+            if(!Yii::$app->request->post('time',[])){
+                $showModel->status = 2;
+            }else
+                $showModel->status = 1;
 
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
@@ -173,18 +178,22 @@
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
                 //写入场次
-                $isTime = $this->_updataTimes($showId);
-//                 $showModel->deleteShowTimesByShowIds($showId);
-//                 if($time && is_array($time)){
-//                     foreach ($time as $k => $v){
-//                         $showTimes = new CommonModel('show_times');
-//                         $showTimes->show_id = $showId;
-//                         $showTimes->room_id = 1;
-//                         $showTimes->stime   = strtotime($v);
-//                         $showTimes->ctime   = time();
-//                         $showTimes->save(false);
+                if(Yii::$app->request->post('time',[])){
+                       $isTime = $this->_updataTimes($showId);
+//                     $showModel->deleteShowTimesByShowIds($showId);
+//                     if($time && is_array($time)){
+//                         foreach ($time as $k => $v){
+//                             $showTimes = new CommonModel('show_times');
+//                             $showTimes->show_id = $showId;
+//                             $showTimes->room_id = 1;
+//                             $showTimes->stime   = strtotime($v);
+//                             $showTimes->ctime   = time();
+//                             $showTimes->save(false);
+//                         }
 //                     }
-//                 }
+
+                }
+
 
                 //删除演员
                 (new CommonModel('show_actor'))->deleteAll(['show_id'=>$showModel->id]);
