@@ -55,6 +55,30 @@
         }
 
         /**
+         * 获取演出演员基本信息
+         * @param  int $_showId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月24日 下午5:35:31
+        **/
+        function getActorByShowId($_showId){
+//             $sql = "SELECT a.`id`,a.`avatar`,a.`name` FROM `show_actor` sa LEFT JOIN `actor` a ON sa.actor_id = a.id WHERE sa.`show_id` = ".$_showId;
+            $sql = "SELECT `actor_id` FROM `show_actor` WHERE show_id = ".$_showId;
+            $actorIds = \Yii::$app->db->createCommand($sql)->queryColumn();
+            $actorIds = $actorIds ? array_unique($actorIds) : [];
+            $actorListInfo = self::find()->select('id actor_id,name,avatar')->where(['id'=>$actorIds])->asArray()->all();
+            if($actorListInfo){
+                foreach ($actorListInfo as $k => $v){
+                    $actorListInfo[$k]['avatar'] = ImageUrl.$v['avatar'];
+                }
+            }else{
+                return [];
+            }
+
+            return $actorListInfo;
+        }
+
+        /**
          * 获取演员详情
          * @param  int $_actorId
          * @return array

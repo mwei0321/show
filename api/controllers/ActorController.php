@@ -21,17 +21,26 @@
         function actionIndex(){
             $ActorObj = new ApiActor();
             //即将演出
-            $recentlyShow = \common\models\Show::find()->select('id,title')->where(['status'=>2])->orderBy('ctime DESC')->asArray()->one();
-            $recentlyShowActorList = $ActorObj->getShowActorList($recentlyShow['id']);
+            $recentlyShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>2])->orderBy('id DESC')->asArray()->one();
+            $recentlyShowActorList = $ActorObj->getActorByShowId($recentlyShow['id']);
             $recentlyShow['artor'] = $recentlyShowActorList ? : [];
             //最近演出
-            $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
-            $nowShow = Yii::$app->db->createCommand($sql)->queryColumn();
+//             $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
+            $nowShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>1])->orderBy('id DESC')->asArray()->one();
+            $nowShowActorList = $ActorObj->getActorByShowId($nowShow['id']);
+            $nowShow['artor'] = $recentlyShowActorList ? : [];
             //最新加入演员
-            $actorList = ApiActor::find()->orderBy('ctime DESC')->limit(4)->asArray()->all();
+            $actorList = ApiActor::find()->select('id actor_id,name,avatar')->orderBy('ctime DESC')->limit(8)->asArray()->all();
+            foreach ($actorList as $k => $v){
+                $actorList[$k]['avatar'] = ImageUrl.$v['avatar'];
+            }
 
+            $data = [];
+            $data['now'] = $nowShow;
+            $data['recently'] = $recentlyShow;
+            $data['actor'] = $actorList;
 
-            $this->_returnJson();
+            $this->_returnJson($data);
         }
 
         /**
