@@ -1182,3 +1182,57 @@
 	width:800px;
 	min-height:500px;
 }
+
+/*******************uploader************************/
+.webuploader-container {
+	position: relative;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	color: #fff;
+	text-align: center;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.webuploader-pick-hover {
+	background: #00a2d4;
+}
+.webuploader-pick-disable {
+	opacity: 0.6;
+	pointer-events:none;
+}
+#filePicker2 .webuploader-pick{
+	display: inline-block;
+    width: 65px;
+    height: 30px;
+    color: #fff;
+    border-radius: 6px;
+    text-align: center;
+    padding: 6px;
+    margin-left: 15px;
+    cursor: default;
+    background: #5191d1;
+    vertical-align: bottom;
+}
+.file-item {
+	display: inline-block !important;
+    width: 116px;
+    overflow: hidden;
+    margin-right: 14px;
+    margin-bottom: 8px;
+}
+
+
+
+
+
+
+
+

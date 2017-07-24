@@ -53,6 +53,13 @@
 					<div class="row col-lg-12"><label>星座</label><input type="text" id="data-cast-sigh"  name="constellation" value="<?= $ActorInfo['constellation'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12"><label>出生日期</label><input type="text" id="data-cast-birth"  name="birthday" value="<?= $ActorInfo['birthday'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check theatre-data-input"></input></div>
+					<div class="row col-lg-12"><label>上传图片</label>
+						<div id="uploader-demo">
+							<!--用来存放item-->
+							<div id="fileList" class="uploader-list"></div>
+							<div class="file-photo" id="filePicker2">上传图片</div>
+						</div>
+					</div>
 					<div class="row col-lg-12">
 						<label>个人简介</label><textarea id="data-intro"  name="" class="check"><?= $ActorInfo['intro'] ??null?></textarea>
 						<input type="hidden" name="intro" value="" id="contedit" class="check"/>
@@ -67,6 +74,7 @@
 
 </section>
 	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	
     <script>
     	// 图片上传demo
     	jQuery(function() {
@@ -136,6 +144,58 @@
     	        $error.text('上传失败');
     	    });
     	});
+		//相册
+		var $ = jQuery,
+        $list = $('#fileList');
+		var uploader2 = WebUploader.create({
+
+			// 选完文件后，是否自动上传。
+			auto: true,
+
+			// swf文件路径
+			swf: '/js/Uploader.swf',
+
+			// 文件接收服务端。
+			server: '<?= Url::toRoute(['actor/uploadeimg']) ?>',
+
+			// 选择文件的按钮。可选。
+			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+			pick: '#filePicker2',
+
+			// 只允许选择图片文件。
+			accept: {
+				title: 'Images',
+				extensions: 'gif,jpg,jpeg,bmp,png',
+				mimeTypes: 'image/*'
+			},
+			//'
+			
+		});
+		uploader2.on( 'fileQueued', function( file ) {
+			var $li = $(
+					'<div id="' + file.id + '" class="file-item thumbnail">' +
+						'<img>' +
+						'<div class="info">' + file.name + '</div>' +
+					'</div>'
+					),
+				$img = $li.find('img');
+
+
+			// $list为容器jQuery实例
+			$list.append( $li );
+
+			// 创建缩略图
+			// 如果为非图片文件，可以不用调用此方法。
+			// thumbnailWidth x thumbnailHeight 为 100 x 100
+			uploader2.makeThumb( file, function( error, src ) {
+				if ( error ) {
+					$img.replaceWith('<span>不能预览</span>');
+					return;
+				}
+
+				$img.attr( 'src', src );
+			}, 100, 100 );
+		});
     </script>
 
     	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
