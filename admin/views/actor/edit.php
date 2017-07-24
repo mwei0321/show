@@ -57,7 +57,7 @@
 						<div id="uploader-demo">
 							<!--用来存放item-->
 							<div id="fileList" class="uploader-list"></div>
-							<div id="filePicker2">选择图片</div>
+							<div class="file-photo" id="filePicker2">选择图片</div>
 						</div>
 					</div>
 					<div class="row col-lg-12">

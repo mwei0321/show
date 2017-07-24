@@ -1196,8 +1196,6 @@
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
-	background: #00b7ee;
-	padding: 10px 15px;
 	color: #fff;
 	text-align: center;
 	border-radius: 3px;
@@ -1206,10 +1204,22 @@
 .webuploader-pick-hover {
 	background: #00a2d4;
 }
-
 .webuploader-pick-disable {
 	opacity: 0.6;
 	pointer-events:none;
+}
+#filePicker2 .webuploader-pick{
+	display: inline-block;
+    width: 65px;
+    height: 30px;
+    color: #fff;
+    border-radius: 6px;
+    text-align: center;
+    padding: 6px;
+    margin-left: 15px;
+    cursor: default;
+    background: #5191d1;
+    vertical-align: bottom;
 }
 
 
