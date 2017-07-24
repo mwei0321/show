@@ -263,7 +263,7 @@
     		singleDatePicker: true,
 		    timePicker: true,
 		    autoClose:true,
-			minDate: moment(),
+			// minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});
 		var inputset = '<div class="one-time-set" ><input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-bottom:10px;"><a class="del-time">删除</a></div>'
@@ -280,7 +280,7 @@
     			},
     			   singleDatePicker: true,
     			   timePicker: true,
-				minDate: moment(),
+				// minDate: moment(),
 //     			   timePickerIncrement: 30,
     			});
 		});
