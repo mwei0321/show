@@ -19,7 +19,7 @@
 
         function init(){
             parent::init();
-            $this->_showMsg = '点赞失败，请刷新后重试！';
+            $this->_showMsg = '';
         }
 
         /**

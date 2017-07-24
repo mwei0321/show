@@ -16,7 +16,14 @@
 
     class BannerController extends CommonController{
 
-
+        /**
+         * 获取banner
+         * @param  array
+         * @param  string
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月24日 上午9:54:30
+        **/
         function actionGetbanner(){
             $banner = Banner::find()->where(['status'=>1])->orderBy('sort DESC')->asArray()->all();
             //数据处理

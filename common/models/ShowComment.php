@@ -30,7 +30,7 @@
          **/
         function getShowCommentList($_where = 1,$_offset = 'count',$_pageSize = 10){
             $ShowCommentObj = self::find()->where($_where);
-            if($_offset == 'count'){
+            if((string)$_offset == 'count'){
                 return $ShowCommentObj->count();
             }
 

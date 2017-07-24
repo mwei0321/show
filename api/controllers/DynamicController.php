@@ -59,7 +59,7 @@
             }
 
             //评论
-            $comment = (new \common\models\DynamicComment())->getDynamicCommentList(1,3);
+            $comment = (new \common\models\DynamicComment())->getDynamicCommentList(1,'0',3);
             $info['comment'] = $comment ? : [];
 
             //增加阅读数
