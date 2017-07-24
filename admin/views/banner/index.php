@@ -200,4 +200,8 @@
 	$(".adver-top-set a").click(function(){
 		$('.bs-example-modal-lg').modal('show');
 	})
+	$(".adv-type a").click(function(){
+		$(".adv-type a").removeClass("active");
+		$(this).addClass("active");
+	})
 </script>

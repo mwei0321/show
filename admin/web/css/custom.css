@@ -1208,7 +1208,8 @@
 	opacity: 0.6;
 	pointer-events:none;
 }
-#filePicker2 .webuploader-pick{
+#filePicker2 .webuploader-pick,
+.pick-start-banner{
 	display: inline-block;
     width: 65px;
     height: 30px;
@@ -1220,6 +1221,9 @@
     cursor: default;
     background: #5191d1;
     vertical-align: bottom;
+}
+.pick-start-banner{
+	width:90px;
 }
 .file-item {
 	display: inline-block !important;
