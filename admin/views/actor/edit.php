@@ -145,7 +145,9 @@
     	    });
     	});
 		//相册
-		var uploader = WebUploader.create({
+		var $ = jQuery,
+        $list = $('#fileList');
+		var uploader2 = WebUploader.create({
 
 			// 选完文件后，是否自动上传。
 			auto: true,
@@ -169,7 +171,7 @@
 			//'
 			
 		});
-		uploader.on( 'fileQueued', function( file ) {
+		uploader2.on( 'fileQueued', function( file ) {
 			var $li = $(
 					'<div id="' + file.id + '" class="file-item thumbnail">' +
 						'<img>' +
@@ -185,14 +187,14 @@
 			// 创建缩略图
 			// 如果为非图片文件，可以不用调用此方法。
 			// thumbnailWidth x thumbnailHeight 为 100 x 100
-			uploader.makeThumb( file, function( error, src ) {
+			uploader2.makeThumb( file, function( error, src ) {
 				if ( error ) {
 					$img.replaceWith('<span>不能预览</span>');
 					return;
 				}
 
 				$img.attr( 'src', src );
-			}, thumbnailWidth, thumbnailHeight );
+			}, 100, 100 );
 		});
     </script>
 
