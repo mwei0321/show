@@ -121,6 +121,11 @@
             }
 
             if($commentObj->save(false) && $commentObj->id > 0){
+                //评论数统计
+                $count = \common\models\DynamicComment::find()->where(['dynamic_id'=>$commentObj->dynamic_id])->count();
+                $dynamicObj = ApiDynamic::findOne($commentObj->dynamic_id);
+                $dynamicObj->comment_num = $count;
+                $dynamicObj->save(false);
 
                 return $this->_returnJson();
             }

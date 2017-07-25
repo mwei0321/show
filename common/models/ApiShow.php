@@ -17,6 +17,10 @@
 
     class ApiShow extends ActiveRecord{
 
+        static function tableName(){
+            return 'show';
+        }
+
         /**
          * 节目列表
          * @param  array $_where

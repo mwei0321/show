@@ -18,6 +18,12 @@
 
     class ActorController extends CommonController{
 
+        /**
+         * 演员首页
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月24日 下午6:11:29
+        **/
         function actionIndex(){
             $ActorObj = new ApiActor();
             //即将演出
@@ -79,9 +85,9 @@
                 $info['actorPhotos'] = $actorPhotos;
             }else
                 $info['artorPhotos'] = [];
-            //评论
-            $comment = (new \common\models\ActorComment())->getActorCommentList(1,'0',3);
-            $info['comment'] = $comment ? : [];
+//             //评论
+//             $comment = (new \common\models\ActorComment())->getActorCommentList(1,'0',3);
+//             $info['comment'] = $comment ? : [];
 
             return $this->_returnJson($info);
         }
@@ -159,6 +165,12 @@
             }
 
             if($commentObj->save(false) && $commentObj->id > 0){
+                //评论数统计
+                $count = \common\models\ActorComment::find()->where(['actor_id'=>$commentObj->actor_id])->count();
+                $actorObj = ApiActor::findOne($commentObj->actor_id);
+                $actorObj->comment_num = $count;
+                $actorObj->save(false);
+
                 return $this->_returnJson();
             }
             $this->_reCode = 400;

@@ -156,8 +156,15 @@
             }
 
             if($commentObj->save(false) && $commentObj->id > 0){
+                //评论数统计
+                $count = \common\models\ShowComment::find()->where(['show_id'=>$commentObj->show_id])->count();
+                $showObj = ApiShow::findOne($commentObj->show_id);
+                $showObj->comment_num = $count;
+                $showObj->save(false);
+
                 return $this->_returnJson();
             }
+
             $this->_reCode = 400;
             $this->_reMsg = '评论失败';
             $this->_showMsg = '评论失败';
