@@ -28,7 +28,7 @@
          * @date 2017年7月20日 上午11:37:03
         **/
         function getAllActor(){
-            $artorlist = Actor::find()->select('id actor,name,avatar')->asArray()->all();
+            $artorlist = Actor::find()->select('id actor_id,name,avatar')->asArray()->all();
             foreach ($artorlist as $k => $v){
                 $artorlist[$k]['avatar'] = ImageUrl.$v['avatar'];
             }
