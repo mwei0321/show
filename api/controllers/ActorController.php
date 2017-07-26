@@ -80,7 +80,7 @@
             $count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
             $info['actorPhotosNum'] = $count;
             if($count > 0){
-                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(10)->asArray()->all();
+                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(6)->asArray()->all();
                 foreach ($actorPhotos as $k => $v){
                     $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
                 }
@@ -102,7 +102,7 @@
         **/
         function actionGetactorphoto(){
             $actorId = Yii::$app->request->get('actor_id',0);
-            $num = Yii::$app->request->get('num',10);
+            $num = Yii::$app->request->get('num',6);
 
             \common\models\CommonM::setTabelName('actor_photo');
             $this->_count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
