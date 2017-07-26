@@ -77,8 +77,10 @@
             $info['actor_show'] = $showlist;
             //演员相册
             \common\models\CommonM::setTabelName('actor_photo');
-            $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->asArray()->all();
-            if($actorPhotos){
+            $count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
+            $info['actorPhotosNum'] = $count;
+            if($count > 0){
+                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(10)->asArray()->all();
                 foreach ($actorPhotos as $k => $v){
                     $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
                 }
@@ -90,6 +92,29 @@
 //             $info['comment'] = $comment ? : [];
 
             return $this->_returnJson($info);
+        }
+
+        /**
+         * 演员相册
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月26日 下午3:49:04
+        **/
+        function actionGetactorphoto(){
+            $actorId = Yii::$app->request->get('actor_id',0);
+            $num = Yii::$app->request->get('num',10);
+
+            \common\models\CommonM::setTabelName('actor_photo');
+            $this->_count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
+            if($this->_count > 0 && $page = page($this->_count,$num)){
+                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->offset($page['offset'])->limit($num)->asArray()->all();
+                foreach ($actorPhotos as $k => $v){
+                    $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
+                }
+            }else
+                $actorPhotos = [];
+
+            $this->_returnJson($actorPhotos);
         }
 
         /**
