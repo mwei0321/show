@@ -67,7 +67,7 @@
                 $dynamic = (new ApiDynamic())->getDynamicByTop();
                 $info['dynamic'] = $dynamic;
                 //评论
-                $comment = (new \common\models\ShowComment())->getShowCommentList(1,'0',3);
+                $comment = (new \common\models\ShowComment())->getShowCommentList(['show_id'=>$id],'0',3);
                 $info['comment'] = $comment ? : [];
             }else{
                 $this->_reCode = 440;
