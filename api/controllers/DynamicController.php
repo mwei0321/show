@@ -61,6 +61,7 @@
             //评论
             $comment = (new \common\models\DynamicComment())->getDynamicCommentList(1,'0',3);
             $info['comment'] = $comment ? : [];
+            $info['commentNum'] = \common\models\DynamicComment::find()->where(['dynamic_id'=>$dynamicId,'status'=>1])->count();
 
             //增加阅读数
             (new ApiDynamic())->IncDynamicReadNum($dynamicId);

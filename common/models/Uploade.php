@@ -128,6 +128,7 @@
                 'avatar'    =>  '/avatar/',
                 'startlogo' =>  '/startlogo/',
                 'banner'    =>  '/banner/',
+                'advert'    =>  '/advert/',
             ];
 
             $this->path = $path[$_path].($this->isDate ? (date($this->isDate).'/') : '');
