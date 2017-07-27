@@ -25,14 +25,7 @@
          * @date 2017年7月24日 上午9:54:30
         **/
         function actionGetbanner(){
-            $banner = Banner::find()->where(['status'=>1])->orderBy('sort DESC')->asArray()->all();
-            //数据处理
-            foreach ($banner as $k => $v){
-                $banner[$k]['imgUrl']       = ImageUrl.$v['imgUrl'];
-                $banner[$k]['banner_id']    = $v['id'];
-                unset($banner[$k]['ctime']);
-                unset($banner[$k]['id']);
-            }
+            $banner = Banner::getBannerList();
 
             $this->_returnJson($banner);
         }
