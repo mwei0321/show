@@ -27,9 +27,9 @@
 		<h3>演出页面顶部广告设置</h3>
 		<table width="" border="1">
 		  <tbody id="bannerlist">
-		    <?php foreach ($lists as $k => $v){?>
-    			<tr banid="<?= $v['id'] ?>">
-    			  <td width="85%"><?= $v->title ?></td>
+		    <?php foreach ($banner as $k => $v){?>
+    			<tr banid="<?= $v['banner_id'] ?>">
+    			  <td width="85%"><?= $v['title'] ?></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
     			  <td width="5%"><a class="exchange-adv" href="javascript:void(0)">✎</a></td>
@@ -62,22 +62,23 @@
 				<a>动态</a>
 				<a>演出</a>
 			</div>
+			<!-- 广告 -->
 			<ul>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
-				<li><div class="adver-list-img"><img></div><span style="width:60%;">自强不吸，抗击雾霾—— 一张表帮你选择空气净化器</span><div class="adver-list-btn"><a>选择广告</a></div></li>
+				<?php foreach ($advert as $k => $v){?>
+					<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
+				<?php }?>
+			</ul>
+			<!-- 动态 -->
+			<ul>
+				<?php foreach ($dynamic as $k => $v){?>
+					<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
+				<?php }?>
+			</ul>
+			<!-- 演出 -->
+			<ul>
+				<?php foreach ($show as $k => $v){?>
+					<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
+				<?php }?>
 			</ul>
 		</div>
 	  </div>
@@ -162,7 +163,6 @@
 		$('#bannerlist > tr').each(function (e){
 			sort = sort+','+$(this).attr('banid');
 		});
-		alert(sort);
     	$.ajax({
     		type:"GET",
     		data:'sort='+sort,

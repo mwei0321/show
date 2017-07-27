@@ -29,13 +29,25 @@
             $startlogo = \common\models\CommonM::find()->select('path')->where(['id'=>1])->one();
 
             //banner显示列表
-            $list = Banner::find()->where(['status'=>1])->orderBy('sort DESC')->all();
+            $bannerList = Banner::getBannerList();
+
+            //广告
+            $advertList = \common\models\Advert::find()->select('id,title,cover')->where(['status'=>1])->orderBy('id DESC')->all();
+
+            //动态
+            $DynamicList = \common\models\Dynamic::find()->select('id,title,cover')->where(['status'=>1])->orderBy('id DESC')->all();
+
+            //演出
+            $showList = \common\models\Show::find()->select('id,title,cover')->where(['status'=>1])->orderBy('id DESC')->all();
 
 
-
+// var_dump($list);exit;
 
             return $this->render('index',[
-                'lists'=>$list,
+                'banner'    => $bannerList??[],
+                'advert'    => $advertList ??[],
+                'dynamic'   => $DynamicList??[],
+                'show'      => $showList??[],
                 'startlogo' => $startlogo,
             ]);
         }
