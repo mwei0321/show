@@ -39,7 +39,7 @@
             }
             //分页处理
             $page = page($this->_count,10);
-            $sql = "SELECT * FROM (( SELECT 1 type, show_id obj_id, reply_mid, content, ctime FROM show_comment WHERE reply_mid = ".$this->mid." ) UNION ( SELECT 2 type, dynamic_id obj_id, reply_mid, content, ctime FROM dynamic_comment WHERE reply_mid = ".$this->mid." ) UNION ( SELECT 3 type, actor_id obj_id, reply_mid, content, ctime FROM actor_comment WHERE reply_mid = ".$this->mid." )) temp ORDER BY ctime DESC LIMIT ".$page['page'];
+            $sql = "SELECT * FROM (( SELECT 1 type, show_id obj_id, reply_mid, content,member_id, ctime FROM show_comment WHERE reply_mid = ".$this->mid." ) UNION ( SELECT 2 type, dynamic_id obj_id, reply_mid, content,member_id, ctime FROM dynamic_comment WHERE reply_mid = ".$this->mid." ) UNION ( SELECT 3 type, actor_id obj_id, reply_mid,member_id, content, ctime FROM actor_comment WHERE reply_mid = ".$this->mid." )) temp ORDER BY ctime DESC LIMIT ".$page['page'];
             $list = Yii::$app->db->createCommand($sql)->queryAll();
             //数据处理  type（1:演出评论 2：动态评论 3：演员评论）
             foreach ($list as $k => $v){
@@ -62,7 +62,7 @@
                         break;
                 }
                 //回复人信息
-                $userInfo = \common\models\Member::find()->select('username,avatar')->where(['id'=>$v['reply_mid']])->one();
+                $userInfo = \common\models\Member::find()->select('username,avatar')->where(['id'=>$v['member_id']])->one();
                 $list[$k]['reply_name'] = $userInfo->username;
                 $list[$k]['reply_avatar'] = $userInfo->avatar;
                 //时间处理

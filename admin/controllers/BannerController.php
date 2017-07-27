@@ -32,6 +32,8 @@
             $list = Banner::find()->where(['status'=>1])->orderBy('sort DESC')->all();
 
 
+
+
             return $this->render('index',[
                 'lists'=>$list,
                 'startlogo' => $startlogo,
