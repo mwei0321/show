@@ -26,9 +26,9 @@
 	<div class="adver-table-sort">
 		<h3>演出页面顶部广告设置</h3>
 		<table width="" border="1">
-		  <tbody>
+		  <tbody id="bannerlist">
 		    <?php foreach ($lists as $k => $v){?>
-    			<tr>
+    			<tr banid="<?= $v['id'] ?>">
     			  <td width="85%"><?= $v->title ?></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
@@ -156,7 +156,26 @@
     	    });
     	});
     </script>
-
+<script>
+	function setSort(){
+		var sort = '0';
+		$('#bannerlist > tr').each(function (e){
+			sort = sort+','+$(this).attr('banid');
+		});
+		alert(sort);
+    	$.ajax({
+    		type:"GET",
+    		data:'sort='+sort,
+    		url :'<?= Url::to(['banner/sort']) ?>',
+    		success:function(e){
+    			if(e.status == 200){
+					return 1;
+    			}else
+        			return 0;
+    		}
+    	});
+	}
+</script>
 <script>
 	function moveUp(_a){
 	var _row = _a.parentNode.parentNode;
@@ -192,6 +211,8 @@
 	//将node1插入到原来node2的位置
 	if(_t2)_parent.insertBefore(node1,_t2);
 	else _parent.appendChild(node1);
+
+	setSort();
 	}
 
 	$(".exchange-adv").click(function(){

@@ -18,20 +18,35 @@
 
     class ActorController extends CommonController{
 
+        /**
+         * 演员首页
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月24日 下午6:11:29
+        **/
         function actionIndex(){
             $ActorObj = new ApiActor();
-            //即将演出
-            $recentlyShow = \common\models\Show::find()->select('id,title')->where(['status'=>2])->orderBy('ctime DESC')->asArray()->one();
-            $recentlyShowActorList = $ActorObj->getShowActorList($recentlyShow['id']);
-            $recentlyShow['artor'] = $recentlyShowActorList ? : [];
             //最近演出
-            $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
-            $nowShow = Yii::$app->db->createCommand($sql)->queryColumn();
+//             $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
+            $recentlyShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>1])->orderBy('id DESC')->asArray()->one();
+            $recentlyShowActorList = $ActorObj->getActorByShowId($recentlyShow['show_id']);
+            $recentlyShow['actor'] = $recentlyShowActorList ? : [];
+            //即将演出
+            $comingShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>2])->orderBy('id DESC')->asArray()->one();
+            $comingShowActorList = $ActorObj->getActorByShowId($comingShow['show_id']);
+            $comingShow['actor'] = $comingShowActorList ? : [];
             //最新加入演员
-            $actorList = ApiActor::find()->orderBy('ctime DESC')->limit(4)->asArray()->all();
+            $actorList = ApiActor::find()->select('id actor_id,name,avatar')->orderBy('ctime DESC')->limit(8)->asArray()->all();
+            foreach ($actorList as $k => $v){
+                $actorList[$k]['avatar'] = ImageUrl.$v['avatar'];
+            }
 
+            $data = [];
+            $data['recently'] = $recentlyShow; //最近
+            $data['coming'] = $comingShow; //即将
+            $data['actor'] = $actorList; //最新加入演员
 
-            $this->_returnJson();
+            $this->_returnJson($data);
         }
 
         /**
@@ -62,19 +77,44 @@
             $info['actor_show'] = $showlist;
             //演员相册
             \common\models\CommonM::setTabelName('actor_photo');
-            $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->asArray()->all();
-            if($actorPhotos){
+            $count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
+            $info['actorPhotosNum'] = $count;
+            if($count > 0){
+                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(6)->asArray()->all();
                 foreach ($actorPhotos as $k => $v){
                     $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
                 }
                 $info['actorPhotos'] = $actorPhotos;
             }else
                 $info['artorPhotos'] = [];
-            //评论
-            $comment = (new \common\models\ActorComment())->getActorCommentList(1,'0',3);
-            $info['comment'] = $comment ? : [];
+//             //评论
+//             $comment = (new \common\models\ActorComment())->getActorCommentList(1,'0',3);
+//             $info['comment'] = $comment ? : [];
 
             return $this->_returnJson($info);
+        }
+
+        /**
+         * 演员相册
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月26日 下午3:49:04
+        **/
+        function actionGetactorphoto(){
+            $actorId = Yii::$app->request->get('actor_id',0);
+            $num = Yii::$app->request->get('num',6);
+
+            \common\models\CommonM::setTabelName('actor_photo');
+            $this->_count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
+            if($this->_count > 0 && $page = page($this->_count,$num)){
+                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->offset($page['offset'])->limit($num)->asArray()->all();
+                foreach ($actorPhotos as $k => $v){
+                    $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
+                }
+            }else
+                $actorPhotos = [];
+
+            $this->_returnJson($actorPhotos);
         }
 
         /**
@@ -150,6 +190,12 @@
             }
 
             if($commentObj->save(false) && $commentObj->id > 0){
+                //评论数统计
+                $count = \common\models\ActorComment::find()->where(['actor_id'=>$commentObj->actor_id])->count();
+                $actorObj = ApiActor::findOne($commentObj->actor_id);
+                $actorObj->comment_num = $count;
+                $actorObj->save(false);
+
                 return $this->_returnJson();
             }
             $this->_reCode = 400;

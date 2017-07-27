@@ -71,6 +71,37 @@
         }
 
         /**
+         * 排序
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月24日 上午11:44:57
+        **/
+        function actionSort(){
+            $sort = Yii::$app->request->get('sort','');
+
+            $status = 400;
+            if($sort){
+                $sortnum = 100;
+                $sort = explode(',', $sort);
+                array_shift($sort);
+                Banner::updateAll(['sort'=>0]);
+                foreach ($sort as $v){
+                    $bannerObj = Banner::findOne($v);
+                    $bannerObj->sort = $sortnum--;
+                    $bannerObj->save(false);
+                }
+                $status = 200;
+            }
+
+            $reArray = [
+                'status'    =>  $status,
+            ];
+
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $reArray;
+        }
+
+        /**
          * 广告栏更新、写入
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -184,7 +215,7 @@
          * @date 2017年7月5日 下午6:29:55
         **/
         function beforeAction($action){
-            if(in_array($action->id,['uploadeimg','delbanner','upstartlogo'])){
+            if(in_array($action->id,['uploadeimg','delbanner','upstartlogo','sort'])){
                 $action->controller->enableCsrfValidation = false;
             }
             parent::beforeAction($action);
