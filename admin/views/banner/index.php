@@ -41,45 +41,40 @@
 			<a href="<?= Url::toRoute(['banner/advlist']) ?>">查看所有广告>></a>
 		</div>
 	</div>
-	<div class="adver-top-set">
-		<h3>详情页面顶部广告设置</h3>
-		<div>
-			<table width="" border="1">
-		  <tbody>
-			<tr>
-			  <td width="95%">擎动乐享，高圆圆年末巨献</td>
-			  <td width="5%"><a href="javascript:void(0)">✎</a></td>
-			</tr>
-		  </tbody>
-		</table>
-		</div>
-	</div>
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	  <div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content adver-list">
-			<div class="adv-type">
-				<a class="active">广告</a>
-				<a>动态</a>
-				<a>演出</a>
+			<ul class="adv-type" role="tablist">
+				<li role="presentation" class="active"><a class="active"  href="#adv" aria-controls="adv" role="tab" data-toggle="tab">广告</a></li>
+				<li role="presentation"><a href="#dynamic" aria-controls="profile" role="tab" data-toggle="tab">动态</a></li>
+				<li role="presentation"><a href="#show" aria-controls="profile" role="tab" data-toggle="tab">演出</a></li>
+			</ul>
+			<div class="tab-content">
+				<!-- 广告 -->
+				<div role="tabpanel" class="tab-pane active" id="adv">
+				<ul>
+					<?php foreach ($advert as $k => $v){?>
+						<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
+					<?php }?>
+				</ul>
+				</div>
+				<!-- 动态 -->
+				<div role="tabpanel" class="tab-pane" id="dynamic">
+				<ul role="tabpanel" id="dynamic">
+					<?php foreach ($dynamic as $k => $v){?>
+						<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
+					<?php }?>
+				</ul role="tabpanel" id="show">
+				</div>
+				<!-- 演出 -->
+				<div role="tabpanel" class="tab-pane" id="show">
+				<ul>
+					<?php foreach ($show as $k => $v){?>
+						<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
+					<?php }?>
+				</ul>
+				</div>
 			</div>
-			<!-- 广告 -->
-			<ul>
-				<?php foreach ($advert as $k => $v){?>
-					<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
-				<?php }?>
-			</ul>
-			<!-- 动态 -->
-			<ul>
-				<?php foreach ($dynamic as $k => $v){?>
-					<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
-				<?php }?>
-			</ul>
-			<!-- 演出 -->
-			<ul>
-				<?php foreach ($show as $k => $v){?>
-					<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn"><a replaceid = "2">选择广告</a></div></li>
-				<?php }?>
-			</ul>
 		</div>
 	  </div>
 	</div>
@@ -220,5 +215,9 @@
 	})
 	$(".adver-top-set a").click(function(){
 		$('.bs-example-modal-lg').modal('show');
+	})
+	$(".adv-type a").click(function(){
+		$(".adv-type a").removeClass("active");
+		$(this).addClass("active");
 	})
 </script>
