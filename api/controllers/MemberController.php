@@ -40,15 +40,15 @@ class MemberController extends CommonController{
         $pwd       = \yii::$app->request->get('pwd');
         $data = [];
         if ( $cellphone && $code && $pwd && $username ) {
-            if ( ! $Randcode->validateCode($cellphone,$code,11) ) {
+            if ( $Member->ifUsernameExist($username) ) {
                 $this->_reCode = 440;
-                $this->_showMsg =$this->_reMsg = '验证码错误';
+                $this->_showMsg =$this->_reMsg = '该用户名已被注册';
             } elseif ( strlen($pwd)<6 || strlen($pwd)>12 ) {
                 $this->_reCode = 440;
                 $this->_showMsg =$this->_reMsg = '密码格式不对';
-            } elseif ( $Member->ifUsernameExist($username) ) {
+            } elseif ( ! $Randcode->validateCode($cellphone,$code,11) ) {
                 $this->_reCode = 440;
-                $this->_showMsg =$this->_reMsg = '该用户名已被注册';
+                $this->_showMsg =$this->_reMsg = '验证码错误';
             } elseif ( $Member->ifCellphoneExist($cellphone) ) {
                 $this->_reCode = 440;
                 $this->_showMsg =$this->_reMsg = '该手机号码已被注册';
@@ -84,7 +84,8 @@ class MemberController extends CommonController{
         $sms = new \yii\HPlugin\SendSMS\Message([]);
         $code_arr = $Randcode->createCode($cellphone,11);
         if ( $code_arr['code']==1 ) {
-            $sms->sendRegedistCode( $cellphone,$code_arr['data']['code'],'2' );
+            $re = $sms->sendRegedistCode( $cellphone,$code_arr['data']['code'],'2' );
+            echo json_decode($re);
             return $this->_returnJson();
         } else {
             $this->_reCode = 440;
@@ -123,15 +124,15 @@ class MemberController extends CommonController{
         $pwd       = \yii::$app->request->get('newpwd');
         $pwdre     = \yii::$app->request->get('newpwdre');
         if ( $cellphone && $code && $pwd && $pwdre && ($pwd==$pwdre) ) {
-            if ( ! $Randcode->validateCode($cellphone,$code,11) ) {
-                $this->_reCode = 440;
-                $this->_showMsg =$this->_reMsg = '验证码错误';
-            } elseif ( ! $Member->ifCellphoneExist($cellphone) ) {
+            if ( ! $Member->ifCellphoneExist($cellphone) ) {
                 $this->_reCode = 440;
                 $this->_showMsg =$this->_reMsg = '该账号不存在';
+            } elseif ( ! $Randcode->validateCode($cellphone,$code,11) ) {
+                $this->_reCode = 440;
+                $this->_showMsg =$this->_reMsg = '验证码错误';
             } else {
                 $re = $Member->resetPwd($cellphone,$pwd);
-                if ( empty($re) ) {
+                if ( $re===false ) {
                     $this->_reCode = 440;
                     $this->_reMsg = '操作失败，请重试!';
                 }
@@ -157,10 +158,11 @@ class MemberController extends CommonController{
     function actionUpdate(){
         $token = \yii::$app->request->get('token');
         $avatar = \yii::$app->request->get('avatar');
-        if ( empty($token) || empty($avatar) ) $this->_reCode = 440;
+        $uname  = \yii::$app->request->get('username');
+        if ( empty($token) || empty($avatar) || empty($uname) ) $this->_reCode = 440;
         else {
             $Member    = new Member();
-            $re = $Member->updateOne( ['avatar'=>$avatar],$token );
+            $re = $Member->updateOne( ['avatar'=>$avatar,'username'=>$uname],$token );
             if ( empty($re) ) {
                 $this->_reCode = 440;
                 $this->_reMsg = '操作失败，请重试!';
