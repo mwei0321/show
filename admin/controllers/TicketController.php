@@ -38,8 +38,7 @@
                 $buySeat = $ticketM->getShowTicketSellInfo($timesId);
                 $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
                 //订单
-                \common\models\CommonM::setTabelName('ticket_order');
-                $order = \common\models\CommonM::find()->where(['times_id'=>$timesId,'status'=>1])->orderBy('id DESC')->all();
+                $order = \common\models\TicketOrder::getOrderList($timesId);
             }
 
             return $this->render('seat',[
@@ -49,6 +48,7 @@
                 'times_id'  => $timesId,
                 'reserved'  => $ReservedSeat,
                 'buyseat'   => $buySeat,
+                'order'     => $order,
                 'seatNum'   => $ticketM->_RoomSeatNum($roomId),
             ]);
         }
