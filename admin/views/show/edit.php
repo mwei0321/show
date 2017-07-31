@@ -48,7 +48,7 @@
 							<div class="time-group">
 								<?php $timesids = ''; if(isset($showTimes) && $showTimes){?>
     								<?php foreach ($showTimes as $k => $v) { $timesids .= $v['id'].',';?>
-    									<div><input type="text" class="time-input-length theatre-data-input <?php if($v['stime'] > (time() + 10)){?>data-start-time <?php }?>" name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input></div>
+    									<div><input type="text" class="time-input-length " name="times_<?= $v['id']?>" value="<?= date('Y-m-d H:i',$v['stime']) ?>" style="margin-bottom:10px;"></input></div>
     								<?php }}else {?>
 								<?php }?>
 								<input type="hidden" name="timesids" value="<?= $timesids ?>"/>
@@ -263,7 +263,7 @@
     		singleDatePicker: true,
 		    timePicker: true,
 		    autoClose:true,
-			// minDate: moment(),
+			minDate: moment(),
 // 		    timePickerIncrement: 30,
 		});
 		var inputset = '<div class="one-time-set" ><input type="text" name="time[]" class="time-input-length theatre-data-input" style="margin-bottom:10px;"><a class="del-time">删除</a></div>'
@@ -280,7 +280,7 @@
     			},
     			   singleDatePicker: true,
     			   timePicker: true,
-				// minDate: moment(),
+				minDate: moment(),
 //     			   timePickerIncrement: 30,
     			});
 		});
