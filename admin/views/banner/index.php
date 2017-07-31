@@ -38,7 +38,7 @@
 		  </tbody>
 		</table>
 		<div class="get-adver">
-			<a href="<?= Url::toRoute(['banner/advlist']) ?>">查看所有广告>></a>
+			<a href="<?= Url::toRoute(['advert/index']) ?>">查看所有广告>></a>
 		</div>
 	</div>
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">

@@ -73,9 +73,12 @@
             $actorId = Yii::$app->request->get('actor_id',0);
 
             $ActorInfo = (new Actor())->getActorInfoById($actorId);
+            //演员相册
+            $actorPhoto = \common\models\ActorPhoto::findAll(['actor_id'=>$ActorInfo['id']]);
 
             return $this->render('info',[
                 'ActorInfo'   => $ActorInfo,
+                'actorphoto'    => $actorPhoto ?? [],
             ]);
         }
 
@@ -110,6 +113,18 @@
             $data['status'] = 0;
             $data['msg'] = '添加修改失败！';
             if($actorM->save(false) && $actorM->id >0){
+                //写入相册
+                $photolist = $request->post('photo',[]);
+                if($photolist){
+                    foreach ($photolist as $k => $v){
+                        $photoObj = new \common\models\ActorPhoto();
+                        $photoObj->actor_id = $actorM->id;
+                        $photoObj->path     = $v;
+                        $photoObj->ctime    = time();
+                        $photoObj->save(false);
+                    }
+                }
+
                 $data['status'] = 200;
                 $data['msg'] = '添加修改成功！';
                 $data['url'] = \yii\helpers\Url::toRoute(['actor/index']);
@@ -143,6 +158,24 @@
         }
 
         /**
+         * 删除图片
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月29日 下午3:40:38
+        **/
+        function actionDelphoto(){
+            $id = Yii::$app->request->get('id',0);
+
+            $status = 0;
+            if($id > 0 && (\common\models\ActorPhoto::deleteAll(['id'=>$id]))){
+                $data['status'] = 200;
+            }
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            return $data;
+        }
+
+        /**
          * 节目图片上传
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -167,7 +200,7 @@
          * @date 2017年1月17日 下午2:32:27
          **/
         function beforeAction($action){
-            if(in_array($action->id,['uploadeimg','delactor'])){
+            if(in_array($action->id,['uploadeimg','delactor','delphoto'])){
                 $action->controller->enableCsrfValidation = false;
             }
             parent::beforeAction($action);

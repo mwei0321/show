@@ -14,66 +14,61 @@
     use yii\helpers\Url;
     use yii\widgets\LinkPager;
 
+    $this->title = '动态草稿主页';
 ?>
 
 <section class="main padder">
 	<div class="row">
 		<div class="m-t-small">
-
-		<div class="search-box" style="margin-top:10px;">
-		<i class="icon-search text-muted" style="left:20px;"></i>
-				<input type="text" class="input-small form-control" style="margin-left:15px;" placeholder="搜索动态" id="search" url="<?= Url::toRoute(['dynamic/index'])?>">
-		</div>
 		</div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-lg-12">
 			<section class="panel">
 				<header class="panel-heading">
 					<div class="step-bar">
-						<a class="top-step" href="<?= Url::toRoute(['show/index']) ?>">演出管理</a>
+						<a class="top-step" href="<?= Url::toRoute(['dynamic/index']) ?>">动态管理</a>
 						<a class="top-step" > - </a>
-						<a class="top-step" href="">编辑演出</a>
+						<a class="top-step" href="javascript:;">编辑动态</a>
 					</div>
 				</header>
 				<section class="panel-content scrollbar scroll-y">
 					<ul class="dynamic-list">
-    						<li	class="dynamic-block">
-    							<div class="dt-poster"> <a href=""><img src=""></a></div>
+							<?php foreach ($list as $k => $v){?>
+    						<li	class="dynamic-block" id="dynamic_<?= $v['id'] ?>">
+    							<div class="dt-poster"> <a href="<?= Url::to('dynamic/info',['dyid'=>$v['id']]) ?>"><img src="<?= ImageUrl,$v['cover'] ?>"></a></div>
     							<div class="dynamic-info">
-    								<a class="dynamic-title" href="">22222</a>
-    								<p class="dynamic-time">发布时间：</p>
-									<div class="draft-operation"><a class="draft-edit">编辑</a><a class="draft-release">发布</a><a class="draft-del">删除</a></div>
+    								<a class="dynamic-title" href="<?= Url::to('dynamic/info',['dyid'=>$v['id']]) ?>"><?= $v['title'] ?></a>
+    								<p class="dynamic-time">发布时间：未定</p>
+									<div class="draft-operation"><a class="draft-edit" href="<?= Url::toRoute(['edit','dyid'=>$v['id']]) ?>">编辑</a>
+									<a class="draft-release" href="javascript:;" onclick="issue($(this));" url="<?= Url::toRoute(['issue','dyid'=>$v['id']]) ?>" delId="#dynamic_<?= $v['id'] ?>">发布</a>
+									<a class="draft-del" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['deldynamic','dyid'=>$v['id']]) ?>" delId="#dynamic_<?= $v['id'] ?>">删除</a></div>
     							</div>
     						</li>
-    						<li	class="dynamic-block">
-    							<div class="dt-poster"> <a href=""><img src=""></a></div>
-    							<div class="dynamic-info">
-    								<a class="dynamic-title" href="">22222</a>
-    								<p class="dynamic-time">发布时间：</p>
-									<div class="draft-operation"><a class="draft-edit">编辑</a><a class="draft-release">发布</a><a class="draft-del">删除</a></div>
-    							</div>
-    						</li>
-    						<li	class="dynamic-block">
-    							<div class="dt-poster"> <a href=""><img src=""></a></div>
-    							<div class="dynamic-info">
-    								<a class="dynamic-title" href="">22222</a>
-    								<p class="dynamic-time">发布时间：</p>
-									<div class="draft-operation"><a class="draft-edit">编辑</a><a class="draft-release">发布</a><a class="draft-del">删除</a></div>
-    							</div>
-    						</li>
-    						<li	class="dynamic-block">
-    							<div class="dt-poster"> <a href=""><img src=""></a></div>
-    							<div class="dynamic-info">
-    								<a class="dynamic-title" href="">22222</a>
-    								<p class="dynamic-time">发布时间：</p>
-									<div class="draft-operation"><a class="draft-edit">编辑</a><a class="draft-release">发布</a><a class="draft-del">删除</a></div>
-    							</div>
-    						</li>
+    						<?php } ?>
 					</ul>
 				</section>
 			</section>
 		</div>
 	</div>
+	<script>
+		var issue = function (obj) {
+			if(!confirm('你确定要发布吗？')) return false;
+			var url = obj.attr('url');
+			var delid = obj.attr('delid');
+        	$.ajax({
+        		type:'get',
+        		url	: url,
+        		success:function (e){
+        			if(e.status == 200){
+        				mwlayer.success('发布成功！');
+        				$(delid).remove();
+        				return false;
+        			}
+        			mwlayer.error('发布失败！');
+        		}
+        	});
+		}
+	</script>
 </section>

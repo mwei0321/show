@@ -22,7 +22,7 @@
 			<section class="panel">
 				<header class="panel-heading">
 					<div class="row step-bar">
-						<a class="top-step" href="<?= Url::toRoute(['advert/edit']) ?>">广告位设置</a><a class="top-step"> - </a>
+						<a class="top-step" href="<?= Url::toRoute(['banner/index']) ?>">广告位设置</a><a class="top-step"> - </a>
 						<a class="top-step" href="javascript:;">所有广告</a>
 					</div>
 				</header>
@@ -39,7 +39,6 @@
     							</div>
     						</li>
 						<?php }?>
-
 					</ul>
 				</div>
 			</section>

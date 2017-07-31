@@ -118,7 +118,7 @@
                 $bannerObj = Banner::findOne($replayId);
                 $bannerObj->type = $type;
                 $bannerObj->obj_id = $id;
-                $bannerObj->save();
+                $bannerObj->save(false);
                 $status = 200;
             }
 
