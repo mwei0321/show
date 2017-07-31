@@ -107,11 +107,13 @@
     							<?php }}else{?>
     								<div class="pull-group addActor">
         								<select class="position-one cast-select" name="actor[]">
+        									<option>请选择</option>
         									<?php foreach ($actors as $k => $v) {
         									   echo '<option value="'.$k.'">'.$v['name'].'</option>';
         									}?>
         								</select>
         								<select class="position-one cast-position" name="duty[]">
+        									<option>请选择</option>
         									<?php foreach ($dutys as $k => $v){
         									   echo '<option value="'.$k.'">'.$v.'</option>';
         									}?>
