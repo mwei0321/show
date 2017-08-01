@@ -16,6 +16,7 @@
 
     $this->title = '动态编辑修改';
 ?>
+<link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
 <section class="main padder">
 	<div class="col-lg-12" style="margin-top:30px;">
 		<section class="panel">
@@ -74,6 +75,8 @@
 
 </section>
 	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/daterangepicker/moment.min.js"></script>
+	<script src="/js/daterangepicker/daterangepicker.js"></script>
 	
     <script>
     	// 图片上传demo
@@ -143,6 +146,17 @@
 
     	        $error.text('上传失败');
     	    });
+			
+		$('#data-cast-birth').daterangepicker({
+    		locale: {
+    		  format: 'YYYY-MM-DD HH:mm'
+    		},
+    		singleDatePicker: true,
+		    timePicker: true,
+		    autoClose:true,
+			maxDate: moment(),
+// 		    timePickerIncrement: 30,
+		});
     	});
 		//相册
 		var $ = jQuery,
