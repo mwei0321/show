@@ -87,13 +87,14 @@
             									    else
             									        echo '<option value="'.$k.'">'.$v.'</option>';
             									}?>
-            									<?php if($val['duty'] == 2){?>
-            										<input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>">
-            									<?php }else {?>
-            										<input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
-            									<?php }?>
             								</select>
-            								<script type="text/javascript">
+            								<?php if($val['duty'] == 2){?>
+        										<span class=> 饰 <input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>"></span>
+        									<?php }else {?>
+        										<span class=> 饰 <input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
+        									<?php }?>
+            							</div>
+    							<?php }?> <script type="text/javascript">
                 								$(".cast-position").click(function(){
                 									if($(this).val()==2){
                 										$(this).parent().find(".play").css("visibility","visible");
@@ -103,8 +104,7 @@
                 									}
                 								});
             								</script>
-            							</div>
-    							<?php }}else{?>
+            					<?php }else{?>
     								<div class="pull-group addActor">
         								<select class="position-one cast-select" name="actor[]">
         									<option>请选择</option>
@@ -117,8 +117,8 @@
         									<?php foreach ($dutys as $k => $v){
         									   echo '<option value="'.$k.'">'.$v.'</option>';
         									}?>
-        									<input type="text" class="play theatre-data-input" name="act[]">
         								</select>
+        								<span class="play"> 饰 <input type="text" class=" theatre-data-input" name="act[]"></span>
         								<script type="text/javascript">
             								$(".cast-position").click(function(){
             									if($(this).val()==2){

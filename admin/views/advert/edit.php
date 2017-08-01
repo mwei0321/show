@@ -30,7 +30,7 @@
     				<form id="advertf">
     					<div class="edit-item">
     						<label>广告标题</label>
-    						<input id="adv-title" type="text" name="title" class="checktitle" value="<?php echo $advertInfo->title??'' ?>">
+    						<input id="adv-title" type="text" name="title" class="checktitle" emsg="标题不能为空" value="<?php echo $advertInfo->title??'' ?>">
     					</div>
     					<div class="edit-item">
     						<label>广告封面</label>
