@@ -42,16 +42,18 @@
                     $lists[$k]['ctime'] = date('Y-m-d H:i',$v['ctime']);
                     $lists[$k]['title'] = $showInfos[$v['show_id']]['title'];
                     $lists[$k]['cover'] = ImageUrl.$showInfos[$v['show_id']]['cover'];
-                    $lists[$k]['stime'] = date('Y-m-d H:i',$times[$v['times_id']]['stime']);
+                    $tmpStime = isset($times[$v['times_id']]) ? $times[$v['times_id']]['stime'] : 0;
+                    $lists[$k]['stime'] = date('Y-m-d H:i',$tmpStime);
+
                     //判断节目开始
                     $time = time();
-                    $showt = $times[$v['times_id']]['stime'] + $showInfos[$v['show_id']]['duration'] * 60;
+                    $showt = $tmpStime + $showInfos[$v['show_id']]['duration'] * 60;
                     if($v['status'] == 7){
                         $lists[$k]['status'] = 7; //退票
-                    }elseif($time < $times[$v['times_id']]['stime']){
+                    }elseif($time < $tmpStime){
 //                         $lists[$k]['status'] = ($time < ($times[$v['times_id']]['stime'] - 3600)) ? 0 : 1; //即将开始
                         $lists[$k]['status'] = 1; //即将开始
-                    }elseif (($time > $times[$v['times_id']]['stime']) && $time < $showt){
+                    }elseif (($time > $tmpStime) && $time < $showt){
                         $lists[$k]['status'] = 2; //已开始
                     }elseif($time > $showt){
                         $lists[$k]['status'] = 3; //已结束
