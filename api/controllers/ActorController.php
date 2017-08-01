@@ -77,7 +77,7 @@
             $info['actor_show'] = $showlist;
             //演员相册
             \common\models\CommonM::setTabelName('actor_photo');
-            $count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
+            $count = \common\models\CommonM::find()->where(['actor_id'=>$actorId,'status'=>1])->count();
             $info['actorPhotosNum'] = $count;
             if($count > 0){
                 $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(6)->asArray()->all();
@@ -105,7 +105,7 @@
             $num = Yii::$app->request->get('num',6);
 
             \common\models\CommonM::setTabelName('actor_photo');
-            $this->_count = \common\models\CommonM::find()->where(['artor_id'=>$actorId,'status'=>1])->count();
+            $this->_count = \common\models\CommonM::find()->where(['actor_id'=>$actorId,'status'=>1])->count();
             if($this->_count > 0 && $page = page($this->_count,$num)){
                 $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->offset($page['offset'])->limit($num)->asArray()->all();
                 foreach ($actorPhotos as $k => $v){

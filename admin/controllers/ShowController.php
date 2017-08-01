@@ -178,6 +178,7 @@
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
                 //写入场次
+                $isTime = 1;
                 if(Yii::$app->request->post('time',[])){
                        $isTime = $this->_updataTimes($showId);
 //                     $showModel->deleteShowTimesByShowIds($showId);

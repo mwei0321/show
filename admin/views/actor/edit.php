@@ -59,6 +59,7 @@
 							<!--用来存放item-->
 							<div id="fileList" class="uploader-list"></div>
 							<div class="file-photo" id="filePicker2">上传图片</div>
+							<div id="photolist"></div>
 						</div>
 					</div>
 					<div class="row col-lg-12">
@@ -75,9 +76,13 @@
 
 </section>
 	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
+<<<<<<< HEAD
 	<script src="/js/daterangepicker/moment.min.js"></script>
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
 	
+=======
+
+>>>>>>> 33670a46924710b91f9f833ac984516962fcf935
     <script>
     	// 图片上传demo
     	jQuery(function() {
@@ -183,8 +188,17 @@
 				mimeTypes: 'image/*'
 			},
 			//'
-			
+
 		});
+	    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+	    uploader2.on( 'uploadSuccess', function( file,respones ) {
+	    	if(respones.status == 200){
+		    	var html = '<input type="hidden" value="'+respones.imgPath+'" name="photo[]" />';
+				$('#photolist').append(html);
+	    	}
+	    	console.log(respones);
+	    });
+
 		uploader2.on( 'fileQueued', function( file ) {
 			var $li = $(
 					'<div id="' + file.id + '" class="file-item thumbnail">' +

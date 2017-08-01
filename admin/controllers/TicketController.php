@@ -37,7 +37,8 @@
                 //已售座位
                 $buySeat = $ticketM->getShowTicketSellInfo($timesId);
                 $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
-
+                //订单
+                $order = \common\models\TicketOrder::getOrderList($timesId);
             }
 
             return $this->render('seat',[
@@ -47,6 +48,7 @@
                 'times_id'  => $timesId,
                 'reserved'  => $ReservedSeat,
                 'buyseat'   => $buySeat,
+                'order'     => $order,
                 'seatNum'   => $ticketM->_RoomSeatNum($roomId),
             ]);
         }

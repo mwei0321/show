@@ -26,6 +26,7 @@
         **/
         function actionIndex(){
             $where = [];
+            $where['status'] = 1;
             //搜索条件
             $keyword = Yii::$app->request->get('keyword','');
             $keyword && $where = ['like','title',$keyword];
@@ -65,8 +66,29 @@
                 'dynamicInfo'   => $dynamicInfo,
             ]);
         }
-		
-		
+
+        /**
+         * 发布动态
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月29日 下午5:00:22
+        **/
+        function actionIssue(){
+            $dyid = Yii::$app->request->get('dyid',0);
+
+            $status = 0;
+            if($dyid > 0){
+                $dynamicObj = Dynamic::findOne($dyid);
+                $dynamicObj->status = 1;
+                if($dynamicObj->save(false)) $status = 200;
+            }
+
+            $data['status'] = $status;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            return $data;
+        }
+
         /**
          * 动态草稿箱
          * @param  array
@@ -76,8 +98,11 @@
          * @date 2017年2月13日 下午6:38:24
         **/
         function actionDraft(){
-           
-             return $this->render('draft');
+            $lists = Dynamic::find()->where(['status'=>2])->orderBy('id DESC')->all();
+
+             return $this->render('draft',[
+                 'list' => $lists,
+             ]);
         }
 
         /**
@@ -146,7 +171,10 @@
             $data['status'] = 0;
             $data['msg'] = '删除失败！请刷新后重试！';
             $data['url'] = \yii\helpers\Url::toRoute(['dynamic/index']);
-            if((new Dynamic())->findOne(['id'=>$dyid])->delete()){
+            if($dyid > 0){
+                $dynamicObj = Dynamic::findOne($dyid);
+                $dynamicObj->status = 0;
+                $dynamicObj->save(false);
                 $data['status'] = 200;
                 $data['msg'] = '删除成功！';
             }

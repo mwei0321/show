@@ -25,16 +25,34 @@
          * @date 2017年7月24日 上午9:54:30
         **/
         function actionGetbanner(){
-            $banner = Banner::find()->where(['status'=>1])->orderBy('sort DESC')->asArray()->all();
-            //数据处理
-            foreach ($banner as $k => $v){
-                $banner[$k]['imgUrl']       = ImageUrl.$v['imgUrl'];
-                $banner[$k]['banner_id']    = $v['id'];
-                unset($banner[$k]['ctime']);
-                unset($banner[$k]['id']);
-            }
+            $banner = Banner::getBannerList();
 
             $this->_returnJson($banner);
+        }
+
+        /**
+         * 广告详情
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月27日 下午5:11:01
+        **/
+        function actionGetadvertinfo(){
+            $advertId = \Yii::$app->request->get('advert_id',0);
+
+            $advertInfo = [];
+            if($advertId > 0){
+                //节目详情
+                $advertInfo = \common\models\Advert::find()->where(['id'=>$advertId])->asArray()->one();
+                $advertInfo['advert_id'] = $advertInfo['id'];
+                $advertInfo['cover'] = ImageUrl.$advertInfo['cover'];
+                $advertInfo['ctime'] = date('Y-m-d H:i',$advertInfo['ctime']);
+                unset($advertInfo['id']);
+            }else{
+                $this->_reCode = 440;
+                $this->_reMsg = 'id errors->'.$advertId;
+            }
+
+            return $this->_returnJson($advertInfo);
         }
 
         /**

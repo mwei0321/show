@@ -39,18 +39,9 @@
 						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delById($(this),delmsgJump);" url="<?= Url::toRoute(['actor/delactor','actor_id' => $ActorInfo['id']]) ?>">删除</a>
 					</div>
 					<div class="cast-photo-show">
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
-						<div class="photo-wrap"><a class="cancel-photo"></a><img src=""></div>
+						<?php foreach ($actorphoto as $k => $v){?>
+							<div class="photo-wrap" id="actorphoto_<?= $v['id'] ?>"><a class="cancel-photo" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['delphoto','id'=>$v['id']]) ?>" delId="#actorphoto_<?= $v['id'] ?>"></a><img src="<?= ImageUrl,$v['path'] ?>" width='118px'></div>
+						<?php }?>
 					</div>
 				</div>
 				<div class="row">
@@ -63,6 +54,19 @@
 		</div>
 
     </section>
+    <script>
+    	var delphoto = function (obj,id) {
+    		$.ajax({
+    			url:"<?= Url::to('actor/delphoto') ?>",
+    			data:'id='+id,
+    			success:function(e){
+					if(e.status == 200){
+						layer
+					}
+            	}
+    		});
+    	}
+    </script>
 	<script>
 		$(".photo-wrap").hover(function(){
 			$(this).find(".cancel-photo").show();

@@ -40,7 +40,6 @@
             //演出
             $showList = \common\models\Show::find()->select('id,title,cover')->where(['status'=>1])->orderBy('id DESC')->all();
 
-
 // var_dump($list);exit;
 
             return $this->render('index',[
@@ -52,18 +51,6 @@
             ]);
         }
 
-        /**
-         * banner列表
-         * @return array
-         * @author MaWei (http://www.phpython.com)
-         * @date 2017年7月20日 上午11:01:05
-        **/
-        function actionAdvlist(){
-
-            return $this->render('advlist',[
-
-            ]);
-        }
 
         /**
          * 广告编辑页
@@ -104,6 +91,34 @@
                     $bannerObj->sort = $sortnum--;
                     $bannerObj->save(false);
                 }
+                $status = 200;
+            }
+
+            $reArray = [
+                'status'    =>  $status,
+            ];
+
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $reArray;
+        }
+
+        /**
+         * 修改banner
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月29日 上午10:36:29
+        **/
+        function actionChangebanner(){
+            $id = Yii::$app->request->post('id',0);
+            $type = Yii::$app->request->post('type',0);
+            $replayId = Yii::$app->request->post('replayid',0);
+
+            $status = 0;
+            if($id > 0 && $type > 0 && $replayId > 0){
+                $bannerObj = Banner::findOne($replayId);
+                $bannerObj->type = $type;
+                $bannerObj->obj_id = $id;
+                $bannerObj->save(false);
                 $status = 200;
             }
 
@@ -229,7 +244,7 @@
          * @date 2017年7月5日 下午6:29:55
         **/
         function beforeAction($action){
-            if(in_array($action->id,['uploadeimg','delbanner','upstartlogo','sort'])){
+            if(in_array($action->id,['uploadeimg','delbanner','upstartlogo','sort','changebanner'])){
                 $action->controller->enableCsrfValidation = false;
             }
             parent::beforeAction($action);
