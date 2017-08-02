@@ -44,7 +44,7 @@
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
 						<a class="confirm-it draft-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a>
-						<a class="confirm-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update','status'=>2])?>">保存</a>
+						<a class="confirm-it save-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update','status'=>2])?>">保存</a>
 						</div>
 					</form>
 				</div>

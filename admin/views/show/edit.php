@@ -132,7 +132,7 @@
         							</div>
     							<?php }?>
 							</div>
-							<a class="btn btn-small btn-info" onclick="addActor();" style="margin-left:11px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a>
+							<div style="padding-left:92px;"><a class="btn btn-small btn-info" onclick="addActor();" style="margin-left:11px;margin-bottom:2px;"><i class="icon-plus"></i> 添加新成员</a></div>
 						</div>
 					</form>
 					<div class="row col-lg-12" style="text-align:center;"><span class="confirm-it" onclick="submit();" href="javascript:;">发布</span></div>
