@@ -15,6 +15,8 @@
     use yii\widgets\LinkPager;
 
     $this->title = "话剧演出详情";
+    //星期
+    $_week = ['周日','周一','周二','周三','周四','周五','周六']
 ?>
 
 <section class="main padder">
@@ -68,7 +70,7 @@
 							<ul class="nav theatre-arrange" role="tablist">
 								<?php foreach ($showTimes as $k => $v){?>
         							<li role="presentation" class="<?= $times_id == $v['id'] ? 'active' : '' ?>">
-        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d H:i',$v['stime']) ?></a>
+        								<a onclick="timesseat($(this));" timesid="<?= $v['id'] ?>"  url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d H:i',$v['stime']) ?></a>
         							</li>
     							<?php }?>
 							</ul>
@@ -97,23 +99,57 @@
 						</div>
 						<p style="margin:10px auto;text-align:center;"><a class="seat"></a>为可选座位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="seat sold"></a>为已预订座位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="seat selected"></a>为已锁定座位</p>
 					</div>
+					<div class="row col-lg-12" style="text-align:center;">
+						<a class="check-seat" href="javascript:;" url="<?= Url::toRoute(['ticket/timesorder'])?>" timesid = "<?= $showTimes[0]['id'] ?>" onclick="timesorderlist($(this));">查看本场订票人信息</a></div>
 				</div>
 			</section>
 		</div>
-
+		<div class="modal fade bs-example-modal-lg" id="check" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		  <div class="modal-dialog modal-lg ticket-table-wrap" role="document">
+			<div class="modal-content">
+				<h3 class="">订票人信息</h3>
+				<p>场次：<span id="timestime"><?= date('Y-m-d',$showTimes[0]['stime']).' '.$_week[date('w',$showTimes[0]['stime'])].' '.date('H:i',$showTimes[0]['stime']) ?></span>
+				<a href="" target="_link" id="downorder" class="export-seat" >导出列表</a></p>
+				<table class="seat-table">
+					<tr><th>订单序列号</th><th>座位号</th><th>联系方式</th></tr>
+					<tbody id="tiemsorders">
+					</tbody>
+				</table>
+			</div>
+		  </div>
+		</div>
     </section>
 <script>
-		var timesseat = function (Obj){
-			var url = Obj.attr('url');
-			$.ajax({
-				url:url,
-				success:function (e){
-					$('#seatmap').html(e.html);
-					Obj.parent('li').addClass('active').siblings().removeClass('active');
+        var timesseat = function (Obj){
+        	var url = Obj.attr('url');
+        	$('#timestime').text(Obj.text());
+        	var timesid = Obj.attr('timesid');
+        	$(".check-seat").attr('timesid',timesid);
+        	$.ajax({
+        		url:url,
+        		success:function (e){
+        			$('#seatmap').html(e.html);
+        			Obj.parent('li').addClass('active').siblings().removeClass('active');
+        			return false;
+        		}
+        	});
+        };
 
-				}
-			});
-		};
+        var timesorderlist = function (Obj) {
+        	var url = Obj.attr('url');
+        	var timesid = Obj.attr('timesid');
+        	var downurl = '<?= Url::toRoute(['ticket/excel'])?>'+'&times_id='+timesid+'&times='+<?= $showTimes[0]['stime'] ?>+'&show_id=<?= $showInfo['id'] ?>';
+        	$('#downorder').attr('href',downurl);
+        	$.ajax({
+        		url:url,
+        		data:'times_id='+timesid,
+        		success:function (e){
+        			$('#tiemsorders').html(e.html);
+        			$('#check').modal('show');
+        			return false;
+        		}
+        	});
+        };
 
 		var delshow3 = function (obj){
 			if(!confirm('你确定要删除吗？')) return false;
