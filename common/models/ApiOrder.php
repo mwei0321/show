@@ -92,6 +92,7 @@
             $data['code'] = $orderInfo->code;
             $data['show_id'] = $orderInfo->show_id;
             $data['times_id'] = $orderInfo->times_id;
+            $data['order_id'] = $_orderId;
             //演出信息
             $showInfo = self::find()->from('show')->select('title,cover')->where(['id'=>$orderInfo->show_id])->asArray()->one();
             $data['title'] = $showInfo['title'];
