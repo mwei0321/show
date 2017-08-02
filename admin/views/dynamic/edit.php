@@ -43,7 +43,7 @@
 							<input type="hidden" name="content" value="" id="contedit" class="check" />
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it draft-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a>
+						<a class="confirm-it draft-it" href="javascript:;" onclick="if(confirm('你确定要发布吗？')){fromData2($(this),'.check',modifyMsgJump);}" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a>
 						<a class="confirm-it save-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update','status'=>2])?>">保存</a>
 						</div>
 					</form>
@@ -127,7 +127,7 @@
     	});
     </script>
 
-    	<script src="kindeditor-4.1.10/kindeditor.js"></script>
+    <script src="kindeditor-4.1.10/kindeditor.js"></script>
   	<script src="kindeditor-4.1.10/lang/zh_CN.js"></script>
 	<script>
     	KindEditor.ready(function(K) {

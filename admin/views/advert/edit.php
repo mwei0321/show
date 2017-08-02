@@ -50,7 +50,7 @@
     					</div>
     					<div class="row col-lg-12" style="text-align:center;">
     						<input type="hidden" name="advert_id" value="<?php echo $advertInfo->id?? '' ?>"/>
-        					<a class="confirm-it draft-it" href="javascript:;" onclick="fromData2($(this),'#advertf',modifyMsgJump);" url="<?= Url::toRoute(['advert/updata'])?>">发布</a>
+        					<a class="confirm-it draft-it" href="javascript:;" onclick="if(confirm('你确定要发布吗？')){fromData2($(this),'#advertf',modifyMsgJump);}" url="<?= Url::toRoute(['advert/updata'])?>">发布</a>
     					</div>
     				</form>
     			</div>
@@ -59,7 +59,7 @@
 		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	  <div class="modal-dialog modal-lg banner-window" role="document">
 		<div class="modal-content adver-list">
-			
+
 		</div>
 	  </div>
 	</div>
