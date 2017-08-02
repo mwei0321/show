@@ -135,7 +135,7 @@
     		window.editor = K.create('#adv-detail',{
     			//height : '700px',
     			resizeType: 0,
-    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image'] ,
+    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image','link'] ,
     		});
     	});
 	</script>
