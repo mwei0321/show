@@ -43,4 +43,18 @@
 
             return $this->_returnJson($lists);
         }
+
+        /**
+         * 订单详情
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年8月2日 下午3:13:43
+        **/
+        function actionGetorderinfo(){
+            $orderId = \Yii::$app->request->get('order_id',0);
+
+            $info = ApiOrder::getOrderInfoById($orderId);
+
+            $this->_returnJson($info);
+        }
     }

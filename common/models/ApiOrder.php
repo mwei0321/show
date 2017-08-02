@@ -17,6 +17,10 @@
 
     class ApiOrder extends ActiveRecord{
 
+        static function tableName(){
+            return 'ticket_order';
+        }
+
         /**
          * 获取我的订单列表
          * @param  int $_memberId
@@ -72,5 +76,37 @@
             }
 
             return $lists;
+        }
+
+        /**
+         * 获取订单ID
+         * @param  int $_orderId
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年8月2日 下午3:28:20
+        **/
+        static function getOrderInfoById($_orderId){
+            $data = [];
+            //订单信息
+            $orderInfo = self::findOne($_orderId);
+            $data['code'] = $orderInfo->code;
+            $data['show_id'] = $orderInfo->show_id;
+            $data['times_id'] = $orderInfo->times_id;
+            //演出信息
+            $showInfo = self::find()->from('show')->select('title,cover')->where(['id'=>$orderInfo->show_id])->asArray()->one();
+            $data['title'] = $showInfo['title'];
+            $data['cover'] = ImageUrl.$showInfo['cover'];
+            //订单座位
+            $orderSeats = self::find()->from('ticket')->where(['order_id'=>$_orderId])->asArray()->all();
+            $seats = '';
+            foreach ($orderSeats as $val){
+                $seats .= $val['row']."排".$val['column']."座 ";
+            }
+            $data['seats'] = $seats;
+            //场次时间
+            $times = self::find()->from('show_times')->where(['id'=>$orderInfo->times_id])->asArray()->one();
+            $data['times'] = date('Y-m-d H:i',$times['stime']);
+
+            return $data;
         }
     }
