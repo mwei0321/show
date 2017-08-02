@@ -80,7 +80,7 @@
             									        echo '<option value="'.$k.'">'.$v['name'].'</option>';
             									}?>
             								</select>
-            								<select class="position-one cast-position" name="duty[]">
+            								<select class="position-one cast-position" name="duty[]"  onchange="actorshow($(this));">
             									<?php foreach ($dutys as $k => $v){
             									    if($k == $val['duty'])
             									        echo '<option value="'.$k.'" selected="true">'.$v.'</option>';
@@ -89,22 +89,12 @@
             									}?>
             								</select>
             								<?php if($val['duty'] == 2){?>
-        										<span class=> 饰 <input type="text" class="play theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>"></span>
+        										<span class='play'>饰<input type="text" class="theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>"></span>
         									<?php }else {?>
-        										<span class=> 饰 <input type="text" class="play theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
+        										<span class='play'><input type="text" class="theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
         									<?php }?>
             							</div>
-    							<?php }?> <script type="text/javascript">
-                								$(".cast-position").click(function(){
-                									if($(this).val()==2){
-                										$(this).parent().find(".play").css("visibility","visible");
-                									}
-                									else{
-                										$(this).parent().find(".play").css("visibility","hidden");
-                									}
-                								});
-            								</script>
-            					<?php }else{?>
+    							<?php }}else{?>
     								<div class="pull-group addActor">
         								<select class="position-one cast-select" name="actor[]">
         									<option>请选择</option>
@@ -112,23 +102,13 @@
         									   echo '<option value="'.$k.'">'.$v['name'].'</option>';
         									}?>
         								</select>
-        								<select class="position-one cast-position" name="duty[]">
+        								<select class="position-one cast-position" name="duty[]" onchange="actorshow($(this));">
         									<option>请选择</option>
         									<?php foreach ($dutys as $k => $v){
         									   echo '<option value="'.$k.'">'.$v.'</option>';
         									}?>
         								</select>
-        								<span class="play"> 饰 <input type="text" class=" theatre-data-input" name="act[]"></span>
-        								<script type="text/javascript">
-            								$(".cast-position").click(function(){
-            									if($(this).val()==2){
-            										$(this).parent().find(".play").css("visibility","visible");
-            									}
-            									else{
-            										$(this).parent().find(".play").css("visibility","hidden");
-            									}
-            								});
-            							</script>
+        								<span class="play"></span>
         							</div>
     							<?php }?>
 							</div>
@@ -140,6 +120,17 @@
 			</section>
 		</div>
 		<script>
+			var actorshow = function (Obj){
+				if(Obj.val()==2){
+					Obj.parent().find(".play").html(' 饰 <input type="text" class=" theatre-data-input" name="act[]">');
+					Obj.parent().find(".play").css("visibility","visible");
+				}
+				else{
+					Obj.parent().find(".play").css("visibility","hidden");
+					Obj.parent().find(".play").html(' <input type="text" class=" theatre-data-input" name="act[]">');
+				}
+			};
+
 			var addActor = function () {
 				$('.add-cast-list').append($('.add-cast-list div:first-child').clone());
 			}
