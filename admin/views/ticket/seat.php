@@ -14,7 +14,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
 
-    $this->title = '节目编辑修改';
+    $this->title = '节目演出信息';
     //星期
     $_week = ['周日','周一','周二','周三','周四','周五','周六']
 
@@ -35,7 +35,7 @@
 							<ul class="nav theatre-arrange" role="tablist">
 								<?php foreach ($times as $k => $v){?>
         							<li role="presentation" class="<?= $times_id == $v['id'] ? 'active' : '' ?>">
-        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" href="javascript:;" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d',$v['stime']).' '.$_week[date('w',$v['stime'])].' '.date('H:i',$v['stime']) ?></a>
+        								<a onclick="timesseat($(this));" url="<?= Url::toRoute(['ticket/timesseat','timesid'=>$v['id']])?>" timesid="<?= $v['id'] ?>" href="javascript:;" aria-controls="home" role="tab" data-toggle="tab"><?= date('Y-m-d',$v['stime']).' '.$_week[date('w',$v['stime'])].' '.date('H:i',$v['stime']) ?></a>
         							</li>
     							<?php }?>
 							</ul>
@@ -73,7 +73,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="row col-lg-12" style="text-align:center;"><a class="check-seat" href="<?= Url::toRoute(['show/index'])?>" data-toggle="modal" data-target="#check">查看本场订票人信息</a><a class="confirm-it" href="<?= Url::toRoute(['show/index'])?>">确定</a></div>
+					<div class="row col-lg-12" style="text-align:center;">
+						<a class="check-seat" href="javascript:;" url="<?= Url::toRoute(['ticket/timesorder'])?>" timesid = "<?= $times[0]['id'] ?>" onclick="timesorderlist($(this));">查看本场订票人信息</a><a class="confirm-it" href="<?= Url::toRoute(['show/index'])?>">确定</a></div>
 				</div>
 			</section>
 		</div>
@@ -81,18 +82,12 @@
 		  <div class="modal-dialog modal-lg ticket-table-wrap" role="document">
 			<div class="modal-content">
 				<h3 class="">订票人信息</h3>
-				<p>场次：<?= date('Y-m-d',$times[0]['stime']).' '.$_week[date('w',$times[0]['stime'])].' '.date('H:i',$times[0]['stime']) ?> <a class="export-seat">导出列表</a></p>
+				<p>场次：<span id="timestime"><?= date('Y-m-d',$times[0]['stime']).' '.$_week[date('w',$times[0]['stime'])].' '.date('H:i',$times[0]['stime']) ?></span>
+				<a href="" target="_link" id="downorder" class="export-seat" >导出列表</a></p>
 				<table class="seat-table">
 					<tr><th>订单序列号</th><th>座位号</th><th>联系方式</th></tr>
-					<?php foreach ($order as $k => $v){?>
-					<tr>
-						<td><?= $k+1 ?></td><td>
-							<?php foreach ($v['seats'] as $val){?>
-							<?= $val['row']?>排<?= $val['column']?>座&nbsp;
-							<?php }?></td>
-						<td><?= $v['cellphone']?></td>
-					</tr>
-					<?php }?>
+					<tbody id="tiemsorders">
+					</tbody>
 				</table>
 			</div>
 		  </div>
@@ -101,6 +96,9 @@
     <script>
 		var timesseat = function (Obj){
 			var url = Obj.attr('url');
+			$('#timestime').text(Obj.text());
+			var timesid = Obj.attr('timesid');
+			$(".check-seat").attr('timesid',timesid);
 			$.ajax({
 				url:url,
 				success:function (e){
@@ -110,6 +108,36 @@
 				}
 			});
 		};
+
+		var timesorderlist = function (Obj) {
+			var url = Obj.attr('url');
+			var timesid = Obj.attr('timesid');
+			var downurl = '<?= Url::toRoute(['ticket/excel'])?>'+'&times_id='+timesid+'&times='+<?= $times[0]['stime'] ?>+'&show_id=<?= $show_id ?>';
+			$('#downorder').attr('href',downurl);
+			$.ajax({
+				url:url,
+				data:'times_id='+timesid,
+				success:function (e){
+					$('#tiemsorders').html(e.html);
+					$('#check').modal('show');
+					return false;
+				}
+			});
+		};
+
+		var downloadorder = function (Obj){
+			var url = Obj.attr('url');
+			var timesid = Obj.attr('timesid');
+			var time = Obj.attr('times');
+			$.ajax({
+				url:url,
+				data:'times_id='+timesid+'&time='+time+'&show_id=<?= $show_id ?>',
+				success:function (e){
+					$('#tiemsorders').html(e.html);
+					return false;
+				}
+			});
+		}
 
 		var lockseat = function (Obj) {
 			var url = Obj.attr('url');
