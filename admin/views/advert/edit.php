@@ -40,7 +40,7 @@
     						</div>
     						<div class="adv-cover-operation">
     							<p>图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
-    							<a class="pick-start-banner post-change" id="filePicker">上传封面</a>
+    							<a class="pick-start-banner post-change" id="">上传封面</a>
     						</div>
     					</div>
     					<div class="edit-item">
@@ -56,6 +56,13 @@
     			</div>
 			</section>
 		</div>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	  <div class="modal-dialog modal-lg banner-window" role="document">
+		<div class="modal-content adver-list">
+			
+		</div>
+	  </div>
+	</div>
 </section>
 <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -135,7 +142,7 @@
     		window.editor = K.create('#adv-detail',{
     			//height : '700px',
     			resizeType: 0,
-    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image'] ,
+    			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image','link'] ,
     		});
     	});
 	</script>

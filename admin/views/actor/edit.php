@@ -76,13 +76,9 @@
 
 </section>
 	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
-<<<<<<< HEAD
 	<script src="/js/daterangepicker/moment.min.js"></script>
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
-	
-=======
 
->>>>>>> 33670a46924710b91f9f833ac984516962fcf935
     <script>
     	// 图片上传demo
     	jQuery(function() {
@@ -154,14 +150,14 @@
 			
 		$('#data-cast-birth').daterangepicker({
     		locale: {
-    		  format: 'YYYY-MM-DD HH:mm'
+    		  format: 'YYYY-MM-DD'
     		},
     		singleDatePicker: true,
-		    timePicker: true,
 		    autoClose:true,
 			maxDate: moment(),
 // 		    timePickerIncrement: 30,
-		});
+		})
+		$('#data-cast-birth').val('');;
     	});
 		//相册
 		var $ = jQuery,
