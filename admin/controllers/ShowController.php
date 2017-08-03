@@ -203,14 +203,16 @@
                 $duty  = $request->post('duty',[]);
                 $act  = $request->post('act',[]);
                 foreach ($actor as $k => $v){
-                    $actorModel = new CommonModel('show_actor');
-                    $actorModel->show_id     = $showModel->id;
-                    $actorModel->actor_id    = $v;
-                    $actorModel->duty        = $duty[$k];
-                    $actorModel->act         = $act[$k];
-                    $actorModel->ctime       = time();
-                    $actorModel->save(false);
+                    if($v > 0){
+                        $actorModel = new CommonModel('show_actor');
+                        $actorModel->show_id     = $showModel->id;
+                        $actorModel->actor_id    = $v;
+                        $actorModel->duty        = $duty[$k];
+                        $actorModel->act         = $act[$k];
+                        $actorModel->ctime       = time();
+                        $actorModel->save(false);
 //                     echo $actorModel->id;
+                    }
                 }
                 if($show_id > 0 || $isTime)
                     return $this->redirect(['show/index']);

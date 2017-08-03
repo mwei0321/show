@@ -32,7 +32,9 @@
 					<div class="session-info">
 						<a class="info-name"><?= $showInfo['title']?></a>
 						<p class="info-time">时间：
-    						<?php if($showInfo['stime'] == $showInfo['etime']) {
+    						<?php if($showInfo['stime'] == '1970-01-01'){
+    						    echo '未定';
+    						}elseif($showInfo['stime'] == $showInfo['etime']){
                                 echo $showInfo['stime'];
                             }else{
                                 echo $showInfo['stime'].' 至 '.$showInfo['etime'];
@@ -101,7 +103,7 @@
 						<p style="margin:10px auto;text-align:center;"><a class="seat"></a>为可选座位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="seat sold"></a>为已预订座位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="seat selected"></a>为已锁定座位</p>
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
-						<a class="check-seat" href="javascript:;" url="<?= Url::toRoute(['ticket/timesorder'])?>" timesid = "<?= $showTimes[0]['id'] ?>" onclick="timesorderlist($(this));">查看本场订票人信息</a></div>
+						<a class="check-seat" href="javascript:;" url="<?= Url::toRoute(['ticket/timesorder'])?>" timesid = "<?= $showTimes[0]['id']??0 ?>" onclick="timesorderlist($(this));">查看本场订票人信息</a></div>
 				</div>
 			</section>
 		</div>
@@ -109,7 +111,7 @@
 		  <div class="modal-dialog modal-lg ticket-table-wrap" role="document">
 			<div class="modal-content">
 				<h3 class="">订票人信息</h3>
-				<p>场次：<span id="timestime"><?= date('Y-m-d',$showTimes[0]['stime']).' '.$_week[date('w',$showTimes[0]['stime'])].' '.date('H:i',$showTimes[0]['stime']) ?></span>
+				<p>场次：<span id="timestime"><?if(isset($showTimes)){echo date('Y-m-d',$showTimes[0]['stime']).' '.$_week[date('w',$showTimes[0]['stime'])].' '.date('H:i',$showTimes[0]['stime']) }?></span>
 				<a href="" target="_link" id="downorder" class="export-seat" >导出列表</a></p>
 				<table class="seat-table">
 					<tr><th>订单序列号</th><th>座位号</th><th>联系方式</th></tr>
@@ -139,7 +141,7 @@
         var timesorderlist = function (Obj) {
         	var url = Obj.attr('url');
         	var timesid = Obj.attr('timesid');
-        	var downurl = '<?= Url::toRoute(['ticket/excel'])?>'+'&times_id='+timesid+'&times='+<?= $showTimes[0]['stime'] ?>+'&show_id=<?= $showInfo['id'] ?>';
+        	var downurl = '<?= Url::toRoute(['ticket/excel'])?>'+'&times_id='+timesid+'&times='+<?= $showTimes[0]['stime']??0 ?>+'&show_id=<?= $showInfo['id'] ?>';
         	$('#downorder').attr('href',downurl);
         	$.ajax({
         		url:url,
