@@ -56,7 +56,9 @@
     window.onbeforeunload = function(event) { return confirm("确定离开此页面吗？");}
     </script>
 	<script type="text/javascript">
-
+		window.onbeforeunload=function(){
+		  return "您创建的演出还未提交，确定要离开吗？";
+		};
 	</script>
     <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
     <script>

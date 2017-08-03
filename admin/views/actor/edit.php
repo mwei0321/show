@@ -81,6 +81,9 @@
 
     <script>
     	// 图片上传demo
+		window.onbeforeunload=function(){
+		  return "您创建的演出还未提交，确定要离开吗？";
+		};
     	jQuery(function() {
     	    var $ = jQuery,
     	        $list = $('#fileList'),
