@@ -961,6 +961,11 @@
     margin-top: 22px;
     border: solid 1px #333;
     margin-right: 30px;
+	position:relative;
+}
+.start-img-wrap img{
+	height:100%;
+	width:100%;
 }
 .pick-start-banner{
 	display: inline-block;

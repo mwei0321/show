@@ -19,7 +19,7 @@
 		<h3>启动页设置</h3>
 		<div>
 			<div class="start-img-wrap"><img id="thumbImgCover" src="<?= ImageUrl.$startlogo->path ?>" style="width:240px"></div>
-			<a class="pick-start-banner post-change" id="filePicker">更改广告页</a>
+			<a class="pick-start-banner post-change" id="filePicker">更改启动页</a>
 			<p class="avatar-tips">图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
 		</div>
 	</div>

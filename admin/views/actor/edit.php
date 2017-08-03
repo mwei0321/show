@@ -155,9 +155,10 @@
     		singleDatePicker: true,
 		    autoClose:true,
 			maxDate: moment(),
+			showDropdowns: true,
+			autoUpdateInput: false,
 // 		    timePickerIncrement: 30,
 		})
-		$('#data-cast-birth').val('');;
     	});
 		//相册
 		var $ = jQuery,

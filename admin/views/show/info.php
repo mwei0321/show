@@ -48,6 +48,7 @@
 						<p class="intro-title">演出简介</p>
 						<p class="intro-main"><?= $showInfo['intro'] ?></p></article>
 					<div class="cast-bar">
+						<p class="intro-title">演职人员</p>
 						<ul class="cast-slider">
 						<?php foreach ($showActors as $k => $v){?>
 							<li class="cast">

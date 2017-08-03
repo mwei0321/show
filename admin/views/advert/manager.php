@@ -22,7 +22,7 @@
 		<h3>启动页设置</h3>
 		<div>
 			<div class="start-img-wrap"><img></div>
-			<a class="pick-start-banner">更改广告页</a>
+			<a class="pick-start-banner">更改启动页</a>
 		</div>
 	</div>
 	<div class="adver-table-sort">

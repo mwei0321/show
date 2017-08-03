@@ -89,7 +89,7 @@
             									}?>
             								</select>
             								<?php if($val['duty'] == 2){?>
-        										<span class='play'>饰<input type="text" class="theatre-data-input" name="act[]" style="visibility: visible" value="<?= $val['act'] ?>"></span>
+        										<span class='play' style="visibility: visible" >饰&nbsp;<input type="text" class="theatre-data-input" name="act[]" value="<?= $val['act'] ?>"></span>
         									<?php }else {?>
         										<span class='play'><input type="text" class="theatre-data-input" name="act[]" value="<?= $val['act'] ?>">
         									<?php }?>
@@ -108,7 +108,7 @@
         									   echo '<option value="'.$k.'">'.$v.'</option>';
         									}?>
         								</select>
-        								<span class="play"></span>
+        								<span class="play" style="visibility: visible" ></span>
         							</div>
     							<?php }?>
 							</div>
