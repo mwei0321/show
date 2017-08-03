@@ -52,6 +52,9 @@
 		</div>
 
     </section>
+    <script language="JavaScript">
+    window.onbeforeunload = function(event) { return confirm("确定离开此页面吗？");}
+    </script>
 	<script type="text/javascript">
 
 	</script>
