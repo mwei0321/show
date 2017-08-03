@@ -28,7 +28,7 @@
          * @date 2017年2月17日 上午10:42:13
         **/
         function searchShow($_keyword){
-            $showlist = self::find()->select('id show_id,title,cover')->where(['like','title',$_keyword])->orderBy('id DESC')->asArray()->all();
+            $showlist = self::find()->select('id show_id,title,cover,praise,comment_num')->where(['like','title',$_keyword])->orderBy('id DESC')->asArray()->all();
             if($showlist){
                 $showM = new \common\models\Show();
                 foreach ($showlist as $k => $v){
@@ -52,7 +52,7 @@
          * @date 2017年2月17日 上午10:43:58
         **/
         function searchActor($_keyword){
-            $actorlist = self::find()->select('id actor_id,name,avatar')
+            $actorlist = self::find()->select('id actor_id,name,avatar,praise,comment_num')
                         ->from('actor')
                         ->where(['like','name',$_keyword])
                         ->orderBy('id DESC')
@@ -76,7 +76,7 @@
          * @date 2017年2月17日 上午10:52:35
         **/
         function searchDynamic($_keyword){
-            $dynamiclist = self::find()->select('id dynamic_id,title,cover')
+            $dynamiclist = self::find()->select('id dynamic_id,title,cover,praise,comment_num')
                         ->from('dynamic')
                         ->where(['like','title',$_keyword])
                         ->orderBy('id DESC')
