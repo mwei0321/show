@@ -40,8 +40,11 @@
                 $this->_reCode = 204;
                 return $this->_returnJson();
             }
-            $pages = page($this->_count,20);
-            $lists = $showM->getShowList($where,$pages['offset'],$this->mid);
+            $pages = page($this->_count,10);
+            $lists = [];
+            if($pages){
+                $lists = $showM->getShowList($where,$pages['offset'],$this->mid);
+            }
 
             return $this->_returnJson($lists);
         }
