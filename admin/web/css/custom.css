@@ -980,6 +980,9 @@
     color: #333;
 	vertical-align: bottom;
 }
+#crop-avatar{
+	margin:0px !important;
+}
 .adver-table-sort{
 	padding:36px;
 	border-bottom: solid 1px #ddd;

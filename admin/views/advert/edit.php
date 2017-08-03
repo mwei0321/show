@@ -29,23 +29,77 @@
 				</div>
 			</header>
 			<div class="adv-edit-wrap">
-				<form id="advertf">
+				<!--<form id="advertf">-->
+				
 					<div class="edit-item">
 						<label>广告标题</label>
 						<input id="adv-title" type="text" name="title" class="checktitle" emsg="标题不能为空" value="<?php echo $advertInfo->title??'' ?>">
 					</div>
 					<div class="edit-item">
 						<label>广告封面</label>
-						<div class="adv-cover-wrap">
+						<!--<div class="adv-cover-wrap">
 							<div class="adv-cover-show"><img id="thumbImgCover" src="<?php echo ImageUrl,$advertInfo->cover??'' ?>" style="width:320px;"></div>
 							<input type="hidden" name="cover" id="cover" value="<?php echo $advertInfo->cover??'' ?>"/>
 						</div>
 						<div class="adv-cover-operation">
 							<p>图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
-							<a class="pick-start-banner post-change" id="filePicker" <!--data-toggle="modal" data-target="#banner-window"-->上传封面</a>
-						</div>
-						
+							<a class="pick-start-banner post-change" id="filePicker" </a>
+						</div>-->
+						<div class="container" id="crop-avatar">
+            
+            <!-- Current avatar -->
+            <div style="color:red;">提示：点击图片上传</div>
+            <div class="avatar-view" title="Change the avatar">
+                <img src="img/picture.jpg" alt="Avatar"/>
+            </div>
+
+            <!-- Cropping modal -->
+            <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal" type="button">&times;</button>
+                                <h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="avatar-body">
+
+                                    <!-- Upload image and data -->
+                                    <div class="avatar-upload">
+                                        <input class="avatar-src" name="avatar_src" type="hidden"/>
+                                        <input class="avatar-data" name="avatar_data" type="hidden"/>
+                                        <label for="avatarInput">头像上传</label>
+                                        <input class="avatar-input" id="avatarInput" name="avatar_file" type="file"/>
+                                    </div>
+
+                                    <!-- Crop and preview -->
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="avatar-wrapper"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row avatar-btns">
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary btn-block avatar-save" type="submit">Done</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="modal-footer">
+                              <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                            </div> -->
+                        </form>
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+
+            <!-- Loading state -->
+            <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+        </div>
 					</div>
+					
 					<div class="edit-item">
 						<label>广告详情</label>
 						<textarea id="adv-detail" ><?php echo $advertInfo->content??'' ?></textarea>
@@ -55,7 +109,8 @@
 						<input type="hidden" name="advert_id" value="<?php echo $advertInfo->id?? '' ?>"/>
 						<a class="confirm-it draft-it" href="javascript:;" onclick="fromData2($(this),'#advertf',modifyMsgJump);" url="<?= Url::toRoute(['advert/updata'])?>">发布</a>
 					</div>
-				</form>
+				<!--</form>-->
+				
 			</div>
 		</section>
 		</div>
@@ -68,13 +123,13 @@
             <!-- Loading state -->
             <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
         </div>
-	<div class="modal fade" id="banner-window" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+		<div class="modal fade" id="banner-window" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
 			<div class="modal-dialog modal-lg">
 				 <div class="modal-content">
 					<form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
 						<div class="modal-header">
 							<button class="close" data-dismiss="modal" type="button">&times;</button>
-							<h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
+							<h4 class="modal-title" id="avatar-modal-label">更换图片</h4>
 						</div>
 						<div class="modal-body">
 							<div class="avatar-body">
@@ -83,7 +138,7 @@
 								<div class="avatar-upload">
 									<input class="avatar-src" name="avatar_src" type="hidden"/>
 									<input class="avatar-data" name="avatar_data" type="hidden"/>
-									<label for="avatarInput">头像上传</label>
+									<label for="avatarInput">图片上传</label>
 									<input class="avatar-input" id="avatarInput" name="avatar_file" type="file"/>
 								</div>
 
@@ -115,6 +170,9 @@
 <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
 	// 图片上传demo
+		window.onbeforeunload=function(){
+		  return "您创建的演出还未提交，确定要离开吗？";
+		};
 	jQuery(function() {
 	    var $ = jQuery,
 	        $list = $('#fileList'),
