@@ -965,7 +965,7 @@
 }
 .start-img-wrap img{
 	height:100%;
-	width:100%;
+	width:100% !important;
 }
 .pick-start-banner{
 	display: inline-block;
