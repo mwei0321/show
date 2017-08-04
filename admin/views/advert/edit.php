@@ -30,7 +30,7 @@
 			</header>
 			<div class="adv-edit-wrap">
 				<!--<form id="advertf">-->
-				
+
 					<div class="edit-item">
 						<label>广告标题</label>
 						<input id="adv-title" type="text" name="title" class="checktitle" emsg="标题不能为空" value="<?php echo $advertInfo->title??'' ?>">
@@ -45,8 +45,9 @@
 							<p>图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
 							<a class="pick-start-banner post-change" id="filePicker" </a>
 						</div>-->
+						<input type="hidden" name="cover" value="" id="adv-cover"/>
 						<div class="container" id="crop-avatar">
-            
+
             <!-- Current avatar -->
             <div style="color:red;">提示：点击图片上传</div>
             <div class="avatar-view" title="Change the avatar">
@@ -57,7 +58,7 @@
             <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <form class="avatar-form" action="crop.php" enctype="multipart/form-data" method="post">
+                        <form class="avatar-form" action="<?= Url::toRoute('upcropimg')?>" enctype="multipart/form-data" method="post">
                             <div class="modal-header">
                                 <button class="close" data-dismiss="modal" type="button">&times;</button>
                                 <h4 class="modal-title" id="avatar-modal-label">更换头像</h4>
@@ -99,18 +100,18 @@
             <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
         </div>
 					</div>
-					
+
 					<div class="edit-item">
 						<label>广告详情</label>
 						<textarea id="adv-detail" ><?php echo $advertInfo->content??'' ?></textarea>
 						<input type="hidden" name="content" value="" id="contedit" class="check" />
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
-						<input type="hidden" name="advert_id" value="<?php echo $advertInfo->id?? '' ?>"/>
-						<a class="confirm-it draft-it" href="javascript:;" onclick="fromData2($(this),'#advertf',modifyMsgJump);" url="<?= Url::toRoute(['advert/updata'])?>">发布</a>
+						<input type="hidden" name="advert_id" id="adv-id" value="<?php echo $advertInfo->id?? '' ?>"/>
+						<a class="confirm-it draft-it" href="javascript:;" onclick="advertsubmit($(this));" url="<?= Url::toRoute(['advert/updata'])?>">发布</a>
 					</div>
 				<!--</form>-->
-				
+
 			</div>
 		</section>
 		</div>
@@ -167,11 +168,43 @@
 			</div>
 		</div><!-- /.modal -->
 </section>
+<script type="text/javascript">
+
+</script>
+
 <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
+var leaveMsg = 1;
 	// 图片上传demo
+var advertsubmit = function (Obj){
+	var title = $('#adv-title').val();
+	if(!title){
+		mwlayer.error(checkObj.attr('emsg'));
+		return false
+	}
+	var id = $('#adv-id').val();
+	var cover = $('#adv-cover').val();
+	var content = editor.html();
+	$.ajax({
+		type:'post',
+		url : Obj.attr('url'),
+		data:'title='+title+'&cover='+cover+'&content='+content+'&advert_id='+id,
+		success:function(e){
+			mwlayer.msg(e.msg,e.status);
+			if(e.status == 200){
+				leaveMsg = 0;
+				setTimeout(function () {
+					window.location.href='<?= Url::toRoute('index') ?>';
+				},2000);
+			}
+		}
+	});
+}
+
 		window.onbeforeunload=function(){
-		  return "您创建的演出还未提交，确定要离开吗？";
+			if(leaveMsg){
+		  		return "您创建的演出还未提交，确定要离开吗？";
+			}
 		};
 	jQuery(function() {
 	    var $ = jQuery,
@@ -253,5 +286,5 @@
     			items:['undo','redo','forecolor','bold','italic','removeformat','justifyleft','justifycenter','justifyright','justifyfull','image','link'] ,
     		});
     	});
-		
+
 	</script>

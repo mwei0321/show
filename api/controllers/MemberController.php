@@ -84,8 +84,7 @@ class MemberController extends CommonController{
         $sms = new \yii\HPlugin\SendSMS\Message([]);
         $code_arr = $Randcode->createCode($cellphone,11);
         if ( $code_arr['code']==1 ) {
-            $re = $sms->sendRegedistCode( $cellphone,$code_arr['data']['code'],'2' );
-            echo json_decode($re);
+            $sms->sendRegedistCode( $cellphone,$code_arr['data']['code'],'2' );
             return $this->_returnJson();
         } else {
             $this->_reCode = 440;
@@ -162,11 +161,17 @@ class MemberController extends CommonController{
         if ( empty($token) || empty($avatar) || empty($uname) ) $this->_reCode = 440;
         else {
             $Member    = new Member();
-            $re = $Member->updateOne( ['avatar'=>$avatar,'username'=>$uname],$token );
-            if ( empty($re) ) {
-                $this->_reCode = 440;
-                $this->_reMsg = '操作失败，请重试!';
+            if ( !empty($uname) && $Member->ifExistName($uname) ) {
+                $this->_reCode = 2;
+                $this->_reMsg = '用户名已存在!';
+            } else {
+                $re = $Member->updateOne( ['avatar'=>$avatar,'username'=>$uname],$token );
+                if ( empty($re) ) {
+                    $this->_reCode = 440;
+                    $this->_reMsg = '操作失败，请重试!';
+                }
             }
+
         }
         return $this->_returnJson();
     }

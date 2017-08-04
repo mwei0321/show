@@ -133,13 +133,42 @@
         }
 
         /**
+         *
+         * @param  array
+         * @param  string
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年8月3日 下午6:11:09
+        **/
+        function actionUpcropimg(){
+            $request = \Yii::$app->request;
+            require_once ROOT_PATH.'/common/library/CropImg.php';
+
+            $conf = array(
+                'rate'      => array( 'w'=>256,'h'=>120 ),
+                'root_path' => ROOT_PATH.'/upload/advert/'
+            );
+            $crop = @new \CropImg($request->post('avatar_src',''), $request->post('avatar_data',''),$_FILES['avatar_file'],$conf);
+            $path = str_replace('/D:\Web\show/upload','',$crop->getResult());
+            $response = array(
+                'state'  => 200,
+                'message' => $crop -> getMsg(),
+                'result' => $path,
+                'showpath' => ImageUrl.$path
+            );
+
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return $response;
+        }
+
+        /**
          * ajax上传操作
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2017年7月5日 下午6:29:55
          **/
         function beforeAction($action){
-            if(in_array($action->id,['uploadeimg','updata'])){
+            if(in_array($action->id,['uploadeimg','updata','upcropimg'])){
                 $action->controller->enableCsrfValidation = false;
             }
             parent::beforeAction($action);
