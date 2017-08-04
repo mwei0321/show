@@ -48,9 +48,9 @@
             }
 
             $data = [];
-            $data['recently'] = $recentlyShow??[]; //最近
-            $data['coming'] = $comingShow??[]; //即将
-            $data['actor'] = $actorList??[]; //最新加入演员
+            $recentlyShow && $data['recently'] = $recentlyShow; //最近
+            $comingShow && $data['coming'] = $comingShow; //即将
+            $actorList && $data['actor'] = $actorList; //最新加入演员
 
             $this->_returnJson($data);
         }
