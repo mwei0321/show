@@ -29,22 +29,28 @@
             //最近演出
 //             $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
             $recentlyShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>1])->orderBy('id DESC')->asArray()->one();
-            $recentlyShowActorList = $ActorObj->getActorByShowId($recentlyShow['show_id']);
-            $recentlyShow['actor'] = $recentlyShowActorList ? : [];
+            if($recentlyShow){
+                $recentlyShowActorList = $ActorObj->getActorByShowId($recentlyShow['show_id']);
+                $recentlyShow['actor'] = $recentlyShowActorList ? : [];
+            }
             //即将演出
             $comingShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>2])->orderBy('id DESC')->asArray()->one();
-            $comingShowActorList = $ActorObj->getActorByShowId($comingShow['show_id']);
-            $comingShow['actor'] = $comingShowActorList ? : [];
+            if($comingShow){
+                $comingShowActorList = $ActorObj->getActorByShowId($comingShow['show_id']);
+                $comingShow['actor'] = $comingShowActorList ? : [];
+            }
             //最新加入演员
             $actorList = ApiActor::find()->select('id actor_id,name,avatar')->orderBy('ctime DESC')->limit(8)->asArray()->all();
-            foreach ($actorList as $k => $v){
-                $actorList[$k]['avatar'] = ImageUrl.$v['avatar'];
+            if($actorList){
+                foreach ($actorList as $k => $v){
+                    $actorList[$k]['avatar'] = ImageUrl.$v['avatar'];
+                }
             }
 
             $data = [];
-            $data['recently'] = $recentlyShow; //最近
-            $data['coming'] = $comingShow; //即将
-            $data['actor'] = $actorList; //最新加入演员
+            $data['recently'] = $recentlyShow??[]; //最近
+            $data['coming'] = $comingShow??[]; //即将
+            $data['actor'] = $actorList??[]; //最新加入演员
 
             $this->_returnJson($data);
         }
