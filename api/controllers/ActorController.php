@@ -86,7 +86,7 @@
             $count = \common\models\CommonM::find()->where(['actor_id'=>$actorId,'status'=>1])->count();
             $info['actorPhotosNum'] = $count;
             if($count > 0){
-                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['artor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(6)->asArray()->all();
+                $actorPhotos = \common\models\CommonM::find()->select('id `photo_id`,`path`,`size`')->where(['actor_id'=>$actorId,'status'=>1])->orderBy('ctime DESC')->limit(6)->asArray()->all();
                 foreach ($actorPhotos as $k => $v){
                     $actorPhotos[$k]['path'] = ImageUrl.$v['path'];
                 }
