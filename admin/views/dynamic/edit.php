@@ -53,7 +53,8 @@
 
     </section>
     <script language="JavaScript">
-    window.onbeforeunload=function(e){
+    
+		window.onbeforeunload=function(e){
 			var leave = $('body').attr('leaveMsg');
 			if(leave=="1"){
 		  		return "您创建的演出还未提交，确定要离开吗？";
