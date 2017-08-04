@@ -510,6 +510,7 @@
     padding-left: 17px;
     margin-bottom: 25px;
     color: #bbb;
+	display:inline-block;
 }
 .cast-data{
 	margin-top: 60px;
