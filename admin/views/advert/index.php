@@ -34,7 +34,7 @@
     							<div class="adv-poster"><img src="<?= ImageUrl,$v['cover']?>"></div>
     							<div class="adv-info">
     								<p class="adv-word" href=""><?= $v['title'] ?></p>
-    								<div><a class="adv-edit" href="<?= Url::toRoute(['advert/edit',['advert_id'=>$v['id']]]) ?>">编辑</a>
+    								<div><a class="adv-edit" href="<?= Url::toRoute(['advert/edit','advert_id'=>$v['id']]) ?>">编辑</a>
     								<a class="adv-del" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['deladvert','id'=>$v['id']]) ?>" delId="#advert_<?= $v['id'] ?>">删除</a></div>
     							</div>
     						</li>
