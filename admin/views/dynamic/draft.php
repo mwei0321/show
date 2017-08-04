@@ -30,7 +30,7 @@
 					<div class="step-bar">
 						<a class="top-step" href="<?= Url::toRoute(['dynamic/index']) ?>">动态管理</a>
 						<a class="top-step" > - </a>
-						<a class="top-step" href="javascript:;">编辑动态</a>
+						<a class="top-step" href="javascript:;">草稿箱</a>
 					</div>
 				</header>
 				<section class="panel-content scrollbar scroll-y">
