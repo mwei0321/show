@@ -278,7 +278,7 @@
       if ($.isPlainObject(data) && data.state === 200) {
         if (data.result) {
           this.url = data.result;
-
+		$("input[name=cover]").val(data.uppath);
           if (this.support.datauri || this.uploaded) {
             this.uploaded = false;
             this.cropDone();

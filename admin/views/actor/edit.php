@@ -159,7 +159,7 @@
 		    autoClose:true,
 			maxDate: moment(),
 			showDropdowns: true,
-			autoUpdateInput: false,
+			// autoUpdateInput: false,
 // 		    timePickerIncrement: 30,
 		})
     	});
