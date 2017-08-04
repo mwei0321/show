@@ -39,6 +39,7 @@
 						<a class="info-btn info-delet-btn" href="javascript:;" onclick="delById($(this),delmsgJump);" url="<?= Url::toRoute(['actor/delactor','actor_id' => $ActorInfo['id']]) ?>">删除</a>
 					</div>
 					<div class="cast-photo-show">
+						<p class="intro-title">个人简介</p>
 						<?php foreach ($actorphoto as $k => $v){?>
 							<div class="photo-wrap" id="actorphoto_<?= $v['id'] ?>"><a class="cancel-photo" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['delphoto','id'=>$v['id']]) ?>" delId="#actorphoto_<?= $v['id'] ?>"></a><img src="<?= ImageUrl,$v['path'] ?>" width='118px'></div>
 						<?php }?>
