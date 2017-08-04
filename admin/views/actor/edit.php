@@ -81,8 +81,12 @@
 
     <script>
     	// 图片上传demo
-		window.onbeforeunload=function(){
-		  return "您创建的演出还未提交，确定要离开吗？";
+		
+		window.onbeforeunload=function(e){
+			var leave = $('body').attr('leaveMsg');
+			if(leave=="1"){
+		  		return "您创建的演出还未提交，确定要离开吗？";
+			}
 		};
     	jQuery(function() {
     	    var $ = jQuery,

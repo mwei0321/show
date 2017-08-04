@@ -249,6 +249,13 @@
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
 	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
 	<script>
+	
+		window.onbeforeunload=function(e){
+			var leave = $('body').attr('leaveMsg');
+			if(leave=="1"){
+		  		return "您创建的演出还未提交，确定要离开吗？";
+			}
+		};
 		$('.data-start-time').daterangepicker({
     		locale: {
     		  format: 'YYYY-MM-DD HH:mm'
