@@ -149,12 +149,12 @@
                 'root_path' => ROOT_PATH.'/upload/advert/'
             );
             $crop = @new \CropImg($request->post('avatar_src',''), $request->post('avatar_data',''),$_FILES['avatar_file'],$conf);
-            $path = str_replace('/D:\Web\show/upload','',$crop->getResult());
+            $path = str_replace('/'.ROOT_PATH.'/upload','',$crop->getResult());
             $response = array(
                 'state'  => 200,
                 'message' => $crop -> getMsg(),
-                'result' => $path,
-                'showpath' => ImageUrl.$path
+                'result' => ImageUrl.$path,
+                'uppath' => $path
             );
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

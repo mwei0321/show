@@ -37,21 +37,14 @@
 					</div>
 					<div class="edit-item">
 						<label>广告封面</label>
-						<!--<div class="adv-cover-wrap">
-							<div class="adv-cover-show"><img id="thumbImgCover" src="<?php echo ImageUrl,$advertInfo->cover??'' ?>" style="width:320px;"></div>
-							<input type="hidden" name="cover" id="cover" value="<?php echo $advertInfo->cover??'' ?>"/>
-						</div>
-						<div class="adv-cover-operation">
-							<p>图片小于2M你可以上传JPG、JPEG、GIF、PNG或BMP文件。</p>
-							<a class="pick-start-banner post-change" id="filePicker" </a>
-						</div>-->
-						<input type="hidden" name="cover" value="" id="adv-cover"/>
+					
+						<input type="hidden" name="cover" value="<?= $advertInfo->cover??'' ?>" id="adv-cover"/>
 						<div class="container" id="crop-avatar">
 
             <!-- Current avatar -->
             <div style="color:red;">提示：点击图片上传</div>
             <div class="avatar-view" title="Change the avatar">
-                <img src="img/picture.jpg" alt="Avatar"/>
+                <img src="<?= ImageUrl,$advertInfo->cover??'' ?>" alt="Avatar"/>
             </div>
 
             <!-- Cropping modal -->
@@ -174,7 +167,6 @@
 
 <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
-var leaveMsg = 1;
 	// 图片上传demo
 var advertsubmit = function (Obj){
 	var title = $('#adv-title').val();
@@ -192,7 +184,7 @@ var advertsubmit = function (Obj){
 		success:function(e){
 			mwlayer.msg(e.msg,e.status);
 			if(e.status == 200){
-				leaveMsg = 0;
+				$('body').attr('leaveMsg',0);
 				setTimeout(function () {
 					window.location.href='<?= Url::toRoute('index') ?>';
 				},2000);
@@ -201,78 +193,13 @@ var advertsubmit = function (Obj){
 	});
 }
 
-		window.onbeforeunload=function(){
-			if(leaveMsg){
+		window.onbeforeunload=function(e){
+			var leave = $('body').attr('leaveMsg');
+			if(leave=="1"){
 		  		return "您创建的演出还未提交，确定要离开吗？";
 			}
 		};
-	jQuery(function() {
-	    var $ = jQuery,
-	        $list = $('#fileList'),
-	        // 优化retina, 在retina下这个值是2
-	        ratio = window.devicePixelRatio || 1,
-
-	        // 缩略图大小
-	        thumbnailWidth = 100 * ratio,
-	        thumbnailHeight = 100 * ratio,
-
-	        // Web Uploader实例
-	        uploader;
-
-	    // 初始化Web Uploader
-	    uploader = WebUploader.create({
-
-	        // 自动上传。
-	        auto: true,
-
-	        // swf文件路径
-	        swf: '/js/Uploader.swf',
-
-	        // 文件接收服务端。
-	        server: '<?= Url::to(['advert/uploadeimg']) ?>',
-
-	        // 选择文件的按钮。可选。
-	        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-	        pick: '#filePicker',
-	        //文件下标名
-	        fileVal:'file',
-
-	        // 只允许选择文件，可选。
-	        accept: {
-	            title: 'Images',
-	            extensions: 'gif,jpg,jpeg,bmp,png',
-	            mimeTypes: 'image/*'
-	        }
-	    });
-
-	    // 当有文件添加进来的时候
-	    uploader.on( 'fileQueued', function( file ) {
-
-	    });
-
-
-	    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-	    uploader.on( 'uploadSuccess', function( file,respones ) {
-	    	if(respones.status == 200){
-    	    	$("#thumbImgCover").attr('src',respones.path);
-    	    	$("#cover").val(respones.imgPath);
-	    	}
-	    	console.log(respones);
-	    });
-
-	    // 文件上传失败，现实上传出错。
-	    uploader.on( 'uploadError', function( file ) {
-	        var $li = $( '#'+file.id ),
-	            $error = $li.find('div.error');
-
-	        // 避免重复创建
-	        if ( !$error.length ) {
-	            $error = $('<div class="error"></div>').appendTo( $li );
-	        }
-
-	        $error.text('上传失败');
-	    });
-	});
+	
 </script>
     	<script src="kindeditor-4.1.10/kindeditor.js"></script>
         <script src="/js/cropper.min.js"></script>

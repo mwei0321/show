@@ -53,7 +53,12 @@
 
     </section>
     <script language="JavaScript">
-    window.onbeforeunload = function(event) { return confirm("确定离开此页面吗？");}
+    window.onbeforeunload=function(e){
+			var leave = $('body').attr('leaveMsg');
+			if(leave=="1"){
+		  		return "您创建的演出还未提交，确定要离开吗？";
+			}
+		};
     </script>
 	<script type="text/javascript">
 		window.onbeforeunload=function(){
