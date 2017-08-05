@@ -57,6 +57,19 @@
                 'advertInfo'    => $advertInfo,
             ]);
         }
+		
+		
+        /**
+         * 广告编辑
+         * @param  array
+         * @param  string
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年7月26日 下午4:59:46
+        **/
+        function actionInfo(){
+            return $this->render('info',[]);
+        }
 
         /**
          * 广告添加、更新
