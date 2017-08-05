@@ -56,7 +56,11 @@
                                     echo $v['stime'].' 至 '.$v['etime'];
                                 }?>
                                 <div class="theatre-button-group">
-                                    <a class="theatre-button" href="<?= Url::toRoute(['ticket/seat','show_id'=>$v['id']]) ?>">售票情况</a>
+                                	<?php if(!$v['stime']){?>
+                                    	<a class="theatre-button" href="javascript:;" style="background: #aaa">售票情况</a>
+                                    <?php }else{?>
+                                    	<a class="theatre-button" href="<?= Url::toRoute(['ticket/seat','show_id'=>$v['id']]) ?>">售票情况</a>
+                                    <?php }?>
                                     <a class="theatre-button" href="<?= Url::toRoute(['show/edit','id'=>$v['id']]) ?>">编辑详情</a>
                                     <a class="theatre-button-red" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['del-show','id'=>$v['id']]) ?>" delId="#show_<?= $v['id'] ?>">删除</a>
                                 </div>

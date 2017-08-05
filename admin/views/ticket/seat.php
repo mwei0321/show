@@ -74,7 +74,7 @@
 						</div>
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
-						<a class="check-seat" href="javascript:;" url="<?= Url::toRoute(['ticket/timesorder'])?>" timesid = "<?= $times[0]['id'] ?>" onclick="timesorderlist($(this));">查看本场订票人信息</a><a class="confirm-it" href="<?= Url::toRoute(['show/index'])?>">确定</a></div>
+						<a class="check-seat" href="javascript:;" url="<?= Url::toRoute(['ticket/timesorder'])?>" timesid = "<?= $times[0]['id']??0 ?>" onclick="timesorderlist($(this));">查看本场订票人信息</a><a class="confirm-it" href="<?= Url::toRoute(['show/index'])?>">确定</a></div>
 				</div>
 			</section>
 		</div>
@@ -82,7 +82,7 @@
 		  <div class="modal-dialog modal-lg ticket-table-wrap" role="document">
 			<div class="modal-content">
 				<h3 class="">订票人信息</h3>
-				<p>场次：<span id="timestime"><?= date('Y-m-d',$times[0]['stime']).' '.$_week[date('w',$times[0]['stime'])].' '.date('H:i',$times[0]['stime']) ?></span>
+				<p>场次：<span id="timestime"><?= isset($times[0]['stime']) ? (date('Y-m-d',$times[0]['stime']).' '.$_week[date('w',$times[0]['stime'])].' '.date('H:i',$times[0]['stime'])) : '' ?></span>
 				<a href="" target="_link" id="downorder" class="export-seat" >导出列表</a></p>
 				<table class="seat-table">
 					<tr><th>订单序列号</th><th>座位号</th><th>联系方式</th></tr>
@@ -112,7 +112,7 @@
 		var timesorderlist = function (Obj) {
 			var url = Obj.attr('url');
 			var timesid = Obj.attr('timesid');
-			var downurl = '<?= Url::toRoute(['ticket/excel'])?>'+'&times_id='+timesid+'&times='+<?= $times[0]['stime'] ?>+'&show_id=<?= $show_id ?>';
+			var downurl = '<?= Url::toRoute(['ticket/excel'])?>'+'&times_id='+timesid+'&times='+<?= $times[0]['stime']??'' ?>+'&show_id=<?= $show_id ?>';
 			$('#downorder').attr('href',downurl);
 			$.ajax({
 				url:url,
