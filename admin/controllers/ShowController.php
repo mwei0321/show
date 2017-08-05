@@ -33,7 +33,7 @@
         function actionIndex(){
             $where = [];
             $keyword = Yii::$app->request->get('keyword','');
-            $keyword && $where = ['like','title',$keyword];
+            $keyword && $where[] = ['like','title',$keyword];
             $where['status'] = [1,2];
 
             $showModel = new Show();
