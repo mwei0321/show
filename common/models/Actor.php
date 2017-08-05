@@ -80,14 +80,17 @@
          * @date 2017年1月19日 下午3:17:30
         **/
         function getShowActorInfo($_showId){
-            $datas = self::find()
-                    ->select('a.*,sa.duty,sa.act')
-                    ->from('actor a')
-                    ->rightJoin('show_actor sa','a.id = sa.actor_id')
-                    ->where(['sa.show_id'=>$_showId])
-                    ->orderBy('duty ASC')
-                    ->asArray()
-                    ->all();
+//             $datas = self::find()
+//                     ->select('a.*,sa.duty,sa.act')
+//                     ->from('actor a')
+//                     ->rightJoin('show_actor sa','a.id = sa.actor_id')
+//                     ->where(['sa.show_id'=>$_showId])
+//                     ->orderBy('duty ASC')
+// //                     ->createCommand()->getRawSql();
+//                     ->asArray()
+//                     ->all();
+            $sql = "SELECT `a`.*, `sa`.`duty`, `sa`.`act` FROM `actor` `a` RIGHT JOIN `show_actor` `sa` ON a.id = sa.actor_id WHERE `sa`.`show_id`='".$_showId."' ORDER BY `duty`";
+            $datas = \Yii::$app->db->createCommand($sql)->queryAll();
             //处理数据
             $dutyNameList = $this->getActorDutyLists();
             foreach ($datas as $k => $v){
