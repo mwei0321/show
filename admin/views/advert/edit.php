@@ -37,7 +37,7 @@
 					</div>
 					<div class="edit-item">
 						<label>广告封面</label>
-					
+
 						<input type="hidden" name="cover" value="<?= $advertInfo->cover??'' ?>" id="adv-cover"/>
 						<div class="container" id="crop-avatar">
 
@@ -194,12 +194,12 @@ var advertsubmit = function (Obj){
 }
 
 		window.onbeforeunload=function(e){
-			var leave = $('body').attr('leaveMsg');
+			var leave = $('body').attr('leavemsg');
 			if(leave=="1"){
 		  		return "您创建的演出还未提交，确定要离开吗？";
 			}
 		};
-	
+
 </script>
     	<script src="kindeditor-4.1.10/kindeditor.js"></script>
         <script src="/js/cropper.min.js"></script>

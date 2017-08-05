@@ -79,6 +79,7 @@
             if($dyid > 0){
                 $dynamicObj = Dynamic::findOne($dyid);
                 $dynamicObj->status = 1;
+                $dynamicObj->ctime = time();
                 if($dynamicObj->save(false)) $status = 200;
             }
 

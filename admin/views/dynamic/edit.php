@@ -44,7 +44,9 @@
 						</div>
 						<div class="row col-lg-12" style="text-align:center;">
 						<a class="confirm-it draft-it" href="javascript:;" onclick="if(confirm('你确定要发布吗？')){fromData2($(this),'.check',modifyMsgJump);}" url="<?= Url::toRoute(['dynamic/update'])?>">发布</a>
-						<a class="confirm-it save-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update','status'=>2])?>">保存</a>
+						<?php if(!isset($dynamicInfo['status']) || $dynamicInfo['status'] != 1){ ?>
+							<a class="confirm-it save-it" href="javascript:;" onclick="fromData2($(this),'.check',modifyMsgJump);" url="<?= Url::toRoute(['dynamic/update','status'=>2])?>">保存</a>
+						<?php }?>
 						</div>
 					</form>
 				</div>
@@ -53,19 +55,15 @@
 
     </section>
     <script language="JavaScript">
-    
+
 		window.onbeforeunload=function(e){
-			var leave = $('body').attr('leaveMsg');
+			var leave = $('body').attr('leavemsg');
 			if(leave=="1"){
 		  		return "您创建的演出还未提交，确定要离开吗？";
 			}
 		};
     </script>
-	<script type="text/javascript">
-		window.onbeforeunload=function(){
-		  return "您创建的演出还未提交，确定要离开吗？";
-		};
-	</script>
+
     <script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
     	// 图片上传demo

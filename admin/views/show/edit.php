@@ -252,7 +252,7 @@
 	<script>
 
 		window.onbeforeunload=function(e){
-			var leave = $('body').attr('leaveMsg');
+			var leave = $('body').attr('leavemsg');
 			if(leave=="1"){
 		  		return "您创建的演出还未提交，确定要离开吗？";
 			}

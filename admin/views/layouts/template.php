@@ -33,7 +33,7 @@
 
     <script type="text/javascript" src="/js/jquery.min.js"></script>
 </head>
-<body leaveMsg="1">
+<body leavemsg="1">
 
 <?php $this->beginBody() ?>
 <!-- header -->

@@ -38,7 +38,7 @@ var ajaxRequest = function (url,data,callback){
 		data : data,
 		dataType : 'json'
 	}).done(function (reData) {
-			$('body').attr('leaveMsg',0);
+			$('body').attr('leavemsg',0);
 			callback(reData);
 	});
 }

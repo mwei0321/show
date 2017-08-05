@@ -40,7 +40,7 @@
     							<div class="dt-poster"> <a href="<?= Url::to('dynamic/info',['dyid'=>$v['id']]) ?>"><img src="<?= ImageUrl,$v['cover'] ?>"></a></div>
     							<div class="dynamic-info">
     								<a class="dynamic-title" href="<?= Url::to('dynamic/info',['dyid'=>$v['id']]) ?>"><?= $v['title'] ?></a>
-    								<p class="dynamic-time">发布时间：未定</p>
+    								<p class="dynamic-time">保存时间：<?= date('Y-m-d H:i')?></p>
 									<div class="draft-operation"><a class="draft-edit" href="<?= Url::toRoute(['edit','dyid'=>$v['id']]) ?>">编辑</a>
 									<a class="draft-release" href="javascript:;" onclick="issue($(this));" url="<?= Url::toRoute(['issue','dyid'=>$v['id']]) ?>" delId="#dynamic_<?= $v['id'] ?>">发布</a>
 									<a class="draft-del" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['deldynamic','dyid'=>$v['id']]) ?>" delId="#dynamic_<?= $v['id'] ?>">删除</a></div>
