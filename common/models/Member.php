@@ -52,9 +52,9 @@ class Member extends ActiveRecord{
         return md5( md5($pwd) );
     }
 
-    function ifExistName($name){
+    function ifExistName($name,$id){
         $M = $this->findOne(['username'=>$name]);
-        if ( $M ) return true;
+        if ( $M && $M->id!=$id ) return true;
         else return false;
     }
 
@@ -63,6 +63,7 @@ class Member extends ActiveRecord{
         $M = $this->findOne(['id'=>$mid]);
         if ( empty($M) ) return false;
         if ( $data['avatar'] ) $M->avatar = $data['avatar'];
+        if ( $data['username'] ) $M->username = $data['username'];
         return $M->update();
     }
 
