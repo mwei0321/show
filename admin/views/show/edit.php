@@ -120,6 +120,7 @@
 			</section>
 		</div>
 		<script>
+		console.log($('#contedit').val(editor.html()));
 			var actorshow = function (Obj){
 				if(Obj.val()==2){
 					Obj.parent().find(".play").html(' 饰 <input type="text" class=" theatre-data-input" name="act[]">');

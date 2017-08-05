@@ -164,6 +164,7 @@ class MemberController extends CommonController{
             if ( !empty($uname) && $Member->ifExistName($uname) ) {
                 $this->_reCode = 2;
                 $this->_reMsg = '用户名已存在!';
+                $this->_showMsg = '用户名已存在!';
             } else {
                 $re = $Member->updateOne( ['avatar'=>$avatar,'username'=>$uname],$token );
                 if ( empty($re) ) {
