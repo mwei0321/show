@@ -158,18 +158,22 @@ class MemberController extends CommonController{
         $token = \yii::$app->request->get('token');
         $avatar = \yii::$app->request->get('avatar');
         $uname  = \yii::$app->request->get('username');
-        if ( empty($token) || empty($avatar) || empty($uname) ) $this->_reCode = 440;
+        if ( empty($token) && empty($avatar) && empty($uname) ) $this->_reCode = 440;
         else {
             $Member    = new Member();
-            if ( !empty($uname) && $Member->ifExistName($uname) ) {
+            if ( !empty($uname) && $Member->ifExistName($uname,$token) ) {
                 $this->_reCode = 2;
                 $this->_reMsg = '用户名已存在!';
                 $this->_showMsg = '用户名已存在!';
             } else {
                 $re = $Member->updateOne( ['avatar'=>$avatar,'username'=>$uname],$token );
-                if ( empty($re) ) {
+                //var_dump($re);die();
+                if ( $re === false ) {
                     $this->_reCode = 440;
                     $this->_reMsg = '操作失败，请重试!';
+                } elseif ( empty($re) ) {
+                    $this->_reCode = 2;
+                    $this->_reMsg = '无内容修改';
                 }
             }
 
