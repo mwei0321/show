@@ -22,7 +22,7 @@
 				<header class="panel-heading">
 					<div class="row step-bar">
 						<a class="top-step" href="<?= Url::toRoute('dynamic/index')?>">剧场动态管理</a><a class="top-step" > - </a>
-						<a class="top-step" href="javascript:;">编辑动态</a>
+						<a class="top-step" href="javascript:;"><?php if(isset($dynamicInfo['id'])){ ?>编辑<?php }else{ ?>创建<?php }?>动态</a>
 					</div>
 				</header>
 				<div class="row main-info">
