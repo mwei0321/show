@@ -28,14 +28,16 @@
          * @date 2017年2月17日 上午10:42:13
         **/
         function searchShow($_keyword){
-            $showlist = self::find()->select('id show_id,title,cover,praise,comment_num')->where(['like','title',$_keyword])->orderBy('id DESC')->asArray()->all();
+            $where = [];
+            $where = ['like','title',$_keyword];
+            $showlist = self::find()->select('id show_id,title,cover,praise,comment_num')->where(['like','title',$_keyword])->andWhere(['status'=>[1,2]])->orderBy('id DESC')->asArray()->all();
             if($showlist){
                 $showM = new \common\models\Show();
                 foreach ($showlist as $k => $v){
                     //写入演出时间范围
                     $times = $showM->getShowExpire($v['show_id']);
-                    $showlist[$k]['stime'] = date('Y-m-d',$times['stime']);
-                    $showlist[$k]['etime'] = date('Y-m-d',$times['etime']);
+                    $showlist[$k]['stime'] = $times['stime'] > 10 ? date('Y-m-d',$times['stime']) : '时间暂定';
+                    $showlist[$k]['etime'] = $times['stime'] > 10 ? date('Y-m-d',$times['etime']) : '';
                     //头像
                     $showlist[$k]['cover'] = ImageUrl.$v['cover'];
                 }
@@ -79,6 +81,7 @@
             $dynamiclist = self::find()->select('id dynamic_id,title,cover,praise,comment_num')
                         ->from('dynamic')
                         ->where(['like','title',$_keyword])
+                        ->andWhere(['status'=>1])
                         ->orderBy('id DESC')
                         ->asArray()->all();
 

@@ -74,8 +74,8 @@
             $info = $showM->getShowInfoById($_showId);
             //写入演出时间范围
             $times = $showM->getShowExpire($_showId);
-            $info['stime'] = date('Y-m-d',$times['stime']);
-            $info['etime'] = date('Y-m-d',$times['etime']);
+            $info['stime'] = $times['stime'] > 10 ? date('Y-m-d',$times['stime']) : '时间暂定';
+            $info['etime'] = $times['stime'] > 10 ? date('Y-m-d',$times['etime']) : '';
             $info['show_id'] = $_showId;
             $info['cover'] = ImageUrl.$info['cover'];
             $info['isPraise'] = 0;

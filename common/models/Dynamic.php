@@ -30,7 +30,7 @@
          * @date 2017年2月6日 上午11:47:12
         **/
         function getDynamicList($_where = 1,$_offset = 'count'){
-            $dynamicM = self::find()->where($_where);
+            $dynamicM = self::find()->where($_where)->andWhere(['status'=>1]);
             if((string)$_offset == 'count'){
                 return $dynamicM->count();
             }

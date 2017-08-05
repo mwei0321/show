@@ -30,13 +30,15 @@
                 $ticketM = new Ticket();
                 $times = $ticketM->getShowTimesById($showId);
                 //                 var_dump($times);exit;
-                $timesId = $times[0]['id'];
-                //预留座位
-                $ReservedSeat = $ticketM->getShowTimesReserved($timesId);
-                $ReservedSeat = $ReservedSeat ? arr2to1($ReservedSeat,'seat_id') : [];
-                //已售座位
-                $buySeat = $ticketM->getShowTicketSellInfo($timesId);
-                $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
+                $timesId = $times[0]['id']??0;
+                if($timesId > 0){
+                    //预留座位
+                    $ReservedSeat = $ticketM->getShowTimesReserved($timesId);
+                    $ReservedSeat = $ReservedSeat ? arr2to1($ReservedSeat,'seat_id') : [];
+                    //已售座位
+                    $buySeat = $ticketM->getShowTicketSellInfo($timesId);
+                    $buySeat = $buySeat ? arr2to1($buySeat,'seat_id') : [];
+                }
                 //订单
 //                 $order = \common\models\TicketOrder::getOrderList($timesId);
             }
@@ -46,8 +48,8 @@
                 'ticket'    => $ticket,
                 'show_id'   => $showId,
                 'times_id'  => $timesId,
-                'reserved'  => $ReservedSeat,
-                'buyseat'   => $buySeat,
+                'reserved'  => $ReservedSeat??[],
+                'buyseat'   => $buySeat??[],
 //                 'order'     => $order,
                 'seatNum'   => $ticketM->_RoomSeatNum($roomId),
             ]);
