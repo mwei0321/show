@@ -26,7 +26,6 @@
         **/
         function actionIndex(){
             $where = [];
-            $where['status'] = 1;
             //搜索条件
             $keyword = Yii::$app->request->get('keyword','');
             $keyword && $where = ['like','title',$keyword];

@@ -33,8 +33,7 @@
         function actionIndex(){
             $where = [];
             $keyword = Yii::$app->request->get('keyword','');
-            $keyword && $where[] = ['like','title',$keyword];
-            $where['status'] = [1,2];
+            $keyword && $where = ['like','title',$keyword];
 
             $showModel = new Show();
             $count = $showModel->getShowList($where);
@@ -51,7 +50,7 @@
                 $lists[$k]['stime'] = $times['stime'] ? date('Y-m-d',$times['stime']) : null;
                 $lists[$k]['etime'] = date('Y-m-d',$times['etime']);
             }
-// var_dump($lists);exit;
+
             return $this->render('index',[
                 'lists'     => $lists,
                 'pages'     => $pageM,

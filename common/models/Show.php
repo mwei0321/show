@@ -49,7 +49,7 @@
          * @date 2017年1月18日 上午10:04:03
         **/
         function getShowList($_where = 1,$_offset = 'count'){
-            $showM = self::find()->where($_where);
+            $showM = self::find()->where($_where)->andWhere(['status'=>[1,2]]);
             if((string)$_offset == 'count'){
                 return $showM->count();
             }
