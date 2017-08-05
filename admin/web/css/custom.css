@@ -1110,6 +1110,7 @@
     color: #333;
     font-size: 18px;
 	height: 66px;
+	display:inline-block;
 }
 .adv-edit:hover,
 .adv-edit{
