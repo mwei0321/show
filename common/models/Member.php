@@ -25,7 +25,7 @@ class Member extends ActiveRecord{
         $haveS = $this->M->where(['cellphone'=>$useranme,'status'=>1])->asArray()->one();
         if ( empty($haveS) ) $haveS = $this->M->where(['username'=>$useranme,'status'=>1])->asArray()->one();
         if ( $haveS && $this->encodePwd($pwd)==$haveS['passwd'] ) {
-            return ['member_id'=>$haveS['id'],'username'=>$haveS['username'],'cellphone'=>$haveS['cellphone'],'avatar'=>$haveS['avatar']?:'http://stage2.getop.cc/avatar/default-avatar.png'];
+            return ['member_id'=>$haveS['id'],'username'=>$haveS['username'],'cellphone'=>$haveS['cellphone'],'avatar'=>$haveS['avatar']?:ImageUrl.'/avatar/default-avatar.png'];
         }
         else return false;
     }
@@ -50,6 +50,12 @@ class Member extends ActiveRecord{
     function encodePwd($pwd){
         if ( ! is_string($pwd) ) return false;
         return md5( md5($pwd) );
+    }
+
+    function ifExistName($name){
+        $M = $this->findOne(['username'=>$name]);
+        if ( $M ) return true;
+        else return false;
     }
 
     function updateOne($data,$mid){
