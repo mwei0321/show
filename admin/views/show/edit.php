@@ -136,6 +136,7 @@
 			}
 			var submit = function () {
 				var title = $('.checktitle').val();
+				$('body').attr('leavemsg',0);
 				if(title){
     				$('#contedit').val(editor.html());
     				$("#addshow").submit();
@@ -249,7 +250,7 @@
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
 	<script charset="utf-8" src="/kindeditor-4.1.10/kindeditor.js"></script>
 	<script>
-	
+
 		window.onbeforeunload=function(e){
 			var leave = $('body').attr('leaveMsg');
 			if(leave=="1"){
