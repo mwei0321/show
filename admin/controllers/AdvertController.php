@@ -30,7 +30,7 @@
                 'pageSize'=>20,
                 'pageParam'=>'p',
             ]);
-            $lists = Advert::find()->offset($pageM->offset)->limit(20)->all();
+            $lists = Advert::find()->offset($pageM->offset)->limit(20)->orderBy('id DESC')->all();
 
             return $this->render('index',[
                 'lists'  => $lists ? : [],
