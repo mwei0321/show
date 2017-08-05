@@ -214,7 +214,7 @@
          * @date 2017年7月19日 下午3:51:51
         **/
         function actionUpstartlogo(){
-            $fileInfo = (new \common\models\Uploade('startlogo',['isDate'=>false]))->uploadeImg('startlogo');
+            $fileInfo = (new \common\models\Uploade('startlogo',['isDate'=>false]))->uploadeImg();
             //修改启动logo
             \common\models\CommonM::setTabelName('start_logo');
             if($fileInfo['size'] > 0){
