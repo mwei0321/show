@@ -124,10 +124,13 @@
             if($orderId > 0){ //订单ID过滤
                 $orderInfo = \common\models\Order::find()->where([
                     'id'        => $orderId,
-                    'member_id' => $this->mid,
-                    'status'    => 1,
                 ])->one();
-                if($orderInfo->id > 0){ //该人是否有该订单信息
+                if ($orderInfo->member_id != $this->mid){
+                    $this->_reCode = 440;
+                }elseif($orderInfo->status == 7){
+                    $this->_reCode = 400;
+                    $this->_showMsg = '已退过票！请误重复操作！';
+                }elseif($orderInfo->id > 0 && $orderInfo->status = 1){ //该人是否有该订单信息
                     $timesInfo = (new \common\models\Ticket())->getTimesByIds($orderInfo->times_id);
                     $timesInfo = array_shift($timesInfo);
                     if($timesInfo['stime'] > (time()+1800)){ //判断退票时间为开场30分钟以前
