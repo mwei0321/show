@@ -30,7 +30,7 @@
                 'pageSize'=>20,
                 'pageParam'=>'p',
             ]);
-            $lists = Advert::find()->offset($pageM->offset)->limit(20)->all();
+            $lists = Advert::find()->offset($pageM->offset)->where(['status'=>1])->limit(20)->orderBy('id DESC')->all();
 
             return $this->render('index',[
                 'lists'  => $lists ? : [],
@@ -57,8 +57,8 @@
                 'advertInfo'    => $advertInfo,
             ]);
         }
-		
-		
+
+
         /**
          * 广告编辑
          * @param  array
@@ -68,7 +68,16 @@
          * @date 2017年7月26日 下午4:59:46
         **/
         function actionInfo(){
-            return $this->render('info',[]);
+            $advertId = Yii::$app->request->get('advert_id',0);
+            if($advertId > 0){
+                $advertInfo = Advert::findOne($advertId);
+            }else {
+                return $this->redirect(['advert/index']);
+            }
+
+            return $this->render('info',[
+                'advertInfo'    => $advertInfo,
+            ]);
         }
 
         /**

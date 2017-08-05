@@ -158,7 +158,7 @@ class MemberController extends CommonController{
         $token = \yii::$app->request->get('token');
         $avatar = \yii::$app->request->get('avatar');
         $uname  = \yii::$app->request->get('username');
-        if ( empty($token) || empty($avatar) || empty($uname) ) $this->_reCode = 440;
+        if ( empty($token) && empty($avatar) && empty($uname) ) $this->_reCode = 440;
         else {
             $Member    = new Member();
             if ( !empty($uname) && $Member->ifExistName($uname,$token) ) {

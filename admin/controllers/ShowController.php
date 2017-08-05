@@ -76,7 +76,7 @@
             $showInfo['etime'] = date('Y-m-d',$times['etime']);
             //获取演员列表
             $actorObj = new Actor();
-            $showActors = $actorObj->getShowActorInfo(['show_id'=>$showId]);
+            $showActors = $actorObj->getShowActorInfo($showId);
 
             //获取场次
             $timesList = (new Ticket())->getShowTimesById($showId);
@@ -164,10 +164,10 @@
                 $showModel->ctime   =   time();
             }
             //时间判断
-            if(!Yii::$app->request->post('time',[])){
-                $showModel->status = 2;
-            }else
+            if((Yii::$app->request->post('timesids',[])) || (Yii::$app->request->post('time',[]))){
                 $showModel->status = 1;
+            }else
+                $showModel->status = 2;
 
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
@@ -180,20 +180,7 @@
                 $isTime = 1;
                 if(Yii::$app->request->post('time',[])){
                        $isTime = $this->_updataTimes($showId);
-//                     $showModel->deleteShowTimesByShowIds($showId);
-//                     if($time && is_array($time)){
-//                         foreach ($time as $k => $v){
-//                             $showTimes = new CommonModel('show_times');
-//                             $showTimes->show_id = $showId;
-//                             $showTimes->room_id = 1;
-//                             $showTimes->stime   = strtotime($v);
-//                             $showTimes->ctime   = time();
-//                             $showTimes->save(false);
-//                         }
-//                     }
-
                 }
-
 
                 //删除演员
                 (new CommonModel('show_actor'))->deleteAll(['show_id'=>$showModel->id]);
@@ -258,19 +245,19 @@
             $request = Yii::$app->request;
 
             $isTime = 1;
-            //更新场次
-            $timesIds = $request->post('timesids','');
-            if($timesIds){
-                $timesIds = explode(',', substr($timesIds,0,-1));
-                foreach ($timesIds as $k => $v){
-                    $stime = $request->post('times_'.$v,'');
-                    $stime = strtotime($stime);
-                    $TimesM = \admin\models\ShowTimes::findOne(['id'=>$v]);
-                    $TimesM->stime = $stime;
-                    $TimesM->save();
-                }
-                $isTime = 0;
-            }
+//             //更新场次
+//             $timesIds = $request->post('timesids','');
+//             if($timesIds){
+//                 $timesIds = explode(',', substr($timesIds,0,-1));
+//                 foreach ($timesIds as $k => $v){
+//                     $stime = $request->post('times_'.$v,'');
+//                     $stime = strtotime($stime);
+//                     $TimesM = \admin\models\ShowTimes::findOne(['id'=>$v]);
+//                     $TimesM->stime = $stime;
+//                     $TimesM->save();
+//                 }
+//                 $isTime = 0;
+//             }
             //插入新场次
             $times = Yii::$app->request->post('time',[]);
             if($times && is_array($times)){

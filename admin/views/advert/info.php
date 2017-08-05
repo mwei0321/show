@@ -26,17 +26,37 @@
 					</div>
 				</header>
 				<div class="row main-info" style="margin-top:20px;">
-					<h3 class="advert-info-title">广告标题！！！</h3>
-					<div class="banner-view"><img src=""></div>
+					<h3 class="advert-info-title"><?= $advertInfo->title ?? '' ?></h3>
+					<div class="banner-view"><img src="<?= ImageUrl,$advertInfo->cover??'' ?>"></div>
 					<div class="info-button-group">
-						<a class="info-btn info-edit-btn" href="">编辑</a>
-						<a class="info-btn info-delet-btn" href="javascript:;">删除</a>
+						<a class="info-btn info-edit-btn" href="<?= Url::toRoute(['edit','advert_id'=>$advertInfo->id??0])?>">编辑</a>
+						<a class="info-btn info-delet-btn" href="javascript:;" onclick="deladvert($(this));" url="<?= Url::toRoute(['deladvert','id'=>$advertInfo['id']??0]) ?>">删除</a>
 					</div>
 				</div>
 				<div class="row">
-					<article class="dynamic-text">广告内容！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！</article>
+					<article class="dynamic-text"><?= $advertInfo->content??'' ?></article>
 				</div>
 			</section>
 		</div>
 
     </section>
+    <script>
+		var deladvert = function (obj) {
+    			if(!confirm('你确定要删除吗？')) return false;
+    			var url = obj.attr('url');
+    			$.ajax({
+    				type:'get',
+    				url	: url,
+    				success:function (e){
+    					if(e.status == 200){
+    						mwlayer.success('删除成功！');
+    						setTimeout(function () {
+    							window.location.href='<?= Url::toRoute(['index'])?>';
+    						},2000);
+    						return false;
+    					}
+    					mwlayer.error('删除失败！');
+    				}
+    			});
+			}
+    </script>
