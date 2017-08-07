@@ -133,11 +133,10 @@
             $dyId = $request->post('dyid',0);
             if($dyId > 0){
                 $dynamicM = Dynamic::findOne($dyId);
-                $dynamicM->utime = time();
             }else{
                 $dynamicM = new Dynamic();
-                $dynamicM->ctime = time();
             }
+            $dynamicM->ctime = time();
 
             $dynamicM->title    =   $request->post('title','');
             $dynamicM->cover    =   $request->post('cover','');
