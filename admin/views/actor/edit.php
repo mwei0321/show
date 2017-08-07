@@ -67,7 +67,7 @@
 						<input type="hidden" name="intro" value="" id="contedit" class="check"/>
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" href="javascript:;" onclick="fromData2($(this),'#artorSubmit',modifyMsgJump);" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
+						<a class="confirm-it" id="confirm-actor" href="javascript:;" isup="1" onclick="fromData2($(this),'#artorSubmit',modifyMsgJump);" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
 					</div>
 				</form>
 			</div>
@@ -141,6 +141,7 @@
     	    	}
     	    	console.log(respones);
     	    });
+			
 
     	    // 文件上传失败，现实上传出错。
     	    uploader.on( 'uploadError', function( file ) {
@@ -197,12 +198,23 @@
 	    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
 	    uploader2.on( 'uploadSuccess', function( file,respones ) {
 	    	if(respones.status == 200){
+				$("#confirm-actor").attr("isup","1");
 		    	var html = '<input type="hidden" value="'+respones.imgPath+'" name="photo[]" />';
 				$('#photolist').append(html);
 	    	}
-	    	console.log(respones);
+			
+			
+			
+			//上传图片仍队列中的数量，0为上传完成；
+			console.log(uploader2.getStats().progressNum);
 	    });
 
+		// 文件上传中，给item添加成功class, 用样式标记上传成功。
+		uploader2.on( 'uploadProgress', function( file,respones ) {
+			// $("#confirm-actor").attr("isup","0");
+			// $("#confirm-actor").html("正在上传")
+		});
+		
 		uploader2.on( 'fileQueued', function( file ) {
 			var $li = $(
 					'<div id="' + file.id + '" class="file-item thumbnail">' +
