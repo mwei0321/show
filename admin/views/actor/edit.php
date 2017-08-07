@@ -67,13 +67,22 @@
 						<input type="hidden" name="intro" value="" id="contedit" class="check"/>
 					</div>
 					<div class="row col-lg-12" style="text-align:center;">
-						<a class="confirm-it" id="confirm-actor" href="javascript:;" isup="1" onclick="fromData2($(this),'#artorSubmit',modifyMsgJump);" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
+						<a class="confirm-it" id="confirm-actor" href="javascript:;" isup="1" onclick="actorup($(this));" url="<?= Url::toRoute(['actor/update'])?>">提交修改</a>
 					</div>
 				</form>
 			</div>
 		</section>
 	</div>
-
+<script type="text/javascript">
+	var actorup = function(Obj){
+			if(uploader2.getStats().progressNum == 0){
+				fromData2(Obj,'#artorSubmit',modifyMsgJump);
+			}else{
+				alert('照片还没有上传完成！');
+				return false;
+			}
+		}
+</script>
 </section>
 	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/daterangepicker/moment.min.js"></script>
@@ -141,7 +150,7 @@
     	    	}
     	    	console.log(respones);
     	    });
-			
+
 
     	    // 文件上传失败，现实上传出错。
     	    uploader.on( 'uploadError', function( file ) {
@@ -202,9 +211,9 @@
 		    	var html = '<input type="hidden" value="'+respones.imgPath+'" name="photo[]" />';
 				$('#photolist').append(html);
 	    	}
-			
-			
-			
+
+
+
 			//上传图片仍队列中的数量，0为上传完成；
 			console.log(uploader2.getStats().progressNum);
 	    });
@@ -214,7 +223,7 @@
 			// $("#confirm-actor").attr("isup","0");
 			// $("#confirm-actor").html("正在上传")
 		});
-		
+
 		uploader2.on( 'fileQueued', function( file ) {
 			var $li = $(
 					'<div id="' + file.id + '" class="file-item thumbnail">' +
