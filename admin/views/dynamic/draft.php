@@ -35,18 +35,18 @@
 				</header>
 				<section class="panel-content scrollbar scroll-y">
 					<ul class="dynamic-list">
-							<?php foreach ($list as $k => $v){?>
+							<?php if($list){ foreach ($list as $k => $v){?>
     						<li	class="dynamic-block" id="dynamic_<?= $v['id'] ?>">
     							<div class="dt-poster"> <a href="<?= Url::to('dynamic/info',['dyid'=>$v['id']]) ?>"><img src="<?= ImageUrl,$v['cover'] ?>"></a></div>
     							<div class="dynamic-info">
     								<a class="dynamic-title" href="<?= Url::to('dynamic/info',['dyid'=>$v['id']]) ?>"><?= $v['title'] ?></a>
-    								<p class="dynamic-time">保存时间：<?= date('Y-m-d H:i')?></p>
+    								<p class="dynamic-time">保存时间：<?= date('Y-m-d H:i',$v['ctime'])?></p>
 									<div class="draft-operation"><a class="draft-edit" href="<?= Url::toRoute(['edit','dyid'=>$v['id']]) ?>">编辑</a>
 									<a class="draft-release" href="javascript:;" onclick="issue($(this));" url="<?= Url::toRoute(['issue','dyid'=>$v['id']]) ?>" delId="#dynamic_<?= $v['id'] ?>">发布</a>
 									<a class="draft-del" href="javascript:;" onclick="delshow($(this));" url="<?= Url::toRoute(['deldynamic','dyid'=>$v['id']]) ?>" delId="#dynamic_<?= $v['id'] ?>">删除</a></div>
     							</div>
     						</li>
-    						<?php } ?>
+    						<?php } }?>
 					</ul>
 				</section>
 			</section>

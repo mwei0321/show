@@ -66,7 +66,7 @@
         **/
         function uploadeImg($_fileName = null){
             //文件绝对路径
-            $this->fileName = $_fileName ? ($_fileName.'.'.$this->fileType) :$this->filePrefix.date('YmdHis').rand(2000,99999).'.'.$this->fileType;
+            $this->fileName = $_fileName ? ($_fileName.'.'.$this->fileType) :$this->filePrefix.date('YmdHis').substr(time(),-1,7).rand(2,999999).'.'.$this->fileType;
 //             $this->fileName = autoCharset(($_fileName ? $_fileName : $this->fileObj['name']),'utf-8','gbk');
             $this->fileAbsPath = $this->absRootPath.$this->path.$this->fileName;
             if(!move_uploaded_file($this->fileObj['tmp_name'], $this->fileAbsPath)) {
