@@ -129,7 +129,7 @@
             //获取评论数
             $this->_count = $showCommentObj->getShowCommentList($where);
             if($this->_count > 0 && $page = page($this->_count,$this->_num)){
-                $list = $showCommentObj->getShowCommentList($where,$page['offset']);
+                $list = $showCommentObj->getShowCommentList($where,$page['offset'],$this->_num);
             }else{
                 $this->_reCode = 204;
                 return $this->_returnJson();
@@ -151,7 +151,7 @@
             $commentObj->show_id    = $request->post('show_id',0);
             $commentObj->member_id  = $this->mid;
             $commentObj->ctime      = time();
-            $commentObj->content    = $_REQUEST['content']??'';
+            $commentObj->content    = $_REQUEST['content'];
             $commentObj->reply_id   = $request->post('reply_id',0);
             if($commentObj->reply_id > 0){
                 $replyMid = \common\models\ShowComment::findOne($commentObj->reply_id);

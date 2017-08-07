@@ -166,7 +166,7 @@
             //获取评论数
             $this->_count = $actorCommentObj->getActorCommentList($where);
             if($this->_count > 0 && $page = page($this->_count,$this->_num)){
-                $list = $actorCommentObj->getActorCommentList($where,$page['offset']);
+                $list = $actorCommentObj->getActorCommentList($where,$page['offset'],$this->_num);
             }else{
                 $this->_reCode = 204;
                 return $this->_returnJson();

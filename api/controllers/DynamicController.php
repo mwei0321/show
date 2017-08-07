@@ -91,8 +91,9 @@
             $where['status']        = 1;
             //获取评论数
             $this->_count = $dynamicCommentObj->getDynamicCommentList($where);
-            if($this->_count > 0 && $page = page($this->_count,$this->_num)){
-                $list = $dynamicCommentObj->getDynamicCommentList($where,$page['offset']);
+            $page = page($this->_count,$this->_num);
+            if($this->_count > 0 && $page){
+                $list = $dynamicCommentObj->getDynamicCommentList($where,$page['offset'],$this->_num);
             }else{
                 $this->_reCode = 204;
                 return $this->_returnJson();

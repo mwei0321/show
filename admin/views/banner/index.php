@@ -31,12 +31,12 @@
 		<table width="" border="1">
 		  <tbody id="bannerlist">
 		    <?php foreach ($banner as $k => $v){?>
-    			<tr banid="<?= $v['banner_id'] ?>">
+    			<tr banid="<?= $v['banner_id'] ?>" id="banid_<?= $v['banner_id'] ?>">
     			  <td width="80%"><?= $v['title'] ?></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
     			  <td width="5%"><a class="exchange-adv" banner_id="<?= $v['banner_id'] ?>" href="javascript:void(0)">✎</a></td>
-    			  <td width="5%"><a >删除</a></td>
+    			  <td width="5%"><a href="javascript:void(0)" onclick="delshow($(this));" delid="#banid_<?= $v['banner_id'] ?>"  url="<?= Url::toRoute(['delbanner','dyid'=>$v['banner_id']]) ?>">删除</a></td>
     			</tr>
 			<?php }?>
 		  </tbody>
@@ -59,7 +59,7 @@
 				<ul>
 					<?php foreach ($advert as $k => $v){?>
 						<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn">
-						<a onclick="changebanner($(this),1,<?= $v['id'] ?>)" class="replacebanner" replaceid = "2">选择广告</a></div></li>
+						<a onclick="changebanner($(this),1,<?= $v['id'] ?>)" class="replacebanner" replaceid = "0">选择广告</a></div></li>
 					<?php }?>
 				</ul>
 				</div>
@@ -69,7 +69,7 @@
 					<?php foreach ($dynamic as $k => $v){?>
 						<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn">
 
-						<a onclick="changebanner($(this),2,<?= $v['id'] ?>)" class="replacebanner" replaceid = "2">选择广告</a></div></li>
+						<a onclick="changebanner($(this),2,<?= $v['id'] ?>)" class="replacebanner" replaceid = "0">选择广告</a></div></li>
 					<?php }?>
 				</ul role="tabpanel" id="show">
 				</div>
@@ -79,7 +79,7 @@
 					<?php foreach ($show as $k => $v){?>
 						<li><div class="adver-list-img"><img src="<?= ImageUrl,$v['cover'] ?>"></div><span style="width:60%;"><?= $v['title'] ?></span><div class="adver-list-btn">
 
-						<a onclick="changebanner($(this),3,<?= $v['id'] ?>)" class="replacebanner" replaceid = "2">选择广告</a></div></li>
+						<a onclick="changebanner($(this),3,<?= $v['id'] ?>)" class="replacebanner" replaceid = "0">选择广告</a></div></li>
 					<?php }?>
 				</ul>
 				</div>
@@ -243,7 +243,7 @@
 		$(".adv-type a").removeClass("active");
 		$(this).addClass("active");
 	})
-	
+
 	$("#add-adv").click(function(){
 		$('.bs-example-modal-lg').modal('show');
 	})
