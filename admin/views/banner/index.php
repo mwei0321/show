@@ -27,14 +27,16 @@
 	</div>
 	<div class="adver-table-sort">
 		<h3>演出页面顶部广告设置</h3>
+		<a id="add-adv" style="cursor:pointer; display:inline-block; border:solid 1px #333; padding:5px 5px; border-radius:6px;">添加顶部广告显示</a>
 		<table width="" border="1">
 		  <tbody id="bannerlist">
 		    <?php foreach ($banner as $k => $v){?>
     			<tr banid="<?= $v['banner_id'] ?>">
-    			  <td width="85%"><?= $v['title'] ?></td>
+    			  <td width="80%"><?= $v['title'] ?></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveUp(this)">▲</a></td>
     			  <td width="5%"><a href="javascript:void(0)" onclick="moveDown(this)">▼</a></td>
     			  <td width="5%"><a class="exchange-adv" banner_id="<?= $v['banner_id'] ?>" href="javascript:void(0)">✎</a></td>
+    			  <td width="5%"><a >删除</a></td>
     			</tr>
 			<?php }?>
 		  </tbody>
@@ -240,5 +242,9 @@
 	$(".adv-type a").click(function(){
 		$(".adv-type a").removeClass("active");
 		$(this).addClass("active");
+	})
+	
+	$("#add-adv").click(function(){
+		$('.bs-example-modal-lg').modal('show');
 	})
 </script>
