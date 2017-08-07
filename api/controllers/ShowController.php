@@ -151,7 +151,7 @@
             $commentObj->show_id    = $request->post('show_id',0);
             $commentObj->member_id  = $this->mid;
             $commentObj->ctime      = time();
-            $commentObj->content    = $request->post('content','');
+            $commentObj->content    = $_REQUEST['content']??'';
             $commentObj->reply_id   = $request->post('reply_id',0);
             if($commentObj->reply_id > 0){
                 $replyMid = \common\models\ShowComment::findOne($commentObj->reply_id);
