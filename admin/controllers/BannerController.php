@@ -120,6 +120,12 @@
                 $bannerObj->obj_id = $id;
                 $bannerObj->save(false);
                 $status = 200;
+            }else{
+                $bannerObj = new Banner();
+                $bannerObj->type = $type;
+                $bannerObj->obj_id = $id;
+                $bannerObj->save(false);
+                $status = 200;
             }
 
             $reArray = [
