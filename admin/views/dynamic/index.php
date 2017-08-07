@@ -33,15 +33,15 @@
 			<section class="panel">
 				<section class="panel-content scrollbar scroll-y">
 					<ul class="dynamic-list">
-						<?php foreach ($lists as $k => $v){?>
+						<?php if($lists){ foreach ($lists as $k => $v){?>
     						<li	class="dynamic-block">
     							<div class="dt-poster"> <a href="<?= Url::toRoute(['dynamic/info','dyid'=>$v['id']]) ?>"><img src="<?= ImageUrl.$v['cover'] ?>"></a></div>
     							<div class="dynamic-info">
     								<a class="dynamic-title" href="<?= Url::toRoute(['dynamic/info','dyid'=>$v['id']]) ?>"><?= $v['title'] ?></a>
-    								<p class="dynamic-time">发布时间：<?= date('Y-m-d H:i',$v['ctime']) ?></p>
+    								<p class="dynamic-time">发布时间：<?= date('Y-m-d H:i',$v['utime']) ?></p>
     							</div>
     						</li>
-						<?php }?>
+						<?php }}?>
 					</ul>
 				</section>
 			</section>

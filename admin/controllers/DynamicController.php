@@ -80,6 +80,7 @@
                 $dynamicObj = Dynamic::findOne($dyid);
                 $dynamicObj->status = 1;
                 $dynamicObj->ctime = time();
+                $dynamicObj->utime = time();
                 if($dynamicObj->save(false)) $status = 200;
             }
 
@@ -133,8 +134,14 @@
             $dyId = $request->post('dyid',0);
             if($dyId > 0){
                 $dynamicM = Dynamic::findOne($dyId);
+                if(($request->get('status',1) == 1) && $dynamicM->utime < 100){
+                    $dynamicM->utime = time();
+                }
             }else{
                 $dynamicM = new Dynamic();
+                if($request->get('status',1) == 1){
+                    $dynamicM->utime = time();
+                }
             }
             $dynamicM->ctime = time();
 
