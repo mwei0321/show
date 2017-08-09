@@ -220,9 +220,9 @@
 		});
 		uploader2.on("error",function (type){
 			if (type=="Q_TYPE_DENIED"){
-				dialogMsg("myModal","messageP","请上传正确格式文件");
+				alert("请上传正确格式文件");
 			}else if(type=="F_EXCEED_SIZE"){
-				dialogMsg("myModal","messageP","文件大小不能超过2M");
+				alert("文件大小不能超过2M");
 			}
 		});
 	    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
