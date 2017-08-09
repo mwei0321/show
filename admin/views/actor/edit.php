@@ -206,6 +206,8 @@
 			// 选择文件的按钮。可选。
 			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
 			pick: '#filePicker2',
+			
+			fileSingleSizeLimit: 2*1024*1024 ,
 
 			// 只允许选择图片文件。
 			accept: {
@@ -215,6 +217,13 @@
 			},
 			//'
 
+		});
+		uploader2.on("error",function (type){
+			if (type=="Q_TYPE_DENIED"){
+				dialogMsg("myModal","messageP","请上传正确格式文件");
+			}else if(type=="F_EXCEED_SIZE"){
+				dialogMsg("myModal","messageP","文件大小不能超过2M");
+			}
 		});
 	    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
 	    uploader2.on( 'uploadSuccess', function( file,respones ) {
