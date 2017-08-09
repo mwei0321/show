@@ -17,6 +17,7 @@
     $this->title = '动态编辑修改';
 ?>
 <link rel="stylesheet" href="js/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="css/loaders.css">
 <section class="main padder">
 	<div class="col-lg-12" style="margin-top:30px;">
 		<section class="panel">
@@ -56,6 +57,17 @@
 					<div class="row col-lg-12"><label>出生地</label><input type="text" id="data-cast-land"  name="address" value="<?= $ActorInfo['address'] ??null?>" class="check theatre-data-input"></input></div>
 					<div class="row col-lg-12"><label>上传图片</label>
 						<div id="uploader-demo">
+							<div class="upload-loading-wrap">
+								<div class="loader">
+								<div class="loader-inner line-scale">
+								  <div></div>
+								  <div></div>
+								  <div></div>
+								  <div></div>
+								  <div></div>
+								</div>
+							  </div>
+							</div>
 							<!--用来存放item-->
 							<div id="fileList" class="uploader-list"></div>
 							<div class="file-photo" id="filePicker2">上传图片</div>
@@ -75,13 +87,13 @@
 	</div>
 <script type="text/javascript">
 	var actorup = function(Obj){
-			if(uploader2.getStats().progressNum == 0){
-				fromData2(Obj,'#artorSubmit',modifyMsgJump);
-			}else{
-				alert('照片还没有上传完成！');
-				return false;
-			}
+		if(uploader2.getStats().progressNum == 0){
+			fromData2(Obj,'#artorSubmit',modifyMsgJump);
+		}else{
+			alert('照片还没有上传完成！');
+			return false;
 		}
+	}
 </script>
 </section>
 	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
@@ -216,6 +228,14 @@
 
 			//上传图片仍队列中的数量，0为上传完成；
 			console.log(uploader2.getStats().progressNum);
+			if(uploader2.getStats().progressNum == "0"){
+				$(".upload-loading-wrap").hide();
+			}
+	    });
+		
+		// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+	    uploader2.on( 'uploadStart', function( file,respones ) {
+	    	$(".upload-loading-wrap").show();
 	    });
 
 		// 文件上传中，给item添加成功class, 用样式标记上传成功。
