@@ -153,6 +153,9 @@
         **/
         function actionUpdata(){
             $request = Yii::$app->request;
+            if(!trim($request->post('title',''))){
+                return $this->redirect(['show/index']);
+            }
             //时间
             $time = $request->post('time',[]);
             $show_id = $request->post('id','');
