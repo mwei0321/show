@@ -96,7 +96,7 @@
 	}
 </script>
 </section>
-	<script src="/js/webuploader.custom.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/webuploader.html5only.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/daterangepicker/moment.min.js"></script>
 	<script src="/js/daterangepicker/daterangepicker.js"></script>
 
@@ -137,6 +137,8 @@
     	        // 选择文件的按钮。可选。
     	        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
     	        pick: '#filePicker',
+				
+				fileSingleSizeLimit: 2*1024*1024 ,
     	        //文件下标名
     	        fileVal:'file',
 
