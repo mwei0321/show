@@ -36,7 +36,10 @@
                 return $this->_returnJson();
             }
             $pages = page($this->_count,20);
-            $lists = $dynamicM->getDynamicList($where,$pages['offset'],$this->mid);
+            $lists = [];
+            if($pages){
+                $lists = $dynamicM->getDynamicList($where,$pages['offset'],$this->mid);
+            }
 
             return $this->_returnJson($lists);
         }
