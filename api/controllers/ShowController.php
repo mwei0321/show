@@ -31,7 +31,9 @@
             $num = Yii::$app->request->get('num',10);
 
             $where = [];
-            $where['status'] = $type;
+            $where[] = 'and';
+            $where[] = ['>','etime',time()];
+            $where[] = ['status'=>1];
 
             //返回节目列表
             $showM = new ApiShow();
