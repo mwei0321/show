@@ -120,6 +120,7 @@
             $orderId = Yii::$app->request->get('order_id');
             $this->_reCode  = 400;
             $this->_showMsg = '退票失败！请刷新后再操作！';
+            $this->_reMsg = '';
 
             if($orderId > 0){ //订单ID过滤
                 $orderInfo = \common\models\Order::find()->where([
@@ -131,6 +132,7 @@
                     $this->_reCode = 400;
                     $this->_showMsg = '已退过票！请误重复操作！';
                 }elseif($orderInfo->id > 0 && $orderInfo->status = 1){ //该人是否有该订单信息
+                    $this->_reCode  = 200;
                     $timesInfo = (new \common\models\Ticket())->getTimesByIds($orderInfo->times_id);
                     $timesInfo = array_shift($timesInfo);
                     if($timesInfo['stime'] > (time()+1800)){ //判断退票时间为开场30分钟以前
