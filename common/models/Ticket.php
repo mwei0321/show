@@ -28,7 +28,7 @@
          * @date 2017年2月9日 下午2:43:29
         **/
         function getShowTicketSellInfo($_timesId){
-            return self::find()->where(['times_id'=>$_timesId])->asArray()->all();
+            return self::find()->where(['times_id'=>$_timesId,'status'=>1])->asArray()->all();
         }
 
         /**

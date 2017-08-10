@@ -138,6 +138,8 @@
                     if($timesInfo['stime'] > (time()+1800)){ //判断退票时间为开场30分钟以前
                         $orderInfo->status = 7; //退票
                         if($orderInfo->save(false)){
+                            //座位状态更新
+                            \common\models\Ticket::updateAll(['status'=>0],['order_id'=>$orderId]);
                             $this->_showMsg = '退票成功！';
                             return $this->_returnJson();
                         }
