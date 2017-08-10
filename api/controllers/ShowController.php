@@ -32,7 +32,7 @@
 
             $where = [];
             $where[] = 'and';
-            $where[] = ['>','etime',time()];
+            $where[] = ($type == 3) ? ['<','etime',time()] : ['>','etime',time()];
             $where[] = ['status'=>1];
 
             //返回节目列表
