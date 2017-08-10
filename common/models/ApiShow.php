@@ -29,13 +29,13 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年1月18日 上午10:04:03
          **/
-        function getShowList($_where = 1,$_offset = 'count',$_memberId = 0,$_pagenum = 10){
+        function getShowList($_where = 1,$_offset = 'count',$_memberId = 0,$_pagenum = 10,$_orderBy = 'stime ASC'){
             if($_offset == 'count'){
                 $count = self::find()->where($_where)->count();
                 return $count;
             }
 
-            $lists = self::find()->where($_where)->offset($_offset)->limit($_pagenum)->orderBy('stime ASC')->asArray()->all();
+            $lists = self::find()->where($_where)->offset($_offset)->limit($_pagenum)->orderBy($_orderBy)->asArray()->all();
             //处理列表
             if((string)$_offset != 'count'){
                 //点赞列表

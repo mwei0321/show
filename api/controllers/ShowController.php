@@ -32,8 +32,19 @@
 
             $where = [];
             $where[] = 'and';
-            ($type != 2) && $where[] = ($type == 3) ? ['<','etime',time()] : ['>','etime',time()];
-            $where[] = ['status'=>$type];
+            switch ($type){
+                case 1:
+                    $where[] = ['status'=>1];
+                    $where[] = ['>','etime',time()];
+                    break;
+                case 2:
+                    $where[] = ['status'=>1];
+                    break;
+                case 3:
+                    $where[] = ['status'=>1];
+                    $where[] = ['<','etime',time()];
+                    break;
+            }
 
             //返回节目列表
             $showM = new ApiShow();
