@@ -79,6 +79,7 @@
             $seatIds = explode(',', $seatId);
 //             $showId = Yii::$app->request->get('show_id',0);
 
+            $reid = 0;
             if($this->mid && $timesId && $seatIds && is_array($seatIds)){
                 $ApiTicketM = new ApiTicket();
                 $reid = $ApiTicketM->BuyTicket($this->mid, $timesId, $seatIds);

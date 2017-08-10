@@ -122,6 +122,7 @@
                     $seatIsBuy = self::find()->from('ticket')->where([
                                     'seat_id'   => $_seatId,
                                     'times_id'  => $_timesId,
+                                    'status'    => 1,
                                 ])->count();
 
                     //判断座位是否已售
