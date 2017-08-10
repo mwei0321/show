@@ -28,7 +28,7 @@
             $ActorObj = new ApiActor();
             //最近演出
 //             $sql = "SELECT s.`id`,s.`title` FROM `show` s LEFT JOIN `show_times` st ON `s`.`id` = `st`.`show_id` WHERE st.`stime` > ".time()." AND s.`status` = 1 ORDER BY st.`stime` ASC LIMIT 1";
-            $recentlyShow = \common\models\Show::find()->select('id show_id,title')->where(['status'=>1])->orderBy('id DESC')->asArray()->one();
+            $recentlyShow = \common\models\Show::find()->select('id show_id,title')->where(['and','status'=>1,['>','etime',time()]])->orderBy('stime DESC')->asArray()->one();
             if($recentlyShow){
                 $recentlyShowActorList = $ActorObj->getActorByShowId($recentlyShow['show_id']);
                 $recentlyShow['actor'] = $recentlyShowActorList ? : [];
