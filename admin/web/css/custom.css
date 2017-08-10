@@ -373,7 +373,7 @@
 	margin-bottom:10px;
 }
 .add-cast-list{
-	width: 435px;
+	width: 465px;
     margin-left: 0px;
     position: relative;
     display: inline-block;
@@ -391,6 +391,8 @@
 	visibility:hidden;
 	width:100px;
 	margin-left:10px;
+	display:inline-block;
+	width:190px;
 }
 .position-select{
 }
