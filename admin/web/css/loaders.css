@@ -1320,7 +1320,7 @@
   -webkit-animation: line-scale 1s 0.5s infinite cubic-bezier(.2, .68, .18, 1.08);
           animation: line-scale 1s 0.5s infinite cubic-bezier(.2, .68, .18, 1.08); }
 .line-scale > div {
-  background-color: ##5191d1;
+  background-color: #5191d1;
   width: 4px;
   height: 35px;
   border-radius: 2px;
