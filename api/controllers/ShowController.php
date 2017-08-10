@@ -28,6 +28,7 @@
         **/
         function actionGetshowlist(){
             $type = Yii::$app->request->get('type',1);
+            $num = Yii::$app->request->get('num',10);
 
             $where = [];
             $where['status'] = $type;
@@ -43,7 +44,7 @@
             $pages = page($this->_count,10);
             $lists = [];
             if($pages){
-                $lists = $showM->getShowList($where,$pages['offset'],$this->mid);
+                $lists = $showM->getShowList($where,$pages['offset'],$this->mid,$num);
             }
 
             return $this->_returnJson($lists);

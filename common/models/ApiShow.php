@@ -29,9 +29,13 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2017年1月18日 上午10:04:03
          **/
-        function getShowList($_where = 1,$_offset = 'count',$_memberId = 0){
-            $showM = new Show();
-            $lists = $showM->getShowList($_where,$_offset);
+        function getShowList($_where = 1,$_offset = 'count',$_memberId = 0,$_pagenum = 10){
+            if($_offset == 'count'){
+                $count = self::find()->where($_where)->count();
+                return $count;
+            }
+
+            $lists = self::find()->where($_where)->offset($_offset)->limit($_pagenum)->orderBy('stime ASC')->asArray()->all();
             //处理列表
             if((string)$_offset != 'count'){
                 //点赞列表
@@ -45,7 +49,7 @@
                     $lists[$k]['cover'] = ImageUrl.$v['cover'];
                     unset($lists[$k]['ctime']);
                     //写入演出时间范围
-                    $times = $showM->getShowExpire($v['id']);
+                    $times = (new Show())->getShowExpire($v['id']);
                     //是否时间未定
                     if($times['stime'] && $times['etime']){
                         $lists[$k]['stime'] = date('Y-m-d',$times['stime']);

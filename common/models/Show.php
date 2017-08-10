@@ -54,7 +54,7 @@
                 return $showM->count();
             }
 
-            $data = $showM->offset($_offset)->limit($this->_pageSize)->orderBy('stime ASC')->asArray()->all();
+            $data = $showM->offset($_offset)->limit($this->_pageSize)->orderBy('id DESC')->asArray()->all();
             return $data;
         }
 
