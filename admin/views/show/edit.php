@@ -93,7 +93,7 @@
         									<?php }else {?>
         										<span class='play'><input type="text" class="theatre-data-input" name="act[]" value="<?= $val['act'] ?>"></span>
         									<?php }?>
-												<a class="delete-player" style="cursor:pointer;">删除</a>
+												<a class="delete-player" style="cursor:pointer;" onclick="delactor(this)">删除</a>
             							</div>
     							<?php }}else{?>
     								<div class="pull-group addActor">
@@ -110,7 +110,7 @@
         									}?>
         								</select>
         								<span class="play" style="visibility: visible" ></span>
-										<a class="delete-player" style="cursor:pointer;">删除</a>
+										<a class="delete-player" style="cursor:pointer;" onclick="delactor(this)">删除</a>
         							</div>
     							<?php }?>
 							</div>
@@ -136,9 +136,6 @@
 			var addActor = function () {
 				$('.add-cast-list').append($('.add-cast-list div:first-child').clone());
 				
-				$(".delete-player").click(function(){
-					$(this).parent().remove();
-				})
 			}
 			var submit = function () {
 				var title = $('.checktitle').val();
@@ -304,13 +301,16 @@
 			$(".add-time-btn").show();
 		}
 		)
-		$(".del-time").click(function(){
-			$(this).parent().remove();
-		})
 		
-		$(".delete-player").click(function(){
-			$(this).parent().remove();
-		})
+		function delactor(e){
+			var s = $(".add-cast-list").find(".addActor").length;
+			if(s>1){			
+				$(e).parent().remove();
+			}
+			else{
+				return false;
+			}
+		}
 	</script>
 
 	<script src="kindeditor-4.1.10/kindeditor-min.js"></script>
