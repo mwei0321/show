@@ -287,7 +287,8 @@
     			},
     			   singleDatePicker: true,
     			   timePicker: true,
-				minDate: moment(),
+					showDropdowns: true,
+					minDate: moment(),
 //     			   timePickerIncrement: 30,
     			});
 		});
