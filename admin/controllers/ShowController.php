@@ -72,7 +72,6 @@
             $showInfo = $showModel->getShowInfoById($showId);
             //写入演出时间范围
             $times = $showModel->getShowExpire($showId);
-            $showInfo['stime'] = date('Y-m-d',$times['stime']);
             $showInfo['etime'] = date('Y-m-d',$times['etime']);
             //获取演员列表
             $actorObj = new Actor();
@@ -167,15 +166,18 @@
                 $showModel->ctime   =   time();
             }
             //时间判断
-            if((Yii::$app->request->post('timesids',[])) || (Yii::$app->request->post('time',[]))){
+            $timeslist = Yii::$app->request->post('time',[]);
+            if((Yii::$app->request->post('timesids',[])) || $timeslist){
                 $showModel->status = 1;
-            }else
+            }else{
                 $showModel->status = 2;
+            }
 
             $showModel->title   =   $request->post('title','');
             $showModel->cover   =   $request->post('cover','');
             $showModel->intro   =   $request->post('intro','');
             $showModel->duration=   intval($request->post('duration',0));
+
 //             var_dump($showModel);exit;
             if($showModel->save(false) && $showModel->id > 0){
                 $showId = $showModel->id;
@@ -272,7 +274,17 @@
                     $showTimesM->save();
                 }
                 $isTime = 0;
+                //更新开始、结束时间
+                \common\models\CommonM::setTabelName('show_times');
+                $stimes = \common\models\CommonM::find()->where(['show_id'=>$_showId])->orderBy('stime ASC')->one();
+                $etimes = \common\models\CommonM::find()->where(['show_id'=>$_showId])->orderBy('stime DESC')->one();
+                $showObj = Show::findOne($_showId);
+                $showObj->stime = $stimes->stime;
+                $showObj->etime = $etimes->stime;
+                $showObj->save(false);
             }
+
+
             return $isTime;
         }
 
