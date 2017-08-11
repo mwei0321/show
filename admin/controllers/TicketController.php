@@ -223,7 +223,6 @@
             //响应数据
             $reArray = [
                 'status'=> 0,
-                'url'   => Url::toRoute(['ticket/lockseat','show_id'=>$showId]),
             ];
 
             //锁票
@@ -233,7 +232,7 @@
             if($seatStatus == 1){
                 $reArray['status'] = 1;//已售
             }elseif($seatStatus == 2){
-                $ticketM->find()->createCommand()->delete('reserved_seat',['times_id'=>$timesId,'seat_id'=>$seatId])->execute();
+                Yii::$app->db->createCommand()->delete('reserved_seat',['times_id'=>$timesId,'seat_id'=>$seatId])->execute();
                 $reArray['status'] = 2;//取消预留
             }elseif($seatStatus == 0){
                 $seatInfo = $ticketM->getSeatInfoById($seatId);
