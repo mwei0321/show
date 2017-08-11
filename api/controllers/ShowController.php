@@ -32,17 +32,20 @@
 
             $where = [];
             $where[] = 'and';
+            $order = 'stime ASC';
             switch ($type){
                 case 1:
                     $where[] = ['status'=>1];
                     $where[] = ['>','etime',time()];
                     break;
                 case 2:
-                    $where[] = ['status'=>1];
+                    $where[] = ['status'=>2];
+                    $order = 'id DESC';
                     break;
                 case 3:
                     $where[] = ['status'=>1];
                     $where[] = ['<','etime',time()];
+                    $order = 'etime DESC';
                     break;
             }
 
@@ -57,7 +60,7 @@
             $pages = page($this->_count,10);
             $lists = [];
             if($pages){
-                $lists = $showM->getShowList($where,$pages['offset'],$this->mid,$num);
+                $lists = $showM->getShowList($where,$pages['offset'],$this->mid,$num,$order);
             }
 
             return $this->_returnJson($lists);
