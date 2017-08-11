@@ -121,13 +121,13 @@
                 $seatcode += $val;
                 $seatId = $seatcode;
                 for ($i = 0;$i < $val;$i++){
-                    $html .= '<a class="seat ';
+                    $html .= '<a href="javascript:;" class="seat ';
                     if(in_array($seatId, $buySeat)){
                         $html .= 'sold "';
                     }elseif(in_array($seatId, $ReservedSeat)){
-                        $html .= ' selected " onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
+                        $html .= ' selected " iscancel="1" onclick="lockseat($(this),1);" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
                     }else{
-                        $html .= '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
+                        $html .= '" onclick="lockseat($(this));" iscancel="0" url="'.Url::toRoute(['ticket/lock','show_id'=>$timesInfo['show_id'],'seat_id'=>$seatId,'tid'=>$timesId]).'" ';
                     }
                     $html .= '></a>';
                     $seatId--;

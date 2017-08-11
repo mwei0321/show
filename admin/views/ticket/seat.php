@@ -54,13 +54,13 @@
 									       $seatcode += $val;
 									       $seatId = $seatcode;
 									       for ($i = $val;$i > 0;$i--){
-                                                echo '<a class="seat ';
+                                                echo '<a href="javascript:;" class="seat ';
                                                 if(in_array($seatId, $buyseat)){
                                                     echo 'sold "';
                                                 }elseif(in_array($seatId, $reserved)){
-                                                    echo ' selected " onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
+                                                    echo ' selected " iscancel="1" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
                                                 }else{
-                                                    echo '" onclick="lockseat($(this));" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
+                                                    echo '" onclick="lockseat($(this));" iscancel="0" url="'.Url::toRoute(['ticket/lock','show_id'=>$show_id,'seat_id'=>$seatId,'tid'=>$times_id]).'"';
                                                 }
 	                                            echo ' ></a>';
 	                                            $seatId--;
@@ -139,21 +139,26 @@
 			});
 		}
 
-		var lockseat = function (Obj) {
-			var url = Obj.attr('url');
-				$.ajax({
-					url:url,
-					success:function (e){
-						if(e.status == 1){
-							layer.msg('该票已售！');
-							windown.location.reload();
-
-						}else if(e.status == 2){
-							Obj.removeClass('selected');
-						}else{
-							Obj.addClass('selected');
-						}
+    </script>
+    <script>
+    var lockseat = function (Obj) {
+        var iscancel = Obj.attr('iscancel');
+        if((iscancel == 1)){if(!confirm('您确定取消该留座！')) return false};
+		var url = Obj.attr('url');
+			$.ajax({
+				url:url,
+				success:function (e){
+					if(e.status == 1){
+						layer.msg('该票已售！');
+						windown.location.reload();
+					}else if(e.status == 2){
+						Obj.attr('iscancel',0);
+						Obj.removeClass('selected');
+					}else{
+						Obj.attr('iscancel',1);
+						Obj.addClass('selected');
 					}
-				});
-			}
+				}
+			});
+		}
     </script>
