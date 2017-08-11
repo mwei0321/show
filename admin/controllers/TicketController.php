@@ -215,6 +215,11 @@
             $timesId = Yii::$app->request->get('tid',0);
             $showId = Yii::$app->request->get('show_id',0);
             $seatId = Yii::$app->request->get('seat_id',0);
+            if($timesId < 1 || $showId < 1 || $seatId < 1){
+                $reArray['status'] = 400;
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return $reArray;
+            }
             //响应数据
             $reArray = [
                 'status'=> 0,
