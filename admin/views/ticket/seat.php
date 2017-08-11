@@ -154,9 +154,12 @@
 					}else if(e.status == 2){
 						Obj.attr('iscancel',0);
 						Obj.removeClass('selected');
-					}else{
+					}else if(e.status == 3){
 						Obj.attr('iscancel',1);
 						Obj.addClass('selected');
+					}else{
+						layer.msg('网络请求失败！请刷新后重试');
+						return false;
 					}
 				}
 			});

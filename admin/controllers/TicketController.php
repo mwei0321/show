@@ -226,11 +226,11 @@
             //0:未售 1:已售 2:已预留
             $seatStatus = $ticketM->checkSeatStatus($timesId, $seatId);
             if($seatStatus == 1){
-                $reArray['status'] = 1;
-            }elseif($seatStatus == 2){//取消预留
+                $reArray['status'] = 1;//已售
+            }elseif($seatStatus == 2){
                 $ticketM->find()->createCommand()->delete('reserved_seat',['times_id'=>$timesId,'seat_id'=>$seatId])->execute();
-                $reArray['status'] = 2;
-            }elseif($seatStatus == 0){ //写入预留
+                $reArray['status'] = 2;//取消预留
+            }elseif($seatStatus == 0){
                 $seatInfo = $ticketM->getSeatInfoById($seatId);
                 //赋值
                 $seatM = new CommonModel('reserved_seat');
@@ -240,7 +240,7 @@
                 $seatM->column    = $seatInfo['column'];
                 $seatM->seat_id   = $seatId;
                 if ($seatM->save(false)){
-                    $reArray['status'] = 3;
+                    $reArray['status'] = 3;//写入预留
                 }
             }
 
