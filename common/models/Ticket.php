@@ -158,7 +158,7 @@
             $where['seat_id'] = $_seatId;
 
             //是否预留
-            $isReserved = self::find()->from('reserved_seat')->where($where)->asArray()->one();
+            $isReserved = self::find()->from('reserved_seat')->where($where)->count();
             //是否已售
             $where['status'] = 1;
             $isBuy = self::find()->where($where)->count();
