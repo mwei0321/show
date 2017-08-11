@@ -141,7 +141,7 @@
 
     </script>
     <script>
-    var lockseat = function (Obj) {
+    function lockseat (Obj) {
         var iscancel = Obj.attr('iscancel');
         if((iscancel == 1)){if(!confirm('您确定取消该留座！')) return false};
 		var url = Obj.attr('url');
